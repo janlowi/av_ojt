@@ -14,14 +14,19 @@
                 <tr>
                 <th scope="col"></th>
                 <th scope="col">Id</th>
-                <th scope="col">OJT Id</th>
+                <th scope="col">OJT ID</th>
                 <th scope="col">Name</th>
                 <th scope="col">Age</th>
                 <th scope="col">Sex</th>
+                <th scope="col">Contact no.</th>
                 <th scope="col">Course</th>
                 <th scope="col">University</th>
+                <th scope="col">Hours to render</th>
+                <th scope="col">Date started</th>
+
                 <th scope="col">Email</th>
                 <th scope="col">Password</th>
+                <th scope="col">Usertype</th>
                 <th scope="col">Status</th>
                 <th scope="col">Operation</th>
                 </tr>
@@ -37,12 +42,11 @@
      while ($row=mysqli_fetch_assoc($query)) {
 
                         $id = $row ['id'];
-                       $ojtid = $row ['ojt_id'];
-                       $firstname = $row ['first_name'];
-                       $middlename = $row ['middle_name'];
-                       $lastname = $row ['last_name'];
+                       $ojt_id = $row ['ojt_id'];
+                       $full_name = $row ['last_name'].","." ". $row['first_name']." ". $row['middle_name'];
                        $age = $row ['age'];
                        $sex = $row ['sex'];
+                       $contact_num =$row['contact_num'];
                        $course = $row ['degree'];
                        $university = $row ['university'];
                        $hours_to_render = $row ['hours_to_render'];
@@ -56,12 +60,11 @@
                                 
 
                                         <td>'.$id.'</td>
-                                        <td>'.$ojtid.'</td>
-                                        <td>'.$firstname.'</td>
-                                        <td>'.$middlename.'</td>
-                                         <td>'.$lastname.'</td>
+                                        <td>'.$ojt_id.'</td>
+                                        <td>'.$full_name.'</td>
                                         <td>'.$age.'</td>
                                         <td>'.$sex.'</td>
+                                        <td>'.$contact_num.'</td>
                                         <td>'.$course.'</td>
                                         <td>'.$university.'</td>
                                         <td>'.$hours_to_render.'</td>

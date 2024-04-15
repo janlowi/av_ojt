@@ -45,9 +45,16 @@
     border-radius: 15px 15px 15px 15px;
     -webkit-box-shadow: -1px 6px 10px -1px rgba(143,143,143,0.77); 
     box-shadow: -1px 6px 10px -1px rgba(143,143,143,0.77);
-    z-index: -1;
 
 }
+/* .ojt-table .table {
+
+    position: relative;
+    width:auto;
+    height:auto;
+    overflow: scroll  ;
+} */
+
   .container-nav .add-button {
     font-size: 20px;
     position:absolute;

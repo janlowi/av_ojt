@@ -41,7 +41,7 @@
   .register {
     position: absolute;
     overflow:scroll;
-    overflow-x: hidden;
+    overflow: hidden;
     top: 20px;
     background-color:var(--bs-white) ;
     padding: 30px;
