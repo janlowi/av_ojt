@@ -1,3 +1,7 @@
+<?php 
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -171,7 +176,20 @@
     </style>
 </head>
 <body>
+
     <form action="../Php/php-login.php" method="POST">
+    <?php 
+                if( isset ($_SESSION ['error']))
+                {
+        ?>
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Bogo!</strong> <?= $_SESSION['error']; ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+        <?php
+                    unset($_SESSION['error']);
+                }
+        ?>
     <div class="login-container">
         <div class="img-cont">
             <div class="image"><img src="avega.png" alt="Logo" width="110" height="80"></div> 
@@ -189,7 +207,7 @@
             </div>
         </div>
         <div class="sign"><h2>Sign in</h2></div>
-        
+
         <div class="login-form">
             <div class="input-container">
   <input type="email" id="email" name="email" placeholder="Email" >
@@ -206,6 +224,7 @@
         </div>
         
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 
 </html>

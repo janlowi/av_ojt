@@ -16,7 +16,8 @@ if (empty($email)) {
 
     if (strlen($password) < 8) {
         // Password is too short
-        echo "Password must be at least 8 characters long";
+        $_SESSION ['error']= 'Password must be 8 characters long';
+        header("Location: ../Login/index.php");
         // Handle the error accordingly
     } else {
         $query = "SELECT * FROM trainees WHERE email = '$email' ";
