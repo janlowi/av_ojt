@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -172,7 +171,7 @@
     </style>
 </head>
 <body>
-    <form action="login.php" method="POST">
+    <form action="../Php/php-login.php" method="POST">
     <div class="login-container">
         <div class="img-cont">
             <div class="image"><img src="avega.png" alt="Logo" width="110" height="80"></div> 
@@ -193,12 +192,12 @@
         
         <div class="login-form">
             <div class="input-container">
-  <input type="email" id="email" name="email" placeholder="Email" required>
+  <input type="email" id="email" name="email" placeholder="Email" >
   <i class="fa fa-envelope icon"></i>
 </div>
 
 <div class="input-container">
-  <input type="password" id="password" name="password" placeholder="Password" required>
+  <input type="password" id="password" name="password" placeholder="Password" >
   <i class="fa fa-lock icon"></i>
 </div>
                 <button type="submit">LOGIN</button>
