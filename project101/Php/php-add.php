@@ -34,7 +34,7 @@ include 'db_connect.php';
 
 
         
-$sql = "INSERT INTO trainees (id, ojt_id, first_name, middle_name, last_name, age, sex, contact_num, degree, university, hours_to_render, dos, office_assigned, email, password, user_type)
+$sql = "INSERT INTO trainees (id, ojt_id, first_name, middle_name, last_name, age, sex, contact_num, degree, university, hours_to_render, dos, office_assigned, email, password, user_type, status)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?)";
 
 $stmt = mysqli_stmt_init($connect);

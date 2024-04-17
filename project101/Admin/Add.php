@@ -1,8 +1,6 @@
 <?php 
-            include '../Layouts/maintemp.php';
-      include '../Layouts/navbar.php'; 
-      include 'AdminDashboard.php'; 
          include '../Php/db_connect.php';
+         include '../Layouts/main.php';
     ?>
 
 <?php
