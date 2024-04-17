@@ -17,12 +17,12 @@ include '../Php/db_connect.php';
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Dashboard - Analytics | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+    <title>Admin Dashboard</title>
 
     <meta name="description" content="" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="../assets/img/icons/brands/avlogo.png" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -94,5 +94,14 @@ include '../Php/db_connect.php';
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+      <!-- Vendors JS -->
+  <script src="../../assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
+
+<!-- Main JS -->
+<script src="../../assets/js/main.js"></script>
+
+
+<!-- Page JS -->
+<script src="../../assets/js/tables-datatables-extensions.js"></script>
   </body>
 </html>
