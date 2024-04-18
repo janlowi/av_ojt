@@ -9,8 +9,8 @@ $user_type = "";
 
 
 if (empty($email)) {
-    $_SESSION ['error']= 'Invalid Email Address';
-    header("Location: ../Login/index.php");
+    // Email is invalid
+    echo "Invalid email address";
 
 } else {
 
@@ -44,13 +44,13 @@ if (empty($email)) {
                     // Handle unknown user types or errors
                 }
             } else {
-                $_SESSION ['error']= 'incorrect password';
-        header("Location: ../Login/index.php");
+                // Password does not match
+                echo "Incorrect password";
               
             }
         } else {
-            $_SESSION ['error']= 'Invalid Email Address';
-            header("Location: ../Login/index.php");
+            // Email does not exist in the database
+            echo "Email not found";
           
         }
     }
