@@ -135,9 +135,20 @@ error_reporting (0);
                                                                        <input type="email" class="form-control" id="inputZip"name = "Email">
                                                                </div>
                                                                <div class="col-md-12">
-                                                                       <label for="inputZip" class="form-label">Password</label>
-                                                                       <input type="password" class="form-control" id="inputZip"name = "Password">
+                                                                       <label for="pass" class="form-label">Password</label>
+                                                                       <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" class="form-control" id="pass"name = "Password" data-bs-toggle="collapse" data-bs-target="#collapseExample">
                                                                </div>  
+                                                                              <!-- password must contain the following -->
+                                                                              <div class="collapse" id="collapseExample">
+                                                                                            <div class="card card-body">
+                                                                                                <p>Password must contain the following characters:</p>
+                                                                                                <p id="lower" class= "invalid">A lower case letter</p>
+                                                                                                <p id="upper" class= "invalid">A capital (uppercase) letter</p>
+                                                                                                <p id="number" class= "invalid">A number</p>
+                                                                                                <p id="length" class= "invalid">Minimum of 8 characters</p>
+                                                                                            </div>
+                                                                                </div>
+
                                                                <div class="col-md-12">
                                                                        <label for="inputZip" class="form-label">Confirm Password</label>
                                                                        <input type="password" class="form-control" id="inputZip"name = "Confirm">
@@ -330,4 +341,3 @@ error_reporting (0);
           </div>
         </div>
           <!-- Content wrapper -->
-          
