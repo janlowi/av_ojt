@@ -138,13 +138,15 @@
 
 /* password validation */
 
-.invalid {
+#invalid {
   color:var( --bs-form-invalid-color);
 }
-.valid {
+#valid {
   color:var(  --bs-form-valid-color);
 }
-
+#message {
+  color:var( --bs-form-invalid-color);
+}
 /* password validation */
 
 

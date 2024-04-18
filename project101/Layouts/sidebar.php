@@ -6,7 +6,7 @@
           <div class="app-brand demo">
             <a href="https://www.avegabros.com/" class="app-brand-link">
               <span class="app-brand-logo demo">
-               <img width="80" height= "55"src="../assets/img/icons/brands/avlogo.png" alt="" xlink:href="https://www.avegabros.com/" >
+               <img width="80" height= "55"src="../assets/img/favicon/avlogo.png" alt="" xlink:href="https://www.avegabros.com/" >
               </span>
               <span class="app-brand-text demo menu-text fw-bold ms-4">Avega</span>
             </a>

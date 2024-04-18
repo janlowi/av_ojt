@@ -100,6 +100,13 @@ error_reporting (0);
                                                                        </select>
                                                                </div>
                                                                <div class="col-md-6">    
+                                                                       <label for="usertype" class="form-label">Usertype</label>
+                                                                       <select name="Usertype" id="usertype" class="form-select">
+                                                                               <option value="Admin">Admin</option>
+                                                                               <option value="Trainee">Trainee</option>
+                                                                       </select>
+                                                               </div>
+                                                               <div class="col-md-6">    
                                                                        <select name="Status" id="status" class="form-select" hidden>
                                                                                <option value="Active" selected >Active</option>
                                                                                <option value="Deactivated">Deactivated</option>
@@ -135,12 +142,12 @@ error_reporting (0);
                                                                        <input type="email" class="form-control" id="inputZip"name = "Email">
                                                                </div>
                                                                <div class="col-md-12">
-                                                                       <label for="pass" class="form-label">Password</label>
-                                                                       <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" class="form-control" id="pass"name = "Password" data-bs-toggle="collapse" data-bs-target="#collapseExample">
+                                                                       <label for="password" class="form-label">Password</label>
+                                                                       <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" class="form-control" id="password"name = "Password" data-bs-toggle="collapse" data-bs-target="#collapseExample">
                                                                </div>  
                                                                               <!-- password must contain the following -->
-                                                                              <div class="collapse" id="collapseExample">
-                                                                                            <div class="card card-body">
+                                                                              <div class="collapse" id="collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                                                                            <div class="card card-body" id="message">
                                                                                                 <p>Password must contain the following characters:</p>
                                                                                                 <p id="lower" class= "invalid">A lower case letter</p>
                                                                                                 <p id="upper" class= "invalid">A capital (uppercase) letter</p>
@@ -189,6 +196,9 @@ error_reporting (0);
                 <div class="col-lg-8 mb-4 order-0">
                   <div class="card">
                     <div class="d-flex align-items-end row">
+
+           <!--   center layout -->
+
                       <div class="col-sm-7">
                         <div class="card-body">
                           <h5 class="card-title text-primary">Congratulations John! 🎉</h5>
@@ -200,6 +210,9 @@ error_reporting (0);
                           <a href="javascript:;" class="btn btn-sm btn-outline-primary">View Badges</a>
                         </div>
                       </div>
+
+
+
                       <div class="col-sm-5 text-center text-sm-left">
                         <div class="card-body pb-0 px-0 px-md-4">
                           <img
@@ -331,6 +344,10 @@ error_reporting (0);
                 </div>
               </div>
               <!--/ Bootstrap Dark Table -->
+
+
+
+              <!-- center layout -->
                     </div>
                   </div>
                 </div>
@@ -341,3 +358,4 @@ error_reporting (0);
           </div>
         </div>
           <!-- Content wrapper -->
+          <script src="../assets/js/pass_validate.js"></script>
