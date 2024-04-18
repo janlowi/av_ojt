@@ -1,6 +1,7 @@
 <?php 
-    include "../Layouts/maintemp.php";
+    include "../Layouts/main.php";
     include "../Php/db_connect.php";
+
 ?>
 
 <div class="container-nav">
