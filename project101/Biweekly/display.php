@@ -1,74 +1,174 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avega OJT Responses Form</title>
-    <style>
-        /* Add your CSS styles here */
-        /* For example: */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        label {
-            font-weight: bold;
-        }
-        input[type="text"], textarea {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-        }
-        input[type="submit"] {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        input[type="submit"]:hover {
-            background-color: #45a049;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avega Intern Report</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    tr:nth-child(odd) {
+        background-color: #e9e9e9;
+    }
+    tr:hover {
+        background-color: #ddd;
+    }
+    td.editable {
+        background-color: #ffffff;
+    }
+    td.editable:hover {
+        background-color: #f0f0f0;
+    }
+    td.editable:focus {
+        background-color: #ffffcc;
+    }
+    .save-button {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: none;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+</style>
 </head>
-<body>
-    <h2>Avega OJT Responses Form</h2>
-    <form action="submit_response.php" method="POST">
-        <label for="timestamp">Timestamp:</label>
-        <input type="text" id="timestamp" name="timestamp" required><br>
+<body onload="loadData()">
+    <div class="container">
+        <center><h1>Intern Bi-weekly Report</h1></center>
+        <center><h6>You must be able to complete this report every 2 weeks after your deployment</h6></center>
+        <table id="reportTable">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Timestamp</th>
+                    <th>Email Address</th>
+                    <th>Name</th>
+                    <th>Assigned Department</th>
+                    <th>Assigned Period Start</th>
+                    <th>Assigned Period End</th>
+                    <th>Summary or Scope of Work</th>
+                    <th>Accomplishment</th>
+                    <th>Challenges</th>
+                    <th>Learning & Conclusion</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td contenteditable="true" class="editable"></td>
+                    <td contenteditable="true" class="editable"></td>
+                    <td contenteditable="true" class="editable"></td>
+                    <td contenteditable="true" class="editable"></td>
+                    <td contenteditable="true" class="editable"></td>
+                    <td contenteditable="true" class="editable"></td>
+                    <td contenteditable="true" class="editable"></td>
+                    <td contenteditable="true" class="editable"></td>
+                    <td contenteditable="true" class="editable"></td>
+                    <td contenteditable="true" class="editable"></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td contenteditable="true" class="editable"></td>
+                    <td contenteditable="true" class="editable"></td>
+                    <td contenteditable="true" class="editable"></td>
+                    <td contenteditable="true" class="editable"></td>
+                    <td contenteditable="true" class="editable"></td>
+                    <td contenteditable="true" class="editable"></td>
+                    <td contenteditable="true" class="editable"></td>
+                    <td contenteditable="true" class="editable"></td>
+                    <td contenteditable="true" class="editable"></td>
+                    <td contenteditable="true" class="editable"></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td contenteditable="true" class="editable"></td>
+                    <td contenteditable="true" class="editable"></td>
+                    <td contenteditable="true" class="editable"></td>
+                    <td contenteditable="true" class="editable"></td>
+                    <td contenteditable="true" class="editable"></td>
+                    <td contenteditable="true" class="editable"></td>
+                    <td contenteditable="true" class="editable"></td>
+                    <td contenteditable="true" class="editable"></td>
+                    <td contenteditable="true" class="editable"></td>
+                    <td contenteditable="true" class="editable"></td>
+                </tr>
+                <!-- Add more rows as needed -->
+                <tr>
+                    <td>4</td>
+                    <td contenteditable="true" class="editable"></td>
+                    <td contenteditable="true" class="editable"></td>
+                    <td contenteditable="true" class="editable"></td>
+                    <td contenteditable="true" class="editable"></td>
+                    <td contenteditable="true" class="editable"></td>
+                    <td contenteditable="true" class="editable"></td>
+                    <td contenteditable="true" class="editable"></td>
+                    <td contenteditable="true" class="editable"></td>
+                    <td contenteditable="true" class="editable"></td>
+                    <td contenteditable="true" class="editable"></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td contenteditable="true" class="editable"></td>
+                    <td contenteditable="true" class="editable"></td>
+                    <td contenteditable="true" class="editable"></td>
+                    <td contenteditable="true" class="editable"></td>
+                    <td contenteditable="true" class="editable"></td>
+                    <td contenteditable="true" class="editable"></td>
+                    <td contenteditable="true" class="editable"></td>
+                    <td contenteditable="true" class="editable"></td>
+                    <td contenteditable="true" class="editable"></td>
+                    <td contenteditable="true" class="editable"></td>
+                </tr>
+            </tbody>
+        </table>
+        <button class="save-button" onclick="saveData()">Save Data</button>
+    </div>
 
-        <label for="email">Email Address:</label>
-        <input type="text" id="email" name="email" required><br>
+    <script>
+        function saveData() {
+            const tableRows = document.querySelectorAll('#reportTable tbody tr');
+            let data = [];
+            tableRows.forEach(row => {
+                let rowData = [];
+                row.querySelectorAll('.editable').forEach(cell => {
+                    rowData.push(cell.innerText);
+                });
+                data.push(rowData);
+            });
+            localStorage.setItem('reportData', JSON.stringify(data));
+            alert('Data saved successfully!');
+        }
 
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required><br>
-
-        <label for="department">Assigned Department:</label>
-        <input type="text" id="department" name="department" required><br>
-
-        <label for="start_date">Assigned Period Start:</label>
-        <input type="text" id="start_date" name="start_date" placeholder="YYYY-MM-DD" required><br>
-
-        <label for="end_date">Assigned Period End:</label>
-        <input type="text" id="end_date" name="end_date" placeholder="YYYY-MM-DD" required><br>
-
-        <label for="summary">Summary or Scope of Work:</label>
-        <textarea id="summary" name="summary" rows="4" required></textarea><br>
-
-        <label for="accomplishment">Accomplishment:</label>
-        <textarea id="accomplishment" name="accomplishment" rows="4" required></textarea><br>
-
-        <label for="challenges">Challenges:</label>
-        <textarea id="challenges" name="challenges" rows="4" required></textarea><br>
-
-        <label for="learning">Learning & Conclusion:</label>
-        <textarea id="learning" name="learning" rows="4" required></textarea><br>
-
-        <input type="submit" value="Submit">
-    </form>
-</body>
-</html>
+        function loadData() {
+            const storedData = localStorage.getItem('reportData');
+            if (storedData) {
+                const parsedData = JSON.parse(storedData);
+                const tableRows = document.querySelectorAll('#reportTable tbody tr');
+                parsedData.forEach((rowData, index) => {
+                    if (index < tableRows.length) {
+                        const
