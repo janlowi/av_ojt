@@ -1,29 +1,17 @@
 <?php
-$conn = mysqli_connect('localhost', 'root', '', 'time_tracking');
-
-if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
+$conn = mysqli_connect('localhost','root','','time_tracking');
+if($conn){
+   
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-  if(isset($_POST['time']) && isset($_POST['date']) && isset($_POST['timeInOut'])) {
-    $time = $_POST['time'];
-    $date = $_POST['date'];
-    $timeInOut = $_POST['timeInOutBtn'];
+$time_in=$_POST['time_in'];
 
-    $sql = "INSERT INTO time_tracking_db (time_in,  time_out) VALUES (?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("iii", $time, $date, $timeInOut);
-
-    // if ($stmt->execute()) {
-    //   echo "New record created successfully";
-    // } else {
-    //   echo "Error: " . $sql . "<br>" . $conn->error;
-    // }
-
-    // $stmt->close();
-  }
+$data = "INSERT INTO time_tracking_db('', '$time_in',)";
+$check = mysqli_query($conn,$data);
+if($check){
+    echo "save";
 }
-
-$conn->close();
+// else{
+//     echo "data not send";
+// }
 ?>

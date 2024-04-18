@@ -80,13 +80,15 @@
         <div class="container">
             <h1>Time-In System</h1>
             <div class="time-form">
-                <form action="submit.php" method="POST">
-                    <label for="time_in">Time In:</label>
-                    <input type="time" name="time_in" id="time_in" required><br>
+                <form action="update.php" method="POST">
+                    <label for="time_out">Time Out:</label>
+                    <input type="time" name="time_out" id="time_out" required><br>
                     
-                    <input type="submit" value="Time In">
+                    <input type="submit" value="Time Out">
+
                 </form>
             </div>
+
         </div>
     </div>
 </body>
