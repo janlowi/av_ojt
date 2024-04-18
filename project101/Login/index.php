@@ -183,7 +183,7 @@
                 {
         ?>
                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <strong>Bogo!</strong> <?= $_SESSION['error']; ?>
+                    <strong>Invalid Email Address!</strong> <?= $_SESSION['error']; ?>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
         <?php
@@ -208,6 +208,18 @@
         </div>
         <div class="sign"><h2>Sign in</h2></div>
 
+        <?php 
+                if( isset ($_SESSION ['error']))
+                {
+        ?>
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Password must be 8 characters long!</strong> <?= $_SESSION['error']; ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+        <?php
+                    unset($_SESSION['error']);
+                }
+        ?>
         <div class="login-form">
             <div class="input-container">
   <input type="email" id="email" name="email" placeholder="Email" >
