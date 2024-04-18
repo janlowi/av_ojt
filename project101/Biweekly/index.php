@@ -86,6 +86,7 @@
     </style>
 </head>
 <body>
+    <form action="display.php">
     <div class="container">
         <h1>AV Student Intern Bi-weekly Report</h1>
         <p>You must be able to complete this report every 2 weeks after your deployment.</p>
