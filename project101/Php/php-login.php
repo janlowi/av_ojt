@@ -45,7 +45,7 @@ if (empty($email)) {
                 }
             } else {
                 // Password does not match
-                echo "Incorrect password";
+                echo "Incorrect password.";
               
             }
         } else {
