@@ -23,6 +23,8 @@ include 'db_connect.php';
                $user_type = $_POST["Usertype"];
                $contact_num = $_POST["Contact"];
                $status = $_POST["Status"];
+               $department = $_POST["Department"];
+
 
 
 
@@ -40,14 +42,16 @@ include 'db_connect.php';
         !empty( $email)&&  
         !empty( $password)&&
         !empty( $confirm_pass)&& 
+        !empty( $department)&& 
+
         !empty( $user_type)&&
         !empty( $contact_num)) {
           if($password >=8) 
           {
                   if($password == $confirm_pass) {
                     $pass_hashed= password_hash($password, PASSWORD_DEFAULT);
-                    $sql = "INSERT INTO trainees (id, ojt_id, first_name, middle_name, last_name, age, sex, contact_num, degree, university, hours_to_render, dos, office_assigned, email, password, user_type, status)
-                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?, ?)";
+                    $sql = "INSERT INTO trainees (id, ojt_id, first_name, middle_name, last_name, age, sex, contact_num, degree, university, hours_to_render, dos, office_assigned, email, password, user_type, status, department)
+                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?, ?, ?)";
                     
                     $stmt = mysqli_stmt_init($connect);
                     
@@ -73,6 +77,8 @@ include 'db_connect.php';
                                            $email,
                                            $pass_hashed,
                                            $user_type,
+                                           $department,
+
                                            $status
 
                                           

@@ -19,7 +19,7 @@ error_reporting (0);
        $last_id = $row['id'];
        if ($last_id == "")
        {
-           $ojt_ID = "AVOJT0001";
+           $ojt_ID = "AVOJT-001";
        }
        else
        {
@@ -100,10 +100,15 @@ error_reporting (0);
                                                                        </select>
                                                                </div>
                                                                <div class="col-md-6">    
-                                                                       <label for="usertype" class="form-label">Usertype</label>
-                                                                       <select name="Usertype" id="usertype" class="form-select">
+                                                                       <label for="usertype" class="form-label">Department</label>
+                                                                       <select name="Department" id="usertype" class="form-select">
+                                                                               <option value="IT">IT</option>
+                                                                               <option value="Accounitng">Accounitng</option>
+                                                                               <option value="Finance">Finance</option>
                                                                                <option value="Admin">Admin</option>
-                                                                               <option value="Trainee">Trainee</option>
+                                                                               <option value="HR">HR</option>
+
+
                                                                        </select>
                                                                </div>
                                                                <div class="col-md-6">    

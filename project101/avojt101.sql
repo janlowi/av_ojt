@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 15, 2024 at 05:14 AM
+-- Generation Time: Apr 18, 2024 at 08:23 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -30,6 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `reports` (
   `id` int(11) NOT NULL,
   `trainee_id` int(11) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `dos` time(6) NOT NULL,
   `doe` time(6) NOT NULL,
   `assigned_dept.` varchar(20) NOT NULL,
@@ -54,6 +55,13 @@ CREATE TABLE `timesheet` (
   `total_hours` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `timesheet`
+--
+
+INSERT INTO `timesheet` (`id`, `trainee_id`, `date`, `time_in`, `time_out`, `total_hours`) VALUES
+(1, 1, '2024-04-16', '14:35:00.000000', '17:35:00.063000', 8);
+
 -- --------------------------------------------------------
 
 --
@@ -73,19 +81,14 @@ CREATE TABLE `trainees` (
   `university` varchar(100) NOT NULL,
   `hours_to_render` int(10) NOT NULL,
   `dos` date NOT NULL,
+  `department` varchar(20) NOT NULL,
   `office_assigned` varchar(20) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   `user_type` varchar(7) NOT NULL,
+  `status` varchar(7) NOT NULL,
   `profile` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `trainees`
---
-
-INSERT INTO `trainees` (`id`, `ojt_id`, `first_name`, `middle_name`, `last_name`, `age`, `sex`, `contact_num`, `degree`, `university`, `hours_to_render`, `dos`, `office_assigned`, `email`, `password`, `user_type`, `profile`) VALUES
-(1, 'AVOJT0001', 'John Louie', 'Toñacao', 'Gastardo', 22, 'Male', '09772799104', 'Bachelor of Industrial Technology major in Computer Technology', 'Cebu Technological University - Daanbantayan Campus', 1800, '2023-09-11', 'Tayud', 'gastardo.johnlouie10@gmail.com', '0000', 'Admin', '');
 
 --
 -- Indexes for dumped tables
@@ -125,13 +128,13 @@ ALTER TABLE `reports`
 -- AUTO_INCREMENT for table `timesheet`
 --
 ALTER TABLE `timesheet`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `trainees`
 --
 ALTER TABLE `trainees`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
