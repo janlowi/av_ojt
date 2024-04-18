@@ -1,11 +1,27 @@
-const inputValue = document.getElementById('pass')
+
+const inputValue = document.getElementById('password')
 let lower = document.getElementById('lower');
 let upper = document.getElementById('upper');
 let number = document.getElementById('number');
 let length = document.getElementById('length');
 
 
-inputValue.onkeyup = function (){
+
+ inputValue.onfocus = function() {
+     document.getElementById('message').style.display = "block";
+      document.getElementById('retype').style.display = "none";
+      document.getElementById("confirm").style.display = "none";
+      
+ }
+ inputValue.onblur = function() {
+     document.getElementById('message').style.display = 'none';
+      document.getElementById('retype').style.display = "block";
+      document.getElementById("confirm").style.display = "block";
+ }
+
+
+
+ inputValue.onkeyup = function (){
     var lowerCase = /[a-z]/g;
     if(inputValue.value.match(lowerCase)) {
         lower.classList.remove("invalid");
@@ -45,4 +61,27 @@ inputValue.onkeyup = function (){
         length.classList.add("invalid");
     }
     
-}   
+}
+//  function validate(){
+//     if(email.value=="" && pass.value==""){
+//         alert("Please fill all the fields...");
+//         return false;
+//     }
+//     if(inputValue.value != reInput.value ){
+//     alert("password does not match, please try again");
+//     return false;
+// }
+//     if(email.value.length <8 || email.value == " "){
+//         alert("please fill email and  must be greater than 9 characters");
+//         return false;
+//     }
+//     if(username.value.length <8 || username.value == " "){
+//         alert("please fill username and  must be greater than 9 characters");
+//         return false;
+//     }
+
+//  } 
+
+ //createbutton first modal
+ const nextForm = document.getElementById('nextform');
+ console.log(nextForm);
