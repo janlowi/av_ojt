@@ -5,10 +5,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $time_out = $_POST['time_out'];
     $time_in = '8:00'; 
+   
     
-    $sql= "SELECT * 
-    FROM timesheet 
-    WHERE id = '$id'";
+    "SELECT * FROM `timesheet` WHERE id=$id"
 
     $result = $connect->query($sql); 
 
