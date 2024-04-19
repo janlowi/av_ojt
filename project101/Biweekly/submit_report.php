@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Prepare the data to be written to the file
     // $data = "Department: $department\n";
     // $data .= "Start Date: $start_date\n";
-    // $data .= "End Date: $end_date\n";
+    // $data .= "End Date: $end_date\n";9883
     // $data .= "Summary: $summary\n";
     // $data .= "Accomplishments: $accomplishments\n";
     // $data .= "Challenges: $challenges\n";
@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Write the data to the file
     // file_put_contents($filename, $data, FILE_APPEND);
-    $sql= "INSERT INTO reports(assigned_department, assignment_period_start, assignment_period_end, summary, accomplishments, challenges, learning) 
+    $sql= "INSERT INTO users(assigned_department, assignment_period_start, assignment_period_end, summary, accomplishments, challenges, learning) 
     VALUES ('$department','$start_date','$end_date','$summary','$accomplishments','$challenges','$learning')";
 
     if(!empty($department) && !empty($start_date) && !empty($end_date) && !empty($summary) && !empty($accomplishments) && !empty($challenges) && !empty($learning))
