@@ -17,7 +17,7 @@
           </div>
 
 
-
+        
           <div class="menu-inner-shadow"></div>
           <li class="menu-header small text-uppercase"><span class="menu-header-text">Dashboard</span></li>
             <li class="menu-item">
@@ -37,20 +37,7 @@
                 <li class="menu-item mb-3">
                   <a href="pages-account-settings-account.html" class="menu-link">
                     <div data-i18n="Account">View Reports</div>
-                  </a>
-                </li>
-                <li class="menu-item mb-3">
-                  <a href="pages-account-settings-notifications.html" class="menu-link">
-                    <div data-i18n="Notifications">Notifications</div>
-                  </a>
-                </li>
-                <li class="menu-item mb-3">
-                  <a href="pages-account-settings-connections.html" class="menu-link">
-                    <div data-i18n="Connections">Connections</div>
-                  </a>
-                </li>
-              </ul>
-            </li>
+              
 
             <!-- Misc -->
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
@@ -60,7 +47,7 @@
                 target="_blank"
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
-                <div data-i18n="Support">Support</div>
+                <div data-i18n="Support">Log out</div>
               </a>
             </li>
           </ul>
