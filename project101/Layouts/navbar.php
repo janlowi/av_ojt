@@ -1,5 +1,7 @@
 <?php 
+
 include 'main.php';
+include '../Php/db_connect.php';
 
 ?>
 
@@ -36,11 +38,8 @@ include 'main.php';
                   <a
                     class="github-button"
                     href="https://github.com/themeselection/sneat-html-admin-template-free"
-                    data-icon="octicon-star"
-                    data-size="large"
-                    data-show-count="true"
-                    aria-label="Star themeselection/sneat-html-admin-template-free on GitHub"
-                    >...</a
+
+                    > <?= $_SESSION['email']; ?></a
                   >
                 </li>
 
@@ -61,8 +60,8 @@ include 'main.php';
                             </div>
                           </div>
                           <div class="flex-grow-1">
-                            <span class="fw-medium d-block">John Louie</span>
-                            <small class="text-muted">Admin</small>
+                            <span class="fw-medium d-block"><?= $_SESSION['firstname'];?></span>
+                            <small class="text-muted"><?= $_SESSION['usertype'];?></small>
                           </div>
                         </div>
                       </a>

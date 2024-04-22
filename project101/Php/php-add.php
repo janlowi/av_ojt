@@ -6,6 +6,7 @@ include 'db_connect.php';
 
  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
+
     $ojtid = $_POST["Ojtid"];
     $firstname = $_POST["Firstname"];
      $middlename = $_POST["Middlename"];
@@ -46,75 +47,111 @@ include 'db_connect.php';
 
         !empty( $user_type)&&
         !empty( $contact_num)) {
+
+
           if($password >=8) 
           {
                   if($password == $confirm_pass) {
                     $pass_hashed= password_hash($password, PASSWORD_DEFAULT);
-                    $sql = "INSERT INTO trainees (id, ojt_id, first_name, middle_name, last_name, age, sex, contact_num, degree, university, hours_to_render, dos, office_assigned, email, password, user_type, status, department)
-                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?, ?, ?)";
-                    
-                    $stmt = mysqli_stmt_init($connect);
-                    
-                    if ( ! mysqli_stmt_prepare($stmt, $sql)) {
-                     
-                        die(mysqli_error($connect));
-                    } else {
-                    
-                    mysqli_stmt_bind_param($stmt, "isssssisssiisssss",
-                                           $id,
-                                           $ojtid,
-                                           $firstname,
-                                           $middlename,
-                                           $lastname,
-                                           $age,
-                                           $sex,
-                                           $contact_num,
-                                           $course,
-                                           $university,
-                                           $hours_to_render,
-                                           $dos,
-                                           $office,
-                                           $email,
-                                           $pass_hashed,
-                                           $user_type,
-                                           $department,
 
-                                           $status
+                    $sql = "INSERT INTO users (
+                                               office_assigned, 
+                                               email,
+                                               password, 
+                                               user_type,  
+                                               department,
+                                               status
+                                              )
 
-                                          
-                                          );
+                            VALUES (       
+                                           '$office',
+                                           '$email',
+                                           '$pass_hashed',
+                                           '$user_type',
+                                           '$department',
+                                           '$status'
+                                           )";
+
+                    $query= mysqli_query($connect, $sql);
                     
-                    mysqli_stmt_execute($stmt);
+                     if ($query==1) {
+
+                      $user_id=mysqli_insert_id($connect);
+
+                      $insert="INSERT INTO trainees(
+                                                                                    ojt_id, 
+                                                                                    user_id, 
+                                                                                    first_name, 
+                                                                                    middle_name, 
+                                                                                    last_name, 
+                                                                                    age, 
+                                                                                    sex, 
+                                                                                    contact_num, 
+                                                                                    degree, 
+                                                                                    university,
+                                                                                    hours_to_render, 
+                                                                                    email, 
+                                                                                    dos
+                                                                                    )
+
+                                                        VALUES ( '$ojtid',
+                                                                '$user_id', 
+                                                                '$firstname',
+                                                                '$middlename',
+                                                                '$lastname',
+                                                                '$age',
+                                                                '$sex',
+                                                                '$contact_num',
+                                                                '$course',
+                                                                '$university',
+                                                                '$hours_to_render',
+                                                                '$email',
+                                                                '$dos',
+                                                              )";
+
+                                                           $query =mysqli_query($connect,$insert);
+
+                                                                                    $success_msg = "Trainee added successfully.";
+                                                                                    $_SESSION['success'] = $success_msg;
+                                                                              
+                                                                                  header("Location: ../Admin/AdminDashboard.php");
+                                                //       }else{
+                                                //         echo 'error';
+                                                //       }
+                                                // }
+
+                                    
+
+                                          } 
                     
-                    $success_msg = "Trainee added successfully.";
-                    $_SESSION['success'] = $success_msg;
-                    
-                    header("Location: ../Admin/AdminDashboard.php");
-                    }
-                    
-   }      else {
+
+                    }  else {
     
-    $error_msg = "Password does not match";
-    $_SESSION['error'] = $error_msg;
-    header("Location: ../Admin/AdminDashboard.php");
-   }
-
-    }   else {
-    
-      $error_msg = "Password must be equal or greater than 8 charaacters.";
+      $error_msg = "Password does not match";
       $_SESSION['error'] = $error_msg;
       header("Location: ../Admin/AdminDashboard.php");
-     }
- 
+    }
   
-  }
-  else {
+  } else {
     
-    $error_msg = "Please fill all the fieds.";
+    $error_msg = "Password must be equal or greater than 8 charaacters.";
     $_SESSION['error'] = $error_msg;
     header("Location: ../Admin/AdminDashboard.php");
    }
+  
  }
-
+ else {
+    
+  $error_msg = "Please fill all the fieds.";
+  $_SESSION['error'] = $error_msg;
+  header("Location: ../Admin/AdminDashboard.php");
+ }
+}
+else {
+    
+  $error_msg = "Faile to add trainee.";
+  $_SESSION['error'] = $error_msg;
+  header("Location: ../Admin/AdminDashboard.php");
+}
 
 ?>

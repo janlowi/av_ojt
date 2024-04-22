@@ -1,5 +1,5 @@
 
-const inputValue = document.getElementById('password')
+const inputValue = document.g
 let lower = document.getElementById('lower');
 let upper = document.getElementById('upper');
 let number = document.getElementById('number');
@@ -9,14 +9,12 @@ let length = document.getElementById('length');
 
  inputValue.onfocus = function() {
      document.getElementById('message').style.display = "block";
-      document.getElementById('retype').style.display = "none";
-      document.getElementById("confirm").style.display = "none";
+
       
  }
  inputValue.onblur = function() {
      document.getElementById('message').style.display = 'none';
-      document.getElementById('retype').style.display = "block";
-      document.getElementById("confirm").style.display = "block";
+    
  }
 
 

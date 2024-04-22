@@ -136,18 +136,6 @@
   }
 }
 
-/* password validation */
-
-#invalid {
-  color:var( --bs-form-invalid-color);
-}
-#valid {
-  color:var(  --bs-form-valid-color);
-}
-#message {
-  color:var( --bs-form-invalid-color);
-}
-/* password validation */
 
 
 body {

@@ -24,7 +24,7 @@
           <ul class="menu-inner py-1 ">
 
                 <li class="menu-item active mb-3 ">
-                  <a href="../Admin/AdminDashboard.php" class="menu-link">
+                  <a href="../Admin/Users.php" class="menu-link">
                     <div data-i18n="Analytics">Dashboard</div>
                   </a>
               </li>
@@ -35,7 +35,7 @@
                 </li>
               <ul class="menu-item ">
                 <li class="menu-item mb-3">
-                  <a href="pages-account-settings-account.html" class="menu-link">
+                  <a href="../Admin/Trainees.php" class="menu-link">
                     <div data-i18n="Account">Trainees</div>
                   </a>
                 </li>
