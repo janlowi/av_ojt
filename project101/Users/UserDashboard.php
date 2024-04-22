@@ -15,7 +15,7 @@ include '../Layouts/main.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User DAshboard</title>
-    <style>
+    <!-- <style>
         body {
             font-family: Arial, sans-serif;
         }
@@ -54,7 +54,7 @@ include '../Layouts/main.php';
             line-height: 30px;
             color: white;
         }
-    </style>
+    </style> -->
 </head>
 <body>
     <div class="container">
