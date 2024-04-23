@@ -3,7 +3,7 @@ include 'db_conn.php';
 // Check if the form is submitted
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Define the filename for storing form data
-    // $filename = "inex.php";
+    // $filename = "index.php";
 
     // Extract form data
     $department = $_POST['department'];

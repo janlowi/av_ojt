@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <head>
     <title>AV Student Intern Report Form</title>
-    <style>
+  
+       <style>
         body {
             font-family: Arial, sans-serif;
             background-color: black;
@@ -84,13 +84,14 @@
         input[type="submit"]:hover {
             background-color: #333;
         }
+    
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>AV Student Intern Bi-weekly Report</h1>
-        <p>You must be able to complete this report every 2 weeks after your deployment.</p>
-       <form id="reportForm" action="weekly_display.php" method="post">
+    <form id="reportForm" action="weekly_display.php" method="post" onsubmit="return validateForm()">
+        <div class="container">
+            <h1>AV Student Intern Bi-weekly Report</h1>
+            <p>You must be able to complete this report every 2 weeks after your deployment.</p>
             
             <label for="department">Assigned Department:</label><br>
             <select id="department" name="department" required>
@@ -123,9 +124,33 @@
             <textarea id="learning" name="learning" rows="4"></textarea><br>
 
             <input type="submit" name="submit" value="Submit">
-        </form>
-    </div>
+        </div>
+    </form>
 
-    
+    <script>
+        function validateForm() {
+    var department = document.getElementById("department").value;
+    var startDate = document.getElementById("start_date").value;
+    var endDate = document.getElementById("end_date").value;
+    var summary = document.getElementById("summary").value;
+    var accomplishments = document.getElementById("accomplishments").value;
+    var challenges = document.getElementById("challenges").value;
+    var learning = document.getElementById("learning").value;
+
+    // Check if any field is empty
+    if (department === "" || startDate === "" || endDate === "" || summary === "" || accomplishments === "" || challenges === "" || learning === "") {
+        alert("All fields are required.");
+        return false;
+    }
+
+    // Check if start date is greater than end date
+    if (new Date(startDate) > new Date(endDate)) {
+        alert("Assignment Period Start cannot be after Assignment Period End.");
+        return false;
+    }
+
+    return true;
+}
+    </script>
 </body>
 </html>
