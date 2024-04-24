@@ -11,7 +11,7 @@ include '../Layouts/main.php';
  if(isset($_GET['update'])) 
  
  $user_id= $_GET['update'];
-         $sql = "SELECT * FROM trainees WHERE id = '$user_id' ";
+         $sql = "SELECT * FROM trainees tr,users us WHERE tr.id = '$user_id' AND us.id = tr.user_id ";
          $result = mysqli_query($connect, $sql);
          $row = mysqli_fetch_assoc($result);
        if ($row>0 ) {
@@ -88,7 +88,7 @@ include '../Layouts/main.php';
                                 
                             <div class="modal-header">
                                     <h2 class="modal-title" id="modalCenterTitle">Update account for trainee.</h2>
-                                        <a href="AdminDashboard.php">
+                                        <a href="Users.php">
                                     <button
                                         type="button"
                                         class="btn-close"

@@ -21,7 +21,19 @@ if (empty($email)) {
         header("Location: ../Login/index.php");
         // Handle the error accordingly
     } else {
-        $query = "SELECT * FROM trainees WHERE email = '$email' ";
+        $query = "SELECT  us.password,
+                          tr.email,            
+                          tr.first_name,
+                          us.user_type
+                  
+        
+        FROM users us,
+            trainees tr
+
+        
+         WHERE tr.email = '$email' ";
+
+
         $result = mysqli_query($connect, $query);
         
 
@@ -39,7 +51,7 @@ if (empty($email)) {
 
                 // Redirect based on user type
                 if ($_SESSION['usertype'] === 'Admin') {
-                    header('location: ../Admin/AdminDashboard.php');   
+                    header('location: ../Admin/Users.php');   
                     exit();
                 } elseif ($_SESSION['usertype'] === 'User') {
                     header("Location: ../Users/index.php ");
