@@ -188,6 +188,164 @@ error_reporting (0);
                    </div>
 
 
+
+                   <?php 
+    
+     
+    $sql= "SELECT  us.*,
+                   tr.email, 
+                   tr.sex, 
+                   tr.first_name, 
+                   tr.middle_name, 
+                   tr.last_name,
+                   tr.dos
+
+           FROM    users us, 
+                   trainees tr
+                   
+           WHERE   us.id=tr.user_id ";
+    $query =mysqli_query($connect, $sql);
+
+   if( $count = mysqli_num_rows($query)>0) {
+
+    while ($row=mysqli_fetch_assoc($query))  {
+
+     ?>
+
+
+
+
+                             <!-- Content wrapper -->
+          <div class="content-wrapper">
+            <!-- Content --> 
+          <!-- Layout container -->
+          <div class="layout-page">
+
+          <div class="container-xxl flex-grow-1 container-p-y">
+
+
+
+                  <div class="row">
+                    <div class="col-lg-4 col-md-12 col-6 mb-4">
+                      <div class="card">
+                        <div class="card-body">
+                                
+                          <div class="card-title d-flex align-items-start justify-content-between">
+                            <div class="avatar flex-shrink-0">
+                              <img
+                                src="../assets/img/icons/unicons/chart-success.png"
+                                alt="chart success"
+                                class="rounded" />
+                            </div>
+                            <div class="dropdown">
+                              <button
+                                class="btn p-0"
+                                type="button"
+                                id="cardOpt3"
+                                data-bs-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false">
+                                <i class="bx bx-dots-vertical-rounded"></i>
+                              </button>
+                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
+                                <a class="dropdown-item" href="javascript:void(0);">View More</a>
+                                <a class="dropdown-item" href="javascript:void(0);">Delete</a>
+                              </div>
+                            </div>
+                          </div>
+                          <span class="fw-medium d-block mb-1"> NO. OF USERS</span>
+                          <h3 class="card-title mb-2"><?php echo $count.' ','     ','Users' ?></h3>
+                          <small class="text-success fw-medium"><i class="bx bx-up-arrow-alt"></i></small>
+                        </div>
+                      </div>
+                    </div>
+               
+
+
+           
+                    <div class="col-lg-2 col-md-12 col-6 mb-4">
+                      <div class="card">
+                        <div class="card-body">
+                          <div class="card-title d-flex align-items-start justify-content-between">
+                            <div class="avatar flex-shrink-0">
+                              <img
+                                src="../assets/img/icons/unicons/wallet-info.png"
+                                alt="Credit Card"
+                                class="rounded" />
+                            </div>
+                            <div class="dropdown">
+                              <button
+                                class="btn p-0"
+                                type="button"
+                                id="cardOpt6"
+                                data-bs-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false">
+                                <i class="bx bx-dots-vertical-rounded"></i>
+                              </button>
+                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt6">
+                                <a class="dropdown-item" href="javascript:void(0);">View More</a>
+                                <a class="dropdown-item" href="javascript:void(0);">Delete</a>
+                              </div>
+                            </div>
+                          </div>
+                          <span>Sales</span>
+                          <h3 class="card-title text-nowrap mb-1">$4,679</h3>
+                          <small class="text-success fw-medium"><i class="bx bx-up-arrow-alt"></i> +28.42%</small>
+                        </div>
+                      </div>
+                    </div>
+             
+
+                  <div class="col-lg-2 col-md-12 col-6 ">
+                      <div class="card">
+                        <div class="card-body">
+                          <div class="card-title d-flex align-items-start justify-content-between">
+                            <div class="avatar flex-shrink-0">
+                              <img
+                                src="../assets/img/icons/unicons/wallet-info.png"
+                                alt="Credit Card"
+                                class="rounded" />
+                            </div>
+                            <div class="dropdown">
+                              <button
+                                class="btn p-0"
+                                type="button"
+                                id="cardOpt6"
+                                data-bs-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false">
+                                <i class="bx bx-dots-vertical-rounded"></i>
+                              </button>
+                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt6">
+                                <a class="dropdown-item" href="javascript:void(0);">View More</a>
+                                <a class="dropdown-item" href="javascript:void(0);">Delete</a>
+                              </div>
+                            </div>
+                          </div>
+                          <span>Sales</span>
+                          <h3 class="card-title text-nowrap mb-1">$4,679</h3>
+                          <small class="text-success fw-medium"><i class="bx bx-up-arrow-alt"></i> +28.42%</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
+
+                </div>     
+          </div>          
+        </div>  
+    </div>  
+
+
+
+
+                    
+
+                   
+<!-- Table -->
+
+
           <!-- Content wrapper -->
           <div class="content-wrapper">
             <!-- Content --> 
@@ -200,25 +358,18 @@ error_reporting (0);
 
             <!-- center layout -->
 
+         
 
-                                        <div class="row">
-                                            <div class="col-lg-8 mb-4 order-0">
-                                            <div class="card">
-                                                <div class="d-flex align-items-end row">
-
-                        
+                 
+              <!-- <div class="row"> -->
 
 
-                                                </div>
-                                                </div>
-                                            </div>
-                                            </div>
 
 
                 <!-- trainee table -->
                 <!-- Bootstrap Dark Table -->
   
-              <div class="card ">
+              <!-- <div class="card "> -->
               <?php 
                                if(isset($_SESSION['success']))
                                 {
@@ -257,7 +408,7 @@ error_reporting (0);
                        </button>
                        
                 <h5 class="card-header">Users</h5>
-                <div class="     text-nowrap">
+                <div class=" table-responsive    text-nowrap">
                   <table class="table table-info">
                     <thead>
                 <tr>
@@ -275,28 +426,7 @@ error_reporting (0);
                 </tr>
             </thead>
             <tbody class="table-border-bottom-0">
-  <?php 
-    
-     
-     $sql= "SELECT  us.*,
-                    tr.email, 
-                    tr.sex, 
-                    tr.first_name, 
-                    tr.middle_name, 
-                    tr.last_name,
-                    tr.dos
 
-            FROM    users us, 
-                    trainees tr
-                    
-            WHERE   us.id=tr.user_id ";
-     $query =mysqli_query($connect, $sql);
-
-    if(mysqli_num_rows($query)>0) {
-
-     while ($row=mysqli_fetch_assoc($query))  {
-
-      ?>
 
                      <tr>
 

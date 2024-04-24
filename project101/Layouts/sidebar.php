@@ -22,34 +22,34 @@
           <li class="menu-header small text-uppercase"><span class="menu-header-text">Dashboard</span></li>
             <li class="menu-item">
           <ul class="menu-inner py-1 ">
-
-                <li class="menu-item active mb-3 ">
-                  <a href="../Admin/Users.php" class="menu-link">
-                    <div data-i18n="Analytics">Dashboard</div>
+          <ul class="menu-item ">
+            <li class="menu-item mb-3">
+                  <a href="../Admin/Users.php" class="menu-link ">
+                    <div data-i18n="Connections">Dashboard</div>
                   </a>
-              </li>
+                </li>
                 <li class="menu-item mb-3">
                   <a href="index.html" class="menu-link">
                     <div data-i18n="Analytics">Weekly Reports</div>
                   </a>
                 </li>
-              <ul class="menu-item ">
-                <li class="menu-item mb-3">
+            
+                <li class="menu-item active mb-3">
                   <a href="../Admin/Trainees.php" class="menu-link">
-                    <div data-i18n="Account">Trainees</div>
+                    <div data-i18n="Analytics">Trainees</div>
                   </a>
                 </li>
-                <li class="menu-item mb-3">
+                <li class="menu-item active mb-3">
                   <a href="pages-account-settings-notifications.html" class="menu-link">
                     <div data-i18n="Notifications">Notifications</div>
                   </a>
                 </li>
-                <li class="menu-item mb-3">
+                <li class="menu-item active mb-3">
                   <a href="pages-account-settings-connections.html" class="menu-link">
                     <div data-i18n="Connections">Connections</div>
                   </a>
                 </li>
-              </ul>
+              
             </li>
 
             <!-- Misc -->
@@ -59,10 +59,11 @@
                 href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
                 target="_blank"
                 class="menu-link">
-                <i class="menu-icon tf-icons bx bx-support"></i>
+                <i class="menu-icon tf-icons  bx bx-support" ></i>
                 <div data-i18n="Support">Support</div>
               </a>
             </li>
+            </ul>
           </ul>
         </aside>
         <!-- / Menu -->
