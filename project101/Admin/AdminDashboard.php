@@ -1,11 +1,11 @@
 <?php 
 session_start();
 
-$title="Admin Dashboard";
 include '../Layouts/main.php'; 
  include '../Layouts/sidebar.php';
  include '../Layouts/navbar.php';
  include '../Php/db_connect.php';
+
 
   ?>
    
@@ -19,7 +19,7 @@ error_reporting (0);
        $last_id = $row['id'];
        if ($last_id == "")
        {
-           $ojt_ID = "AVOJT-001";
+           $ojt_ID = "AVOJT0001";
        }
        else
        {
@@ -28,14 +28,21 @@ error_reporting (0);
            $ojt_ID = "AVOJT-00" . ($last_id + 1);
        }
    ?>
-
+                       <!-- Button trigger modal -->
+                       <button
+                         type="button"
+                         class="btn btn-primary"
+                         data-bs-toggle="modal"
+                         data-bs-target="#modalCenter">
+                         Launch modal
+                       </button>
 
                        <!-- Modal -->
                        <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
                          <div class="modal-dialog modal-dialog-centered" role="document">
                            <div class="modal-content">
                              <div class="modal-header">
-                               <h2 class="modal-title" id="modalCenterTitle">Register user.</h2>
+                               <h2 class="modal-title" id="modalCenterTitle">Create account for trainee.</h2>
 
                                <button
                                  type="button"
@@ -62,14 +69,10 @@ error_reporting (0);
                                                                        <label for="inputLastname" class="form-label">Lastname</label>
                                                                        <input type="text" class="form-control" id="inputLastname"name = "Lastname">
                                                                </div>
-
-
-
                                                                <div class="col-md-6">
                                                                        <label for="inputLastname" class="form-label">OJT-ID</label>
                                                                        <input type="text" class="form-control" id="inputLastname"name = "Ojtid" value="<?= $ojt_ID; ?>" readonly>
                                                                </div>
-
 
                                                                <div class="col-md-6">
                                                                        <label for="inputZip" class="form-label">Contact no.</label>
@@ -94,18 +97,6 @@ error_reporting (0);
                                                                        <select name="Usertype" id="usertype" class="form-select">
                                                                                <option value="Admin">Admin</option>
                                                                                <option value="Trainee">Trainee</option>
-                                                                       </select>
-                                                               </div>
-                                                               <div class="col-md-6">    
-                                                                       <label for="usertype" class="form-label">Department</label>
-                                                                       <select name="Department" id="usertype" class="form-select">
-                                                                               <option value="IT">IT</option>
-                                                                               <option value="Accounitng">Accounitng</option>
-                                                                               <option value="Finance">Finance</option>
-                                                                               <option value="Admin">Admin</option>
-                                                                               <option value="HR">HR</option>
-
-
                                                                        </select>
                                                                </div>
                                                                <div class="col-md-6">    
@@ -144,15 +135,12 @@ error_reporting (0);
                                                                        <input type="email" class="form-control" id="inputZip"name = "Email">
                                                                </div>
                                                                <div class="col-md-12">
-                                                                       <label for="password" class="form-label">Password</label>
-                                                                       <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" class="form-control" id="password"name = "Password" data-bs-toggle="collapse" data-bs-target="#collapseExample">
+                                                                       <label for="pass" class="form-label">Password</label>
+                                                                       <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" class="form-control" id="pass"name = "Password" data-bs-toggle="collapse" data-bs-target="#collapseExample">
                                                                </div>  
-                                                               <div id="passwordHelpBlock" class="form-text">
-                                                                  Your password must be 8-20 characters long, contains an UPPERCASE, a lowercase, a number and must have special characters.
-                                                              </div>
-                                                                              password must contain the following
-                                                                              <div class="collapse" id="collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                                                                                            <div class="card card-body" id="message">
+                                                                              <!-- password must contain the following -->
+                                                                              <div class="collapse" id="collapseExample">
+                                                                                            <div class="card card-body">
                                                                                                 <p>Password must contain the following characters:</p>
                                                                                                 <p id="lower" class= "invalid">A lower case letter</p>
                                                                                                 <p id="upper" class= "invalid">A capital (uppercase) letter</p>
@@ -179,171 +167,15 @@ error_reporting (0);
                                </div>  
 
                              <div class="modal-footer">
-
+                               <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                 Close
+                               </button>
                              </div>
                            </div>
                          </div>
                        </div>
                      </div>
                    </div>
-
-
-
-                   <?php 
-    
-     
-    $sql= "SELECT  us.*,
-                   tr.email, 
-                   tr.sex, 
-                   tr.first_name, 
-                   tr.middle_name, 
-                   tr.last_name,
-                   tr.dos
-
-           FROM    users us, 
-                   trainees tr
-                   
-           WHERE   us.id=tr.user_id ";
-    $query =mysqli_query($connect, $sql);
-
-   if( $count = mysqli_num_rows($query)>0) {
-
-    while ($row=mysqli_fetch_assoc($query))  {
-
-     ?>
-
-
-
-
-                             <!-- Content wrapper -->
-          <div class="content-wrapper">
-            <!-- Content --> 
-          <!-- Layout container -->
-          <div class="layout-page">
-
-          <div class="container-xxl flex-grow-1 container-p-y">
-
-
-
-                  <div class="row">
-                    <div class="col-lg-4 col-md-12 col-6 mb-4">
-                      <div class="card">
-                        <div class="card-body">
-                                
-                          <div class="card-title d-flex align-items-start justify-content-between">
-                            <div class="avatar flex-shrink-0">
-                              <img
-                                src="../assets/img/icons/unicons/chart-success.png"
-                                alt="chart success"
-                                class="rounded" />
-                            </div>
-                            <div class="dropdown">
-                              <button
-                                class="btn p-0"
-                                type="button"
-                                id="cardOpt3"
-                                data-bs-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false">
-                                <i class="bx bx-dots-vertical-rounded"></i>
-                              </button>
-                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
-                                <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                                <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                              </div>
-                            </div>
-                          </div>
-                          <span class="fw-medium d-block mb-1"> NO. OF USERS</span>
-                          <h3 class="card-title mb-2"><?php echo $count.' ','     ','Users' ?></h3>
-                          <small class="text-success fw-medium"><i class="bx bx-up-arrow-alt"></i></small>
-                        </div>
-                      </div>
-                    </div>
-               
-
-
-           
-                    <div class="col-lg-2 col-md-12 col-6 mb-4">
-                      <div class="card">
-                        <div class="card-body">
-                          <div class="card-title d-flex align-items-start justify-content-between">
-                            <div class="avatar flex-shrink-0">
-                              <img
-                                src="../assets/img/icons/unicons/wallet-info.png"
-                                alt="Credit Card"
-                                class="rounded" />
-                            </div>
-                            <div class="dropdown">
-                              <button
-                                class="btn p-0"
-                                type="button"
-                                id="cardOpt6"
-                                data-bs-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false">
-                                <i class="bx bx-dots-vertical-rounded"></i>
-                              </button>
-                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt6">
-                                <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                                <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                              </div>
-                            </div>
-                          </div>
-                          <span>Sales</span>
-                          <h3 class="card-title text-nowrap mb-1">$4,679</h3>
-                          <small class="text-success fw-medium"><i class="bx bx-up-arrow-alt"></i> +28.42%</small>
-                        </div>
-                      </div>
-                    </div>
-             
-
-                  <div class="col-lg-2 col-md-12 col-6 ">
-                      <div class="card">
-                        <div class="card-body">
-                          <div class="card-title d-flex align-items-start justify-content-between">
-                            <div class="avatar flex-shrink-0">
-                              <img
-                                src="../assets/img/icons/unicons/wallet-info.png"
-                                alt="Credit Card"
-                                class="rounded" />
-                            </div>
-                            <div class="dropdown">
-                              <button
-                                class="btn p-0"
-                                type="button"
-                                id="cardOpt6"
-                                data-bs-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false">
-                                <i class="bx bx-dots-vertical-rounded"></i>
-                              </button>
-                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt6">
-                                <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                                <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                              </div>
-                            </div>
-                          </div>
-                          <span>Sales</span>
-                          <h3 class="card-title text-nowrap mb-1">$4,679</h3>
-                          <small class="text-success fw-medium"><i class="bx bx-up-arrow-alt"></i> +28.42%</small>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  </div>
-
-                </div>     
-          </div>          
-        </div>  
-    </div>  
-
-
-
-
-                    
-
-                   
-<!-- Table -->
 
 
           <!-- Content wrapper -->
@@ -353,23 +185,40 @@ error_reporting (0);
           <div class="layout-page">
 
             <div class="container-xxl flex-grow-1 container-p-y">
+              <div class="row">
+                <div class="col-lg-8 mb-4 order-0">
+                  <div class="card">
+                    <div class="d-flex align-items-end row">
+                      <div class="col-sm-7">
+                        <div class="card-body">
+                          <h5 class="card-title text-primary">Congratulations John! 🎉</h5>
+                          <p class="mb-4">
+                            You have done <span class="fw-medium">72%</span> more sales today. Check your new badge in
+                            your profile.
+                          </p>
 
-
-
-            <!-- center layout -->
-
-         
-
-                 
-              <!-- <div class="row"> -->
-
-
+                          <a href="javascript:;" class="btn btn-sm btn-outline-primary">View Badges</a>
+                        </div>
+                      </div>
+                      <div class="col-sm-5 text-center text-sm-left">
+                        <div class="card-body pb-0 px-0 px-md-4">
+                          <img
+                            src="../assets/img/illustrations/man-with-laptop-light.png"
+                            height="140"
+                            alt="View Badge User"
+                            data-app-dark-img="illustrations/man-with-laptop-dark.png"
+                            data-app-light-img="illustrations/man-with-laptop-light.png" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
 
                 <!-- trainee table -->
                 <!-- Bootstrap Dark Table -->
   
-              <!-- <div class="card "> -->
+              <div class="card ">
               <?php 
                                if(isset($_SESSION['success']))
                                 {
@@ -401,23 +250,28 @@ error_reporting (0);
                                 
               <button
                          type="button"
-                         class="btn btn-success"
+                         class="btn btn-dark"
                          data-bs-toggle="modal"
                          data-bs-target="#modalCenter">
-                         ADD USER
+                         ADD TRAINEE
                        </button>
-                       
-                <h5 class="card-header">Users</h5>
-                <div class=" table-responsive    text-nowrap">
+                <h5 class="card-header">Trainees</h5>
+                <div class="table-responsive text-nowrap">
                   <table class="table table-dark">
                     <thead>
                 <tr>
                     <th scope="col">Id</th>
+                    <th scope="col">OJT ID</th>
                     <th scope="col">Name</th>
+                    <th scope="col">Age</th>
                     <th scope="col">Sex</th>
+                    <th scope="col">Contact no.</th>
+                    <th scope="col">Course</th>
+                    <th scope="col">University</th>
+                    <th scope="col">Hours to render</th>
                     <th scope="col">Date started</th>
-                    <th scope="col">Department</th>
                     <th scope="col">Office</th>
+
                     <th scope="col">Email</th>
                     <th scope="col">Password</th>
                     <th scope="col">Usertype</th>
@@ -426,23 +280,38 @@ error_reporting (0);
                 </tr>
             </thead>
             <tbody class="table-border-bottom-0">
+  <?php 
+     
+     $sql= "SELECT * FROM trainees ";
+     $query =mysqli_query($connect, $sql);
+    if(mysqli_num_rows($query)>0) {
 
+     while ($row=mysqli_fetch_assoc($query))  {
+
+     
+      ?>
 
                      <tr>
 
                         <td><?= $row ['id']; ?></td>
-                        <td><?=  $row ['last_name'].","." ". $row['first_name']." ". $row['middle_name']; ?></td>;                     
+                        <td><?= $row ['ojt_id']; ?></td>
+                        <td><?=  $row ['last_name'].","." ". $row['first_name']." ". $row['middle_name']; ?></td>;   
+                        <td><?= $row ['age']; ?></td>;                  
                         <td><?= $row ['sex']; ?></td>
+                        <td><?= $row ['contact_num']; ?></td>
+                        <td><?= $row ['degree']; ?></td>
+                        <td><?= $row ['university']; ?></td>
+                        <td><?= $row ['hours_to_render']; ?></td>
                         <td><?= $row ['dos']; ?></td>
-                        <td><?= $row ['department']; ?></td>
                         <td><?= $row ['office_assigned']; ?></td>
                         <td><?= $row ['email']; ?></td>
                         <td><?= $row ['password']; ?></td>
                         <td><?= $row ['user_type']; ?></td>
+
                        <td><span class="badge bg-label-primary me-1"><?= $row ['status']; ?></span></td>
                        <td>
                             <div class="menu">
-                              <a class="item" href="../Admin/Update.php? update=<?= $row ['id']; ?>"
+                              <a class="item" href="javascript:void(0);"
                                 ><i class='bx bx-edit'></i></a
                               >
                               <a class="item" href="javascript:void(0);"
@@ -461,22 +330,13 @@ error_reporting (0);
                 </div>
               </div>
               <!--/ Bootstrap Dark Table -->
-
-
-
-              <!-- center layout -->
-                    </div>
-                  </div>
-                </div>
-
+                 </div>
+                     </div>
+    
+            </div>
 
             <!-- / Content -->
             <div class="content-backdrop fade"></div>
           </div>
         </div>
           <!-- Content wrapper -->
-
-
-
-
-   

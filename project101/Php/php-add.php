@@ -106,7 +106,7 @@ include 'db_connect.php';
                                                                 '$university',
                                                                 '$hours_to_render',
                                                                 '$email',
-                                                                '$dos',
+                                                                '$dos'
                                                               )";
 
                                                            $query =mysqli_query($connect,$insert);

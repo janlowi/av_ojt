@@ -1,5 +1,6 @@
 <?php
 session_start();
+$_SESSION['user'] = $user_id;
 include 'db_connect.php';
 
 if ($_SERVER['REQUEST_METHOD']=='POST') {
@@ -24,7 +25,8 @@ if (empty($email)) {
         $query = "SELECT  us.password,
                           tr.email,            
                           tr.first_name,
-                          us.user_type
+                          us.user_type,
+                          tr.id
                   
         
         FROM users us,
@@ -42,6 +44,8 @@ if (empty($email)) {
             $_SESSION['email'] = $row['email'];
             $_SESSION['usertype'] = $row['user_type'];
             $_SESSION['firstname'] = $row['first_name'];
+            $_SESSION['id'] = $row['tr.id'];
+
             $hashed_password = $row['password'];
 
             // Verify the password -- not hashed temporarily
