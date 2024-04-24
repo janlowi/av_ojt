@@ -3,6 +3,7 @@ session_start();
 include 'db_connect.php';
 
 if ($_SERVER['REQUEST_METHOD']=='POST') {
+
 $email = $_POST['email'];
 $password = $_POST['password'];
 $user_type = "";
@@ -25,19 +26,22 @@ if (empty($email)) {
         
 
         if ($row = mysqli_fetch_assoc($result)) {
-            
+            // Store the user's email in a session variable
+            $_SESSION['email'] = $row['email'];
+            $_SESSION['usertype'] = $row['user_type'];
+            $_SESSION['firstname'] = $row['first_name'];
             $hashed_password = $row['password'];
 
             // Verify the password -- not hashed temporarily
-            if ($hashed_password === $password) {
+            if ($hashed_password = $password) {
             
-                $user_type = $row['user_type'];
+                $_SESSION['usertype'] = $row['user_type'];
 
                 // Redirect based on user type
-                if ($user_type === 'Admin') {
+                if ($_SESSION['usertype'] === 'Admin') {
                     header('location: ../Admin/AdminDashboard.php');   
                     exit();
-                } elseif ($user_type === 'user') {
+                } elseif ($_SESSION['usertype'] === 'User') {
                     header("Location: ../Users/index.php ");
                     exit();
                 } else {

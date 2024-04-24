@@ -136,16 +136,6 @@
   }
 }
 
-/* password validation */
-
-.invalid {
-  color:var( --bs-form-invalid-color);
-}
-.valid {
-  color:var(  --bs-form-valid-color);
-}
-
-/* password validation */
 
 
 body {

@@ -1,6 +1,6 @@
 <?php 
 session_start();
-
+$title="Trainees";
 include '../Layouts/main.php'; 
  include '../Layouts/sidebar.php';
  include '../Layouts/navbar.php';
@@ -19,7 +19,7 @@ error_reporting (0);
        $last_id = $row['id'];
        if ($last_id == "")
        {
-           $ojt_ID = "AVOJT0001";
+           $ojt_ID = "AVOJT-001";
        }
        else
        {
@@ -28,14 +28,7 @@ error_reporting (0);
            $ojt_ID = "AVOJT-00" . ($last_id + 1);
        }
    ?>
-                       <!-- Button trigger modal -->
-                       <button
-                         type="button"
-                         class="btn btn-primary"
-                         data-bs-toggle="modal"
-                         data-bs-target="#modalCenter">
-                         Launch modal
-                       </button>
+                
 
                        <!-- Modal -->
                        <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
@@ -100,6 +93,18 @@ error_reporting (0);
                                                                        </select>
                                                                </div>
                                                                <div class="col-md-6">    
+                                                                       <label for="usertype" class="form-label">Department</label>
+                                                                       <select name="Department" id="usertype" class="form-select">
+                                                                               <option value="IT">IT</option>
+                                                                               <option value="Accounitng">Accounitng</option>
+                                                                               <option value="Finance">Finance</option>
+                                                                               <option value="Admin">Admin</option>
+                                                                               <option value="HR">HR</option>
+
+
+                                                                       </select>
+                                                               </div>
+                                                               <div class="col-md-6">    
                                                                        <select name="Status" id="status" class="form-select" hidden>
                                                                                <option value="Active" selected >Active</option>
                                                                                <option value="Deactivated">Deactivated</option>
@@ -135,19 +140,22 @@ error_reporting (0);
                                                                        <input type="email" class="form-control" id="inputZip"name = "Email">
                                                                </div>
                                                                <div class="col-md-12">
-                                                                       <label for="pass" class="form-label">Password</label>
-                                                                       <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" class="form-control" id="pass"name = "Password" data-bs-toggle="collapse" data-bs-target="#collapseExample">
+                                                                       <label for="password" class="form-label">Password</label>
+                                                                       <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" class="form-control" id="password"name = "Password" data-bs-toggle="collapse" data-bs-target="#collapseExample">
                                                                </div>  
+                                                               <div id="passwordHelpBlock" class="form-text">
+                                                                  Your password must be 8-20 characters long, contains an UPPERCASE, a lowercase, a number and must have special characters.
+                                                              </div>
                                                                               <!-- password must contain the following -->
-                                                                              <div class="collapse" id="collapseExample">
-                                                                                            <div class="card card-body">
+                                                                              <!-- <div class="collapse" id="collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                                                                            <div class="card card-body" id="message">
                                                                                                 <p>Password must contain the following characters:</p>
                                                                                                 <p id="lower" class= "invalid">A lower case letter</p>
                                                                                                 <p id="upper" class= "invalid">A capital (uppercase) letter</p>
                                                                                                 <p id="number" class= "invalid">A number</p>
                                                                                                 <p id="length" class= "invalid">Minimum of 8 characters</p>
                                                                                             </div>
-                                                                                </div>
+                                                                                </div> -->
 
                                                                <div class="col-md-12">
                                                                        <label for="inputZip" class="form-label">Confirm Password</label>
@@ -189,6 +197,9 @@ error_reporting (0);
                 <div class="col-lg-8 mb-4 order-0">
                   <div class="card">
                     <div class="d-flex align-items-end row">
+
+           <!--   center layout -->
+
                       <div class="col-sm-7">
                         <div class="card-body">
                           <h5 class="card-title text-primary">Congratulations John! 🎉</h5>
@@ -200,6 +211,9 @@ error_reporting (0);
                           <a href="javascript:;" class="btn btn-sm btn-outline-primary">View Badges</a>
                         </div>
                       </div>
+
+
+
                       <div class="col-sm-5 text-center text-sm-left">
                         <div class="card-body pb-0 px-0 px-md-4">
                           <img
@@ -248,13 +262,13 @@ error_reporting (0);
                     ?>
                                 
                                 
-              <button
+              <!-- <button
                          type="button"
                          class="btn btn-dark"
                          data-bs-toggle="modal"
                          data-bs-target="#modalCenter">
                          ADD TRAINEE
-                       </button>
+                       </button> -->
                 <h5 class="card-header">Trainees</h5>
                 <div class="table-responsive text-nowrap">
                   <table class="table table-dark">
@@ -269,14 +283,16 @@ error_reporting (0);
                     <th scope="col">Course</th>
                     <th scope="col">University</th>
                     <th scope="col">Hours to render</th>
-                    <th scope="col">Date started</th>
-                    <th scope="col">Office</th>
+                    <!-- <th scope="col">Date started</th> -->
+                    <!-- <th scope="col">Department</th> -->
+
+                    <!-- <th scope="col">Office</th> -->
 
                     <th scope="col">Email</th>
-                    <th scope="col">Password</th>
+                    <!-- <th scope="col">Password</th>
                     <th scope="col">Usertype</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Operation</th>
+                    <th scope="col">Status</th> -->
+                    <!-- <th scope="col">Operation</th> -->
                 </tr>
             </thead>
             <tbody class="table-border-bottom-0">
@@ -303,24 +319,26 @@ error_reporting (0);
                         <td><?= $row ['degree']; ?></td>
                         <td><?= $row ['university']; ?></td>
                         <td><?= $row ['hours_to_render']; ?></td>
-                        <td><?= $row ['dos']; ?></td>
-                        <td><?= $row ['office_assigned']; ?></td>
+                        <!-- <td><?= $row ['dos']; ?></td> -->
+                        <!-- <td><?= $row ['department']; ?></td> -->
+
+                        <!-- <td><?= $row ['office_assigned']; ?></td> -->
                         <td><?= $row ['email']; ?></td>
-                        <td><?= $row ['password']; ?></td>
+                        <!-- <td><?= $row ['password']; ?></td>
                         <td><?= $row ['user_type']; ?></td>
 
-                       <td><span class="badge bg-label-primary me-1"><?= $row ['status']; ?></span></td>
-                       <td>
+                       <td><span class="badge bg-label-primary me-1"><?= $row ['status']; ?></span></td> -->
+                       <!-- <td>
                             <div class="menu">
-                              <a class="item" href="javascript:void(0);"
-                                ><i class='bx bx-edit'></i></a
+                              <a class="item" href="../Admin/Update.php? update=<?= $row ['id']; ?>"
+                                ><i class='bx bx-edit'>EDIT</i></a
                               >
                               <a class="item" href="javascript:void(0);"
                                 ><i class="bx bx-trash me-2"></i></a
                               >
                             </div>
 
-                        </td>
+                        </td> -->
                       </tr> 
 <?php
 }
@@ -331,6 +349,10 @@ error_reporting (0);
                 </div>
               </div>
               <!--/ Bootstrap Dark Table -->
+
+
+
+              <!-- center layout -->
                     </div>
                   </div>
                 </div>
@@ -341,3 +363,8 @@ error_reporting (0);
           </div>
         </div>
           <!-- Content wrapper -->
+
+
+
+
+   

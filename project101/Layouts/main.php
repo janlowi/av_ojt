@@ -2,6 +2,8 @@
 
 include '../Php/db_connect.php';
 ?>
+
+
 <!DOCTYPE html>
 
 <html
@@ -17,12 +19,12 @@ include '../Php/db_connect.php';
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Admin Dashboard</title>
+      <title><?php echo $title; ?></title>
 
     <meta name="description" content="" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="../assets/img/icons/brands/avlogo.png" />
+    <link rel="icon" type="image/x-icon" href="../assets/img/favicon/avlogo.png" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -44,12 +46,15 @@ include '../Php/db_connect.php';
 
     <!-- Page CSS -->
 
+    
+    
     <!-- Helpers -->
     <script src="../assets/vendor/js/helpers.js"></script>
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="../assets/js/config.js"></script>
   </head>
+
 
   <body>
     <!-- Layout wrapper -->
@@ -88,16 +93,11 @@ include '../Php/db_connect.php';
 
     <!-- Main JS -->
     <script src="../assets/js/main.js"></script>
-    <script src="../assets/js/pass_validate.js"></script>
 
     <!-- Page JS -->
     <script src="../assets/js/dashboards-analytics.js"></script>
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
-
-
-<!-- Page JS -->
-<script src="../../assets/js/tables-datatables-extensions.js"></script>
   </body>
 </html>
