@@ -13,7 +13,7 @@
         justify-content: center;
         align-items: center;
         height: 100vh;
-        background-color: #f0f0f0;
+        background-color: #f0f0f0  ;
     }
 
     .container {
@@ -55,7 +55,7 @@
 
         
         let xhr = new XMLHttpRequest();
-        xhr.open("POST", "log_time.php", true);
+        xhr.open("POST", "submit.php", true);
         xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhr.onreadystatechange = function() {
             if (xhr.readyState == 4 && xhr.status == 200) {
