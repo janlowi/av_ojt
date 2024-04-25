@@ -49,7 +49,7 @@ error_reporting (0);
                                                <div class="col-xl">
                                                <div class="card mb-4">
                                                <div class="card-body">
-                                                       <form class="row g-3" method= 'Post' action="../Php/php-add-user.php";>
+                                                       <form class="row g-3" method= 'Post' action="../Php/php-add.php";>
                                                                <div class="col-md-6">
                                                                        <label for="inputEmail4" class="form-label">Firstname</label>
                                                                        <input type="text" class="form-control" id="inputEmail4" name = "Firstname">
@@ -150,7 +150,7 @@ error_reporting (0);
                                                                <div id="passwordHelpBlock" class="form-text">
                                                                   Your password must be 8-20 characters long, contains an UPPERCASE, a lowercase, a number and must have special characters.
                                                               </div>
-                                                                              password must contain the following
+                                                                              <!-- password must contain the following
                                                                               <div class="collapse" id="collapseExample" aria-expanded="false" aria-controls="collapseExample">
                                                                                             <div class="card card-body" id="message">
                                                                                                 <p>Password must contain the following characters:</p>
@@ -159,7 +159,7 @@ error_reporting (0);
                                                                                                 <p id="number" class= "invalid">A number</p>
                                                                                                 <p id="length" class= "invalid">Minimum of 8 characters</p>
                                                                                             </div>
-                                                                                </div>
+                                                                                </div> -->
 
                                                                <div class="col-md-12">
                                                                        <label for="inputZip" class="form-label">Confirm Password</label>
@@ -189,31 +189,6 @@ error_reporting (0);
 
 
 
-                   <?php 
-    
-     
-    $sql= "SELECT  us.*,
-                   tr.email, 
-                   tr.sex, 
-                   tr.first_name, 
-                   tr.middle_name, 
-                   tr.last_name,
-                   tr.dos
-
-           FROM    users us, 
-                   trainees tr
-                   
-           WHERE   us.id=tr.user_id ";
-    $query =mysqli_query($connect, $sql);
-
-   if( $count = mysqli_num_rows($query)>0) {
-
-    while ($row=mysqli_fetch_assoc($query))  {
-
-     ?>
-
-
-
 
                              <!-- Content wrapper -->
           <div class="content-wrapper">
@@ -222,40 +197,28 @@ error_reporting (0);
           <div class="layout-page">
 
           <div class="container-xxl flex-grow-1 container-p-y">
-
-
-
                   <div class="row">
-                    <div class="col-lg-4 col-md-12 col-6 mb-4">
+
+
+
+                    <div class="col-lg-3   col-md-12 col-6 mb-4">
                       <div class="card">
                         <div class="card-body">
                                 
                           <div class="card-title d-flex align-items-start justify-content-between">
-                            <div class="avatar flex-shrink-0">
-                              <img
-                                src="../assets/img/icons/unicons/chart-success.png"
-                                alt="chart success"
-                                class="rounded" />
-                            </div>
-                            <div class="dropdown">
-                              <button
-                                class="btn p-0"
-                                type="button"
-                                id="cardOpt3"
-                                data-bs-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false">
-                                <i class="bx bx-dots-vertical-rounded"></i>
-                              </button>
-                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
-                                <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                                <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                              </div>
-                            </div>
-                          </div>
-                          <span class="fw-medium d-block mb-1"> NO. OF USERS</span>
-                          <h3 class="card-title mb-2"><?php echo $count.' ','     ','Users' ?></h3>
-                          <small class="text-success fw-medium"><i class="bx bx-up-arrow-alt"></i></small>
+
+                              <i class="fa-solid fa-users"   alt="chart success">
+                               </i>
+                          </div>                          
+                          <?php 
+                                  $sql= "SELECT * FROM users";
+                                  $result= mysqli_query($connect, $sql);
+                                  $count= mysqli_num_rows($result )
+                
+                          ?>
+                          <span class="card-title text-success"> NO. OF USERS</span>
+                          <h3 class="card-title mb-2"><?php echo $count.' ',' ','Users' ?></h3>
+                          <!-- <small class="text-success fw-medium"><i class="bx bx-up-arrow-alt"></i></small> -->
                         </div>
                       </div>
                     </div>
@@ -263,76 +226,52 @@ error_reporting (0);
 
 
            
-                    <div class="col-lg-2 col-md-12 col-6 mb-4">
+                   <div class="col-lg-3   col-md-12 col-6 mb-4">
                       <div class="card">
                         <div class="card-body">
+                                
                           <div class="card-title d-flex align-items-start justify-content-between">
-                            <div class="avatar flex-shrink-0">
-                              <img
-                                src="../assets/img/icons/unicons/wallet-info.png"
-                                alt="Credit Card"
-                                class="rounded" />
-                            </div>
-                            <div class="dropdown">
-                              <button
-                                class="btn p-0"
-                                type="button"
-                                id="cardOpt6"
-                                data-bs-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false">
-                                <i class="bx bx-dots-vertical-rounded"></i>
-                              </button>
-                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt6">
-                                <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                                <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                              </div>
-                            </div>
+
+                              <i class="fa-solid fa-users"   alt="chart success">
+                               </i>
                           </div>
-                          <span>Sales</span>
-                          <h3 class="card-title text-nowrap mb-1">$4,679</h3>
-                          <small class="text-success fw-medium"><i class="bx bx-up-arrow-alt"></i> +28.42%</small>
+
+                          <?php 
+                                  $sql= "SELECT * FROM users WHERE user_type='Trainee'";
+                                  $result= mysqli_query($connect, $sql);
+                                  $trainee_count= mysqli_num_rows($result )
+                
+                          ?>
+                          <span class="card-title text-primary"> NO. OF TRAINEES</span>
+                          <h3 class="card-title mb-2"><?php echo $trainee_count.' ',' ','Trainees' ?></h3>
+                          <!-- <small class="text-success fw-medium"><i class="bx bx-up-arrow-alt"></i></small> -->
                         </div>
                       </div>
                     </div>
              
 
-                  <div class="col-lg-2 col-md-12 col-6 ">
+                    <div class="col-lg-3   col-md-12 col-6 mb-4">
                       <div class="card">
                         <div class="card-body">
+                                
                           <div class="card-title d-flex align-items-start justify-content-between">
-                            <div class="avatar flex-shrink-0">
-                              <img
-                                src="../assets/img/icons/unicons/wallet-info.png"
-                                alt="Credit Card"
-                                class="rounded" />
-                            </div>
-                            <div class="dropdown">
-                              <button
-                                class="btn p-0"
-                                type="button"
-                                id="cardOpt6"
-                                data-bs-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false">
-                                <i class="bx bx-dots-vertical-rounded"></i>
-                              </button>
-                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt6">
-                                <a class="dropdown-item" href="javascript:void(0);">View More</a>
-                                <a class="dropdown-item" href="javascript:void(0);">Delete</a>
-                              </div>
-                            </div>
+
+                              <i class="fa-solid fa-users"   alt="chart success">
+                               </i>
                           </div>
-                          <span>Sales</span>
-                          <h3 class="card-title text-nowrap mb-1">$4,679</h3>
-                          <small class="text-success fw-medium"><i class="bx bx-up-arrow-alt"></i> +28.42%</small>
+                          <?php 
+                                  $sql= "SELECT * FROM users WHERE user_type='Admin'";
+                                  $result= mysqli_query($connect, $sql);
+                                  $admin_count= mysqli_num_rows($result )
+                
+                          ?>
+                          <span class="card-title text-info"> NO. OF ADMINS</span>
+                          <h3 class="card-title mb-2"><?php echo $admin_count.' ',' ','Admins' ?></h3>
+                          <!-- <small class="text-success fw-medium"><i class="bx bx-up-arrow-alt"></i></small> -->
                         </div>
                       </div>
                     </div>
-                  </div>
-                  </div>
-
-                </div>     
+     
           </div>          
         </div>  
     </div>  
@@ -340,11 +279,7 @@ error_reporting (0);
 
 
 
-                    
-
-                   
-<!-- Table -->
-
+  
 
           <!-- Content wrapper -->
           <div class="content-wrapper">
@@ -353,23 +288,16 @@ error_reporting (0);
           <div class="layout-page">
 
             <div class="container-xxl flex-grow-1 container-p-y">
+            <div class="row">                
 
 
 
             <!-- center layout -->
 
-         
-
-                 
-              <!-- <div class="row"> -->
-
-
-
-
                 <!-- trainee table -->
                 <!-- Bootstrap Dark Table -->
   
-              <!-- <div class="card "> -->
+              <div class="card ">
               <?php 
                                if(isset($_SESSION['success']))
                                 {
@@ -397,8 +325,11 @@ error_reporting (0);
                                   unset($_SESSION['error']);
                       }
                     ?>
-                                
-                                
+                          <!-- Table -->
+
+
+      
+                      
               <button
                          type="button"
                          class="btn btn-success"
@@ -406,10 +337,9 @@ error_reporting (0);
                          data-bs-target="#modalCenter">
                          ADD USER
                        </button>
-                       
-                <h5 class="card-header">Users</h5>
-                <div class=" table-responsive    text-nowrap">
-                  <table class="table table-info">
+                       <h5 class="card-header">Users</h5>
+                <div class="table-responsive text-nowrap">
+                <table class=" table table-bordered">
                     <thead>
                 <tr>
                     <th scope="col">Id</th>
@@ -426,6 +356,30 @@ error_reporting (0);
                 </tr>
             </thead>
             <tbody class="table-border-bottom-0">
+            <?php 
+    
+    $sql= "SELECT  us.*,
+                   tr.email, 
+                   tr.sex, 
+                   tr.first_name, 
+                   tr.middle_name, 
+                   tr.last_name,
+                   tr.dos
+
+           FROM    users us, 
+                   trainees tr
+                   
+           WHERE   us.id=tr.user_id ";
+    $query =mysqli_query($connect, $sql);
+  
+
+   if( $count = mysqli_num_rows($query)>0) {
+   
+    while ($row=mysqli_fetch_assoc($query))  {
+   
+  
+
+     ?>
 
 
                      <tr>
@@ -456,23 +410,20 @@ error_reporting (0);
 }
     }
 ?>
-                    </tbody>
+                      </tbody>
                   </table>
                 </div>
               </div>
               <!--/ Bootstrap Dark Table -->
 
-
-
-              <!-- center layout -->
-                    </div>
+                                <!-- center layout -->
+                                </div>
                   </div>
                 </div>
 
-
             <!-- / Content -->
             <div class="content-backdrop fade"></div>
-          </div>
+          <!-- </div> -->
         </div>
           <!-- Content wrapper -->
 

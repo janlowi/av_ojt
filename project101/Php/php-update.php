@@ -73,7 +73,8 @@ include 'db_connect.php';
                                       us.user_type = '$usertype', 
                                       us.status = '$status', 
                                       us.department = '$department'
-                            WHERE tr.id = '$id' AND us.id=tr.user_id";
+                                      
+                            WHERE us.id = '$id' AND us.id=tr.user_id";
                     $result = mysqli_query($connect, $sql);
 
                     if($result==true){
@@ -81,13 +82,13 @@ include 'db_connect.php';
                     $success_msg = "Trainee Updated successfully.";
                     $_SESSION['success'] = $success_msg;
                     
-                    header("Location: ../Admin/Users.php");
+                    header("Location: ../Admin/AdminDashboard.php");
                     }
                     else {
     
                       $error_msg = "Password does not match";
                       $_SESSION['error'] = $error_msg;
-                      header("Location: ../Admin/Users.php");
+                      header("Location: ../Admin/AdminDashboard.php");
                     
                        }    
 }
@@ -95,7 +96,7 @@ include 'db_connect.php';
     
       $error_msg = "Please fill all the fieds.";
       $_SESSION['error'] = $error_msg;
-      header("Location: ../Admin/Users.php");
+      header("Location: ../Admin/AdminDashboard.php");
      
   }
 }

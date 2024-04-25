@@ -6,6 +6,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST') {
 
 $email = $_POST['email'];
 $password = $_POST['password'];
+$user_id='';
 $user_type = "";
 
 
@@ -21,28 +22,28 @@ if (empty($email)) {
         header("Location: ../Login/index.php");
         // Handle the error accordingly
     } else {
-        $query = "SELECT  us.password,
-                          tr.email,            
-                          tr.first_name,
-                          us.user_type
-                  
-        
+
+        $query = "SELECT  us.*,
+                          tr.email,
+                          tr.first_name
+                          
         FROM users us,
             trainees tr
 
         
-         WHERE tr.email = '$email' ";
+         WHERE  us.id=tr.user_id AND tr.email='$email' ";
 
 
-        $result = mysqli_query($connect, $query);
+        $result =mysqli_query($connect, $query);
         
 
         if ($row = mysqli_fetch_assoc($result)) {
             // Store the user's email in a session variable
             $_SESSION['email'] = $row['email'];
-            $_SESSION['usertype'] = $row['user_type'];
             $_SESSION['firstname'] = $row['first_name'];
             $hashed_password = $row['password'];
+            $_SESSION['user_id'] = $row['id'];
+            
 
             // Verify the password -- not hashed temporarily
             if ($hashed_password = $password) {
@@ -51,10 +52,10 @@ if (empty($email)) {
 
                 // Redirect based on user type
                 if ($_SESSION['usertype'] === 'Admin') {
-                    header('location: ../Admin/Users.php');   
+                    header('location: ../Admin/AdminDashboard.php');   
                     exit();
-                } elseif ($_SESSION['usertype'] === 'User') {
-                    header("Location: ../Users/index.php ");
+                } elseif ($_SESSION['usertype'] === 'Trainee') {
+                    header("Location: ../Users/UserDashboard.php ");
                     exit();
                 } else {
                     // Handle unknown user types or errors

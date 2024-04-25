@@ -271,7 +271,7 @@ error_reporting (0);
                        </button> -->
                 <h5 class="card-header">Trainees</h5>
                 <div class="table-responsive text-nowrap">
-                  <table class="table table-dark">
+                <table class="datatables-ajax table table-bordered">
                     <thead>
                 <tr>
                     <th scope="col">Id</th>
@@ -367,4 +367,4 @@ error_reporting (0);
 
 
 
-   
+   <script src="../Assets/js/tables-datatables-advanced.js"></script>
