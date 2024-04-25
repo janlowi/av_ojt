@@ -1,12 +1,19 @@
 <?php 
 session_start();
 
+<<<<<<< HEAD
 $title="Admin Dashboard";
+=======
+>>>>>>> 9287a070d308473266c72eae7d0f0c7c827000d4
 include '../Layouts/main.php'; 
  include '../Layouts/sidebar.php';
  include '../Layouts/navbar.php';
  include '../Php/db_connect.php';
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9287a070d308473266c72eae7d0f0c7c827000d4
   ?>
    
 
@@ -19,7 +26,11 @@ error_reporting (0);
        $last_id = $row['id'];
        if ($last_id == "")
        {
+<<<<<<< HEAD
            $ojt_ID = "AVOJT-001";
+=======
+           $ojt_ID = "AVOJT0001";
+>>>>>>> 9287a070d308473266c72eae7d0f0c7c827000d4
        }
        else
        {
@@ -28,14 +39,29 @@ error_reporting (0);
            $ojt_ID = "AVOJT-00" . ($last_id + 1);
        }
    ?>
+<<<<<<< HEAD
 
+=======
+                       <!-- Button trigger modal -->
+                       <button
+                         type="button"
+                         class="btn btn-primary"
+                         data-bs-toggle="modal"
+                         data-bs-target="#modalCenter">
+                         Launch modal
+                       </button>
+>>>>>>> 9287a070d308473266c72eae7d0f0c7c827000d4
 
                        <!-- Modal -->
                        <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
                          <div class="modal-dialog modal-dialog-centered" role="document">
                            <div class="modal-content">
                              <div class="modal-header">
+<<<<<<< HEAD
                                <h2 class="modal-title" id="modalCenterTitle">Register user.</h2>
+=======
+                               <h2 class="modal-title" id="modalCenterTitle">Create account for trainee.</h2>
+>>>>>>> 9287a070d308473266c72eae7d0f0c7c827000d4
 
                                <button
                                  type="button"
@@ -62,15 +88,21 @@ error_reporting (0);
                                                                        <label for="inputLastname" class="form-label">Lastname</label>
                                                                        <input type="text" class="form-control" id="inputLastname"name = "Lastname">
                                                                </div>
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> 9287a070d308473266c72eae7d0f0c7c827000d4
                                                                <div class="col-md-6">
                                                                        <label for="inputLastname" class="form-label">OJT-ID</label>
                                                                        <input type="text" class="form-control" id="inputLastname"name = "Ojtid" value="<?= $ojt_ID; ?>" readonly>
                                                                </div>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9287a070d308473266c72eae7d0f0c7c827000d4
                                                                <div class="col-md-6">
                                                                        <label for="inputZip" class="form-label">Contact no.</label>
                                                                        <input type="number" class="form-control" id="inputZip"name = "Contact">
@@ -97,6 +129,7 @@ error_reporting (0);
                                                                        </select>
                                                                </div>
                                                                <div class="col-md-6">    
+<<<<<<< HEAD
                                                                        <label for="usertype" class="form-label">Department</label>
                                                                        <select name="Department" id="usertype" class="form-select">
                                                                                <option value="IT">IT</option>
@@ -109,6 +142,8 @@ error_reporting (0);
                                                                        </select>
                                                                </div>
                                                                <div class="col-md-6">    
+=======
+>>>>>>> 9287a070d308473266c72eae7d0f0c7c827000d4
                                                                        <select name="Status" id="status" class="form-select" hidden>
                                                                                <option value="Active" selected >Active</option>
                                                                                <option value="Deactivated">Deactivated</option>
@@ -144,6 +179,7 @@ error_reporting (0);
                                                                        <input type="email" class="form-control" id="inputZip"name = "Email">
                                                                </div>
                                                                <div class="col-md-12">
+<<<<<<< HEAD
                                                                        <label for="password" class="form-label">Password</label>
                                                                        <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" class="form-control" id="password"name = "Password" data-bs-toggle="collapse" data-bs-target="#collapseExample">
                                                                </div>  
@@ -153,13 +189,25 @@ error_reporting (0);
                                                                               <!-- password must contain the following
                                                                               <div class="collapse" id="collapseExample" aria-expanded="false" aria-controls="collapseExample">
                                                                                             <div class="card card-body" id="message">
+=======
+                                                                       <label for="pass" class="form-label">Password</label>
+                                                                       <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" class="form-control" id="pass"name = "Password" data-bs-toggle="collapse" data-bs-target="#collapseExample">
+                                                               </div>  
+                                                                              <!-- password must contain the following -->
+                                                                              <div class="collapse" id="collapseExample">
+                                                                                            <div class="card card-body">
+>>>>>>> 9287a070d308473266c72eae7d0f0c7c827000d4
                                                                                                 <p>Password must contain the following characters:</p>
                                                                                                 <p id="lower" class= "invalid">A lower case letter</p>
                                                                                                 <p id="upper" class= "invalid">A capital (uppercase) letter</p>
                                                                                                 <p id="number" class= "invalid">A number</p>
                                                                                                 <p id="length" class= "invalid">Minimum of 8 characters</p>
                                                                                             </div>
+<<<<<<< HEAD
                                                                                 </div> -->
+=======
+                                                                                </div>
+>>>>>>> 9287a070d308473266c72eae7d0f0c7c827000d4
 
                                                                <div class="col-md-12">
                                                                        <label for="inputZip" class="form-label">Confirm Password</label>
@@ -179,7 +227,13 @@ error_reporting (0);
                                </div>  
 
                              <div class="modal-footer">
+<<<<<<< HEAD
 
+=======
+                               <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                 Close
+                               </button>
+>>>>>>> 9287a070d308473266c72eae7d0f0c7c827000d4
                              </div>
                            </div>
                          </div>
@@ -188,6 +242,7 @@ error_reporting (0);
                    </div>
 
 
+<<<<<<< HEAD
 
 
                              <!-- Content wrapper -->
@@ -281,6 +336,8 @@ error_reporting (0);
 
   
 
+=======
+>>>>>>> 9287a070d308473266c72eae7d0f0c7c827000d4
           <!-- Content wrapper -->
           <div class="content-wrapper">
             <!-- Content --> 
@@ -288,12 +345,45 @@ error_reporting (0);
           <div class="layout-page">
 
             <div class="container-xxl flex-grow-1 container-p-y">
+<<<<<<< HEAD
             <div class="row">                
 
 
 
             <!-- center layout -->
 
+=======
+              <div class="row">
+                <div class="col-lg-8 mb-4 order-0">
+                  <div class="card">
+                    <div class="d-flex align-items-end row">
+                      <div class="col-sm-7">
+                        <div class="card-body">
+                          <h5 class="card-title text-primary">Congratulations John! 🎉</h5>
+                          <p class="mb-4">
+                            You have done <span class="fw-medium">72%</span> more sales today. Check your new badge in
+                            your profile.
+                          </p>
+
+                          <a href="javascript:;" class="btn btn-sm btn-outline-primary">View Badges</a>
+                        </div>
+                      </div>
+                      <div class="col-sm-5 text-center text-sm-left">
+                        <div class="card-body pb-0 px-0 px-md-4">
+                          <img
+                            src="../assets/img/illustrations/man-with-laptop-light.png"
+                            height="140"
+                            alt="View Badge User"
+                            data-app-dark-img="illustrations/man-with-laptop-dark.png"
+                            data-app-light-img="illustrations/man-with-laptop-light.png" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+>>>>>>> 9287a070d308473266c72eae7d0f0c7c827000d4
                 <!-- trainee table -->
                 <!-- Bootstrap Dark Table -->
   
@@ -325,6 +415,7 @@ error_reporting (0);
                                   unset($_SESSION['error']);
                       }
                     ?>
+<<<<<<< HEAD
                           <!-- Table -->
 
 
@@ -337,9 +428,16 @@ error_reporting (0);
                          data-bs-target="#modalCenter">
                          ADD USER
                        </button>
+<<<<<<<< HEAD:project101/Admin/AdminDashboard.php
                        <h5 class="card-header">Users</h5>
                 <div class="table-responsive text-nowrap">
                 <table class=" table table-bordered">
+========
+                       
+                <h5 class="card-header">Users</h5>
+                <div class=" table-responsive    text-nowrap">
+                  <table class="table table-dark">
+>>>>>>>> 9287a070d308473266c72eae7d0f0c7c827000d4:project101/Admin/Users.php
                     <thead>
                 <tr>
                     <th scope="col">Id</th>
@@ -348,6 +446,34 @@ error_reporting (0);
                     <th scope="col">Date started</th>
                     <th scope="col">Department</th>
                     <th scope="col">Office</th>
+=======
+                                
+                                
+              <button
+                         type="button"
+                         class="btn btn-dark"
+                         data-bs-toggle="modal"
+                         data-bs-target="#modalCenter">
+                         ADD TRAINEE
+                       </button>
+                <h5 class="card-header">Trainees</h5>
+                <div class="table-responsive text-nowrap">
+                  <table class="table table-dark">
+                    <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">OJT ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Sex</th>
+                    <th scope="col">Contact no.</th>
+                    <th scope="col">Course</th>
+                    <th scope="col">University</th>
+                    <th scope="col">Hours to render</th>
+                    <th scope="col">Date started</th>
+                    <th scope="col">Office</th>
+
+>>>>>>> 9287a070d308473266c72eae7d0f0c7c827000d4
                     <th scope="col">Email</th>
                     <th scope="col">Password</th>
                     <th scope="col">Usertype</th>
@@ -356,6 +482,7 @@ error_reporting (0);
                 </tr>
             </thead>
             <tbody class="table-border-bottom-0">
+<<<<<<< HEAD
             <?php 
     
     $sql= "SELECT  us.*,
@@ -381,22 +508,54 @@ error_reporting (0);
 
      ?>
 
+=======
+  <?php 
+     
+     $sql= "SELECT * FROM trainees ";
+     $query =mysqli_query($connect, $sql);
+    if(mysqli_num_rows($query)>0) {
+
+     while ($row=mysqli_fetch_assoc($query))  {
+
+     
+      ?>
+>>>>>>> 9287a070d308473266c72eae7d0f0c7c827000d4
 
                      <tr>
 
                         <td><?= $row ['id']; ?></td>
+<<<<<<< HEAD
                         <td><?=  $row ['last_name'].","." ". $row['first_name']." ". $row['middle_name']; ?></td>;                     
                         <td><?= $row ['sex']; ?></td>
                         <td><?= $row ['dos']; ?></td>
                         <td><?= $row ['department']; ?></td>
+=======
+                        <td><?= $row ['ojt_id']; ?></td>
+                        <td><?=  $row ['last_name'].","." ". $row['first_name']." ". $row['middle_name']; ?></td>;   
+                        <td><?= $row ['age']; ?></td>;                  
+                        <td><?= $row ['sex']; ?></td>
+                        <td><?= $row ['contact_num']; ?></td>
+                        <td><?= $row ['degree']; ?></td>
+                        <td><?= $row ['university']; ?></td>
+                        <td><?= $row ['hours_to_render']; ?></td>
+                        <td><?= $row ['dos']; ?></td>
+>>>>>>> 9287a070d308473266c72eae7d0f0c7c827000d4
                         <td><?= $row ['office_assigned']; ?></td>
                         <td><?= $row ['email']; ?></td>
                         <td><?= $row ['password']; ?></td>
                         <td><?= $row ['user_type']; ?></td>
+<<<<<<< HEAD
                        <td><span class="badge bg-label-primary me-1"><?= $row ['status']; ?></span></td>
                        <td>
                             <div class="menu">
                               <a class="item" href="../Admin/Update.php? update=<?= $row ['id']; ?>"
+=======
+
+                       <td><span class="badge bg-label-primary me-1"><?= $row ['status']; ?></span></td>
+                       <td>
+                            <div class="menu">
+                              <a class="item" href="javascript:void(0);"
+>>>>>>> 9287a070d308473266c72eae7d0f0c7c827000d4
                                 ><i class='bx bx-edit'></i></a
                               >
                               <a class="item" href="javascript:void(0);"
@@ -410,11 +569,16 @@ error_reporting (0);
 }
     }
 ?>
+<<<<<<< HEAD
                       </tbody>
+=======
+                    </tbody>
+>>>>>>> 9287a070d308473266c72eae7d0f0c7c827000d4
                   </table>
                 </div>
               </div>
               <!--/ Bootstrap Dark Table -->
+<<<<<<< HEAD
 
                                 <!-- center layout -->
                                 </div>
@@ -431,3 +595,15 @@ error_reporting (0);
 
 
    
+=======
+                 </div>
+                     </div>
+    
+            </div>
+
+            <!-- / Content -->
+            <div class="content-backdrop fade"></div>
+          </div>
+        </div>
+          <!-- Content wrapper -->
+>>>>>>> 9287a070d308473266c72eae7d0f0c7c827000d4

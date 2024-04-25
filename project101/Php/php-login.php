@@ -1,5 +1,6 @@
 <?php
 session_start();
+$_SESSION['user'] = $user_id;
 include 'db_connect.php';
 
 if ($_SERVER['REQUEST_METHOD']=='POST') {
@@ -22,11 +23,21 @@ if (empty($email)) {
         header("Location: ../Login/index.php");
         // Handle the error accordingly
     } else {
+<<<<<<< HEAD
 
         $query = "SELECT  us.*,
                           tr.email,
                           tr.first_name
                           
+=======
+        $query = "SELECT  us.password,
+                          tr.email,            
+                          tr.first_name,
+                          us.user_type,
+                          tr.id
+                  
+        
+>>>>>>> 9287a070d308473266c72eae7d0f0c7c827000d4
         FROM users us,
             trainees tr
 
@@ -41,6 +52,8 @@ if (empty($email)) {
             // Store the user's email in a session variable
             $_SESSION['email'] = $row['email'];
             $_SESSION['firstname'] = $row['first_name'];
+            $_SESSION['id'] = $row['tr.id'];
+
             $hashed_password = $row['password'];
             $_SESSION['user_id'] = $row['id'];
             
@@ -62,7 +75,7 @@ if (empty($email)) {
                 }
             } else {
                 // Password does not match
-                echo "Incorrect password";
+                echo "Incorrect password.";
               
             }
         } else {
