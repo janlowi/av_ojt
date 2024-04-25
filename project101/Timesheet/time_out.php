@@ -9,19 +9,22 @@
         font-family: Arial, sans-serif;
         margin: 0;
         padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        background-color: #f0f0f0  ;
+        background-color: #f0f0f0;
     }
 
     .container {
+        max-width: 500px;
+        margin: 50px auto;
         background-color: #fff;
         border-radius: 8px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         padding: 20px;
         text-align: center;
+    }
+
+    h1 {
+        margin-top: 0;
+        color: #007bff;
     }
 
     button {
@@ -32,23 +35,63 @@
         color: #fff;
         cursor: pointer;
         border-radius: 4px;
+        margin-top: 20px;
+        transition: background-color 0.3s;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    #clock {
+        font-size: 32px;
+        margin-top: 20px;
+        color: #333;
+    }
+
+    #date {
+        font-size: 18px;
         margin-top: 10px;
+        color: #666;
+    }
+
+    #status {
+        margin-top: 20px;
+        color: #666;
     }
 </style>
 </head>
 <body>
     <div class="container">
         <h1>Time Tracking</h1>
-        <p>Click the button below to log your time.</p>
+        <div id="clock"></div>
+        <div id="date"></div>
         <button id="timeButton">Time In</button>
         <p id="status"></p>
     </div>
-
+    
     <script>
     const timeButton = document.getElementById('timeButton');
     const status = document.getElementById('status');
+    const clock = document.getElementById('clock');
+    const dateElement = document.getElementById('date');
 
     let isTimeIn = false;
+
+    function updateTime() {
+        const now = new Date();
+        const hours = now.getHours().toString().padStart(2, '0');
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        const seconds = now.getSeconds().toString().padStart(2, '0');
+        const year = now.getFullYear();
+        const month = (now.getMonth() + 1).toString().padStart(2, '0');
+        const day = now.getDate().toString().padStart(2, '0');
+        clock.textContent = `${hours}:${minutes}:${seconds}`;
+        dateElement.textContent = `${year}-${month}-${day}`;
+    }
+
+    updateTime();
+    setInterval(updateTime, 1000);
 
     timeButton.addEventListener('click', function() {
         let event_type = isTimeIn ? 'Out' : 'In';
@@ -76,4 +119,4 @@
     });
 </script>
 </body>
-</html>
+</html>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
