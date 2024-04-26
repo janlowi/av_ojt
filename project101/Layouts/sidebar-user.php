@@ -1,7 +1,6 @@
        <?php include 'main.php';?>
        
         <!-- Menu -->
-
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
             <a href="https://www.avegabros.com/" class="app-brand-link">
@@ -29,7 +28,7 @@
                   </a>
                 </li>
                 <li class="menu-item mb-3">
-                  <a href="index.html" class="menu-link">
+                  <a href="../Biweekly/DisplayReports.php" class="menu-link">
                     <div data-i18n="Analytics">Weekly Reports</div>
                   </a>
                 </li>

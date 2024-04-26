@@ -23,21 +23,11 @@ if (empty($email)) {
         header("Location: ../Login/index.php");
         // Handle the error accordingly
     } else {
-<<<<<<< HEAD
 
         $query = "SELECT  us.*,
                           tr.email,
                           tr.first_name
                           
-=======
-        $query = "SELECT  us.password,
-                          tr.email,            
-                          tr.first_name,
-                          us.user_type,
-                          tr.id
-                  
-        
->>>>>>> 9287a070d308473266c72eae7d0f0c7c827000d4
         FROM users us,
             trainees tr
 

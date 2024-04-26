@@ -34,6 +34,19 @@ include '../Php/db_connect.php';
 
               <ul class="navbar-nav flex-row align-items-center ms-auto">
                 <!-- Place this tag where you want the button to render. -->
+
+
+                <li class="nav-item lh-7 me-5">
+                  <a
+                  
+                    class="text-muted"
+                    href="../Users/UserDashboard.php"
+                    
+                    ><i class="fas fa-home text-muted" style="color: #000;"></i> Home
+                    </a>
+                   
+                </li>
+
                 <li class="nav-item lh-1 me-3">
                   <a
                     class="text-muted"

@@ -1,4 +1,5 @@
-       <?php include 'main.php';?>
+       <?php include 'main.php';
+       ?>
        
         <!-- Menu -->
 
@@ -29,7 +30,7 @@
                   </a>
                 </li>
                 <li class="menu-item mb-3">
-                  <a href="index.html" class="menu-link">
+                  <a href="../Biweekly/weekly.php? user_id=<?php echo $_SESSION['id'];?> " class="menu-link">
                     <div data-i18n="Analytics">Weekly Reports</div>
                   </a>
                 </li>

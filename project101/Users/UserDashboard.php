@@ -18,6 +18,7 @@ include '../Layouts/main-user.php';
 
           <div class="container-xxl flex-grow-1 container-p-y">
                   <div class="row">
+                    
 
 
                   <?php 
@@ -39,17 +40,15 @@ include '../Layouts/main-user.php';
                       <div class="col-sm-7">
                         <div class="card-body">
                           <h5 class="card-title text-primary">Welcome Trainee <?= $_SESSION['firstname'];?>! 🎉</h5>
-                          <p class="mb-4">
+                          <p class="mb-1">
                             Kung gikapoy naka  <span class="fw-medium"> : ></span> unsa pay gihuwat? surrender na. 
                           <br><br>
                           -janlowi
                           </p>
-
-                          <a href="javascript:;" class="btn btn-sm btn-outline-primary">View Badges</a>
                         </div>
                       </div>
-                      <div class="col-sm-5 text-right text-sm-left">
-                        <div class="card-body pb-10 px-0 px-md-8">
+                      <div class="col-sm-5 text-center text-sm-left">
+                        <div class="card-body pb-0 px-0 px-md-4">
                           <img
                             src="../assets/img/illustrations/nice1.png"
                             height="140"
@@ -58,17 +57,136 @@ include '../Layouts/main-user.php';
                             data-app-light-img="illustrations/man-with-laptop-light.png" />
                         </div>
                       </div>
+
                     </div>
                   </div>
                 </div>
 
           <!-- welcome -->
 
-<div class="col-2 col-xl-8 col-md-6">
-    <div class="card h-100">
+  <!-- report -->
+    
+                <div class="col-md-0 col-xl-3">
+                  <div class="card mb-3">
+                  <button
+                         type="button"
+                         class="btn btn-dark"
+                         href= "../Users/U"
+                         data-bs-toggle="modal"
+                         data-bs-target="#modalCenter">
+                         Add report
+                       </button>
+
+                    <!-- <img class="card-img-top" src="../assets/img/elements/18.jpg" alt="Card image cap" /> -->
+                    <div class="card-body">
+                      <h5 class="card-title">Weekly report</h5>
+                      <p class="card-text">
+                        PLease submit a response weekly of your weekly duties.
+                      </p>
+                      <p class="card-text">
+                        <small class="text-muted">...</small>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              <!--/ report -->
+
+               <!-- report -->
+    
+               <div class="col-md-0 col-xl-3">
+                  <div class="card mb-3">`
+              
+                    <!-- <img class="card-img-top" src="../assets/img/elements/18.jpg" alt="Card image cap" /> -->
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">
+                        This is a wider card with supporting text below as a natural lead-in to additional content. This
+                        content is a little bit longer.
+                      </p>
+                      <p class="card-text">
+                        <small class="text-muted">Last updated 3 mins ago</small>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              <!--/ report -->
+
+    <!-- Modal  for report-->
+    <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h2 class="modal-title" id="modalCenterTitle">Write your weekly report.</h2>
+
+                                              <button
+                                                type="button"
+                                                class="btn-close"
+                                                data-bs-dismiss="modal"
+                                                aria-label="Close">
+                                              </button>
+                                            </div>
+
+
+                                            <div class="row">
+                                               <div class="col-xl">
+                                               <div class="card mb-4">
+                                               <div class="card-body">
+
+                                               <form class="row g-3" id="reportForm" action="../Php/php-weekly.php" method="post">
+                                                         
+                                               <div class="col-12">
+                                                          <label for="department">Assigned Department:</label><br>
+                                                          <select id="department" name="department" required class="form-control">
+                                                              <option value="">Select Department</option>
+                                                              <option value="IT">Information Technology</option>
+                                                              <option value="Accounting">Accounting</option>
+                                                              <option value="Finance">Finance</option>
+                                                              <option value="Admin">Admin</option>
+                                                              <option value="Purchasing">Purchasing</option>
+                                                              <option value="Warehouse">Warehouse</option>
+                                                          </select><br>
+                                               </div>
+                                                          <label for="start_date">Assignment Period Start:</label>
+                                                          <input type="date" id="start_date" name="start_date" required class="form-control">
+
+                                                          <label for="end_date">Assignment Period End:</label>
+                                                          <input type="date" id="end_date" name="end_date" required class="form-control">
+                                                          <br>
+
+                                                          <label for="summary">Summary or Scope of Work:</label>
+                                                          <textarea id="summary" name="summary" rows="4" required class="form-control"></textarea>
+
+                                                          <label for="accomplishments">Accomplishments:</label><br>
+                                                          <textarea id="accomplishments" name="accomplishments" rows="4" class="form-control"></textarea>
+
+                                                          <label for="challenges">Challenges:</label>
+                                                          <textarea id="challenges" name="challenges" rows="4" class="form-control"></textarea>
+
+                                                          <label for="learning">Learning:</label>
+                                                          <textarea id="learning" name="learning" rows="4" class="form-control"></textarea>
+
+                                                          <input type="submit" name="submit" value="Submit" class="btn btn-dark">
+                                                      </form>
+
+                                                      </div>
+                                       </div>
+                                    </div>
+                               </div>  
+
+                             <div class="modal-footer">
+                             </div>
+                           </div>
+                         </div>
+                       </div>
+
+<!-- /modal report -->
+
+
+<div class="col-2 col-xl-12 col-md-6" >
+    <div class="card h-70 p-4">
       <div class="card-header d-flex align-items-right justify-content-between">
-        <div class="card-title mb-0">
-          <h5 class="m-0 me-2 text-uppercase"><?php echo $_SESSION['firstname']."'s", " ", "INFORMATION";?>. </h5>
+        <div class="card-title mb-2">
+          <h5 class="m-0 me-2 text-uppercase"><?php echo $_SESSION['firstname']."'s", " ", "INFORMATION";?> </h5>
         </div>
 <!--         
         <div class="dropdown">
@@ -83,210 +201,204 @@ include '../Layouts/main-user.php';
         </div> -->
       </div>
       
-      <div class="table-responsive">
-        <table class="table table-borderless">
+      <div class="table-responsive ">
+        <table class="table table-bordered border-secondary">
           <thead class="border-bottom">
-            <tr>
-              <th> </th>
-              <th class="text-right"></th>
-            </tr>
           </thead>
           <tbody>
 
-            <tr>
-              <td>
+            <!-- <tr>
+              <th>
                 <div class="d-flex justify-content-start align-items-right mt-lg-4">
                   <div class="d-flex flex-column">
-                    <h6 class="mb-1 text-left  ">Id:</h6>
+                    <p class="mb-1 text-left  ">Id:</p>
                   </div>
                 </div>
-              </td>
-              <td class="text-end">
-                <div class="user-progress mt-lg-4">
-                  <h6 class="mb-1 text-start text-dark"><?= $row ['id']; ?></h6>
+              </th>
+              <th class="text-end">
+                  <p class="mb-1 text-start"><?= $row ['id']; ?></p>
+              </th>
+            </tr> -->
+
+
+            <tr>
+              <th>
+                <div class="d-flex justify-content-start align-items-right mt-lg-4">
+                  <div class="d-flex flex-column">
+                    <p class="mb-1 text-truncate ">OJT Id :</p>
+                  </div>
                 </div>
-              </td>
+              </th>
+              <th class="text-end">
+                <div class="user-progress mt-lg-4">
+                  <p class="mb-1 text-start"><?= $row ['ojt_id']; ?></p>
+                </div>
+              </th>
             </tr>
 
 
             <tr>
-              <td>
+              <th>
                 <div class="d-flex justify-content-start align-items-right mt-lg-4">
                   <div class="d-flex flex-column">
-                    <h6 class="mb-1 text-truncate ">OJT Id :</h6>
+                    <p class="mb-1 text-truncate   ">Firstname :</p>
                   </div>
                 </div>
-              </td>
-              <td class="text-end">
+              </th>
+              <th class="text-end">
                 <div class="user-progress mt-lg-4">
-                  <h6 class="mb-1 text-start text-dark"><?= $row ['ojt_id']; ?></h6>
+                  <p class="mb-1 text-start"><?= $row ['first_name']; ?></p>
                 </div>
-              </td>
-            </tr>
-
-
-            <tr>
-              <td>
-                <div class="d-flex justify-content-start align-items-right mt-lg-4">
-                  <div class="d-flex flex-column">
-                    <h6 class="mb-1 text-truncate   ">Firstname :</h6>
-                  </div>
-                </div>
-              </td>
-              <td class="text-end">
-                <div class="user-progress mt-lg-4">
-                  <h6 class="mb-1 text-start text-dark"><?= $row ['first_name']; ?></h6>
-                </div>
-              </td>
+              </th>
             </tr>
 
             <tr>
-              <td>
+              <th>
                 <div class="d-flex justify-content-start align-items-right mt-lg-4">
                   <div class="d-flex flex-column">
-                    <h6 class="mb-1 text-truncate  ">Middlename :</h6>
+                    <p class="mb-1 text-truncate  ">Middlename :</p>
                   </div>
                 </div>
-              </td>
-              <td class="text-end">
+              </th>
+              <th class="text-end">
                 <div class="user-progress mt-lg-4">
-                  <h6 class="mb-1 text-start text-dark"><?= $row ['middle_name']; ?></h6>
+                  <p class="mb-1 text-start"><?= $row ['middle_name']; ?></p>
                 </div>
-              </td>
+              </th>
             </tr>
 
             <tr>
-              <td>
+              <th>
                 <div class="d-flex justify-content-start align-items-right mt-lg-4">
                   <div class="d-flex flex-column">
-                    <h6 class="mb-1 text-truncate ">Lastname :</h6>
+                    <p class="mb-1 text-truncate ">Lastname :</p>
                   </div>
                 </div>
-              </td>
-              <td class="text-end">
+              </th>
+              <th class="text-end">
                 <div class="user-progress mt-lg-4">
-                  <h6 class="mb-1 text-start text-dark"><?= $row ['last_name']; ?></h6>
+                  <p class="mb-1 text-start"><?= $row ['last_name']; ?></p>
                 </div>
-              </td>
+              </th>
             </tr>
             <tr>
-              <td>
+              <th>
                 <div class="d-flex justify-content-start align-items-right mt-lg-4">
                   <div class="d-flex flex-column">
-                    <h6 class="mb-1 text-truncate ">Age :</h6>
+                    <p class="mb-1 text-truncate ">Age :</p>
                   </div>
                 </div>
-              </td>
-              <td class="text-end">
+              </th>
+              <th class="text-end">
                 <div class="user-progress mt-lg-4">
-                  <h6 class="mb-1 text-start text-dark"><?= $row ['age']; ?></h6>
+                  <p class="mb-1 text-start"><?= $row ['age']; ?></p>
                 </div>
-              </td>
-            </tr>
-
-            <tr>
-              <td>
-                <div class="d-flex justify-content-start align-items-right mt-lg-4">
-                  <div class="d-flex flex-column">
-                    <h6 class="mb-1 text-truncate ">Sex :</h6>
-                  </div>
-                </div>
-              </td>
-              <td class="text-end">
-                <div class="user-progress mt-lg-4">
-                  <h6 class="mb-1 text-start text-dark"><?= $row ['sex']; ?></h6>
-                </div>
-              </td>
+              </th>
             </tr>
 
             <tr>
-              <td>
+              <th>
                 <div class="d-flex justify-content-start align-items-right mt-lg-4">
                   <div class="d-flex flex-column">
-                    <h6 class="mb-1 text-truncate ">Contact No. :</h6>
+                    <p class="mb-1 text-truncate ">Sex :</p>
                   </div>
                 </div>
-              </td>
-              <td class="text-end">
+              </th>
+              <th class="text-end">
                 <div class="user-progress mt-lg-4">
-                  <h6 class="mb-1 text-start text-dark"><?= $row ['contact_num']; ?></h6>
+                  <p class="mb-1 text-start"><?= $row ['sex']; ?></p>
                 </div>
-              </td>
+              </th>
             </tr>
 
             <tr>
-              <td>
+              <th>
                 <div class="d-flex justify-content-start align-items-right mt-lg-4">
                   <div class="d-flex flex-column">
-                    <h6 class="mb-1 text-truncate">Course :</h6>
+                    <p class="mb-1 text-truncate ">Contact No. :</p>
                   </div>
                 </div>
-              </td>
-              <td class="text-end">
+              </th>
+              <th class="text-end">
                 <div class="user-progress mt-lg-4">
-                  <h6 class="mb-1 text-start  text-dark"><?= $row ['degree']; ?></h6>
+                  <p class="mb-1 text-start"><?= $row ['contact_num']; ?></p>
                 </div>
-              </td>
+              </th>
             </tr>
 
             <tr>
-              <td>
+              <th>
                 <div class="d-flex justify-content-start align-items-right mt-lg-4">
                   <div class="d-flex flex-column">
-                    <h6 class="mb-1 text-truncate text-dark">University :</h6>
+                    <p class="mb-1 text-truncate">Course :</p>
                   </div>
                 </div>
-              </td>
-              <td class="text-end">
+              </th>
+              <th class="text-end">
                 <div class="user-progress mt-lg-4">
-                  <h6 class="mb-1 text-start text-dark"><?= $row ['university']; ?></h6>
+                  <p class="mb-1 text-start "><?= $row ['degree']; ?></p>
                 </div>
-              </td>
+              </th>
             </tr>
 
             <tr>
-              <td>
+              <th>
                 <div class="d-flex justify-content-start align-items-right mt-lg-4">
                   <div class="d-flex flex-column">
-                    <h6 class="mb-1 text-truncate ">Hours to render :</h6>
+                    <p class="mb-1 text-truncate">University :</p>
                   </div>
                 </div>
-              </td>
-              <td class="text-end">
+              </th>
+              <th class="text-end">
                 <div class="user-progress mt-lg-4">
-                  <h6 class="mb-1 text-start text-dark"><?= $row ['hours_to_render']; ?></h6>
+                  <p class="mb-1 text-start"><?= $row ['university']; ?></p>
                 </div>
-              </td>
+              </th>
             </tr>
 
             <tr>
-              <td>
+              <th>
                 <div class="d-flex justify-content-start align-items-right mt-lg-4">
                   <div class="d-flex flex-column">
-                    <h6 class="mb-1 text-truncate ">Email:</h6>
+                    <p class="mb-1 text-truncate ">Hours to render :</p>
                   </div>
                 </div>
-              </td>
-              <td class="text-end">
+              </th>
+              <th class="text-end">
                 <div class="user-progress mt-lg-4">
-                  <h6 class="mb-1 text-start text-dark"><?= $row ['email']; ?></h6>
+                  <p class="mb-1 text-start"><?= $row ['hours_to_render']; ?></p>
                 </div>
-              </td>
+              </th>
             </tr>
 
             <tr>
-              <td>
+              <th>
                 <div class="d-flex justify-content-start align-items-right mt-lg-4">
                   <div class="d-flex flex-column">
-                    <h6 class="mb-1 text-truncate ">Date started :</h6>
+                    <p class="mb-1 text-truncate ">Email:</p>
                   </div>
                 </div>
-              </td>
-              <td class="text-end">
+              </th>
+              <th class="text-end">
                 <div class="user-progress mt-lg-4">
-                  <h6 class="mb-1 text-start text-dark"><?= $row ['dos']; ?></h6>
+                  <p class="mb-1 text-start"><?= $row ['email']; ?></p>
                 </div>
-              </td>
+              </th>
+            </tr>
+
+            <tr>
+              <th>
+                <div class="d-flex justify-content-start align-items-right mt-lg-4">
+                  <div class="d-flex flex-column">
+                    <p class="mb-1 text-truncate ">Date started :</p>
+                  </div>
+                </div>
+              </th>
+              <th class="text-end">
+                <div class="user-progress mt-lg-4">
+                  <p class="mb-1 text-start"><?= $row ['dos']; ?></p>
+                </div>
+              </th>
             </tr>
 
 
@@ -297,75 +409,68 @@ include '../Layouts/main-user.php';
   </div>
 
 
-
-
-
-  
-                    <!-- <th scope="row">OJT ID</th>
-                    <th scope="row">Name</th>
-                    <th scope="row">Age</th>
-                    <th scope="row">Sex</th>
-                    <th scope="row">Contact no.</th>
-                    <th scope="row">Course</th>
-                    <th scope="row">University</th>
-                    <th scope="row">Hours to render</th> -->
-                    <!-- <th scope="row">Date started</th> -->
-                    <!-- <th scope="row">Department</th> -->
-
-                    <!-- <th scope="row">Office</th> -->
-
-                    <!-- <th scope="row">Email</th> -->
-                    <!-- <th scope="row">Password</th>
-                    <th scope="row">Usertype</th>
-                    <th scope="row">Status</th> -->
-                    <!-- <th scope="row">Operation</th> -->
-                </tr>
-            </thead>
-            <tbody class="table-border-bottom-0">
- 
-                     <tr>
-                        <!-- <td><?= $row ['ojt_id']; ?></td>
-                        <td><?=  $row ['last_name'].","." ". $row['first_name']." ". $row['middle_name']; ?></td>;   
-                        <td><?= $row ['age']; ?></td>;                  
-                        <td><?= $row ['sex']; ?></td>
-                        <td><?= $row ['contact_num']; ?></td>
-                        <td><?= $row ['degree']; ?></td>
-                        <td><?= $row ['university']; ?></td>
-                        <td><?= $row ['hours_to_render']; ?></td> -->
-                        <!-- <td><?= $row ['dos']; ?></td> -->
-                        <!-- <td><?= $row ['department']; ?></td> -->
-                        <!-- <td><?= $row ['office_assigned']; ?></td> -->
-                        <!-- <td><?= $row ['email']; ?></td> -->
-                        <!-- <td><?= $row ['password']; ?></td>
-                        <td><?= $row ['user_type']; ?></td>
-
-                       <td><span class="badge bg-label-primary me-1"><?= $row ['status']; ?></span></td> -->
-                       <!-- <td>
-                            <div class="menu">
-                              <a class="item" href="../Admin/Update.php? update=<?= $row ['id']; ?>"
-                                ><i class='bx bx-edit'>EDIT</i></a
-                              >
-                              <a class="item" href="javascript:void(0);"
-                                ><i class="bx bx-trash me-2"></i></a
-                              >
-                            </div>
-
-                        </td> -->
-                      </tr> 
+          
 <?php
 }
     }
 ?>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <!--/ Bootstrap Dark Table -->
+
+        <!-- toast -->
+   
+        <?php
+
+          if(isset($_SESSION['success'])){
 
 
+        ?>
+              <div
+              class="bs-toast toast fade show toast-placement-ex m-2 bottom-0 end-0 bg-success"
+                        role="alert"
+                        aria-live="assertive"
+                        aria-atomic="true">
+                        <div class="toast-header">
+                          <i class="bx bx-bell me-2"></i>
+                          <div class="me-auto fw-medium">Success</div>
+                          <small>11 mins ago</small>
+                          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                        </div>
+                        <div class="toast-body">
+                         <?= $_SESSION['success'] ?>
+                        </div>
+                      </div>
+        <?php
+              unset($_SESSION['success']);
+          }
+        ?>
+
+              <?php
+
+              if(isset($_SESSION['error'])){
 
 
+              ?>
+                  <div
+                  class="bs-toast toast fade show toast-placement-ex m-2 bottom-0 end-0 bg-danger"
+                            role="alert"
+                            aria-live="assertive"
+                            aria-atomic="true">
+                            <div class="toast-header">
+                              <i class="bx bx-bell me-2"></i>
+                              <div class="me-auto fw-medium">Error</div>
+                              <small>11 mins ago</small>
+                              <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                            </div>
+                            <div class="toast-body">
+                            <?= $_SESSION['error'] ?>
+                            </div>
+                          </div>
+              <?php
+                  unset($_SESSION['error']);
+              }
+              ?>
 
+
+              <!-- /toast -->
 
 
 
