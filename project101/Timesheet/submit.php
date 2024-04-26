@@ -2,6 +2,25 @@
 include('../Php/db_connect.php');
 
 
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Check if event_type is set and not empty
+    if (isset($_POST["event_type"]) && !empty($_POST["event_type"])) {
+        $event_type = $_POST["event_type"];
+        
+      
+        $sql = "INSERT INTO timesheet (event_type, timestamp) VALUES ('$event_type', NOW())";
+        
+        if (mysqli_query($conn, $sql)) {
+            echo "Record added successfully";
+        } else {
+            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        }
+    } else {
+        echo "Error: Event type not provided";
+    }
+}
 if(isset($_POST['event_type'])) {
     $event_type = $_POST['event_type'];
     
@@ -39,6 +58,6 @@ $stmt->bind_param("ss", $event_type,  $duration_hours);
     
   $stmt->close();
 } else {
-    echo "Error: Event type not set.";
+    //echo "Error: Event type not set.";
 }
 ?>

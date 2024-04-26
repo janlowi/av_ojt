@@ -62,13 +62,16 @@
 </style>
 </head>
 <body>
+  
+<form action="table.php" method="POST">
     <div class="container">
         <h1>Time Tracking</h1>
         <div id="clock"></div>
         <div id="date"></div>
         <button id="timeButton">Time In</button>
         <p id="status"></p>
-    </div>
+    
+
     
     <script>
     const timeButton = document.getElementById('timeButton');
