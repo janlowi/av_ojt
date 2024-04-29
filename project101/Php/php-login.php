@@ -1,6 +1,5 @@
 <?php
 session_start();
-$_SESSION['user'] = $user_id;
 include 'db_connect.php';
 
 if ($_SERVER['REQUEST_METHOD']=='POST') {

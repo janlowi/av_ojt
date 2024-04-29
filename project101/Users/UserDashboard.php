@@ -10,8 +10,8 @@ include '../Layouts/main-user.php';
   ?>
 
 
-                             <!-- Content wrapper -->
-                             <div class="content-wrapper">
+              <!-- Content wrapper -->
+           <div class="content-wrapper">
             <!-- Content --> 
           <!-- Layout container -->
           <div class="layout-page">
@@ -21,17 +21,7 @@ include '../Layouts/main-user.php';
                     
 
 
-                  <?php 
-     
-     $sql= "SELECT * FROM trainees ";
-     $query =mysqli_query($connect, $sql);
-    if(mysqli_num_rows($query)>0) {
-
-     while ($row=mysqli_fetch_assoc($query))  {
-
-     
-      ?>
-
+ 
 
                     <!-- welcome -->
                     <div class="col-lg-6 mb-4 order-0">
@@ -40,11 +30,14 @@ include '../Layouts/main-user.php';
                       <div class="col-sm-7">
                         <div class="card-body">
                           <h5 class="card-title text-primary">Welcome Trainee <?= $_SESSION['firstname'];?>! 🎉</h5>
-                          <p class="mb-1">
-                            Kung gikapoy naka  <span class="fw-medium"> : ></span> unsa pay gihuwat? surrender na. 
-                          <br><br>
-                          -janlowi
-                          </p>
+                          <figure>
+                            <blockquote class="blockquote">
+                              <p>Kung gikapoy naka  :>, pahuway na aysig daghan storya.tsk tsk </p>
+                            </blockquote>
+                            <figcaption class="blockquote-footer">
+                            Janlowi <cite title="Source Title">The Great Philosopher</cite>
+                            </figcaption>
+                          </figure>
                         </div>
                       </div>
                       <div class="col-sm-5 text-center text-sm-left">
@@ -200,7 +193,23 @@ include '../Layouts/main-user.php';
           </div>
         </div> -->
       </div>
-      
+      <?php 
+      $user_id = $_SESSION['user_id'];
+     $sql = "SELECT tr.*,
+                    us.id 
+     
+     FROM trainees tr,
+          users us
+                          
+                           WHERE tr.user_id = us.id AND us.id= '$user_id' ";
+     $query =mysqli_query($connect, $sql);
+    if(mysqli_num_rows($query)>0) {
+
+     while ($row=mysqli_fetch_assoc($query))  {
+
+     
+      ?>
+
       <div class="table-responsive ">
         <table class="table table-bordered border-secondary">
           <thead class="border-bottom">
