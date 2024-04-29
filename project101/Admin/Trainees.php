@@ -1,11 +1,11 @@
 <?php 
 session_start();
-
-$title="Admin Dashboard";
+$title="Trainees";
 include '../Layouts/main.php'; 
  include '../Layouts/sidebar.php';
  include '../Layouts/navbar.php';
  include '../Php/db_connect.php';
+
 
   ?>
    
@@ -28,13 +28,14 @@ error_reporting (0);
            $ojt_ID = "AVOJT-00" . ($last_id + 1);
        }
    ?>
+                
 
                        <!-- Modal -->
                        <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
                          <div class="modal-dialog modal-dialog-centered" role="document">
                            <div class="modal-content">
                              <div class="modal-header">
-                               <h2 class="modal-title" id="modalCenterTitle">Register user.</h2>
+                               <h2 class="modal-title" id="modalCenterTitle">Create account for trainee.</h2>
 
                                <button
                                  type="button"
@@ -61,9 +62,6 @@ error_reporting (0);
                                                                        <label for="inputLastname" class="form-label">Lastname</label>
                                                                        <input type="text" class="form-control" id="inputLastname"name = "Lastname">
                                                                </div>
-
-
-
                                                                <div class="col-md-6">
                                                                        <label for="inputLastname" class="form-label">OJT-ID</label>
                                                                        <input type="text" class="form-control" id="inputLastname"name = "Ojtid" value="<?= $ojt_ID; ?>" readonly>
@@ -148,8 +146,8 @@ error_reporting (0);
                                                                <div id="passwordHelpBlock" class="form-text">
                                                                   Your password must be 8-20 characters long, contains an UPPERCASE, a lowercase, a number and must have special characters.
                                                               </div>
-                                                                              <!-- password must contain the following
-                                                                              <div class="collapse" id="collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                                                                              <!-- password must contain the following -->
+                                                                              <!-- <div class="collapse" id="collapseExample" aria-expanded="false" aria-controls="collapseExample">
                                                                                             <div class="card card-body" id="message">
                                                                                                 <p>Password must contain the following characters:</p>
                                                                                                 <p id="lower" class= "invalid">A lower case letter</p>
@@ -177,6 +175,9 @@ error_reporting (0);
                                </div>  
 
                              <div class="modal-footer">
+                               <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                 Close
+                               </button>
                              </div>
                            </div>
                          </div>
@@ -185,99 +186,6 @@ error_reporting (0);
                    </div>
 
 
-
-
-                             <!-- Content wrapper -->
-          <div class="content-wrapper">
-            <!-- Content --> 
-          <!-- Layout container -->
-          <div class="layout-page">
-
-          <div class="container-xxl flex-grow-1 container-p-y">
-                  <div class="row">
-
-
-
-                    <div class="col-lg-3   col-md-12 col-6 mb-4">
-                      <div class="card">
-                        <div class="card-body">
-                                
-                          <div class="card-title d-flex align-items-start justify-content-between">
-
-                              <i class="fa-solid fa-users"   alt="chart success">
-                               </i>
-                          </div>                          
-                          <?php 
-                                  $sql= "SELECT * FROM users";
-                                  $result= mysqli_query($connect, $sql);
-                                  $count= mysqli_num_rows($result )
-                
-                          ?>
-                          <span class="card-title text-success"> NO. OF USERS</span>
-                          <h3 class="card-title mb-2"><?php echo $count.' ',' ','Users' ?></h3>
-                          <!-- <small class="text-success fw-medium"><i class="bx bx-up-arrow-alt"></i></small> -->
-                        </div>
-                      </div>
-                    </div>
-               
-
-
-           
-                   <div class="col-lg-3   col-md-12 col-6 mb-4">
-                      <div class="card">
-                        <div class="card-body">
-                                
-                          <div class="card-title d-flex align-items-start justify-content-between">
-
-                              <i class="fa-solid fa-users"   alt="chart success">
-                               </i>
-                          </div>
-
-                          <?php 
-                                  $sql= "SELECT * FROM users WHERE user_type='Trainee'";
-                                  $result= mysqli_query($connect, $sql);
-                                  $trainee_count= mysqli_num_rows($result )
-                
-                          ?>
-                          <span class="card-title text-primary"> NO. OF TRAINEES</span>
-                          <h3 class="card-title mb-2"><?php echo $trainee_count.' ',' ','Trainees' ?></h3>
-                          <!-- <small class="text-success fw-medium"><i class="bx bx-up-arrow-alt"></i></small> -->
-                        </div>
-                      </div>
-                    </div>
-             
-
-                    <div class="col-lg-3   col-md-12 col-6 mb-4">
-                      <div class="card">
-                        <div class="card-body">
-                                
-                          <div class="card-title d-flex align-items-start justify-content-between">
-
-                              <i class="fa-solid fa-users"   alt="chart success">
-                               </i>
-                          </div>
-                          <?php 
-                                  $sql= "SELECT * FROM users WHERE user_type='Admin'";
-                                  $result= mysqli_query($connect, $sql);
-                                  $admin_count= mysqli_num_rows($result )
-                
-                          ?>
-                          <span class="card-title text-info"> NO. OF ADMINS</span>
-                          <h3 class="card-title mb-2"><?php echo $admin_count.' ',' ','Admins' ?></h3>
-                          <!-- <small class="text-success fw-medium"><i class="bx bx-up-arrow-alt"></i></small> -->
-                        </div>
-                      </div>
-                    </div>
-     
-          </div>          
-        </div>  
-    </div>  
-
-
-
-
-  
-
           <!-- Content wrapper -->
           <div class="content-wrapper">
             <!-- Content --> 
@@ -285,11 +193,41 @@ error_reporting (0);
           <div class="layout-page">
 
             <div class="container-xxl flex-grow-1 container-p-y">
-            <div class="row">                
+              <div class="row">
+                <div class="col-lg-8 mb-4 order-0">
+                  <div class="card">
+                    <div class="d-flex align-items-end row">
+
+           <!--   center layout -->
+
+                      <div class="col-sm-7">
+                        <div class="card-body">
+                          <h5 class="card-title text-primary">Congratulations John! 🎉</h5>
+                          <p class="mb-4">
+                            You have done <span class="fw-medium">72%</span> more sales today. Check your new badge in
+                            your profile.
+                          </p>
+
+                          <a href="javascript:;" class="btn btn-sm btn-outline-primary">View Badges</a>
+                        </div>
+                      </div>
 
 
 
-            <!-- center layout -->
+                      <div class="col-sm-5 text-center text-sm-left">
+                        <div class="card-body pb-0 px-0 px-md-4">
+                          <img
+                            src="../assets/img/illustrations/man-with-laptop-light.png"
+                            height="140"
+                            alt="View Badge User"
+                            data-app-dark-img="illustrations/man-with-laptop-dark.png"
+                            data-app-light-img="illustrations/man-with-laptop-light.png" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
 
                 <!-- trainee table -->
                 <!-- Bootstrap Dark Table -->
@@ -322,110 +260,111 @@ error_reporting (0);
                                   unset($_SESSION['error']);
                       }
                     ?>
-                          <!-- Table -->
-
-
-      
-                      
-                      <button
+                                
+                                
+              <!-- <button
                          type="button"
-                         class="btn btn-success"
+                         class="btn btn-dark"
                          data-bs-toggle="modal"
                          data-bs-target="#modalCenter">
-                         ADD USER
-                       </button>
-                       
-                <h5 class="card-header">Users</h5>
-                <div class=" table-responsive    text-nowrap">
-                  <table class="table table-dark">
+                         ADD TRAINEE
+                       </button> -->
+                <h5 class="card-header">Trainees</h5>
+                <div class="table-responsive text-nowrap">
+                <table class="datatables-ajax table table-bordered">
                     <thead>
                 <tr>
                     <th scope="col">Id</th>
+                    <th scope="col">OJT ID</th>
                     <th scope="col">Name</th>
+                    <th scope="col">Age</th>
                     <th scope="col">Sex</th>
-                    <th scope="col">Date started</th>
-                    <th scope="col">Department</th>
-                    <th scope="col">Office</th>
+                    <th scope="col">Contact no.</th>
+                    <th scope="col">Course</th>
+                    <th scope="col">University</th>
+                    <th scope="col">Hours to render</th>
+                    <!-- <th scope="col">Date started</th> -->
+                    <!-- <th scope="col">Department</th> -->
+
+                    <!-- <th scope="col">Office</th> -->
+
                     <th scope="col">Email</th>
-                    <th scope="col">Password</th>
+                    <!-- <th scope="col">Password</th>
                     <th scope="col">Usertype</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Operation</th>
+                    <th scope="col">Status</th> -->
+                    <!-- <th scope="col">Operation</th> -->
                 </tr>
             </thead>
             <tbody class="table-border-bottom-0">
-            <?php 
-    
-    $sql= "SELECT  us.*,
-                   tr.email, 
-                   tr.sex, 
-                   tr.first_name, 
-                   tr.middle_name, 
-                   tr.last_name,
-                   tr.dos
+  <?php 
+     
+     $sql= "SELECT * FROM trainees ";
+     $query =mysqli_query($connect, $sql);
+    if(mysqli_num_rows($query)>0) {
 
-           FROM    users us, 
-                   trainees tr
-                   
-           WHERE   us.id=tr.user_id ";
-    $query =mysqli_query($connect, $sql);
-  
+     while ($row=mysqli_fetch_assoc($query))  {
 
-   if( $count = mysqli_num_rows($query)>0) {
-   
-    while ($row=mysqli_fetch_assoc($query))  {
-   
-  
-
-     ?>
-
+     
+      ?>
 
                      <tr>
 
                         <td><?= $row ['id']; ?></td>
-                        <td><?=  $row ['last_name'].","." ". $row['first_name']." ". $row['middle_name']; ?></td>;                     
+                        <td><?= $row ['ojt_id']; ?></td>
+
+                        <td><?=  $row ['last_name'].","." ". $row['first_name']." ". $row['middle_name']; ?></td>;   
+                        <td><?= $row ['age']; ?></td>;                  
                         <td><?= $row ['sex']; ?></td>
-                        <td><?= $row ['dos']; ?></td>
-                        <td><?= $row ['department']; ?></td>
-                        <td><?= $row ['office_assigned']; ?></td>
+                        <td><?= $row ['contact_num']; ?></td>
+                        <td><?= $row ['degree']; ?></td>
+                        <td><?= $row ['university']; ?></td>
+                        <td><?= $row ['hours_to_render']; ?></td>
+                        <!-- <td><?= $row ['dos']; ?></td> -->
+                        <!-- <td><?= $row ['department']; ?></td> -->
+
+                        <!-- <td><?= $row ['office_assigned']; ?></td> -->
                         <td><?= $row ['email']; ?></td>
-                        <td><?= $row ['password']; ?></td>
+                        <!-- <td><?= $row ['password']; ?></td>
                         <td><?= $row ['user_type']; ?></td>
-                       <td><span class="badge bg-label-primary me-1"><?= $row ['status']; ?></span></td>
-                       <td>
+
+                       <td><span class="badge bg-label-primary me-1"><?= $row ['status']; ?></span></td> -->
+                       <!-- <td>
                             <div class="menu">
                               <a class="item" href="../Admin/Update.php? update=<?= $row ['id']; ?>"
-                                ><i class='bx bx-edit'></i></a
+                                ><i class='bx bx-edit'>EDIT</i></a
                               >
                               <a class="item" href="javascript:void(0);"
                                 ><i class="bx bx-trash me-2"></i></a
                               >
                             </div>
 
-                        </td>
+                        </td> -->
                       </tr> 
 <?php
 }
     }
 ?>
-                      </tbody>
+                    </tbody>
                   </table>
                 </div>
               </div>
               <!--/ Bootstrap Dark Table -->
 
-                                <!-- center layout -->
-                                </div>
+
+
+              <!-- center layout -->
+                    </div>
                   </div>
                 </div>
 
+
             <!-- / Content -->
             <div class="content-backdrop fade"></div>
-          <!-- </div> -->
+          </div>
         </div>
           <!-- Content wrapper -->
 
 
 
 
-   
+   <script src="../Assets/js/tables-datatables-advanced.js"></script>

@@ -39,15 +39,13 @@ include '../Php/db_connect.php';
                 <li class="nav-item lh-7 me-5">
                   <a
                   
-                    class="text-dark"
-                    href="../Admin/AdminDashboard.php"
+                    class="text-muted"
+                    href="../Users/UserDashboard.php"
                     
-                    ><i class="fas fa-home" style="color: #000;"></i> Home
+                    ><i class="fas fa-home text-muted" style="color: #000;"></i> Home
                     </a>
                    
                 </li>
-
-
 
                 <li class="nav-item lh-1 me-3">
                   <a
@@ -57,7 +55,6 @@ include '../Php/db_connect.php';
                     > <?= $_SESSION['email']; ?></a
                   >
                 </li>
-
 
                    <!-- User -->
                    <li class="nav-item navbar-dropdown dropdown-user dropdown">

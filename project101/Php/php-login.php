@@ -24,6 +24,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($row = mysqli_fetch_assoc($result)) {
 
             $hashed_password = $row['password'];
+            $_SESSION['user_id'] = $row['id'];
+            
 
             // Verify the password -- not hashed temporarily
             if ($hashed_password === $password) {
@@ -34,8 +36,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 if ($user_type === 'Admin') {
                     header('location: ../Admin/AdminDashboard.php');
                     exit();
-                } elseif ($user_type === 'user') {
-                    header("Location: ../Users/index.php ");
+                } elseif ($_SESSION['usertype'] === 'Trainee') {
+                    header("Location: ../Users/UserDashboard.php ");
                     exit();
                 } else {
                     // Handle unknown user types or errors
