@@ -2,6 +2,7 @@
 include('../Php/db_connect.php');
 
 
+<<<<<<< HEAD
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -21,6 +22,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Error: Event type not provided";
     }
 }
+=======
+>>>>>>> 22ec3338ac300e6731f213d7e136e4f1c6efa336
 if(isset($_POST['event_type'])) {
     $event_type = $_POST['event_type'];
     
@@ -58,6 +61,10 @@ $stmt->bind_param("ss", $event_type,  $duration_hours);
     
   $stmt->close();
 } else {
+<<<<<<< HEAD
     //echo "Error: Event type not set.";
+=======
+    echo "Error: Event type not set.";
+>>>>>>> 22ec3338ac300e6731f213d7e136e4f1c6efa336
 }
 ?>
