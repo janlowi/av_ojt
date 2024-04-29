@@ -57,7 +57,6 @@ if ($result->num_rows > 0) {
         echo "<tr>";
         echo "<td>" . $row["id"] . "</td>";
         echo "<td>" . $row["timestamp"] . "</td>";
-       
         echo "<td>" . $row["date"] . "</td>";
         echo "<td>" . $row["total_hours"] . "</td>";
 

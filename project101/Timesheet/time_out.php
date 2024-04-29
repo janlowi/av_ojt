@@ -63,14 +63,28 @@
 </head>
 <body>
   
-<form action="table.php" method="POST">
+<form action="submit.php" method="POST">
     <div class="container">
         <h1>Time Tracking</h1>
         <div id="clock"></div>
         <div id="date"></div>
-        <button id="timeButton">Time In</button>
+        <?php
+        include('../Php/db_connect.php');
+        $user_id = 1;
+       $query = 'SELECT * FROM timesheet WHERE date(timestamp)="'.date('Y-m-d').'" AND event_type="In" AND user_id='.$user_id;
+       $result = mysqli_query($connect,$query);
+       if (mysqli_num_rows($result)>0){
+        echo '<button id="timeButton">Time Out</button>';
+        echo '<input type="text" name="event_type" value="Out"/>';
+       }else{
+        echo '<button id="timeButton">Time In</button>';
+        echo '<input type="text" name="event_type" value="In"/>';
+
+       }
+        ?>
         <p id="status"></p>
-    
+    </div>
+</form>
 
     
     <script>
@@ -96,30 +110,30 @@
     updateTime();
     setInterval(updateTime, 1000);
 
-    timeButton.addEventListener('click', function() {
-        let event_type = isTimeIn ? 'Out' : 'In';
+    // timeButton.addEventListener('click', function() {
+    //     let event_type = isTimeIn ? 'Out' : 'In';
 
         
-        let xhr = new XMLHttpRequest();
-        xhr.open("POST", "submit.php", true);
-        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                status.textContent = xhr.responseText;
-            }
-        };
-        xhr.send("event_type=" + event_type);
+    //     let xhr = new XMLHttpRequest();
+    //     xhr.open("POST", "submit.php", true);
+    //     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    //     xhr.onreadystatechange = function() {
+    //         if (xhr.readyState == 4 && xhr.status == 200) {
+    //             status.textContent = xhr.responseText;
+    //         }
+    //     };
+    //     xhr.send("event_type=" + event_type);
 
-        if (isTimeIn) {
-            status.textContent = 'Time Out recorded.';
-            timeButton.textContent = 'Time In';
-            isTimeIn = false;
-        } else {
-            status.textContent = 'Time In recorded.';
-            timeButton.textContent = 'Time Out';
-            isTimeIn = true;
-        }
-    });
+    //     if (isTimeIn) {
+    //         status.textContent = 'Time Out recorded.';
+    //         timeButton.textContent = 'Time In';
+    //         isTimeIn = false;
+    //     } else {
+    //         status.textContent = 'Time In recorded.';
+    //         timeButton.textContent = 'Time Out';
+    //         isTimeIn = true;
+    //     }
+    // });
 </script>
 </body>
 </html>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
