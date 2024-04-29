@@ -19,80 +19,258 @@ include '../Layouts/main-user.php';
 
 
 <div class="col-2 col-xl-12 col-md-6" >
-    <div class="card h-70 p-4">
+    <div class="card  p-4">
       <div class="card-header d-flex align-items-right justify-content-between">
         <div class="card-title mb-2">
-          <h5 class="m-0 me-2 text-uppercase"><?php echo $_SESSION['firstname']."'s", " ", "INFORMATION";?> </h5>
+          <h5 class="m-0 me-2 text-uppercase"><?php echo $_SESSION['firstname']."'s", " ", "Response";?> </h5>
+        </div>
         </div>
 
 
-        <div class="table-responsive">
-        <table class="table table-bordered border-secondary">
+
+        <div class="table-responsive text-nowrap">
+        <table class="table table-bordered border-secondary ">
           <thead class="border-bottom">
 
                                             <tr>
                                                 <th scope="col">
 
-                                                    <div class="d-flex justify-content-start align-items-right mt-lg-4">
-                                                    <div class="d-flex flex-column">
+                                                    <div class="d-flex flex-column justify-content-center align-items-center">
                                                         <p class="mb-1">ID </p>
                                                     </div>
-                                                    </div>
+
                                                 </th>
                                                 <th scope="col">
                                                     
-                                                    <div class="d-flex justify-content-start align-items-right mt-lg-4">
-                                                    <div class="d-flex flex-column">
+
+                                                    <div class="d-flex flex-column justify-content-center align-items-center">
                                                         <p class="mb-1 ">OJT ID </p>
                                                     </div>
-                                                    </div>
+                                             
 
                                                 </th>
                                                 <th scope="col">
 
-                                                   <div class="d-flex justify-content-start align-items-right mt-lg-4">
-                                                    <div class="d-flex flex-column">
+                      
+                                                    <div class="d-flex flex-column justify-content-center align-items-center">
                                                         <p class="mb-1 ">TIMESTAMP</p>
                                                     </div>
-                                                    </div>
+                         
 
                                                 </th>
                                                 <th scope="col">
 
-                                                     <div class="d-flex justify-content-start align-items-right mt-lg-4">
-                                                    <div class="d-flex flex-column">
+                   
+                                                    <div class="d-flex flex-column justify-content-center align-items-center">
                                                         <p class="mb-1 ">DEPARTMENT</p>
                                                     </div>
-                                                    </div>
+                                     
 
                                                 </th>
-                                                <th scope="col">Start</th>
-                                                <th scope="col">End</th>
-                                                <th scope="col">Summary</th>
-                                                <th scope="col">Accomplishments</th>
-                                                <th scope="col">Challenges</th>
-                                                <th scope="col">Learnings</th>
+
+                                                <th scope="col">
+
+                   
+                                                    <div class="d-flex flex-column justify-content-center align-items-center">
+                                                        <p class="mb-1 ">START</p>
+                                                    </div>
+
+
+                                                </th>
+                                                
+                                                <th scope="col">
+
+                   
+                                                    <div class="d-flex flex-column justify-content-center align-items-center">
+                                                        <p class="mb-1 ">END</p>
+                                                    </div>
+
+
+                                                </th>
+
+                                                <th scope="col">
+
+                   
+                                                    <div class="d-flex flex-column justify-content-center align-items-center">
+                                                        <p class="mb-1 ">SUMMARY</p>
+                                                    </div>
+
+
+                                                </th>
+
+                                                <th scope="col">
+
+                   
+                                                    <div class="d-flex flex-column justify-content-center align-items-center">
+                                                        <p class="mb-1 ">ACCOMPLISHMENTS</p>
+                                                    </div>
+
+
+                                                </th>
+
+                                                <th scope="col">
+
+                   
+                                                    <div class="d-flex flex-column justify-content-center align-items-center">
+                                                        <p class="mb-1 ">CHALLENGES</p>
+                                                    </div>
+
+
+                                                </th>
+
+                                                <th scope="col">
+
+                   
+                                                    <div class="d-flex flex-column justify-content-center align-items-center">
+                                                        <p class="mb-1 ">LEARNINGS</p>
+                                                    </div>
+
+
+                                                </th>
+                                                <th scope="col">
+
+                   
+                                                    <div class="d-flex flex-column justify-content-center align-items-center">
+                                                        <p class="mb-1 ">STATUS</p>
+                                                    </div>
+
+
+                                                </th>
+
                                             </tr>
                                         </thead>
                                         <tbody class="table-border-bottom-0">
                                             <?php 
-                                            $sql = "SELECT * FROM reports"; // Fetch data from the reports table
+                                            $sql = "SELECT rp.*,
+                                                            tr.ojt_id
+                                            
+                                            
+                                                    FROM trainees tr, reports rp, users us
+
+                                                    WHERE  us.id=rp.user_id AND us.id=$_SESSION[user_id] AND us.id=tr.user_id
+                                                    
+                                                    
+                
+                                            "; // Fetch data from the reports table
                                             $query = mysqli_query($connect, $sql);
                                             if(mysqli_num_rows($query) > 0) {
                                                 while ($row = mysqli_fetch_assoc($query)) { ?>
                                                     <tr>
-                                                        <td><?= $row['id']; ?></td>
-                                                        <td><?= $row['Trainee_id']; ?></td>
-                                                        <td><?= $row['timestamp']; ?></td>
-                                                        <td><?= $row['assigned_dept']; ?></td>   
-                                                        <td><?= $row['dos']; ?></td>                  
-                                                        <td><?= $row['doe']; ?></td>
-                                                        <td><?= $row['summary']; ?></td>
-                                                        <td><?= $row['accomplishment']; ?></td>
-                                                        <td><?= $row['challenges']; ?></td>
-                                                        <td><?= $row['learnings']; ?></td>
+                                                        <td>
+                                                            
+                                                            <div class="d-flex flex-column justify-content-center align-items-center">
+                                                                <p class="mb-1 "><?=  $row['id']; ?></p>
+                                                            </div>
+                                                        
+                                                        </td>
+                                                        <td>
+
+                                                            <div class="d-flex flex-column justify-content-center align-items-center">
+                                                                <p class="mb-1 "> <?= $row['ojt_id']; ?></p>
+                                                            </div>
+                                                            </div>   
+                                                        
+                                                        </td>
+                                                        <td>
+
+                                                            <div class="d-flex flex-column justify-content-center align-items-center">
+                                                                <p class="mb-1 "> <?= $row['timestamp']; ?></p>
+                                                            </div>
+                                                           
+                                                        
+                                                        </td>
+                                                        <td>
+
+                                           
+                                                            <div class="d-flex flex-column justify-content-center align-items-center">
+                                                                <p class="mb-1 "> <?= $row['assigned_dept']; ?></p>
+                                                            </div>
+                                                      
+
+
+                                                        </td>
+                                                        <td>
+
+                                                            <div class="d-flex flex-column justify-content-center align-items-center">
+                                                                <p class="mb-1 "> <?= $row['dos']; ?></p>
+                                                            </div>
+
+
+                                                        </td>
+                                                        <td>
+
+                                                            <div class="d-flex flex-column justify-content-center align-items-center">
+                                                                <p class="mb-1 "> <?= $row['doe']; ?></p>
+                                                            </div>
+
+
+                                                        </td>
+                                                        <td>
+
+                                                            <div class="d-flex flex-column justify-content-center align-items-center">
+                                                                <p class="mb-1 "> <?= $row['summary']; ?></p>
+                                                            </div>
+
+
+                                                        </td>
+                                                        <td>
+
+                                                            <div class="d-flex flex-column justify-content-center align-items-center">
+                                                                <p class="mb-1 "> <?= $row['accomplishment']; ?></p>
+                                                            </div>
+
+
+                                                        </td>
+                                                        <td>
+
+                                                            <div class="d-flex flex-column justify-content-center align-items-center">
+                                                                <p class="mb-1 "> <?= $row['challenges']; ?></p>
+                                                            </div>
+
+
+                                                        </td>
+                                                        <td>
+
+                                                            <div class="d-flex flex-column justify-content-center align-items-center">
+                                                                <p class="mb-1 "> <?= $row['learnings']; ?></p>
+                                                            </div>
+
+
+                                                        </td>
+
+                                                        <td>
+
+                                                            <div class="d-flex flex-column justify-content-center align-items-center d-grid gap-2">
+                                                   
+
+                                                                    <a href="../Biweekly/UpdateReports.php? update_report=<?= $_SESSION['user_id'] ?>" class="btn btn-warning btn-lg row-" id='draft'>
+                                                                   Draft
+                                                                    </a>
+
+                                                                    <a href="../Php/php-weekly-update.php? save_report=<?= $_SESSION['user_id'] ?>"  class="btn btn-success btn-lg row-" id='save' onclick="displayNone()">
+                                                                   Save
+                                                                    </a>
+
+                                                                  
+                                                            </div>
+
+
+                                                        </td>
+
                                                     </tr> 
                                             <?php
+
+                                                        $_SESSION['id'] = $row['id'];
+                                                        $_SESSION['ojt_id'] = $row['ojt_id'];
+                                                        $_SESSION['timestamp'] = $row['timestamp'];
+                                                        $_SESSION['assigned_dept'] = $row['assigned_dept'];
+                                                        $_SESSION['dos'] = $row['dos'];
+                                                        $_SESSION['doe'] = $row['summary'];
+                                                        $_SESSION['summary'] = $row['summary'];
+                                                        $_SESSION['accomplishment'] = $row['accomplishment'];
+                                                        $_SESSION['challenges'] = $row['challenges'];
+                                                        $_SESSION['learnings'] = $row['learnings'];
+                                                        $_SESSION['status'] = $row['status'];
                                                 }
                                             }
                                             ?>
@@ -101,6 +279,7 @@ include '../Layouts/main-user.php';
       </div>
     </div>
   </div>
+
 
 
                 <?php
@@ -126,6 +305,32 @@ if(isset($_SESSION['success'])){
             </div>
 <?php
     unset($_SESSION['success']);
+}
+?>
+
+<?php
+
+if(isset($_SESSION['update_success'])){
+
+
+?>
+    <div
+    class="bs-toast toast fade show toast-placement-ex m-2 bottom-0 end-0 bg-success"
+              role="alert"
+              aria-live="assertive"
+              aria-atomic="true">
+              <div class="toast-header">
+                <i class="bx bx-bell me-2"></i>
+                <div class="me-auto fw-medium">Success</div>
+                <small>11 mins ago</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+              </div>
+              <div class="toast-body">
+               <?= $_SESSION['update_success'] ?>
+              </div>
+            </div>
+<?php
+    unset($_SESSION['update_success']);
 }
 ?>
 

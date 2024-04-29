@@ -1,8 +1,13 @@
 
 <?php
 session_start();
+?>
+
+<?php
 include 'db_connect.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+
     // Check if required fields are not empty
     if (empty($_POST['department'])) {
         $errors[] = "Department is required.";
@@ -35,10 +40,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $accomplishments = $_POST['accomplishments'];
         $challenges = $_POST['challenges'];
         $learning = $_POST['learning'];
+        $status = "Pending";
 
-        $query = "INSERT INTO reports (user_id, dos, doe, assigned_dept, summary, accomplishment, challenges, learnings) VALUES (?, ?, ?, ?, ?, ?, ?,?)";
+        $query = "INSERT INTO reports (user_id, dos, doe, assigned_dept, summary, accomplishment, challenges, learnings, status) VALUES (?, ?, ?, ?, ?, ?, ?,?, ?)";
         $stmt = mysqli_prepare($connect, $query);
-        mysqli_stmt_bind_param($stmt, 'iiisssss', $_SESSION['user_id'], $dos, $doe, $assigned_department, $summary, $accomplishments, $challenges, $learning);
+        mysqli_stmt_bind_param($stmt, 'issssssss', $_SESSION['user_id'], $dos, $doe, $assigned_department, $summary, $accomplishments, $challenges, $learning, $status);
         mysqli_stmt_execute($stmt);
 
         // Check if the query was successful
@@ -56,5 +62,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 }
-
 ?>
+
+
+
+
