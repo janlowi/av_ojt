@@ -2,39 +2,61 @@
 session_start();
 include 'db_connect.php';
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $user_type = "";
+if ($_SERVER['REQUEST_METHOD']=='POST') {
 
-    if (empty($email)) {
-        // Email is invalid
-        $_SESSION['error'] = 'Invalid email address';
-        header("Location: ../Login/index.php");
-        exit();
-    } elseif (strlen($password) < 8) {
+$email = $_POST['email'];
+$password = $_POST['password'];
+$user_id='';
+$user_type = "";
+
+
+if (empty($email)) {
+    // Email is invalid
+    echo "Invalid email address";
+
+} else {
+
+    if (strlen($password) < 8) {
         // Password is too short
-        $_SESSION['error'] = 'Password must be 8 characters long';
+        $_SESSION ['error']= 'Password must be 8 characters long';
         header("Location: ../Login/index.php");
-        exit();
+        // Handle the error accordingly
     } else {
-        $query = "SELECT * FROM trainees WHERE email = '$email' ";
-        $result = mysqli_query($connect, $query);
+
+        $query = "SELECT  us.*,
+                        tr.user_id,
+                          tr.email,
+                          tr.first_name,
+                          tr.id
+                          
+        FROM users us,
+            trainees tr
+
+        
+         WHERE  us.id=tr.user_id AND tr.email='$email' ";
+
+
+        $result =mysqli_query($connect, $query);
+        
 
         if ($row = mysqli_fetch_assoc($result)) {
+            // Store the user's email in a session variable
+            $_SESSION['email'] = $row['email'];
+            $_SESSION['firstname'] = $row['first_name'];
+            $_SESSION['id'] = $row['tr.id'];
 
             $hashed_password = $row['password'];
             $_SESSION['user_id'] = $row['id'];
             
 
             // Verify the password -- not hashed temporarily
-            if ($hashed_password === $password) {
-
-                $user_type = $row['user_type'];
+            if ($hashed_password = $password) {
+            
+                $_SESSION['usertype'] = $row['user_type'];
 
                 // Redirect based on user type
-                if ($user_type === 'Admin') {
-                    header('location: ../Admin/AdminDashboard.php');
+                if ($_SESSION['usertype'] === 'Admin') {
+                    header('location: ../Admin/AdminDashboard.php');   
                     exit();
                 } elseif ($_SESSION['usertype'] === 'Trainee') {
                     header("Location: ../Users/UserDashboard.php ");
@@ -44,16 +66,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 }
             } else {
                 // Password does not match
-                $_SESSION['error'] = 'Incorrect password';
-                header("Location: ../Login/index.php");
-                exit();
+                echo "Incorrect password.";
+              
             }
         } else {
             // Email does not exist in the database
-            $_SESSION['error'] = 'Email not found';
-            header("Location: ../Login/index.php");
-            exit();
+            echo "Email not found";
+          
         }
     }
+}
 }
 ?>

@@ -7,6 +7,7 @@ include '../Layouts/main-user.php';
  include '../Layouts/navbar-user.php';
  include '../Php/db_connect.php';
 
+
   ?>
 
 
@@ -81,11 +82,16 @@ include '../Layouts/main-user.php';
                 </div>
               <!--/ report -->
 
+      <!-- time -->
+       <div class="col-md-0 col-xl-3 order-0">
+                 <div class="card mb-0">
 
+          <?php include '../Timesheet/TimeSystem.php'; ?>
               
 
-
-
+                             </div>
+                         </div>
+         <!--/ time -->
 
 
  

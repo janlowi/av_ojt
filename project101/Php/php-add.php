@@ -149,7 +149,7 @@ include 'db_connect.php';
 }
 else {
     
-  $error_msg = "Faile to add trainee.";
+  $error_msg = "Failed to add trainee.";
   $_SESSION['error'] = $error_msg;
   header("Location: ../Admin/AdminDashboard.php");
 }
