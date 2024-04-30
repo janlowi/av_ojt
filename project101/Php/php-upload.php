@@ -1,20 +1,27 @@
 <?php
   include('../Php/db_connect.php');
-  
+session_start();
   if(isset($_POST['submit'])) {
+
+    $user_id=$_SESSION['user_id'];
+    $tr_id=$_SESSION['id'];
+
+    print_r($user_id, $tr_id);
+
+
       // Check if file is selected
       if(isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
           // Get file details
           $file_name = $_FILES['image']['name'];
           $tempname = $_FILES['image']['tmp_name'];
-          $folder = 'image/'.$file_name;
+          $folder = '../Assets/img/avatars/'.$file_name;
           
           // Check file type
           $allowed_types = array('image/jpeg', 'image/png');
           $file_type = $_FILES['image']['type'];
           if (!in_array($file_type, $allowed_types)) {
               $error = "Only PNG and JPG files are allowed.";
-              header("Location: upload.php?error=$error");
+              header("Location: php-upload.php?error=$error");
               exit();
           }
           
@@ -22,12 +29,12 @@
           $max_size = 5 * 1024 * 1024; // 5 MB
           if ($_FILES['image']['size'] > $max_size) {
               $error = "File size exceeds the limit of 5MB.";
-              header("Location: upload.php?error=$error");
+              header("Location: php-upload.php?error=$error");
               exit();
           }
   
           // Insert file into database
-          $query = mysqli_query($connect, "INSERT INTO image(file)  VALUES ('$file_name')");
+          $query = mysqli_query($connect, "INSERT INTO trainees(profile, user_id)  VALUES ('$file_name', '$user_id') WHERE id ='$tr_id' AND user_id='$user_id'");
           
           // Move uploaded file to destination folder
           if(move_uploaded_file($tempname, $folder)) {
@@ -60,10 +67,17 @@
 </form>
 <div>
     <?php
-        $res = mysqli_query($connect, "SELECT * FROM `image`");
+        $user_id=$_SESSION['user_id'];
+        $res = mysqli_query($connect, "SELECT tr.profile
+        
+        FROM trainees tr
+        
+        WHERE tr.user_id='$user_id'
+        
+        ");
         while($row = mysqli_fetch_assoc($res)) {
             ?>
-            <img src="image/<?php echo $row['file']; ?>" />
+            <img src="../Assets/img/avatars/<?php echo $row['file']; ?>" />
         <?php } ?>
         </div>
 </body>
