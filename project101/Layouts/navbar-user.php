@@ -1,13 +1,26 @@
-<?php 
+<?php
+ 
 
 include 'main.php';
 include '../Php/db_connect.php';
 
+ 
+
+ 
+if(isset($_POST['logout'])) {
+     
+    $_SESSION = array();
+
+    
+    session_destroy();
+
+     
+    header('location: ../login.php');
+    exit;
+}
 ?>
 
-        <!-- Layout container -->
-        <div class="layout-page">
-          <!-- Navbar -->
+
 
           <nav
             class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"

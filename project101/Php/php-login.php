@@ -26,6 +26,7 @@ if (empty($email)) {
         $query = "SELECT  us.*,
                           tr.email,
                           tr.first_name
+      
                           
         FROM users us,
             trainees tr
@@ -41,8 +42,6 @@ if (empty($email)) {
             // Store the user's email in a session variable
             $_SESSION['email'] = $row['email'];
             $_SESSION['firstname'] = $row['first_name'];
-            $_SESSION['id'] = $row['tr.id'];
-
             $hashed_password = $row['password'];
             $_SESSION['user_id'] = $row['id'];
             
