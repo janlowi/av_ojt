@@ -20,19 +20,7 @@ if(isset($_POST['In'])){
     $query= mysqli_query($connect, $sql);
     if($query==1){
 
-            $sql2 = "SELECT TIME_FORMAT(timestamp, '%H:%i'),
-                            event_type,
-            FROM timesheet
-            WHERE date(timestamp) = CURDATE()
-            AND user_id = '$user_id'
-
-            ";
-            $query2= mysqli_query($connect, $sql2);
-            $row = mysqli_fetch_array($query2);
-            $time = $row['TIME_FORMAT(timestamp, \'%H:%i\')'];
-            $In = $row['event_type'];
-
-
+            
         $_SESSION['success'] = "Time In Succesfully";
          header("location: ../Users/UserDashboard.php");
     }else {
@@ -45,24 +33,48 @@ if(isset($_POST['In'])){
 ?>
 <?php
 
+if(isset($_POST['Out'])){  
 
-        if(isset($_POST['Out'])){   
-            $event_type = $_POST['Out'];
+    $user_id = $_SESSION['user_id'];
+    $event_type = $_POST['Out'];
+    $current_time = date('H:i:s');
 
-            $sql = "INSERT INTO timesheet (event_type, user_id)
-            VALUES ('$event_type', '$user_id')
-                ";
 
-            $query= mysqli_query($connect, $sql);
-            if($query==1){
+    $sql = "SELECT * FROM timesheet WHERE DATE(timestamp) = CURDATE() AND user_id = '$user_id'";
+    $query = mysqli_query($connect, $sql);
+    $row = mysqli_fetch_assoc($query);
 
-                $_SESSION['success'] = "Time Out Succesfully";
-                    header("location: ../Users/UserDashboard.php");
-            }else {
+        if ($row['event_type'] == 'In') {
+            $timeIn = strtotime($row['timestamp']);
+            $timeOut = strtotime($current_time);
+        
+            if ($timeOut > $timeIn) {
 
-                $_SESSION['error'] = "Failed to time out";
-                header("location: ../Users/UserDashboard.php");
+                $timeDifferenceSeconds = $timeOut - $timeIn;
+        
+                $totalHours = $timeDifferenceSeconds /3600;
+                $totalHours = round($Hours, 2);
+            } else {
+                $totalHours = 0;
             }
-        }
+        
 
+        $sql2 = "INSERT INTO timesheet (event_type, user_id, total_hours) VALUES ('$event_type', '$user_id', $totalHours)";
+        $query2 = mysqli_query($connect, $sql2);
+
+        if ($query2) {
+            $_SESSION['success'] = "Time Out Successfully";
+            header("location: ../Users/UserDashboard.php");
+            exit;
+        } else {
+            $_SESSION['error'] = "Failed to time out";
+            header("location: ../Users/UserDashboard.php");
+            exit;
+        }
+    } else {
+        $_SESSION['error'] = "No corresponding 'In' entry found";
+        header("location: ../Users/UserDashboard.php");
+        exit;
+    }
+}
 ?>

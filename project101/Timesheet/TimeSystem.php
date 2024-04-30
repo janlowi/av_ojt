@@ -6,40 +6,38 @@ include '../Layouts/main-user.php';
 
  
 
+<?php
+$user_id = $_SESSION['user_id'];
 
-                                      <?php 
+$sql = "SELECT event_type FROM timesheet WHERE user_id = '$user_id' ORDER BY timestamp DESC LIMIT 1";
+$query = mysqli_query($connect, $sql);
 
-                                      $user_id = $_SESSION['user_id'];
+if ($query && mysqli_num_rows($query) > 0) {
+    $row = mysqli_fetch_assoc($query);
+    $latest_event_type = $row['event_type'];
 
-                                      $sql = "SELECT date(timestamp) FROM timesheet 
-                                              WHERE event_type = 'In'
-                                              AND user_id = '$user_id'
-                                    
-                                      ";
-                                      $query = mysqli_query($connect, $sql);
+    if ($latest_event_type == 'In') {
+        // If the latest event type is "In", display the "Out" button
+        echo '
+        <form action="../Php/time-in-out.php" method="POST">
+            <input type="submit" name="Out" value="Out" class="btn btn-dark">
+        </form>';
+    } else {
+        // If the latest event type is "Out", display the "In" button
+        echo '
+        <form action="../Php/time-in-out.php" method="POST">
+            <input type="submit" name="In" value="In" class="btn btn-dark">
+        </form>';
+    }
+} else {
+    // If there are no events for the user, display the "In" button by default
+    echo '
+    <form action="../Php/time-in-out.php" method="POST">
+        <input type="submit" name="In" value="In" class="btn btn-dark">
+    </form>';
+}
+?>
 
-                                      if($row=mysqli_num_rows($query)>0){
-                                       
-                                                  echo '
-                                    <form action="../Php/time-in-out.php" method="POST">
-                                    <input type="submit" name = "Out" value= "Out" class="btn btn-dark">
-                          
-                                    </form>
-                                                    ';
-                                        }else{
-
-                                          echo '
-
-                                          <form action="../Php/time-in-out.php" method="POST">
-                                
-                                          <input type="submit" name = "In" value= "In" class="btn btn-dark">
-
-                                          </form>
-                                          ';
-
-                                        }
-
-                                      ?>
                                         
                                           <div class="card-body">
                                             <h5 class="card-title">Time In/Out System</h5>
