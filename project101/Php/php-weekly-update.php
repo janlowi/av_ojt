@@ -82,9 +82,7 @@ if(!empty($assigned_department) &&
     !empty($challenges) &&
     !empty($learning)
     ) {
-
-        if( ) {
-            
+      
         }
     $update= "UPDATE 
                     reports rp 
@@ -113,6 +111,5 @@ if(!empty($assigned_department) &&
     }
 }
 
-}
 
 ?>
