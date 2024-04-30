@@ -1,14 +1,14 @@
 <?php
-session_start();
+
 include 'db_connect.php';
 
 
 
 
 
-session_destroy();
+session_destroy();+
 
 
-header("Location: ../login.php");
+header("Location: ../Login/index.php");
 exit();
 ?>

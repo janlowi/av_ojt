@@ -1,26 +1,17 @@
-<?php
+<?php 
  
-
 include 'main.php';
 include '../Php/db_connect.php';
 
- 
 
- 
-if(isset($_POST['logout'])) {
-     
-    $_SESSION = array();
 
-    
-    session_destroy();
 
-     
-    header('location: ../login.php');
-    exit;
-}
+
 ?>
 
-
+        <!-- Layout container -->
+        <div class="layout-page">
+          <!-- Navbar -->
 
           <nav
             class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
@@ -120,10 +111,14 @@ if(isset($_POST['logout'])) {
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="javascript:void(0);">
-                        <i class="bx bx-power-off me-2"></i>
-                        <span class="align-middle">Log Out</span>
-                      </a>
+                      
+
+                  <a class="dropdown-item" href="../Users/logout.php" id="logoutBtn">
+                    <i class="bx bx-power-off me-2"></i>
+                    <span class="align-middle">Log Out</span>
+                  </a>
+                  
+
                     </li>
                   </ul>
                 </li>
