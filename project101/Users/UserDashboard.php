@@ -24,7 +24,7 @@ include '../Layouts/main-user.php';
  
 
                     <!-- welcome -->
-                    <div class="col-lg-6 mb-4 order-0">
+                    <div class="col-lg-6 mb-4 order-0 ">
                   <div class="card">
                     <div class="d-flex align-items-end row">
                       <div class="col-sm-7">
@@ -59,14 +59,13 @@ include '../Layouts/main-user.php';
 
   <!-- report -->
     
-                <div class="col-md-0 col-xl-3">
+                <div class="col-md-0 col-xl-3 order-0">
                   <div class="card mb-3">
                   <button
                          type="button"
                          class="btn btn-dark"
-                         href= "../Users/U"
                          data-bs-toggle="modal"
-                         data-bs-target="#modalCenter">
+                         data-bs-target="#modalReport">
                          Add report
                        </button>
 
@@ -76,36 +75,23 @@ include '../Layouts/main-user.php';
                       <p class="card-text">
                         PLease submit a response weekly of your weekly duties.
                       </p>
-                      <p class="card-text">
-                        <small class="text-muted">...</small>
-                      </p>
+
                     </div>
                   </div>
                 </div>
               <!--/ report -->
 
-               <!-- report -->
-    
-               <div class="col-md-0 col-xl-3">
-                  <div class="card mb-3">`
+
               
-                    <!-- <img class="card-img-top" src="../assets/img/elements/18.jpg" alt="Card image cap" /> -->
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">
-                        This is a wider card with supporting text below as a natural lead-in to additional content. This
-                        content is a little bit longer.
-                      </p>
-                      <p class="card-text">
-                        <small class="text-muted">Last updated 3 mins ago</small>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              <!--/ report -->
+
+
+
+
+
+ 
 
     <!-- Modal  for report-->
-    <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="modalReport" tabindex="-1" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
                                           <div class="modal-content">
                                             <div class="modal-header">
@@ -166,13 +152,14 @@ include '../Layouts/main-user.php';
                                     </div>
                                </div>  
 
-                             <div class="modal-footer">
+                               
+                               <div class="modal-footer">
                              </div>
                            </div>
                          </div>
                        </div>
 
-<!-- /modal report -->
+
 
 
 <div class="col-2 col-xl-12 col-md-6" >
