@@ -2,6 +2,8 @@
 session_start();
 
 $title="User Dashboard";
+include '../Php/authenticate.php';
+
 include '../Layouts/main-user.php'; 
  include '../Layouts/sidebar-user.php';
  include '../Layouts/navbar-user.php';
@@ -149,6 +151,8 @@ include '../Layouts/main-user.php';
 
                                                           <label for="learning">Learning:</label>
                                                           <textarea id="learning" name="learning" rows="4" class="form-control"></textarea>
+                                                          
+                                                          <input type="text" value="<?= $_SESSION['user_id'] ?>" hidden>
 
                                                           <input type="submit" name="submit" value="Submit" class="btn btn-dark">
                                                       </form>

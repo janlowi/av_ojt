@@ -3,12 +3,16 @@
 session_start();
 
 $title="Weekly Response";
+include '../Php/authenticate.php';
+
 include '../Layouts/main-user.php'; 
  include '../Layouts/sidebar-user.php';
  include '../Layouts/navbar-user.php';
  include '../Php/db_connect.php';
 
-?>                             <!-- Content wrapper -->
+?>     
+
+<!-- Content wrapper -->
 <div class="content-wrapper">
   <!-- Content --> 
 <!-- Layout container -->
@@ -16,6 +20,25 @@ include '../Layouts/main-user.php';
 
 <div class="container-xxl flex-grow-1 container-p-y">
         <div class="row">
+
+                    <!-- <div class="col-2 col-xl-12 col-md-6 my-4" >
+                        <div class="card  p-4">
+                            <div class="card-header d-flex align-items-right justify-content-between">
+                            <div class="card-title mb-2">
+                            <h5 class="m-0 me-2 text-uppercase"><?php echo $_SESSION['firstname']."'s", " ", "Response";?> </h5>
+                            </div>
+                            </div>
+
+
+
+                            <div class="table-responsive text-nowrap">
+                        
+                                        <?php include '../Biweekly/Review.php'; ?>
+                    </div>
+                </div>
+            </div> -->
+
+
 
 
 <div class="col-2 col-xl-12 col-md-6" >
@@ -238,25 +261,42 @@ include '../Layouts/main-user.php';
 
                                                         </td>
 
-                                                        <td>
-
+                                                   <td>
                                                             <div class="d-flex flex-column justify-content-center align-items-center d-grid gap-2">
-                                                   
-
-                                                                    <a href="../Biweekly/UpdateReports.php? update_report=<?= $_SESSION['user_id'] ?>" class="btn btn-warning btn-lg row-" id='draft'>
-                                                                   Draft
-                                                                    </a>
-
-                                                                    <a href="../Php/php-weekly-update.php? save_report=<?= $_SESSION['user_id'] ?>"  class="btn btn-success btn-lg row-" id='save' onclick="displayNone()">
-                                                                   Save
-                                                                    </a>
-
-                                                                  
+                                    
+                                         <?php
+                                                if(isset($_SESSION['report_saved'])&&$_SESSION['report_saved']===true){
+                                            echo'
+                                                <style>
+                                                        #save {
+                                                                display:block;
+                                                        }
+                                                </style>
+                                            ';
+                                            }
+                                            ?>
+                                            <td>
+                                            <div class="d-flex flex-column justify-content-center align-items-center d-grid gap-2">
+    
+    
+                                                    <a href="../Biweekly/UpdateReports.php? update_report=<?= $_SESSION['user_id'] ?>" class="btn btn-warning btn-lg row-" id='save'>
+                                                Draft
+                                                    </a>
+    
+                                                    <a href="../Php/php-weekly-update.php? save_report=<?= $_SESSION['user_id'] ?>"  class="btn btn-success btn-lg row-" id='save' >
+                                                Save
+                                                    </a>
+    
+                                                
+                                            </div>
+    
+    
+                                            </td>
                                                             </div>
 
 
                                                         </td>
-
+                                                
                                                     </tr> 
                                             <?php
 
@@ -274,11 +314,11 @@ include '../Layouts/main-user.php';
                                                 }
                                             }
                                             ?>
-              </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
+                        </tbody>
+                    </table>
+                </div>
+                </div>
+            </div>
 
 
 
@@ -310,6 +350,33 @@ if(isset($_SESSION['success'])){
 
 <?php
 
+if(isset($_SESSION['error'])){
+
+
+?>
+    <div
+    class="bs-toast toast fade show toast-placement-ex m-2 bottom-0 end-0 bg-success"
+              role="alert"
+              aria-live="assertive"
+              aria-atomic="true">
+              <div class="toast-header">
+                <i class="bx bx-bell me-2"></i>
+                <div class="me-auto fw-medium">Success</div>
+                <small>11 mins ago</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+              </div>
+              <div class="toast-body">
+               <?= $_SESSION['error'] ?>
+              </div>
+            </div>
+<?php
+    unset($_SESSION['error']);
+}
+?>
+
+
+<?php
+
 if(isset($_SESSION['update_success'])){
 
 
@@ -334,6 +401,31 @@ if(isset($_SESSION['update_success'])){
 }
 ?>
 
+<?php
+
+if(isset($_SESSION['saved_success'])){
+
+
+?>
+    <div
+    class="bs-toast toast fade show toast-placement-ex m-2 bottom-0 end-0 bg-success"
+              role="alert"
+              aria-live="assertive"
+              aria-atomic="true">
+              <div class="toast-header">
+                <i class="bx bx-bell me-2"></i>
+                <div class="me-auto fw-medium">Success</div>
+                <small>11 mins ago</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+              </div>
+              <div class="toast-body">
+               <?= $_SESSION['saved_success'] ?>
+              </div>
+            </div>
+<?php
+    unset($_SESSION['saved_success']);
+}
+?>
 
 </div>
 </div>

@@ -45,10 +45,10 @@ if(!empty($assigned_department) &&
     $query=mysqli_query($connect, $update);
 
     if($query==1){
-        $_SESSION['update_success'] = "Report Updated Successfully";
+        $_SESSION['success'] = "Report Updated Successfully";
         header('location: ../Biweekly/DisplayReports.php');
     }else {
-        $_SESSION['update_error'] = "Report Failed Successfully";
+        $_SESSION['error'] = "Report Failed Successfully";
         header('location: ../Biweekly/DisplayReports.php');
     }
 }
@@ -57,59 +57,60 @@ if(!empty($assigned_department) &&
 
 ?>
 
-<?php
-$user_id =$_SESSION['user_id'];
-$report_id = $_GET['save_report'];
+    <?php
+    $user_id =$_SESSION['user_id'];
+    $report_id = $_GET['save_report'];
 
-if(isset($_GET['save_report'])) {
+    if(isset($_GET['save_report'])) {
 
 
 
-    $assigned_department = $_SESSION['assigned_dept'];
-    $dos =   $_SESSION['dos'];
-    $doe =  $_SESSION['doe'];
-    $summary =  $_SESSION['summary'];
-    $accomplishments = $_SESSION['accomplishment'] ;
-    $challenges =  $_SESSION['challenges'];
-    $learning =  $_SESSION['learnings'];
-    $status = $_SESSION['status'];
+        $assigned_department = $_SESSION['assigned_dept'];
+        $dos =   $_SESSION['dos'];
+        $doe =  $_SESSION['doe'];
+        $summary =  $_SESSION['summary'];
+        $accomplishments = $_SESSION['accomplishment'] ;
+        $challenges =  $_SESSION['challenges'];
+        $learning =  $_SESSION['learnings'];
+        $status = $_SESSION['status'];
 
-if(!empty($assigned_department) && 
-    !empty($dos) &&
-    !empty($doe) &&
-    !empty($summary) &&
-    !empty($accomplishments) &&
-    !empty($challenges) &&
-    !empty($learning)
-    ) {
-      
+    if(!empty($assigned_department) && 
+        !empty($dos) &&
+        !empty($doe) &&
+        !empty($summary) &&
+        !empty($accomplishments) &&
+        !empty($challenges) &&
+        !empty($learning)
+        ) {
+        
+            }
+        $update= "UPDATE 
+                        reports rp 
+                                    SET
+                                    rp.dos = '$dos',
+                                    rp.doe = '$doe',
+                                    rp.assigned_dept = '$assigned_department',
+                                    rp.summary = '$summary',
+                                    rp.accomplishment = '$accomplishments',
+                                    rp.challenges = '$challenges',
+                                    rp.learnings = '$learning'
+        
+                                    WHERE rp.user_id ='$user_id'  
+                                    AND rp.id='$report_id' 
+                                    ";
+
+        $query=mysqli_query($connect, $update);
+
+        if($query==1){
+            $_SESSION['success'] = "Report Saved Successfully";
+            $_SESSION['report_saved'] = true;
+            header('location: ../Biweekly/DisplayReports.php');
+
+        }else {
+            $_SESSION['error'] = "Report Failed Successfully";
+            header('location: ../Biweekly/DisplayReports.php');
         }
-    $update= "UPDATE 
-                    reports rp 
-                                SET
-                                rp.dos = '$dos',
-                                rp.doe = '$doe',
-                                rp.assigned_dept = '$assigned_department',
-                                rp.summary = '$summary',
-                                rp.accomplishment = '$accomplishments',
-                                rp.challenges = '$challenges',
-                                rp.learnings = '$learning'
-    
-                                 WHERE rp.user_id ='$user_id'  
-                                 AND rp.id='$report_id' 
-                                 ";
-
-    $query=mysqli_query($connect, $update);
-
-    if($query==1){
-        $_SESSION['update_success'] = "Report Saved Successfully";
-        header('location: ../Biweekly/DisplayReports.php');
-
-    }else {
-        $_SESSION['update_error'] = "Report Failed Successfully";
-        header('location: ../Biweekly/DisplayReports.php');
     }
-}
 
 
-?>
+    ?>

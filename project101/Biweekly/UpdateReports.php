@@ -2,6 +2,8 @@
 session_start();
 
 $title="User Dashboard";
+include '../Php/authenticate.php';
+
 include '../Layouts/main-user.php'; 
  include '../Layouts/sidebar-user.php';
  include '../Layouts/navbar-user.php';
