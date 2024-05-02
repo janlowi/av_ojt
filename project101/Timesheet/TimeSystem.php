@@ -20,14 +20,20 @@ if ($query && mysqli_num_rows($query) > 0) {
         // If the latest event type is "In", display the "Out" button
         echo '
         <form action="../Php/time-in-out.php" method="POST">
+        <div class="d-grid gap-2">
             <input type="submit" name="Out" value="Out" class="btn btn-dark">
-        </form>';
+        </form>
+        </div>
+        ';
     } else {
         // If the latest event type is "Out", display the "In" button
         echo '
+        <div class="d-grid gap-2">
         <form action="../Php/time-in-out.php" method="POST">
-            <input type="submit" name="In" value="In" class="btn btn-dark">
-        </form>';
+            <input type="submit" name="In" value="In" class="btn btn-dark" >
+        </form>
+        </div>
+        ';
     }
 } else {
     // If there are no events for the user, display the "In" button by default
@@ -39,7 +45,7 @@ if ($query && mysqli_num_rows($query) > 0) {
 ?>
 
                                         
-                                          <div class="card-body">
+                                          <div class="card-body text-center">
                                             <h5 class="card-title">Time In/Out System</h5>
                                                         <div class="container">
                                                           <div class="display-date  ">
@@ -47,8 +53,8 @@ if ($query && mysqli_num_rows($query) > 0) {
                                                             <span id="daynum" >00</span>
                                                             <span id="month" >month</span>
                                                             <span id="year" >0000</span>
-                                                          </div>
-                                                          <h3  id ="currentTime" class="badge bg-label-warning rounded-pill">	</h3>
+                                                            <div class="d-grid gap-2">
+                                                          <h2  id ="currentTime" class="btn btn-outline-success">	</h2>
                                                         </div>
                                           </div>
 

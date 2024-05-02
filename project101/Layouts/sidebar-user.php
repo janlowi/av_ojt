@@ -27,17 +27,18 @@
                     <div data-i18n="Connections">Dashboard</div>
                   </a>
                 </li>
+                <li class="menu-item active mb-3">
+                  <a href="../Users/UserProfile.php" class="menu-link">
+                    <div data-i18n="Analytics">Profile</div>
+                  </a>
+                </li>
                 <li class="menu-item mb-3">
                   <a href="../Biweekly/DisplayReports.php" class="menu-link">
                     <div data-i18n="Analytics">Weekly Reports</div>
                   </a>
                 </li>
             
-                <li class="menu-item active mb-3">
-                  <a href="../Users/Trainees.php" class="menu-link">
-                    <div data-i18n="Analytics">Trainees</div>
-                  </a>
-                </li>
+
                 <li class="menu-item active mb-3">
                   <a href="pages-account-settings-notifications.html" class="menu-link">
                     <div data-i18n="Notifications">Notifications</div>
