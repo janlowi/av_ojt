@@ -1,10 +1,9 @@
 
 <?php
 session_start();
-?>
-
-<?php
 include 'db_connect.php';
+$user_id = $_SESSION['user_id'];
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
@@ -53,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             header("Location: ../Biweekly/DisplayReports.php");
         } else {
             $_SESSION['error']= "Failed to submit.";
-            header("Location: ../Users/UserDashboard.php");
+            header("Location: ../Biweekly/DisplayReports.php");
         }
     } else {
         // Display errors

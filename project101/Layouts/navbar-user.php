@@ -1,6 +1,6 @@
 <?php 
 
-include 'main.php';
+include 'main-user.php';
 include '../Php/db_connect.php';
 
 ?>
@@ -57,8 +57,8 @@ include '../Php/db_connect.php';
                 </li>
 
                    <!-- User -->
-                   <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                  <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                  <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                    <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
                       <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
                     </div>
@@ -88,26 +88,12 @@ include '../Php/db_connect.php';
                         <span class="align-middle">My Profile</span>
                       </a>
                     </li>
-                    <!-- <li>
-                      <a class="dropdown-item" href="#">
-                        <i class="bx bx-cog me-2"></i>
-                        <span class="align-middle">Settings</span>
-                      </a>
-                    </li> -->
-                    <!-- <li>
-                      <a class="dropdown-item" href="#">
-                        <span class="d-flex align-items-center align-middle">
-                          <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
-                          <span class="flex-grow-1 align-middle ms-1">Billing</span>
-                          <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-                        </span>
-                      </a>
-                    </li> -->
+
                     <li>
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="javascript:void(0);">
+                      <a class="dropdown-item" href="../Php/php-logout.php">
                         <i class="bx bx-power-off me-2"></i>
                         <span class="align-middle">Log Out</span>
                       </a>

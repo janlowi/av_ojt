@@ -53,7 +53,7 @@ if (empty($email)) {
             if ($hashed_password = $password) {
             
                 $_SESSION['usertype'] = $row['user_type'];
-
+                $_SESSION['logged_in'] = true;
                 // Redirect based on user type
                 if ($_SESSION['usertype'] === 'Admin') {
                     header('location: ../Admin/AdminDashboard.php');   

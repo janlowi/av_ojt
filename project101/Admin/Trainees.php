@@ -1,6 +1,9 @@
 <?php 
 session_start();
+
 $title="Trainees";
+include '../Php/authenticate.php';
+
 include '../Layouts/main.php'; 
  include '../Layouts/sidebar.php';
  include '../Layouts/navbar.php';

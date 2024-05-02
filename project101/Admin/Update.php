@@ -1,7 +1,10 @@
 <?php 
 session_start();
+
 $title="Update";
 include '../Layouts/main.php'; 
+include '../Php/authenticate.php';
+
  include '../Layouts/sidebar.php';
  include '../Layouts/navbar.php';
  include '../Php/db_connect.php';

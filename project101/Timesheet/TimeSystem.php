@@ -1,5 +1,8 @@
 <?php   
+
 $title="Time Tracking System";
+include '../Php/authenticate.php';
+
 include '../Layouts/main-user.php'; 
  include '../Php/db_connect.php';
   ?>
@@ -21,25 +24,31 @@ if ($query && mysqli_num_rows($query) > 0) {
         echo '
         <form action="../Php/time-in-out.php" method="POST">
         <div class="d-grid gap-2">
-            <input type="submit" name="Out" value="Out" class="btn btn-dark">
+            <input type="submit" name="Time Out" value="Out" class="btn btn-dark">
+            </div>
         </form>
-        </div>
+      
         ';
     } else {
         // If the latest event type is "Out", display the "In" button
         echo '
-        <div class="d-grid gap-2">
+       
         <form action="../Php/time-in-out.php" method="POST">
-            <input type="submit" name="In" value="In" class="btn btn-dark" >
+        <div class="d-grid gap-2">
+            <input type="submit" name="Time In" value="In" class="btn btn-dark" >
+            </div>
         </form>
-        </div>
+      
         ';
     }
 } else {
     // If there are no events for the user, display the "In" button by default
     echo '
     <form action="../Php/time-in-out.php" method="POST">
-        <input type="submit" name="In" value="In" class="btn btn-dark">
+    <div class="d-grid gap-2">
+
+        <input type="submit" name="Time In" value="In" class="btn btn-dark">
+        </div>
     </form>';
 }
 ?>

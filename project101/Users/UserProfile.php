@@ -2,6 +2,8 @@
 session_start();
 
 $title=$_SESSION['firstname']." ". "Profile";
+include '../Php/authenticate.php';
+
 include '../Layouts/main-user.php'; 
  include '../Layouts/sidebar-user.php';
  include '../Layouts/navbar-user.php';
@@ -263,7 +265,7 @@ include '../Layouts/main-user.php';
       </div>
     </div>
   </div>
-  <?php
+<?php
 }
     }
 ?>

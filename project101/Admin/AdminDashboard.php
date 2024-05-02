@@ -2,6 +2,7 @@
 session_start();
 
 $title="Admin Dashboard";
+include '../Php/authenticate.php';
 include '../Layouts/main.php'; 
  include '../Layouts/sidebar.php';
  include '../Layouts/navbar.php';
