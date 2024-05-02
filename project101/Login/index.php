@@ -49,19 +49,20 @@
         }
 
         .welcome-container {
+            justify-content: center;
             font-size: 20px;
             text-align: center;
             color: white;
             margin-top: auto; /* Move to the bottom */
         }
         .description {
-            font-size: 12px;
+            font-size: 10px;
             text-align:left;
             color: white;
             margin-top: 50px; /* Move to the bottom */
             }
-        .abisc-container {
-            font-size: 14px;
+        .abisc-container h2 {
+            font-size: 15px;
             text-align: center;
             color: white;
             margin-top: 80px;
@@ -74,8 +75,8 @@
         }
 
         .login-form {
-            position: relative;
-            top: 80px;
+    position: relative;
+    top: 100px; /* Adjust this value to move the input boxes down */
         }
 
         .img-cont,
@@ -149,15 +150,16 @@
         }
 
         button {
-            background-color: black;
-            color: white; /* Changed to black */
-            border-radius: 40px;
-            cursor: pointer;
-            display: block; /* Make it a block element */
-            margin: 0 auto; /* Center it horizontally */
-            width: 170px;
-            height: 35px;
-        }
+    background-color: black;
+    color: white; /* Changed to black */
+    border-radius: 40px;
+    cursor: pointer;
+    display: block; /* Make it a block element */
+    margin: 20px auto; /* Center it horizontally and move it down */
+    width: 170px;
+    height: 35px;
+}
+        
 
         button:hover {
             background-color: black;
@@ -183,7 +185,7 @@
                 {
         ?>
                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <strong>Bogo!</strong> <?= $_SESSION['error']; ?>
+                    <strong>Invalid Email Address!</strong> <?= $_SESSION['error']; ?>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
         <?php
@@ -208,6 +210,18 @@
         </div>
         <div class="sign"><h2>Sign in</h2></div>
 
+        <?php 
+                if( isset ($_SESSION ['error']))
+                {
+        ?>
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Password must be 8 characters long!</strong> <?= $_SESSION['error']; ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+        <?php
+                    unset($_SESSION['error']);
+                }
+        ?>
         <div class="login-form">
             <div class="input-container">
   <input type="email" id="email" name="email" placeholder="Email" >
@@ -220,7 +234,6 @@
 </div>
                 <button type="submit">LOGIN</button>
             </form>
-            <p>Don't have an account? <a href="signup.php">Sign up here</a></p>
         </div>
         
     </div>

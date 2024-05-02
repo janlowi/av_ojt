@@ -24,9 +24,15 @@ if (empty($email)) {
     } else {
 
         $query = "SELECT  us.*,
+                        tr.user_id,
                           tr.email,
+<<<<<<< HEAD
                           tr.first_name
       
+=======
+                          tr.first_name,
+                          tr.id
+>>>>>>> fd4bccaba7162b42ed7eab125a057c5dd0f94ede
                           
         FROM users us,
             trainees tr
