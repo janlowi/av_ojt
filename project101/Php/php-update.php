@@ -2,6 +2,7 @@
 <?php
 session_start();
 include 'db_connect.php';
+include 'authenticate.php';
 
  if ($_SERVER['REQUEST_METHOD']=='POST') {
 

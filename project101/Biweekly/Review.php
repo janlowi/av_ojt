@@ -4,7 +4,6 @@ include '../Layouts/main-user.php';
 include '../Php/authenticate.php';
 
 include '../Php/db_connect.php';
-session_start();
 
 ?>
 
@@ -13,7 +12,7 @@ session_start();
 
 
         <div class="table-responsive text-nowrap">
-        <table class="table table-bordered border-secondary ">
+        <table class="table table-bordered border-secondary "id="review">
           <thead class="border-bottom">
 
                                             <tr>
@@ -229,12 +228,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 </td>
 
 
-<?php }} ?>
+
                                 <?php
                                         if(isset($_SESSION['report_saved'])&&$_SESSION['report_saved']===true){
                                         echo'
                                             <style>
-                                                    #save {
+                                                    #save, #review{
                                                             display:none;
                                                     }
                                             </style>
@@ -263,7 +262,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         </tbody>
                                     </table>
                     
+                                    <?php
 
+                                        header('location: ../Biweekly/DisplayReports.php');
+                                     }
+                                } 
+                                
+                            ?>
         <!-- // $query = "INSERT INTO reports (user_id, dos, doe, assigned_dept, summary, accomplishment, challenges, learnings, status) VALUES (?, ?, ?, ?, ?, ?, ?,?, ?)";
         // $stmt = mysqli_prepare($connect, $query);
         // mysqli_stmt_bind_param($stmt, 'issssssss', $_SESSION['user_id'], $dos, $doe, $assigned_department, $summary, $accomplishments, $challenges, $learning, $status);

@@ -1,6 +1,8 @@
 <?php
-  include('../Php/db_connect.php');
 session_start();
+  include('../Php/db_connect.php');
+  include('../Php/authenticate.php');
+
   if(isset($_POST['submit'])) {
 
     $user_id=$_SESSION['user_id'];
@@ -47,38 +49,4 @@ session_start();
       }
   }
   ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-   
-</head>
-<body>
-    <?php if (isset($_GET['error'])): ?>
-        <p><?php echo $_GET['error']; ?></p>
-        
-        <?php endif ?>
-   <form method="POST" enctype="multipart/form-data">
-    <input type="file" name="image" />
-    <br /> <br />
-    <button type="submit" name="submit">Submit</button>
-</form>
-<div>
-    <?php
-        $user_id=$_SESSION['user_id'];
-        $res = mysqli_query($connect, "SELECT tr.profile
-        
-        FROM trainees tr
-        
-        WHERE tr.user_id='$user_id'
-        
-        ");
-        while($row = mysqli_fetch_assoc($res)) {
-            ?>
-            <img src="../Assets/img/avatars/<?php echo $row['file']; ?>" />
-        <?php } ?>
-        </div>
-</body>
-</html>
+

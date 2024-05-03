@@ -1,14 +1,15 @@
 <?php
 include 'db_connect.php';
+include 'authenticate.php';
+
 session_start();
+
+checkLogin();
 
 
 $user_id =$_SESSION['user_id'];
 
-
 if($_SERVER['REQUEST_METHOD']=='POST') {
-
-
 
     $assigned_department = $_POST['department'];
     $dos = $_POST['start_date'];
@@ -28,18 +29,18 @@ if(!empty($assigned_department) &&
     !empty($learning)
     ) {
     $update= "UPDATE 
-                    reports rp 
+                    reports 
                                 SET
-                                rp.dos = '$dos',
-                                rp.doe = '$doe',
-                                rp.assigned_dept = '$assigned_department',
-                                rp.summary = '$summary',
-                                rp.accomplishment = '$accomplishments',
-                                rp.challenges = '$challenges',
-                                rp.learnings = '$learning'
+                                dos = '$dos',
+                                doe = '$doe',
+                                assigned_dept = '$assigned_department',
+                                summary = '$summary',
+                                accomplishment = '$accomplishments',
+                                challenges = '$challenges',
+                                learnings = '$learning'
     
-                                 WHERE rp.user_id ='$user_id'  
-                                 AND rp.id='$report_id' 
+                                 WHERE user_id ='$user_id'  
+                                 AND id='$report_id' 
                                  ";
 
     $query=mysqli_query($connect, $update);
@@ -72,7 +73,7 @@ if(!empty($assigned_department) &&
         $accomplishments = $_SESSION['accomplishment'] ;
         $challenges =  $_SESSION['challenges'];
         $learning =  $_SESSION['learnings'];
-        $status = $_SESSION['status'];
+        $status = 'Saved';
 
     if(!empty($assigned_department) && 
         !empty($dos) &&
@@ -85,18 +86,20 @@ if(!empty($assigned_department) &&
         
             }
         $update= "UPDATE 
-                        reports rp 
+                        reports 
                                     SET
-                                    rp.dos = '$dos',
-                                    rp.doe = '$doe',
-                                    rp.assigned_dept = '$assigned_department',
-                                    rp.summary = '$summary',
-                                    rp.accomplishment = '$accomplishments',
-                                    rp.challenges = '$challenges',
-                                    rp.learnings = '$learning'
+                                    assigned_dept = '$assigned_department',
+                                    dos = '$dos',
+                                    doe = '$doe',
+                                    summary = '$summary',
+                                    accomplishment = '$accomplishments',
+                                    challenges = '$challenges',
+                                    learnings = '$learning',
+                                    status= '$status'
+                            
         
-                                    WHERE rp.user_id ='$user_id'  
-                                    AND rp.id='$report_id' 
+                                    WHERE user_id ='$user_id'  
+                                    AND id='$report_id' 
                                     ";
 
         $query=mysqli_query($connect, $update);

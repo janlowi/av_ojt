@@ -1,5 +1,4 @@
 <?php 
-session_start();
 
 $title="Admin Dashboard";
 include '../Php/authenticate.php';

@@ -1,5 +1,5 @@
 <?php 
-session_start();
+
 
 $title="User Dashboard";
 include '../Php/authenticate.php';
@@ -40,8 +40,8 @@ include '../Layouts/main-user.php';
                                             <?php 
 
                                             if(isset($_GET['update_report'])){
-
-                                                $user_id= $_GET['update_report'];;
+                                               $user_id=$_SESSION['user_id'];
+                                                $row_id= $_GET['update_report'];;
                                             $sql = "SELECT rp.*,
                                                             tr.ojt_id,
                                                             tr.id
@@ -49,7 +49,10 @@ include '../Layouts/main-user.php';
                                             
                                                     FROM trainees tr, reports rp, users us
 
-                                                    WHERE  us.id=rp.user_id AND tr.user_id=us.id AND us.id='$user_id'
+                                                    WHERE  us.id=rp.user_id
+                                                     AND tr.user_id=us.id 
+                                                     AND us.id='$user_id'
+                                                     AND rp.id='$row_id'
                                                     
                                                     
                                                     
@@ -108,7 +111,7 @@ include '../Layouts/main-user.php';
                                                           <label for="learning">Learning:</label>
                                                           <textarea id="learning" name="learning" rows="4" class="form-control" ><?= $row['learnings']?></textarea>
 
-                                                          <input type="text" name="report_id" value="<?= $row['id']?>" hidden >
+                                                          <input type="text" name="report_id" value="<?= $_SESSION['id']?>" hidden >
                                                           <input type="submit" name="update_report" value="Submit" class="btn btn-dark">
                                                       </form>
 

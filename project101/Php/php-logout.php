@@ -1,5 +1,5 @@
 <?php
-session_start();
+include 'authenticate.php';
 
 // Unset all session variables
 $_SESSION = array();

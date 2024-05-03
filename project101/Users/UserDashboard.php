@@ -2,14 +2,11 @@
 session_start();
 
 $title="User Dashboard";
+include '../Layouts/navbar-user.php';
+include '../Layouts/sidebar-user.php';
 include '../Php/authenticate.php';
-
 include '../Layouts/main-user.php'; 
- include '../Layouts/sidebar-user.php';
- include '../Layouts/navbar-user.php';
  include '../Php/db_connect.php';
-
-
   ?>
 
 
@@ -73,7 +70,7 @@ include '../Layouts/main-user.php';
                        </button>
 
                     <!-- <img class="card-img-top" src="../assets/img/elements/18.jpg" alt="Card image cap" /> -->
-                    <div class="card-body text-center"">
+                    <div class="card-body text-center">
                       <h5 class="card-title">Weekly report</h5>
                       <p class="card-text">
                         PLease submit a response weekly of your weekly duties.
@@ -84,6 +81,8 @@ include '../Layouts/main-user.php';
                 </div>
               <!--/ report -->
 
+
+
       <!-- time -->
        <div class="col-md-0 col-xl-3 order-0">
                  <div class="card mb-0">
@@ -91,8 +90,8 @@ include '../Layouts/main-user.php';
           <?php include '../Timesheet/TimeSystem.php'; ?>
               
 
-                             </div>
-                         </div>
+                    </div>
+                 </div>
          <!--/ time -->
 
 
@@ -170,11 +169,7 @@ include '../Layouts/main-user.php';
                        </div>
 
 
-
-
-
-
-          
+   
 
         <!-- toast -->
    
