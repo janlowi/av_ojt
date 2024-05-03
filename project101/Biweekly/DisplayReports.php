@@ -1,10 +1,8 @@
 <?php 
 
-session_start();
 
 $title="Weekly Response";
 include '../Php/authenticate.php';
-
 include '../Layouts/main-user.php'; 
  include '../Layouts/sidebar-user.php';
  include '../Layouts/navbar-user.php';
@@ -21,24 +19,7 @@ include '../Layouts/main-user.php';
 <div class="container-xxl flex-grow-1 container-p-y">
         <div class="row">
 
-                    <!-- <div class="col-2 col-xl-12 col-md-6 my-4" >
-                        <div class="card  p-4">
-                            <div class="card-header d-flex align-items-right justify-content-between">
-                            <div class="card-title mb-2">
-                            <h5 class="m-0 me-2 text-uppercase"><?php echo $_SESSION['firstname']."'s", " ", "Response";?> </h5>
-                            </div>
-                            </div>
-
-
-
-                            <div class="table-responsive text-nowrap">
-                        
-                                        <?php include '../Biweekly/Review.php'; ?>
-                    </div>
-                </div>
-            </div> -->
-
-
+     
 
 
 <div class="col-2 col-xl-12 col-md-6" >
@@ -170,7 +151,9 @@ include '../Layouts/main-user.php';
                                             
                                                     FROM trainees tr, reports rp, users us
 
-                                                    WHERE  us.id=rp.user_id AND us.id=$_SESSION[user_id] AND us.id=tr.user_id
+                                                    WHERE  us.id=rp.user_id 
+                                                    AND us.id=$_SESSION[user_id] 
+                                                    AND us.id=tr.user_id
                                                     
                                                     
                 
@@ -265,25 +248,40 @@ include '../Layouts/main-user.php';
                                                             <div class="d-flex flex-column justify-content-center align-items-center d-grid gap-2">
                                     
                                          <?php
-                                                if(isset($_SESSION['report_saved'])&&$_SESSION['report_saved']===true){
+                                                if( $row['status']=='Pending'){
+
                                             echo'
+                                            
+                                            
                                                 <style>
-                                                        #save {
+                                                        #save_'.$row['id'].' {
                                                                 display:block;
+                                                        }
+                                                </style>
+                                                
+                                            ';
+                                            }else{
+                                                echo'
+                                                <span class="badge bg-label-success me-1">Saved</span>
+                                                <style>
+                                                        #save_'.$row['id'].' {
+                                                                display:none;
                                                         }
                                                 </style>
                                             ';
                                             }
+                                                  
+
                                             ?>
-                                            <td>
+
                                             <div class="d-flex flex-column justify-content-center align-items-center d-grid gap-2">
     
     
-                                                    <a href="../Biweekly/UpdateReports.php? update_report=<?= $_SESSION['user_id'] ?>" class="btn btn-warning btn-lg row-" id='save'>
+                                                    <a href="../Biweekly/UpdateReports.php? update_report=<?= $row['id'] ?>" class="btn btn-warning btn-lg row-"  id='save_<?= $row['id'] ?>'>
                                                 Draft
                                                     </a>
     
-                                                    <a href="../Php/php-weekly-update.php? save_report=<?= $_SESSION['user_id'] ?>"  class="btn btn-success btn-lg row-" id='save' >
+                                                    <a href="../Php/php-weekly-update.php? save_report=<?= $row['id'] ?>"  class="btn btn-success btn-lg row-"  id='save_<?= $row['id'] ?>' >
                                                 Save
                                                     </a>
     
@@ -292,11 +290,7 @@ include '../Layouts/main-user.php';
     
     
                                             </td>
-                                                            </div>
-
-
-                                                        </td>
-                                                
+                                         
                                                     </tr> 
                                             <?php
 
@@ -305,7 +299,7 @@ include '../Layouts/main-user.php';
                                                         $_SESSION['timestamp'] = $row['timestamp'];
                                                         $_SESSION['assigned_dept'] = $row['assigned_dept'];
                                                         $_SESSION['dos'] = $row['dos'];
-                                                        $_SESSION['doe'] = $row['summary'];
+                                                        $_SESSION['doe'] = $row['doe'];
                                                         $_SESSION['summary'] = $row['summary'];
                                                         $_SESSION['accomplishment'] = $row['accomplishment'];
                                                         $_SESSION['challenges'] = $row['challenges'];

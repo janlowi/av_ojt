@@ -1,13 +1,14 @@
        <?php include 'main.php';?>
        
         <!-- Menu -->
-        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
-          <div class="app-brand demo">
+        <aside id="layout-menu" class=" layout-menu menu-vertical menu bg-menu-theme  px-2 ">
+          <div class=" bg-dark mt-2 ">
+          <div class="app-brand demoh-25 d-inline-block d-flex justify-content-center mt-2">
             <a href="https://www.avegabros.com/" class="app-brand-link">
-              <span class="app-brand-logo demo">
-               <img width="80" height= "55"src="../assets/img/favicon/avlogo.png" alt="" xlink:href="https://www.avegabros.com/" >
+              <span class="app-brand-logo demo d-flex justify-content-center fixed">
+               <img width= '150' height= '120' src="../assets/img/favicon/av.jpg" alt="" xlink:href="https://www.avegabros.com/" >
               </span>
-              <span class="app-brand-text demo menu-text fw-bold ms-4">Avega</span>
+              <span class="app-brand-text demo menu-text fw-bold ms-2 ">Avega</span>
             </a>
 
             <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -22,7 +23,7 @@
             <li class="menu-item">
           <ul class="menu-inner py-1 ">
           <ul class="menu-item ">
-            <li class="menu-item mb-3">
+            <li class="menu-item mb-3 active">
                   <a href="../Users/UserDashboard.php" class="menu-link ">
                     <div data-i18n="Connections">Dashboard</div>
                   </a>
@@ -32,7 +33,7 @@
                     <div data-i18n="Analytics">Profile</div>
                   </a>
                 </li>
-                <li class="menu-item mb-3">
+                <li class="menu-item mb-3 active">
                   <a href="../Biweekly/DisplayReports.php" class="menu-link">
                     <div data-i18n="Analytics">Weekly Reports</div>
                   </a>
@@ -65,5 +66,6 @@
             </li>
             </ul>
           </ul>
+          </div>
         </aside>
         <!-- / Menu -->

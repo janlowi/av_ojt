@@ -2,6 +2,7 @@
 
 include 'main-user.php';
 include '../Php/db_connect.php';
+include '../Php/authenticate.php';
 
 ?>
 
@@ -42,7 +43,7 @@ include '../Php/db_connect.php';
                     class="text-muted"
                     href="../Users/UserDashboard.php"
                     
-                    ><i class="fas fa-home text-muted" style="color: #000;"></i> Home
+                    ><i class="fas fa-home text-muted" style="color: dark;"></i> Home
                     </a>
                    
                 </li>
@@ -58,7 +59,7 @@ include '../Php/db_connect.php';
 
                    <!-- User -->
                   <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                    <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                    <a class="nav-link dropdown-toggle hide-arrow" href="../Users/UserProfile.php" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
                       <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
                     </div>
@@ -83,7 +84,7 @@ include '../Php/db_connect.php';
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="../Php/php-upload.php">
+                      <a class="dropdown-item" href="../Users/UserProfile.php">
                         <i class="bx bx-user me-2"></i>
                         <span class="align-middle">My Profile</span>
                       </a>

@@ -2,7 +2,6 @@
 
 $title="Time Tracking System";
 include '../Php/authenticate.php';
-
 include '../Layouts/main-user.php'; 
  include '../Php/db_connect.php';
   ?>
@@ -24,7 +23,7 @@ if ($query && mysqli_num_rows($query) > 0) {
         echo '
         <form action="../Php/time-in-out.php" method="POST">
         <div class="d-grid gap-2">
-            <input type="submit" name="Time Out" value="Out" class="btn btn-dark">
+            <input type="submit" name="Time_Out" value="Out" class="btn btn-dark">
             </div>
         </form>
       
@@ -35,7 +34,7 @@ if ($query && mysqli_num_rows($query) > 0) {
        
         <form action="../Php/time-in-out.php" method="POST">
         <div class="d-grid gap-2">
-            <input type="submit" name="Time In" value="In" class="btn btn-dark" >
+            <input type="submit" name="Time_In" value="In" class="btn btn-dark" >
             </div>
         </form>
       
@@ -47,12 +46,11 @@ if ($query && mysqli_num_rows($query) > 0) {
     <form action="../Php/time-in-out.php" method="POST">
     <div class="d-grid gap-2">
 
-        <input type="submit" name="Time In" value="In" class="btn btn-dark">
+        <input type="submit" name="Time_In" value="In" class="btn btn-dark">
         </div>
     </form>';
 }
 ?>
-
                                         
                                           <div class="card-body text-center">
                                             <h5 class="card-title">Time In/Out System</h5>
@@ -67,9 +65,6 @@ if ($query && mysqli_num_rows($query) > 0) {
                                                         </div>
                                           </div>
 
-
-
-                      <!-- Show current time -->
-
-                      <script src="../Assets/js/dateTime.js"> </script>
-                      <!-- Show current time -->
+          <!-- Show current time -->
+      <script src="../Assets/js/dateTime.js"> </script>
+    <!-- Show current time -->
