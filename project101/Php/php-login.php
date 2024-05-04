@@ -26,7 +26,8 @@ if (empty($email)) {
                         tr.user_id,
                           tr.email,
                           tr.first_name,
-                          tr.id
+                          tr.profile
+
                           
             	    FROM users us,
                         trainees tr
@@ -42,7 +43,7 @@ if (empty($email)) {
         if ($row = mysqli_fetch_assoc($result)) {
 
             $_SESSION['firstname'] = $row['first_name'];
-            $_SESSION['id'] = $row['tr.id'];
+            $_SESSION['profile'] = $row['profile'];
             $hashed_password = $row['password'];
             $_SESSION['user_id'] = $row['id'];
             $_SESSION['usertype'] = $row['user_type'];
@@ -54,13 +55,13 @@ if (empty($email)) {
                       
                 // Redirect based on user type
                 if ($_SESSION['usertype'] === 'Admin') {
-                    $_SESSION['logged_in_Admin'] = true;
+                    $_SESSION['Admin'] = true;
                     // Redirect to the admin dashboard
                     header('location: ../Admin/AdminDashboard.php');  
 
                     exit();
                 } elseif ($_SESSION['usertype'] === 'Trainee') {
-                $_SESSION['logged_in_Trainee'] = true;
+                $_SESSION['Trainee'] = true;
 
                     header("Location: ../Users/UserDashboard.php ");
                     exit();
