@@ -32,34 +32,70 @@ include '../Layouts/main-user.php';
 
       <div class="card-header d-flex align-items-right justify-content-between">
      
+         <!-- profile pic -->
                     
                      
-        <div class="row mb-0">
-                <div class="col-md-6 col-lg-4 ">
-                  <div class="card mb-4 " style="height: 32rem; width: 25rem;">
-                  <div class="card-body ">
-                    <img class="card-img " src="../assets/img/avatars/1.png" alt="Card image cap" />
-                    
+                                    <div class="row mb-0">
+                                            <div class="col-md-6 col-lg-4 ">
+                                              <div class="card mb-4 " style="height: 32rem; width: 25rem;">
+                                              <div class="card-body ">
+                                            
+                            
+                                                                                <?php
+                                                                                          $user_id=$_SESSION['user_id'];
+                                                                                          $res = mysqli_query($connect, "SELECT profile
+                                                                                                      
+                                                                                                          FROM trainees
+                                                                                                          
+                                                                                                          WHERE user_id='$user_id'
+                                                                                                          
+                                                                                                      ");
+                                                                                          while($row = mysqli_fetch_assoc($res)) {
+                                                                                            $_SESSION['profile']=$row['profile'];
+                                                                                              ?>
+                                                <figure class="figure">                                   
+                                                <img class="card-img " src="../assets/img/avatars/<?php echo $row['profile']; ?>" alt="Card image cap" />
+                                                <figcaption class="figure-caption">A caption for the above image.</figcaption>
+                                              </figure>
+                                    
+                                                <?php } ?>
 
-                      <!-- <p class="card-text">
-                        Some quick example text to build on the card title and make up the bulk of the card's content.
-                      </p>
-                      <p class="card-text">
-                        Cookie topping caramels jujubes gingerbread. Lollipop apple pie cupcake candy canes cookie ice
-                        cream. Wafer chocolate bar carrot cake jelly-o.
-                      </p> -->
-                    </div>
+
+                                        
+
+                                                  <!-- <p class="card-text">
+                                                    Some quick example text to build on the card title and make up the bulk of the card's content.
+                                                  </p>
+                                                  <p class="card-text">
+                                                    Cookie topping caramels jujubes gingerbread. Lollipop apple pie cupcake candy canes cookie ice
+                                                    cream. Wafer chocolate bar carrot cake jelly-o.
+                                                  </p> -->
+                                                </div>
+                                              </div>
+                                            </div>
+                                            <div class="card-title mb-2">
+                                            <h5 class="m-0 me-2 text-uppercase"><?php echo $_SESSION['firstname']."'s", " ", "INFORMATION";?> </h5>
+                                          </div>
+                                  </div>
+         <!-- profile pic -->
+
+
+
+     <!-- qoute    -->
+      <div class="col-sm-6 col-lg-6 mt-5">
+                  <div class="card bg-primary text-white text-center p-3 justify-content-center" style="height: 20rem; width: 30rem;">
+                    <figure class="mb-0 ">
+                      <blockquote class="blockquote">
+                        <p>A well-known quote, contained in a blockquote element.</p>
+                      </blockquote>
+                      <figcaption class="blockquote-footer mb-0 text-white">
+                        Someone famous in <cite title="Source Title">Source Title</cite>
+                      </figcaption>
+                    </figure>
                   </div>
                 </div>
-                <div class="card-title mb-2">
-                <h5 class="m-0 me-2 text-uppercase"><?php echo $_SESSION['firstname']."'s", " ", "INFORMATION";?> </h5>
-              </div>
-      </div>
-         
-        
 
-
-
+    <!-- qoute    -->
                    
 
 
@@ -311,7 +347,7 @@ include '../Layouts/main-user.php';
                                             <div class="modal-dialog modal-dialog-centered" role="document">
                                               <div class="modal-content">
                                                 <div class="modal-header">
-                                                  <h2 class="modal-title" id="modalCenterTitle">Register user.</h2>
+                                                  <h2 class="modal-title" id="modalCenterTitle">Upload Profile Picture</h2>
 
                                                   <button
                                                     type="button"
@@ -321,34 +357,19 @@ include '../Layouts/main-user.php';
                                                   </button>
                                                 </div>
 
-                                                          <div class="row">
+                                                        <div class="row">
                                                                   <div class="col-xl">
                                                                   <div class="card mb-4">
                                                                   <div class="card-body">
-
-                                                                        <?php if (isset($_GET['error'])): ?>
-                                                              <p><?php echo $_GET['error']; ?></p>
-                                                              
-                                                              <?php endif ?>
-                                                        <form method="POST" enctype="multipart/form-data">
-                                                          <input type="file" name="image" />
-                                                          <br /> <br />
-                                                          <button type="submit" name="submit">Submit</button>
-                                                      </form>
-                                                      <div>
-                                                          <?php
-                                                              $user_id=$_SESSION['user_id'];
-                                                              $res = mysqli_query($connect, "SELECT profile
-                                                              
-                                                              FROM trainees
-                                                              
-                                                              WHERE user_id='$user_id'
-                                                              
-                                                              ");
-                                                              while($row = mysqli_fetch_assoc($res)) {
-                                                                  ?>
-                                                                  <img src="../Assets/img/avatars/<?php echo $row['file']; ?>" />
-                                                              <?php } ?>
+                                                            <form method="POST" enctype="multipart/form-data" action="../Php/php-upload.php ">
+                                                              <input type="file" name="image" class="form-control"/>
+                                                              <br><br>
+                                                            <div class="d-grid gap-2 col-6 mx-auto">
+                                                              <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                                                              </div>
+                                                            </form>
+                                                        <div>
+                                                          
                                                               </div>
 
                                                               </div>
@@ -364,6 +385,61 @@ include '../Layouts/main-user.php';
                                         </div>
 
 
+
+                                        <!-- toast -->
+                                        <?php
+                                                      if(isset($_SESSION['success'])){
+
+
+                                                      ?>
+                                                          <div
+                                                          class="bs-toast toast fade show toast-placement-ex m-2 bottom-0 end-0 bg-success"
+                                                                    role="alert"
+                                                                    aria-live="assertive"
+                                                                    aria-atomic="true">
+                                                                    <div class="toast-header">
+                                                                      <i class="bx bx-bell me-2"></i>
+                                                                      <div class="me-auto fw-medium">Success</div>
+                                                                      <small>11 mins ago</small>
+                                                                      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="toast-body">
+                                                                    <?= $_SESSION['success'] ?>
+                                                                    </div>
+                                                                  </div>
+                                                      <?php
+                                                          unset($_SESSION['success']);
+                                                      }
+                                                      ?>
+
+                                                          <?php
+
+                                                          if(isset($_SESSION['error'])){
+
+
+                                                          ?>
+                                                              <div
+                                                              class="bs-toast toast fade show toast-placement-ex m-2 bottom-0 end-0 bg-danger"
+                                                                        role="alert"
+                                                                        aria-live="assertive"
+                                                                        aria-atomic="true">
+                                                                        <div class="toast-header">
+                                                                          <i class="bx bx-bell me-2"></i>
+                                                                          <div class="me-auto fw-medium">Error</div>
+                                                                          <small>11 mins ago</small>
+                                                                          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                                                                        </div>
+                                                                        <div class="toast-body">
+                                                                        <?= $_SESSION['error'] ?>
+                                                                        </div>
+                                                                      </div>
+                                                          <?php
+                                                              unset($_SESSION['error']);
+                                                          }
+                                                          ?>
+
+
+                                                          <!-- /toast -->
 
 
                   <!-- right layout -->

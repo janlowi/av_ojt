@@ -1,6 +1,6 @@
 <?php 
 
-
+session_start();
 $title="Weekly Response";
 include '../Php/authenticate.php';
 include '../Layouts/main-user.php'; 
