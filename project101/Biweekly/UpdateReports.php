@@ -1,6 +1,6 @@
 <?php 
 
-
+session_start();
 $title="User Dashboard";
 include '../Php/authenticate.php';
 

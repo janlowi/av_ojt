@@ -11,7 +11,7 @@ include '../Layouts/main-user.php';
 <?php
 $user_id = $_SESSION['user_id'];
 
-$sql = "SELECT event_type FROM timesheet WHERE user_id = '$user_id' ORDER BY timestamp DESC LIMIT 1";
+$sql = "SELECT event_type FROM timesheet WHERE DATE(timestamp) = CURDATE() AND user_id = '$user_id' ORDER BY timestamp DESC LIMIT 1";
 $query = mysqli_query($connect, $sql);
 
 if ($query && mysqli_num_rows($query) > 0) {
@@ -40,6 +40,7 @@ if ($query && mysqli_num_rows($query) > 0) {
       
         ';
     }
+
 } else {
     // If there are no events for the user, display the "In" button by default
     echo '

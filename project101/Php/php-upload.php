@@ -18,16 +18,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $file_type = $_FILES['image']['type'];
         if (!in_array($file_type, $allowed_types)) {
             $error = "Only PNG and JPG files are allowed.";
-            header("Location: php-upload.php?error=$error");
-            exit();
+
         }
 
         // Check file size (in bytes)
         $max_size = 5 * 1024 * 1024; // 5 MB
         if ($_FILES['image']['size'] > $max_size) {
             $error = "File size exceeds the limit of 5MB.";
-            header("Location: php-upload.php?error=$error");
-            exit();
         }
 
         // Update user profile in the database
@@ -40,10 +37,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['success'] ="File uploaded successfully";
             header('location: ../Users/UserProfile.php');
         } else {
-            $_SESSION['error'] = "File not uploaded";
+            $error = "File not uploaded";
         }
     } else {
-        $_SESSION['error'] = "No file selected or an error occurred";
+       $error= "No file selected or an error occurred";
     }
+    $_SESSION['error']=$error;
+    header('location: ../Users/UserProfile.php');
+    exit();
 }
 ?>

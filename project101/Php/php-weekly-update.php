@@ -1,10 +1,7 @@
 <?php
+session_start();
 include 'db_connect.php';
 include 'authenticate.php';
-
-session_start();
-
-checkLogin();
 
 
 $user_id =$_SESSION['user_id'];

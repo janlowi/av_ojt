@@ -51,6 +51,7 @@ if (empty($email)) {
             // Verify the password -- not hashed temporarily
             if ($hashed_password = $pass_hashed) {
                 $_SESSION['email'] = $row['email'];
+                $_SESSION['user_id'] = $row['id'];
                         // Store the user's email in a session variable
                       
                 // Redirect based on user type
@@ -62,7 +63,7 @@ if (empty($email)) {
                     exit();
                 } elseif ($_SESSION['usertype'] === 'Trainee') {
                 $_SESSION['Trainee'] = true;
-
+                $_SESSION['user_id'] = $row['id'];
                     header("Location: ../Users/UserDashboard.php ");
                     exit();
                 } else {
