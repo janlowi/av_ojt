@@ -11,6 +11,7 @@ $user_id= $_SESSION['user_id'];
 
 if(isset($_POST['Time_In'])){
     date_default_timezone_set('Asia/Manila');// local timezone
+
 $event_type = $_POST['Time_In'];
     $sql = "INSERT INTO timesheet (event_type, user_id )
              VALUES ('$event_type', '$user_id')
@@ -71,7 +72,7 @@ $event_type = $_POST['Time_In'];
 
                 if ($query2) {
                     $_SESSION['success'] = "Time Out Successfully";
-                    header("location: ../Users/UserDashboard.php");
+                    header("location: ../Users/UserDashboard.php"); 
                     exit;
                 } else {
                     $_SESSION['error'] = "Failed to time out";
