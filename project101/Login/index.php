@@ -51,7 +51,7 @@
             font-size: 20px;
             text-align: center;
             color: white;
-            margin-top: auto; /* Move to the bottom */
+            margin-top: 30px; /* Move to the bottom */
         }
         .description {
             font-size: 10px;
@@ -222,12 +222,12 @@
         ?>
         <div class="login-form">
             <div class="input-container">
-  <input type="email" id="email" name="email" placeholder="Email" >
+  <input type="email" id="email" name="email" placeholder="Email" required>
   <i class="fa fa-envelope icon"></i>
 </div>
 
 <div class="input-container">
-  <input type="password" id="password" name="password" placeholder="Password" >
+  <input type="password" id="password" name="password" placeholder="Password" required>
   <i class="fa fa-lock icon"></i>
 </div>
                 <button type="submit">LOGIN</button>
