@@ -22,14 +22,7 @@ include '../Layouts/main-user.php';
   <div class="col-2 col-xl-12 col-md-6" >
     <div class="card h-70 p-4">
 
-                        <button
-                         type="button"
-                         class="btn btn-dark"
-                         data-bs-toggle="modal"
-                         data-bs-target="#modalProfile">
-                         Upload Picture
-                       </button>
-
+                    
       <div class="card-header d-flex align-items-right justify-content-between">
      
          <!-- profile pic -->
@@ -56,6 +49,8 @@ include '../Layouts/main-user.php';
                                                 <figure class="figure">                                   
                                                 <img class="card-img " src="../assets/img/avatars/<?php echo $row['profile']; ?>" alt="Card image cap" />
                                                 <figcaption class="figure-caption">A caption for the above image.</figcaption>
+                                               
+                                          
                                               </figure>
                                     
                                                 <?php } ?>
@@ -70,8 +65,19 @@ include '../Layouts/main-user.php';
                                                     Cookie topping caramels jujubes gingerbread. Lollipop apple pie cupcake candy canes cookie ice
                                                     cream. Wafer chocolate bar carrot cake jelly-o.
                                                   </p> -->
+       
+                                                        <button
+                                                        type="button"
+                                                        class="btn btn-dark"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#modalProfile">
+                                                        Upload Picture
+                                                      </button>
+
                                                 </div>
+                                                
                                               </div>
+                                              
                                             </div>
                                             <div class="card-title mb-2">
                                             <h5 class="m-0 me-2 text-uppercase"><?php echo $_SESSION['firstname']."'s", " ", "INFORMATION";?> </h5>

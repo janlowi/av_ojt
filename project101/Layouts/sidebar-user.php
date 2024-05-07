@@ -1,7 +1,7 @@
        <?php include 'main.php';?>
        
         <!-- Menu -->
-        <aside id="layout-menu" class=" layout-menu menu-vertical menu bg-menu-theme  px-2 ">
+        <aside id="layout-menu" class=" layout-menu menu-vertical menu bg-menu-theme px-2 ">
           <div class=" bg-dark mt-2 ">
           <div class="app-brand demoh-25 d-inline-block d-flex justify-content-center mt-2">
             <a href="https://www.avegabros.com/" class="app-brand-link">
@@ -20,12 +20,12 @@
 
           <div class="menu-inner-shadow"></div>
           <li class="menu-header small text-uppercase"><span class="menu-header-text">Dashboard</span></li>
-            <li class="menu-item">
-          <ul class="menu-inner py-1 ">
+      <li class="menu-item">
+        <ul class="menu-inner py-2 ">
           <ul class="menu-item ">
-            <li class="menu-item mb-3 active">
+            <li class="menu-item active mb-3">
                   <a href="../Users/UserDashboard.php" class="menu-link ">
-                    <div data-i18n="Connections">Dashboard</div>
+                    <div data-i18n="Analytics">Dashboard</div>
                   </a>
                 </li>
                 <li class="menu-item active mb-3">
@@ -38,7 +38,6 @@
                     <div data-i18n="Analytics">Weekly Reports</div>
                   </a>
                 </li>
-            
 
                 <li class="menu-item active mb-3">
                   <a href="pages-account-settings-notifications.html" class="menu-link">
