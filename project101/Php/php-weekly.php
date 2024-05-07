@@ -2,14 +2,8 @@
 <?php
 session_start();
 include 'db_connect.php';
-<<<<<<< HEAD
-?>
-
-<?php
-=======
 include 'authenticate.php';
 $user_id = $_SESSION['user_id'];
->>>>>>> e18037b8b407ac08d209c0aacf9309e3675265f5
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 

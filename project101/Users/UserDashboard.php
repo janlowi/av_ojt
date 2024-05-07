@@ -1,28 +1,12 @@
 <?php 
 session_start();
-<<<<<<< HEAD
-
-if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true){
-  header("location: ../index.php");
-  exit;
-}
-=======
 $title="User Dashboard";
 include '../Layouts/navbar-user.php';
 include '../Layouts/sidebar-user.php';
 include '../Php/authenticate.php';
->>>>>>> e18037b8b407ac08d209c0aacf9309e3675265f5
 include '../Layouts/main-user.php'; 
  include '../Php/db_connect.php';
-<<<<<<< HEAD
-
-
-
  
-
-=======
- 
->>>>>>> e18037b8b407ac08d209c0aacf9309e3675265f5
   ?>
 
 <?php  ?>

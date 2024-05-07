@@ -1,14 +1,6 @@
 <?php 
-<<<<<<< HEAD
-session_start();
-if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true){
-  header("location: ../index.php");
-  exit;
-}
-=======
 
 session_start();
->>>>>>> e18037b8b407ac08d209c0aacf9309e3675265f5
 $title="User Dashboard";
 include '../Php/authenticate.php';
 

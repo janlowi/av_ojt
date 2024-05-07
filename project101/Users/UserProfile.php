@@ -1,12 +1,5 @@
 <?php 
 session_start();
-<<<<<<< HEAD
-if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true){
-  header("location: ../index.php");
-  exit;
-}
-=======
->>>>>>> e18037b8b407ac08d209c0aacf9309e3675265f5
 $title=$_SESSION['firstname']." ". "Profile";
 include '../Php/authenticate.php';
 include '../Layouts/main-user.php'; 

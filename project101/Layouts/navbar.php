@@ -129,11 +129,8 @@ include '../Php/db_connect.php';
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
-<<<<<<< HEAD
                       <a class="dropdown-item" href="../Users/logout.php">
-=======
                       <a class="dropdown-item" href="../Php/php-logout.php">
->>>>>>> e18037b8b407ac08d209c0aacf9309e3675265f5
                         <i class="bx bx-power-off me-2"></i>
                         <span class="align-middle">Log Out</span>
                       </a>
