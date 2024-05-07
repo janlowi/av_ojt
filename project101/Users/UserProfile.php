@@ -1,6 +1,9 @@
 <?php 
 session_start();
-
+if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true){
+  header("location: ../index.php");
+  exit;
+}
 $title=$_SESSION['firstname']." ". "Profile";
 include '../Layouts/main-user.php'; 
  include '../Layouts/sidebar-user.php';

@@ -1,12 +1,18 @@
 <?php 
 session_start();
 
-$title="User Dashboard";
+if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true){
+  header("location: ../index.php");
+  exit;
+}
 include '../Layouts/main-user.php'; 
  include '../Layouts/sidebar-user.php';
  include '../Layouts/navbar-user.php';
  include '../Php/db_connect.php';
 
+
+
+ 
 
   ?>
 
@@ -71,7 +77,7 @@ include '../Layouts/main-user.php';
                        </button>
 
                     <!-- <img class="card-img-top" src="../assets/img/elements/18.jpg" alt="Card image cap" /> -->
-                    <div class="card-body text-center"">
+                    <div class="card-body text-center">
                       <h5 class="card-title">Weekly report</h5>
                       <p class="card-text">
                         PLease submit a response weekly of your weekly duties.

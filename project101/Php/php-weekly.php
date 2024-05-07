@@ -9,6 +9,11 @@ include 'db_connect.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
+
+    
+}
+
+
     // Check if required fields are not empty
     if (empty($_POST['department'])) {
         $errors[] = "Department is required.";
@@ -63,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo $error . "<br>";
         }
     }
-}
+
 ?>
 
 

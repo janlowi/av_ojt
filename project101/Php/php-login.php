@@ -1,7 +1,10 @@
 <?php
 session_start();
 include 'db_connect.php';
-
+if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true){
+    header("location: ../index.php");
+    exit;
+}
 if ($_SERVER['REQUEST_METHOD']=='POST') {
 
 $email = $_POST['email'];
@@ -26,13 +29,8 @@ if (empty($email)) {
         $query = "SELECT  us.*,
                         tr.user_id,
                           tr.email,
-<<<<<<< HEAD
-                          tr.first_name
-      
-=======
                           tr.first_name,
                           tr.id
->>>>>>> fd4bccaba7162b42ed7eab125a057c5dd0f94ede
                           
         FROM users us,
             trainees tr
@@ -50,19 +48,21 @@ if (empty($email)) {
             $_SESSION['firstname'] = $row['first_name'];
             $hashed_password = $row['password'];
             $_SESSION['user_id'] = $row['id'];
-            
+
 
             // Verify the password -- not hashed temporarily
             if ($hashed_password = $password) {
             
                 $_SESSION['usertype'] = $row['user_type'];
-
+                $_SESSION['loggedin']=true;
                 // Redirect based on user type
                 if ($_SESSION['usertype'] === 'Admin') {
                     header('location: ../Admin/AdminDashboard.php');   
+                    $_SESSION['loggedin']=true;
                     exit();
                 } elseif ($_SESSION['usertype'] === 'Trainee') {
                     header("Location: ../Users/UserDashboard.php ");
+                    $_SESSION['loggedin']=true;
                     exit();
                 } else {
                     // Handle unknown user types or errors
