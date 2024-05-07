@@ -2,9 +2,14 @@
 <?php
 session_start();
 include 'db_connect.php';
+<<<<<<< HEAD
 ?>
 
 <?php
+=======
+include 'authenticate.php';
+$user_id = $_SESSION['user_id'];
+>>>>>>> e18037b8b407ac08d209c0aacf9309e3675265f5
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -60,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             header("Location: ../Biweekly/DisplayReports.php");
         } else {
             $_SESSION['error']= "Failed to submit.";
-            header("Location: ../Users/UserDashboard.php");
+            header("Location: ../Biweekly/DisplayReports.php");
         }
     } else {
         // Display errors

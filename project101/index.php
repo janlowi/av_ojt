@@ -1,3 +1,4 @@
+<<<<<<< HEAD:project101/index.php
 <?php 
     session_start();
     if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true){
@@ -5,6 +6,9 @@
         exit;
     }
 ?>
+=======
+
+>>>>>>> e18037b8b407ac08d209c0aacf9309e3675265f5:project101/Login/index.php
 
 <!DOCTYPE html>
 <html lang="en">

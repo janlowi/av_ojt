@@ -61,7 +61,7 @@ include '../Php/db_connect.php';
     <div class="layout-wrapper layout-content-navbar">
       
               <!-- Layout container -->
-              <div class="layout-page">
+              <div class="layout-page ">
                   <div class="content-backdrop fade"></div>
 
 

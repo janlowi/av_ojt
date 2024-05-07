@@ -1,22 +1,32 @@
 <?php 
 session_start();
+<<<<<<< HEAD
 
 if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true){
   header("location: ../index.php");
   exit;
 }
+=======
+$title="User Dashboard";
+include '../Layouts/navbar-user.php';
+include '../Layouts/sidebar-user.php';
+include '../Php/authenticate.php';
+>>>>>>> e18037b8b407ac08d209c0aacf9309e3675265f5
 include '../Layouts/main-user.php'; 
- include '../Layouts/sidebar-user.php';
- include '../Layouts/navbar-user.php';
  include '../Php/db_connect.php';
+<<<<<<< HEAD
 
 
 
  
 
+=======
+ 
+>>>>>>> e18037b8b407ac08d209c0aacf9309e3675265f5
   ?>
 
-
+<?php  ?>
+<?php ?>
               <!-- Content wrapper -->
            <div class="content-wrapper">
             <!-- Content --> 
@@ -67,7 +77,7 @@ include '../Layouts/main-user.php';
   <!-- report -->
     
                 <div class="col-md-0 col-xl-3 order-0">
-                  <div class="card mb-3">
+                  <div class="card mb-0">
                   <button
                          type="button"
                          class="btn btn-dark"
@@ -88,19 +98,20 @@ include '../Layouts/main-user.php';
                 </div>
               <!--/ report -->
 
+
+
       <!-- time -->
-       <div class="col-md-0 col-xl-3 order-0">
+       <div class="col-md-0 col-xl-3 order-0 tabindex=-1">
                  <div class="card mb-0">
 
-          <?php include '../Timesheet/TimeSystem.php'; ?>
+                        <?php include '../Timesheet/TimeSystem.php'; ?>
               
 
-                             </div>
-                         </div>
+                    </div>
+                 </div>
          <!--/ time -->
 
 
- 
 
     <!-- Modal  for report-->
     <div class="modal fade" id="modalReport" tabindex="-1" aria-hidden="true">
@@ -119,13 +130,13 @@ include '../Layouts/main-user.php';
 
 
                                             <div class="row">
-                                               <div class="col-xl">
-                                               <div class="card mb-4">
-                                               <div class="card-body">
+                                               <div class="col-xl-20"   >
+                                               <div class="card" >
+                                               <div class="card-body" >
 
-                                               <form class="row g-3" id="reportForm" action="../Php/php-weekly.php" method="post">
+                                               <form class="row row-cols-14" id="reportForm" action="../Php/php-weekly.php" method="post">
                                                          
-                                               <div class="col-12">
+
                                                           <label for="department">Assigned Department:</label><br>
                                                           <select id="department" name="department" required class="form-control">
                                                               <option value="">Select Department</option>
@@ -136,7 +147,7 @@ include '../Layouts/main-user.php';
                                                               <option value="Purchasing">Purchasing</option>
                                                               <option value="Warehouse">Warehouse</option>
                                                           </select><br>
-                                               </div>
+
                                                           <label for="start_date">Assignment Period Start:</label>
                                                           <input type="date" id="start_date" name="start_date" required class="form-control">
 
@@ -155,6 +166,8 @@ include '../Layouts/main-user.php';
 
                                                           <label for="learning">Learning:</label>
                                                           <textarea id="learning" name="learning" rows="4" class="form-control"></textarea>
+                                                          
+                                                          <input type="text" value="<?= $_SESSION['user_id'] ?>" hidden>
 
                                                           <input type="submit" name="submit" value="Submit" class="btn btn-dark">
                                                       </form>
@@ -174,10 +187,6 @@ include '../Layouts/main-user.php';
 
 
 
-
-
-          
-
         <!-- toast -->
    
         <?php
@@ -194,7 +203,7 @@ include '../Layouts/main-user.php';
                         <div class="toast-header">
                           <i class="bx bx-bell me-2"></i>
                           <div class="me-auto fw-medium">Success</div>
-                          <small>11 mins ago</small>
+
                           <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
                         </div>
                         <div class="toast-body">
@@ -220,7 +229,7 @@ include '../Layouts/main-user.php';
                             <div class="toast-header">
                               <i class="bx bx-bell me-2"></i>
                               <div class="me-auto fw-medium">Error</div>
-                              <small>11 mins ago</small>
+    
                               <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
                             </div>
                             <div class="toast-body">
@@ -242,8 +251,14 @@ include '../Layouts/main-user.php';
                   </div>
                 </div>
 
+   <!-- time tracking -->
+
+   <?php include '../Timesheet/TimeTracking.php'; ?>
+
+<!-- time tracking -->
+
+
             <!-- / Content -->
-            <div class="content-backdrop fade"></div>
-          <!-- </div> -->
+          </div>
         </div>
           <!-- Content wrapper -->

@@ -35,14 +35,33 @@ include '../Php/db_connect.php';
               <ul class="navbar-nav flex-row align-items-center ms-auto">
                 <!-- Place this tag where you want the button to render. -->
 
+                <!-- time -->
+                <li class="nav-item lh-7 me-5">
+                    
+                                           
+                                                      
+                                                          <div class="display-date  ">
+                                                            <span id="day">day</span>,
+                                                            <span id="daynum" >00</span>
+                                                            <span id="month" >month</span>
+                                                            <span id="year" >0000</span>
+                                                          <span  id ="currentTime">	</span>
+                                                    
+                                                          </div>
+
+                            <!-- Show current time -->
+                        <script src="../Assets/js/dateTime.js"> </script>
+                      <!-- Show current time -->
+                  </li>
+
 
                 <li class="nav-item lh-7 me-5">
                   <a
                   
-                    class="text-dark"
+                    class="text-dark text-muted"
                     href="../Admin/AdminDashboard.php"
                     
-                    ><i class="fas fa-home" style="color: #000;"></i> Home
+                    ><i class="fas fa-home  text-muted" style="color: #000;"></i> Home
                     </a>
                    
                 </li>
@@ -60,10 +79,10 @@ include '../Php/db_connect.php';
 
 
                    <!-- User -->
-                   <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                <li class="nav-item navbar-dropdown dropdown-user dropdown">
                   <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                      <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                      <img src="../assets/img/avatars/av.png" alt class="w-px-40 h-px-40 rounded-circle" />
                     </div>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
@@ -72,7 +91,7 @@ include '../Php/db_connect.php';
                         <div class="d-flex">
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
-                              <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                              <img src="../assets/img/avatars/av.png" alt class="w-px-40 h-px-40 rounded-circle" />
                             </div>
                           </div>
                           <div class="flex-grow-1">
@@ -86,7 +105,7 @@ include '../Php/db_connect.php';
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="#">
+                      <a class="dropdown-item" href="">
                         <i class="bx bx-user me-2"></i>
                         <span class="align-middle">My Profile</span>
                       </a>
@@ -110,7 +129,11 @@ include '../Php/db_connect.php';
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
+<<<<<<< HEAD
                       <a class="dropdown-item" href="../Users/logout.php">
+=======
+                      <a class="dropdown-item" href="../Php/php-logout.php">
+>>>>>>> e18037b8b407ac08d209c0aacf9309e3675265f5
                         <i class="bx bx-power-off me-2"></i>
                         <span class="align-middle">Log Out</span>
                       </a>
