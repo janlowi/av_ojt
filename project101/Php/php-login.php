@@ -44,24 +44,6 @@ if (empty($email)) {
         
 
         if ($row = mysqli_fetch_assoc($result)) {
-<<<<<<< HEAD
-            // Store the user's email in a session variable
-            $_SESSION['email'] = $row['email'];
-            $_SESSION['firstname'] = $row['first_name'];
-            $hashed_password = $row['password'];
-            $_SESSION['user_id'] = $row['id'];
-
-
-            // Verify the password -- not hashed temporarily
-            if ($hashed_password = $password) {
-            
-                $_SESSION['usertype'] = $row['user_type'];
-                $_SESSION['loggedin']=true;
-                // Redirect based on user type
-                if ($_SESSION['usertype'] === 'Admin') {
-                    header('location: ../Admin/AdminDashboard.php');   
-                    $_SESSION['loggedin']=true;
-=======
 
             $_SESSION['firstname'] = $row['first_name'];
             $_SESSION['profile'] = $row['profile'];
@@ -81,7 +63,6 @@ if (empty($email)) {
                     // Redirect to the admin dashboard
                     header('location: ../Admin/AdminDashboard.php');  
 
->>>>>>> e18037b8b407ac08d209c0aacf9309e3675265f5
                     exit();
                 } elseif ($_SESSION['usertype'] === 'Trainee') {
                 $_SESSION['Trainee'] = true;
