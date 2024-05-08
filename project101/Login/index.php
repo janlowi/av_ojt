@@ -72,7 +72,7 @@ if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']===true ){
             font-size: 20px;
             text-align: center;
             color: white;
-            margin-top: auto; /* Move to the bottom */
+            margin-top: 30px; /* Move to the bottom */
         }
  
         .abisc-container p {
@@ -200,6 +200,7 @@ if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']===true ){
                                                                                                     <i class="fa fa-envelope icon"></i>
                                                                                                     </div>
 
+<<<<<<< HEAD
                                                                                                     <div class="input-container">
                                                                                                     <input type="password" id="password" name="password" placeholder="Password" >
                                                                                                     <i class="fa fa-lock icon"></i>
@@ -211,5 +212,36 @@ if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']===true ){
                                                              
                                                                                                 </form>
  </div>
+=======
+        <?php 
+                if( isset ($_SESSION ['error']))
+                {
+        ?>
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Password must be 8 characters long!</strong> <?= $_SESSION['error']; ?>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+        <?php
+                    unset($_SESSION['error']);
+                }
+        ?>
+        <div class="login-form">
+            <div class="input-container">
+  <input type="email" id="email" name="email" placeholder="Email" required>
+  <i class="fa fa-envelope icon"></i>
+</div>
+
+<div class="input-container">
+  <input type="password" id="password" name="password" placeholder="Password" required>
+  <i class="fa fa-lock icon"></i>
+</div>
+                <button type="submit">LOGIN</button>
+            </form>
+        </div>
+        
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>
+>>>>>>> e21dd666ff25292674bd74f36b2010962fd59bf8
 
  
