@@ -215,7 +215,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   }
   
   $_SESSION['error'] = $error_msg;
-  // header("Location: ../Admin/AdminDashboard.php");
+  header("Location: ../Admin/AdminDashboard.php");
   exit();
 
 }

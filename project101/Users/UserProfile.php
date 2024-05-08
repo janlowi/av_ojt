@@ -48,7 +48,7 @@ include '../Layouts/main-user.php';
                                                                                               ?>
                                                 <figure class="figure">                                   
                                                 <img class="card-img " src="../assets/img/avatars/<?php echo $row['profile']; ?>" alt="Card image cap" />
-                                                <figcaption class="figure-caption">A caption for the above image.</figcaption>
+                                                <figcaption class="figure-caption">.</figcaption>
                                                
                                           
                                               </figure>
@@ -406,7 +406,7 @@ include '../Layouts/main-user.php';
                                                                     <div class="toast-header">
                                                                       <i class="bx bx-bell me-2"></i>
                                                                       <div class="me-auto fw-medium">Success</div>
-                                                                      <small>11 mins ago</small>
+                                                                      <small></small>
                                                                       <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
                                                                     </div>
                                                                     <div class="toast-body">
@@ -432,7 +432,7 @@ include '../Layouts/main-user.php';
                                                                         <div class="toast-header">
                                                                           <i class="bx bx-bell me-2"></i>
                                                                           <div class="me-auto fw-medium">Error</div>
-                                                                          <small>11 mins ago</small>
+                                                                          <small></small>
                                                                           <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
                                                                         </div>
                                                                         <div class="toast-body">
