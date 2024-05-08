@@ -101,3 +101,59 @@ include '../Php/db_connect.php';
     <script async defer src="https://buttons.github.io/buttons.js"></script>
   </body>
 </html>
+  <!-- toast -->
+   
+  <?php
+
+if(isset($_SESSION['success'])){
+
+
+?>
+    <div
+    class="bs-toast toast fade show toast-placement-ex m-2 bottom-0 end-0 bg-success"
+              role="alert"
+              aria-live="assertive"
+              aria-atomic="true">
+              <div class="toast-header">
+                <i class="bx bx-bell me-2"></i>
+                <div class="me-auto fw-medium">Success</div>
+
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+              </div>
+              <div class="toast-body">
+               <?= $_SESSION['success'] ?>
+              </div>
+            </div>
+<?php
+    unset($_SESSION['success']);
+}
+?>
+
+    <?php
+
+    if(isset($_SESSION['error'])){
+
+
+    ?>
+        <div
+        class="bs-toast toast fade show toast-placement-ex m-2 bottom-0 end-0 bg-danger"
+                  role="alert"
+                  aria-live="assertive"
+                  aria-atomic="true">
+                  <div class="toast-header">
+                    <i class="bx bx-bell me-2"></i>
+                    <div class="me-auto fw-medium">Error</div>
+
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                  </div>
+                  <div class="toast-body">
+                  <?= $_SESSION['error'] ?>
+                  </div>
+                </div>
+    <?php
+        unset($_SESSION['error']);
+    }
+    ?>
+
+
+    <!-- /toast -->

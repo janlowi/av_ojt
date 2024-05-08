@@ -1,7 +1,8 @@
 <?php 
 session_start();
+$title= "Log in";
+
 include "../Layouts/main.php";
-$title="Log in";
 ?>
 <?php 
 if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']===true ){
@@ -73,20 +74,12 @@ if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']===true ){
             color: white;
             margin-top: auto; /* Move to the bottom */
         }
-        .description {
-            position: relative;
-            width: 220px;
-            height: 50px;
-            font-size: 11px;
-            text-align:left;
-            color: white;
-            margin-top: 50px; /* Move to the bottom */
-            }
-        .abisc-container h2 {
+ 
+        .abisc-container p {
+            position:relative;
             font-size: 15px;
+            top: 90px;
             text-align: center;
-            color: white;
-            margin-top: 80px;
         }
 
         .sign {
@@ -110,7 +103,6 @@ if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']===true ){
         .img-cont {
             text-align: center;
             justify-content: center;
-            background-color: black;
             border-radius: 20px 0 0 20px;
         }
 
@@ -120,11 +112,6 @@ if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']===true ){
             text-align: center;
         }
 
-        .image img {           
-            box-shadow: -2px 5px 8px 2px rgba(248,248,248,0.30);
-            -webkit-box-shadow: -2px 5px 8px 2px rgba(248,248,248,0.30);
-            -moz-box-shadow: -2px 5px 8px 2px rgba(248,248,248,0.30);
-        }
 
         input[type="text"],input[type="email"],
         input[type="password"] {
@@ -161,33 +148,17 @@ if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']===true ){
             padding-right: 5px;
         }
 
-        input[type="checkbox"] {
-            margin-right: 5px;
-        }
-
-        a {
-            color: #000; /* Set link color to black */
-            text-decoration: none;
-        }
-
         button {
             position: relative;
             top: 15px;
-    background-color: black;
     color: white; /* Changed to black */
     border-radius: 10px;
     cursor: pointer;
-    display: block; /* Make it a block element */
     margin: 20px auto; /* Center it horizontally and move it down */
     width: 240px;
     height: 45px;
 }
         
-
-        button:hover {
-            background-color: black;
-            border-color: white;
-        }
         .error {
             background: #F2DEDE;
             color: #A94442;
@@ -199,24 +170,25 @@ if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']===true ){
         }
 
     </style>
-<div class="form-container">
+<div class="form-container ">
                                                                                                         <form action="../Php/php-login.php" method="POST">
                                                                                                         
                                                                                                         <div class="login-container">
-                                                                                                            <div class="img-cont">
+                                                                                                            <div class="img-cont  bg-dark">
                                                                                                                 
                                                                                                             <div class="image"><img src="avega.png" alt="Logo" width="110" height="80"></div> 
-                                                                                                                <div class="welcome-container">
-                                                                                                                    <p>Welcome to Avega</p>
+                                                                                                                <div class="welcome-container text-light">
+                                                                                                                    <p>avega</p>
                                                                                                                 </div>
-                                                                                                                <div class="description">
+                                                                                                                <div class=" text-light fw-medium mt-5">
                                                                                                                     <p>We are a complete logistics provider company
                                                                                                                         with full-range of services that can cater 
                                                                                                                         all logistical needs of the flourishing 
                                                                                                                         Philippine market through our ICHS system.</p>
                                                                                                                 </div>
-                                                                                                                <div class="abisc-container">    
-                                                                                                                    <strong><h2>ABISC OJT'S ATTENDANCE & REPORT TRACKING</h2></strong>
+                                                                                                                <div class="abisc-container text-light fw-medium">    
+                                                                                                                    <p>ATTENDANCE MONITORING SYSTEM</p>
+                    
                                                                                                                 </div>
                                                                                                             </div>
                                                                                                             <div class="sign"><h2>Sign in</h2></div>
@@ -232,6 +204,12 @@ if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']===true ){
                                                                                                     <input type="password" id="password" name="password" placeholder="Password" >
                                                                                                     <i class="fa fa-lock icon"></i>
                                                                                                     </div>
-                                                                                                                    <button type="submit">LOGIN</button>
-                                                                                                                </form>
+
+                                                                                                    <div class=" d-flex justify-content-center col-10 mx-auto">
+                                                                                                                 <button type="submit" name =""class="btn btn-dark">Login</button>
+                                                                                                    </div>
+                                                             
+                                                                                                </form>
  </div>
+
+ 
