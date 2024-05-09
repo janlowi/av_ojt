@@ -1,16 +1,15 @@
 <?php 
 session_start();
+include '../Php/authenticate.php';
 $title="User Dashboard";
 include '../Layouts/navbar-user.php';
 include '../Layouts/sidebar-user.php';
-include '../Php/authenticate.php';
+
 include '../Layouts/main-user.php'; 
  include '../Php/db_connect.php';
  
   ?>
 
-<?php  ?>
-<?php ?>
               <!-- Content wrapper -->
            <div class="content-wrapper">
             <!-- Content --> 

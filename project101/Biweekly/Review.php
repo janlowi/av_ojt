@@ -244,12 +244,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         <div class="d-flex flex-column justify-content-center align-items-center d-grid gap-2">
 
 
-                                                <a href="../Biweekly/UpdateReports.php? update_report=<?= $_SESSION['user_id'] ?>" class="btn btn-warning btn-lg row-" id='save'>
-                                            Draft
-                                                </a>
+                                             
 
                                                 <a href="../Php/php-weekly-update.php? save_report=<?= $_SESSION['user_id'] ?>"  class="btn btn-success btn-lg row-" id='save' >
-                                            Save
+                                            Submit
                                                 </a>
 
                                             

@@ -33,7 +33,7 @@ include '../Layouts/main-user.php';
 
 
         <div class="table-responsive text-nowrap">
-        <table class="table table-bordered border-secondary ">
+        <table class="table table-bordered border-secondary " id="dataTable">
           <thead class="border-bottom">
 
                                             <tr>
@@ -277,8 +277,9 @@ include '../Layouts/main-user.php';
                                             <div class="d-flex flex-column justify-content-center align-items-center d-grid gap-2">
     
     
-                                                 Edit
-                                                    </a>
+                                            <a href="../Biweekly/UpdateReports.php? update_report=<?= $_SESSION['user_id'] ?>" class="btn btn-warning btn-lg row-"id='save_<?= $row['id'] ?>'>
+                                            Edit
+                                                </a>
     
                                                     <a href="../Php/php-weekly-update.php? save_report=<?= $row['id'] ?>"  class="btn btn-success btn-lg row-"  id='save_<?= $row['id'] ?>' >
                                                Submit
@@ -312,8 +313,11 @@ include '../Layouts/main-user.php';
                 </div>
                 </div>
             </div>
-
-
+                        <!-- filter data -->
+                        <script>
+                        new DataTable('#dataTable');
+                        </script>
+                        <!-- filter data -->
 
                 <?php
 

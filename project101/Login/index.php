@@ -1,24 +1,45 @@
+<?php 
+session_start();
+$title= "Log in";
 
+include "../Layouts/main.php";
+?>
+<?php 
+if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']===true ){
+    if(isset($_SESSION['Admin'])){
+        header('location: ../Admin/AdminDashboard.php');
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        exit();
+    }elseif(isset($_SESSION['Trainee'])) {
+        header('location: ../Users/UserDashboard.php');
+        exit();
+
+    }
+}
+
+?>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            display: flex;
+            position: relative;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            padding: 20px;
             background-color: #f0f0f0; /* Added a background color */
             color: #000; /* Set text color to black */
         }
+
+        .form-container{
+
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+
+        }
+
+
+
+
         .input-container {
              position: relative;
 }
@@ -53,17 +74,12 @@
             color: white;
             margin-top: 30px; /* Move to the bottom */
         }
-        .description {
-            font-size: 10px;
-            text-align:left;
-            color: white;
-            margin-top: 50px; /* Move to the bottom */
-            }
-        .abisc-container h2 {
+ 
+        .abisc-container p {
+            position:relative;
             font-size: 15px;
+            top: 90px;
             text-align: center;
-            color: white;
-            margin-top: 80px;
         }
 
         .sign {
@@ -74,7 +90,7 @@
 
         .login-form {
     position: relative;
-    top: 100px; /* Adjust this value to move the input boxes down */
+    top: 120px; /* Adjust this value to move the input boxes down */
         }
 
         .img-cont,
@@ -87,7 +103,6 @@
         .img-cont {
             text-align: center;
             justify-content: center;
-            background-color: black;
             border-radius: 20px 0 0 20px;
         }
 
@@ -97,11 +112,6 @@
             text-align: center;
         }
 
-        .image img {           
-            box-shadow: -2px 5px 8px 2px rgba(248,248,248,0.30);
-            -webkit-box-shadow: -2px 5px 8px 2px rgba(248,248,248,0.30);
-            -moz-box-shadow: -2px 5px 8px 2px rgba(248,248,248,0.30);
-        }
 
         input[type="text"],input[type="email"],
         input[type="password"] {
@@ -138,31 +148,17 @@
             padding-right: 5px;
         }
 
-        input[type="checkbox"] {
-            margin-right: 5px;
-        }
-
-        a {
-            color: #000; /* Set link color to black */
-            text-decoration: none;
-        }
-
         button {
-    background-color: black;
+            position: relative;
+            top: 15px;
     color: white; /* Changed to black */
-    border-radius: 40px;
+    border-radius: 10px;
     cursor: pointer;
-    display: block; /* Make it a block element */
     margin: 20px auto; /* Center it horizontally and move it down */
-    width: 170px;
-    height: 35px;
+    width: 240px;
+    height: 45px;
 }
         
-
-        button:hover {
-            background-color: black;
-            border-color: white;
-        }
         .error {
             background: #F2DEDE;
             color: #A94442;
@@ -174,68 +170,46 @@
         }
 
     </style>
-</head>
-<body>
+<div class="form-container ">
+                                                                                                        <form action="../Php/php-login.php" method="POST">
+                                                                                                        
+                                                                                                        <div class="login-container">
+                                                                                                            <div class="img-cont  bg-dark">
+                                                                                                                
+                                                                                                            <div class="image"><img src="avega.png" alt="Logo" width="110" height="80"></div> 
+                                                                                                                <div class="welcome-container text-light">
+                                                                                                                    <p>avega</p>
+                                                                                                                </div>
+                                                                                                                <div class=" text-light fw-medium mt-5">
+                                                                                                                    <p>We are a complete logistics provider company
+                                                                                                                        with full-range of services that can cater 
+                                                                                                                        all logistical needs of the flourishing 
+                                                                                                                        Philippine market through our ICHS system.</p>
+                                                                                                                </div>
+                                                                                                                <div class="abisc-container text-light fw-medium">    
+                                                                                                                    <p>ATTENDANCE MONITORING SYSTEM</p>
+                    
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                            <div class="sign"><h2>Sign in</h2></div>
 
-    <form action="../Php/php-login.php" method="POST">
-    <?php 
-                if( isset ($_SESSION ['error']))
-                {
-        ?>
-                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <strong>Invalid Email Address!</strong> <?= $_SESSION['error']; ?>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-        <?php
-                    unset($_SESSION['error']);
-                }
-        ?>
-    <div class="login-container">
-        <div class="img-cont">
-            <div class="image"><img src="avega.png" alt="Logo" width="110" height="80"></div> 
-            <div class="welcome-container">
-                <strong><p>Welcome to Avega</p></strong>
-            </div>
-            <div class="description">
-                <p>We are a complete logistics provider company
-                    with full-range of services that can cater 
-                    all logistical needs of the flourishing 
-                    Philippine market through our ICHS system.</p>
-            </div>
-            <div class="abisc-container">    
-                <strong><h2>ABISC OJT'S ATTENDANCE & REPORT TRACKING</h2></strong>
-            </div>
-        </div>
-        <div class="sign"><h2>Sign in</h2></div>
+                                                                                                        
+                                                                                                            <div class="login-form">
+                                                                                                                <div class="input-container">
+                                                                                                    <input type="email" id="email" name="email" placeholder="Email" >
+                                                                                                    <i class="fa fa-envelope icon"></i>
+                                                                                                    </div>
 
-        <?php 
-                if( isset ($_SESSION ['error']))
-                {
-        ?>
-                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <strong>Password must be 8 characters long!</strong> <?= $_SESSION['error']; ?>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-        <?php
-                    unset($_SESSION['error']);
-                }
-        ?>
-        <div class="login-form">
-            <div class="input-container">
-  <input type="email" id="email" name="email" placeholder="Email" required>
-  <i class="fa fa-envelope icon"></i>
-</div>
+                                                                                                    <div class="input-container">
+                                                                                                    <input type="password" id="password" name="password" placeholder="Password" >
+                                                                                                    <i class="fa fa-lock icon"></i>
+                                                                                                    </div>
 
-<div class="input-container">
-  <input type="password" id="password" name="password" placeholder="Password" required>
-  <i class="fa fa-lock icon"></i>
-</div>
-                <button type="submit">LOGIN</button>
-            </form>
-        </div>
-        
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-</body>
+                                                                                                    <div class=" d-flex justify-content-center col-10 mx-auto">
+                                                                                                                 <button type="submit" name =""class="btn btn-dark">Login</button>
+                                                                                                    </div>
+                                                             
+                                                                                                </form>
+ </div>
 
-</html>
+ 

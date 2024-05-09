@@ -105,30 +105,27 @@ if ($_SERVER['REQUEST_METHOD']='POST') {
                   }  else {
   
     $error_msg = "Password does not match";
-    $_SESSION['error'] = $error_msg;
-    header("Location: ../Admin/AdminDashboard.php");
+
   }
 
 } else {
   
   $error_msg = "Password must be equal or greater than 8 charaacters.";
-  $_SESSION['error'] = $error_msg;
-  header("Location: ../Admin/AdminDashboard.php");
+
  }
 
 }
 else {
   
 $error_msg = "Please fill all the fieds.";
-$_SESSION['error'] = $error_msg;
-header("Location: ../Admin/AdminDashboard.php");
+
 }
 }
-else {
-  
+else { 
 $error_msg = "Failed to add trainee.";
+
+}
 $_SESSION['error'] = $error_msg;
 header("Location: ../Admin/AdminDashboard.php");
-}
 
 ?>

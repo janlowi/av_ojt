@@ -11,6 +11,33 @@ include '../Layouts/main-user.php';
 <div class="content-wrapper">
     <!-- Content -->
     <!-- Layout container -->
+
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #ddd;
+        }
+    </style>
     <div class="layout-page">
         <div class="container-xxl flex-grow-1 container-p-y">
             <div class="row">
@@ -36,44 +63,52 @@ include '../Layouts/main-user.php';
                         WHERE us.id='$user_id'
                         AND event_type IN ('In', 'Out')
                         ORDER BY timestamp";
-                    
 
-                        
+
                         $query = mysqli_query($connect, $sql);
                         $prev_row = null;
+                        $totalHours = 0; // Initialize total hours variable
+
                         if ($query && mysqli_num_rows($query) > 0) {
-                            
+
                             while ($row = mysqli_fetch_assoc($query)) {
-                              
                                 $date = date('Y-m-d', strtotime($row['timestamp']));
-                                $event_type=$row['event_type'];
-                                $today = date("D", strtotime($row['timestamp'])); 
+                                $event_type = $row['event_type'];
+                                $today = date("D", strtotime($row['timestamp']));
                                 $time = date('H:i:s', strtotime($row['timestamp']));
+
+                                // Add the total hours for each record to the total
+                                $totalHours += $row['total_hours'];
+
+                                // Check if the previous row exists and if the current row's event type is different from the previous one
                                 if ($prev_row && $prev_row['event_type'] !== $event_type && $date === date('Y-m-d', strtotime($prev_row['timestamp']))) {
-                                ?>
-                                 <tr>
-                                <td><?php echo $prev_row['last_name'] . ", " . $prev_row['first_name'] . " " . $prev_row['middle_name']; ?></td>
-                                <td><?php echo $prev_row['department']; ?></td>
-                                <td><?php echo $date; ?></td>
-                                <td><?php echo $today; ?></td>
-                                <?php if ($prev_row['event_type'] === 'In') { ?>
-                                    <td><?php echo date('H:i:s', strtotime($prev_row['timestamp'])); ?></td>
-                                    <td><?php echo $time; ?></td>
-                                <?php } else { ?>
-                                    <td><?php echo $time; ?></td>
-                                    <td><?php echo date('H:i:s', strtotime($prev_row['timestamp'])); ?></td>
-                                <?php } ?>
-                            
-                                <td><?php echo $row['total_hours'];?></td>
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $prev_row['last_name'] . ", " . $prev_row['first_name'] . " " . $prev_row['middle_name']; ?></td>
+                                        <td><?php echo $prev_row['department']; ?></td>
+                                        <td><?php echo $date; ?></td>
+                                        <td><?php echo $today; ?></td>
+                                        <?php if ($prev_row['event_type'] === 'In') { ?>
+                                            <td><?php echo date('H:i:s', strtotime($prev_row['timestamp'])); ?></td>
+                                            <td><?php echo $time; ?></td>
+                                        <?php } else { ?>
+                                            <td><?php echo $time; ?></td>
+                                            <td><?php echo date('H:i:s', strtotime($prev_row['timestamp'])); ?></td>
+                                        <?php } ?>
 
-                            </tr>
-                        <?php
+                                        <td><?php echo $row['total_hours']; ?></td>
+                                    </tr>
+                                <?php
+                                }
+                                $prev_row = $row;
                             }
-                            $prev_row = $row;
                         }
-                    }
 
-                   ?>
+                        ?>
+                        <tr>
+                            <td colspan="6" style="text-align: right;"><strong>Total Hours:</strong></td>
+                            <td><?php echo $totalHours; ?></td>
+                        </tr>
                     </tbody>
                 </table>
                 <!-- / Content -->

@@ -44,7 +44,7 @@ error_reporting (0);
                                </button>
                              </div>
                                                         
-                                       <div class="row">
+
                                                <div class="col-xl">
                                                <div class="card mb-4">
                                                <div class="card-body">
@@ -57,10 +57,10 @@ error_reporting (0);
                                                                                 <option value="Trainee">Trainee</option>
                                                                         </select>
                                                                         
-                                                                </div>
-                                                       <form class="row g-3" method= 'Post' action="../Php/php-add.php" id="traineeForm"  style="display:none">
+                                                                </div><br>
+                                                       <form method= 'Post' action="../Php/php-add.php" id="traineeForm"  style="display:none">
 
-
+                                                       <div class="row g-3">
                                                                 <div class="col-md-6">
                                                                        <label for="inputEmail4" class="form-label">Firstname</label>
                                                                        <input type="text" class="form-control" id="inputEmail4" name = "Firstname">
@@ -73,7 +73,6 @@ error_reporting (0);
                                                                        <label for="inputLastname" class="form-label">Lastname</label>
                                                                        <input type="text" class="form-control" id="inputLastname"name = "Lastname">
                                                                </div>
-
 
                                                                <div class="col-md-6">
                                                                        <label for="inputLastname" class="form-label">Usertype</label>
@@ -172,24 +171,20 @@ error_reporting (0);
                                                                <div class="col-md-12">
                                                                        <label for="inputZip" class="form-label">Confirm Password</label>
                                                                        <input type="password" class="form-control" id="inputZip"name = "Confirm">
-                                                               </div>
+                                                               </div><br><br>
 
                                                               
-                                              
-
                                                                 <div class=" d-grid gap-2 col-6 mx-auto">
                                                                        <button id="register-btn" type="submit" name ="traineeSubmit"class="btn btn-dark">Register</button>
                                                                </div>
                                                              
-                                                               <!-- <div class="col-md-12">
-                                                                       <label for="inputGroupFile04" class="form-label"> Profile</label>
-                                                                       <input type="file" class="form-control" id="inputGroupFile04"  aria-label="Upload" name='Profile'>
-                                                               </div> -->
-           
+                                                        </div>
                                                </form>
 
 
-                                                        <form action="../Php/php-add.php" method="post" id="adminForm" id="adminForm" style="display:none" >
+                                                        <form action="../Php/php-add.php" method="post" id="adminForm"  style="display:none"  class="row g-3">
+
+                                                        <div class="row g-3">
 
 
                                                                         <div class="col-md-6">
@@ -207,8 +202,10 @@ error_reporting (0);
                                                                         <div class="col-md-6">
                                                                        <label for="inputLastname" class="form-label">Usertype</label>
                                                                        <input type="text" class="form-control" id="inputLastname"name = "Usertype" value="Admin" readonly>
-                                                               </div>
-                                                                        <div class="col-md-6">    
+                                                                        </div>
+                                                                        
+
+                                                                        <div class="col-5">    
                                                                         <label for="usertype" class="form-label">Department</label>
                                                                         <select name="Department" id="usertype" class="form-select">
                                                                                 <option value="IT">IT</option>
@@ -220,13 +217,14 @@ error_reporting (0);
 
                                                                         </select>
                                                                         </div>
-                                                                        <div class="col-md-6">    
-                                                                        <select name="Status" id="status" class="form-select" hidden>
+
+                                                                        <div class="col">    
+                                                                        <select name="Status" id="status" class="form-select " hidden>
                                                                                 <option value="Active" selected >Active</option>
                                                                                 <option value="Deactivated">Deactivated</option>
                                                                         </select>
                                                                         </div>
-                                                                        <div class="col-md-4">
+                                                                        <div class="col-md-6">
                                                                         <label for="Office" class="form-label">Office Assigned</label>
                                                                         <select name="Office" id="office" class="form-select">
                                                                                 <option value="Tayud">Tayud Office</option>
@@ -261,14 +259,17 @@ error_reporting (0);
                                                                         <label for="inputZip" class="form-label">Confirm Password</label>
                                                                         <input type="password" class="form-control" id="inputZip"name = "Confirm">
                                                                         </div>
-                                                                        <div class=" d-grid gap-2 col-6 mx-auto">
-                                                                        <button id="register-btn" type="submit" name ="adminSubmit"class="btn btn-dark">Register</button>
+                                                                        <div>
+                                                                        <div class=" d-grid gap-2 col-6 mx-auto ">
+                                                                        <button id="register-btn" type="submit" name ="adminSubmit"class="btn btn-dark ">Register</button>
                                                                         </div>  
+                                                                        </div>
+                                                                </div>
                                                         </form>
 
                                             </div>
                                        </div>
-                                    </div>
+
                                </div>  
 
                              <div class="modal-footer">
@@ -461,16 +462,29 @@ error_reporting (0);
                         <td><?= $row ['email']; ?></td>
                         <td><?= $row ['password']; ?></td>
                         <td><?= $row ['user_type']; ?></td>
-                       <td><span class="badge bg-label-primary me-1"><?= $row ['status']; ?></span></td>
-                       <td>
-                            <div class="menu">
-                              <a class="item" href="../Admin/Update.php? update=<?= $row ['id']; ?>"
-                                ><i class='bx bx-edit'></i></a
+                       <td><?php  
+                            $status = $row ['status'];
+                            if($status==='Active') {
+
+                                echo ' <a class="item" href="../Php/php-status.php? deactivate='.$row['id'].'"
+                                ><button class= "btn btn-danger">Deactivate</button></i></a
+                              > ';
+                            }elseif($status==='Deactivated'){
+                                echo ' <a class="item" href="../Php/php-status.php? activate= '.$row['id'].'"
+                                ><button class= "btn btn-success">Acivate</button></i></a
+                              > ';
+                            }else{
+                                echo ' <a class="item" href="../Php/php-status.php? deactivate='.$row['id'].'"
+                                ><button class= "btn btn-danger">Deactivate</button></i></a
+                              > ';
+                            }
+                            ?>
+                            </td>
+                                <td>
+                            <a class="item" href="../Admin/Update.php? update=<?= $row ['id']; ?>"
+                                ><button class= "btn btn-info">Update</button></i></a
                               >
-                              <a class="item" href="javascript:void(0);"
-                                ><i class="bx bx-trash me-2"></i></a
-                              >
-                            </div>
+
 
                         </td>
                       </tr> 
@@ -484,75 +498,3 @@ error_reporting (0);
               </div>
               <!--/ Bootstrap Dark Table -->
 
-
-               <!-- toast -->
-   
-        <?php
-
-if(isset($_SESSION['success'])){
-
-
-?>
-    <div
-    class="bs-toast toast fade show toast-placement-ex m-2 bottom-0 end-0 bg-success"
-              role="alert"
-              aria-live="assertive"
-              aria-atomic="true">
-              <div class="toast-header">
-                <i class="bx bx-bell me-2"></i>
-                <div class="me-auto fw-medium">Success</div>
-                <small>11 mins ago</small>
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-              </div>
-              <div class="toast-body">
-               <?= $_SESSION['success'] ?>
-              </div>
-            </div>
-<?php
-    unset($_SESSION['success']);
-}
-?>
-
-    <?php
-
-    if(isset($_SESSION['error'])){
-
-
-    ?>
-        <div
-        class="bs-toast toast fade show toast-placement-ex m-2 bottom-0 end-0 bg-danger"
-                  role="alert"
-                  aria-live="assertive"
-                  aria-atomic="true">
-                  <div class="toast-header">
-                    <i class="bx bx-bell me-2"></i>
-                    <div class="me-auto fw-medium">Error</div>
-                    <small>11 mins ago</small>
-                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                  </div>
-                  <div class="toast-body">
-                  <?= $_SESSION['error'] ?>
-                  </div>
-                </div>
-    <?php
-        unset($_SESSION['error']);
-    }
-    ?>
-
-
-    <!-- /toast -->
-                                <!-- center layout -->
-                                </div>
-                  </div>
-                </div>
-
-            <!-- / Content -->
-            <div class="content-backdrop fade"></div>
-          <!-- </div> -->
-        </div>
-          <!-- Content wrapper -->
-
-
-
-
-   
