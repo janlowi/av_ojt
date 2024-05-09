@@ -72,7 +72,7 @@ if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']===true ){
             font-size: 20px;
             text-align: center;
             color: white;
-            margin-top: auto; /* Move to the bottom */
+            margin-top: 30px; /* Move to the bottom */
         }
  
         .abisc-container p {

@@ -40,7 +40,7 @@
                 </li>
 
                 <li class="menu-item active mb-3">
-                  <a href="../Timesheet/display.php" class="menu-link">
+                  <a href="../Timesheet/Display.php" class="menu-link">
                     <div data-i18n="Notifications">Attendance Record</div>
                   </a>
                 </li>
