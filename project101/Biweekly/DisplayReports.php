@@ -33,7 +33,7 @@ include '../Layouts/main-user.php';
 
 
         <div class="table-responsive text-nowrap">
-        <table class="table table-bordered border-secondary ">
+        <table class="table table-bordered border-secondary " id="dataTable">
           <thead class="border-bottom">
 
                                             <tr>
@@ -313,8 +313,11 @@ include '../Layouts/main-user.php';
                 </div>
                 </div>
             </div>
-
-
+                        <!-- filter data -->
+                        <script>
+                        new DataTable('#dataTable');
+                        </script>
+                        <!-- filter data -->
 
                 <?php
 
