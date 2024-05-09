@@ -1,27 +1,33 @@
 <?php
 
-// Settings
+$subject = "Email Notification";
+$message = "Thank you for your email";
+$message = "Your Registering details are as follows:";
+$message .= "<br><br>";
+$message .= "<table border='1'>";
+$message .= "<tr><td>Name</td><td>".$_POST['name']."</td></tr>";
+$message .= "<tr><td>Email</td><td>".$_POST['email']."</td></tr>";
+$message .= "</table>";
 
+$from = $_POST['email'];
+$to =  array('my_address@example.com', 'my_address2@example.com', $from);
+$lp = "notification@example.com";
 
+$headers = "MIME-Version: 1.0\r\n"; 
 
-$mail = new PHPMailer;
-$mail = isSMTP ();
-$mail->Host       = "mail.example.com";    
-$mail->SMTPDebug  = 0;                     
-$mail->SMTPAuth   = true;                  
-$mail->Port       = 25;                   
-$mail->Username   = "username";            
-$mail->Password   = "password";
-$mail-> SMTPSecure = 'ssl';             
+$headers .= "Content-type: text/html; charset=utf-8\r\n"; 
 
-// Content
-$mail->setFrom('domain@example.com');   
-$mail->addAddress('receipt@domain.com');
+$headers .=  'from: '.$lp .'' . "\r\n" .
 
-$mail->isHTML(true);                       
-$mail->Subject = 'Here is the subject';
-$mail->Body    = 'This is the HTML message body <b>in bold!</b>';
-$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+            'Reply-To: '.$lp.'' . "\r\n" .
 
-$mail->send();
+            'X-Mailer: PHP/' . phpversion();
+
+foreach($to as $row)
+{
+   mail($row,$subject,$message,$headers);
+}
+
+echo "Mail Sent.";
+die;
 ?>
