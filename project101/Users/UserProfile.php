@@ -38,9 +38,9 @@ include '../Layouts/main-user.php';
                                                                                           $user_id=$_SESSION['user_id'];
                                                                                           $res = mysqli_query($connect, "SELECT profile
                                                                                                       
-                                                                                                          FROM trainees
+                                                                                                          FROM users
                                                                                                           
-                                                                                                          WHERE user_id='$user_id'
+                                                                                                          WHERE id='$user_id'
                                                                                                           
                                                                                                       ");
                                                                                           while($row = mysqli_fetch_assoc($res)) {

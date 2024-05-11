@@ -406,7 +406,7 @@ error_reporting (0);
                          ADD USER
                        </button>
                        
-                <h5 class="card-header">Users</h5>
+                <h5 class="card-header">Trainees</h5>
                 <div class=" table-responsive    text-nowrap">
                   <table class="table table-dark">
                     <thead>
@@ -418,7 +418,7 @@ error_reporting (0);
                     <th scope="col">Department</th>
                     <th scope="col">Office</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Password</th>
+                    <!-- <th scope="col">Password</th> -->
                     <th scope="col">Usertype</th>
                     <th scope="col">Status</th>
                     <th scope="col">Operation</th>
@@ -460,7 +460,7 @@ error_reporting (0);
                         <td><?= $row ['department']; ?></td>
                         <td><?= $row ['office_assigned']; ?></td>
                         <td><?= $row ['email']; ?></td>
-                        <td><?= $row ['password']; ?></td>
+                        <!-- <td><?= $row ['password']; ?></td> -->
                         <td><?= $row ['user_type']; ?></td>
                        <td><?php  
                             $status = $row ['status'];

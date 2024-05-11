@@ -29,6 +29,12 @@
                   </a>
                 </li>
                 <li class="menu-item active mb-3">
+                  <a href="../Timesheet/DisplayAdmin.php" class="menu-link">
+                    <div data-i18n="Analytics">Attendance Record</div>
+                  </a>
+                </li>
+
+                <li class="menu-item active mb-3">
                   <a href="../Biweekly/AllReports.php " class="menu-link">
                     <div data-i18n="Analytics">Weekly Reports</div>
                   </a>

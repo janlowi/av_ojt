@@ -9,7 +9,50 @@ include '../Layouts/main-user.php';
  include '../Php/db_connect.php';
 
 ?>     
+<style>
+            .dt-layout-row .dt-paging, .dt-info {
+                position: relative;
+                display: flex;
+                flex-direction: row-reverse;
+            }
+           
+        .dt-length{
+            position: relative;
+            display: flex;
+            flex-direction: row-reverse;
+            top: -10px;
 
+        }
+        .dt-length .dt-input{
+            padding: 0 20px 0 58px;
+            border: none;
+            outline: none;
+
+        }
+         
+        .dt-search {
+            position: relative;
+            display: flex;
+            justify-content: flex-end;
+            border: none;
+            outline:none;
+
+        }
+        .dt-search .dt-input{
+            position: relative;
+           height: 30px;
+           outline: none;
+           border:none;
+           padding: 0 0 10px 5px;
+
+
+        }
+       
+      
+    
+
+
+</style>
 <!-- Content wrapper -->
 <div class="content-wrapper">
   <!-- Content --> 
@@ -32,7 +75,7 @@ include '../Layouts/main-user.php';
 
 
 
-        <div class="table-responsive text-nowrap">
+        <div class="table-responsive text-nowrap  pt-5">
         <table class="table table-bordered border-secondary " id="dataTable">
           <thead class="border-bottom">
 
@@ -313,12 +356,7 @@ include '../Layouts/main-user.php';
                 </div>
                 </div>
             </div>
-                        <!-- filter data -->
-                        <script>
-                        new DataTable('#dataTable');
-                        </script>
-                        <!-- filter data -->
-
+                       
                 <?php
 
 if(isset($_SESSION['success'])){
@@ -430,3 +468,8 @@ if(isset($_SESSION['saved_success'])){
 </div>
 
 
+    <!-- filter data -->
+                        <script>
+                        new DataTable('#dataTable');
+                        </script>
+                        <!-- filter data -->

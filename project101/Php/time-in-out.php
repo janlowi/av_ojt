@@ -47,7 +47,7 @@ $event_type = $_POST['Time_In'];
 
         if ($row) {
             $current_time = time();
-            $timeIn = strtotime(($row['timestamp']));
+            $timeIn = strtotime($row['timestamp']);
             $timeOut = $current_time;
 
             // echo "Time In: " . date('Y-m-d H:i:s', $timeIn) . "<br>";
@@ -89,4 +89,9 @@ $event_type = $_POST['Time_In'];
             header("location: ../Users/UserDashboard.php");
             exit;
         }
-    }
+    } 
+
+    $end_of_day = strtotime('tomorrow 00:00:00');
+$query = "SELECT even FROM time_attendance WHERE clock_out IS NULL AND DATE(clock_in) = CURDATE()";
+$result = mysqli_query($connection, $query);
+?>

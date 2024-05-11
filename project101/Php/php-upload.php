@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         // Update user profile in the database
-        $sql = "UPDATE trainees SET profile = '$file_name' WHERE user_id = '$user_id'";
+        $sql = "UPDATE users SET profile = '$file_name' WHERE id = '$user_id'";
         $query = mysqli_query($connect, $sql);
 
         // Move uploaded file to destination folder
