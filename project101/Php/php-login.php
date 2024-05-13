@@ -2,6 +2,7 @@
 session_start();
 include 'db_connect.php';
 
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     
     $email = $_POST['email'];
@@ -20,44 +21,42 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                           t.first_name
                     FROM users u
                     LEFT JOIN trainees t ON u.id = t.user_id
-                    WHERE u.email = ?";
+                    WHERE u.email = '$email'";
         
-        $stmt = mysqli_prepare($connect, $query);
-        mysqli_stmt_bind_param($stmt, "s", $email);
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
+        $sql = mysqli_query($connect, $query);
+
         
-        if ($row = mysqli_fetch_assoc($result)) {
+        if ($row = mysqli_fetch_assoc($sql)) {
             $hashed_password = $row['password'];
             $status = $row['status'];
+            $_SESSION['email'] = $row['email'];
+
 
             if (password_verify($password, $hashed_password)) {
                 if ($status == "Deactivated") {
                     $error_msg = "Your account has been deactivated";
-                } elseif ($status === "Active") {
-                    $_SESSION['email'] = $row['email'];
-                    $_SESSION['user_id'] = $row['id'];
-                    $_SESSION['usertype'] = $row['user_type'];
-                    $_SESSION['profile'] = !empty($row['profile']) ? $row['profile'] : '../Assets/img/avatars/av.png';
-
+                } elseif($row['status']=="Active")  {
+                    // Redirect based on user type
                     if ($_SESSION['usertype'] === 'Admin') {
                         $_SESSION['Admin'] = true;
+                        
+    
                     } elseif ($_SESSION['usertype'] === 'Trainee') {
-                        $_SESSION['Trainee'] = true;
-                        $_SESSION['firstname'] = $row['first_name'];
-                    } 
+                    $_SESSION['Trainee'] = true;
+                    $_SESSION['firstname'] = $row['first_name'];
 
-                    $_SESSION['logged_in'] = true;
-                    
-                    if ($_SESSION['usertype'] === 'Admin') {
+    
+                    } 
+                    $_SESSION['logged_in']=true;
+                    if($_SESSION['usertype'] === 'Admin'){
                         header('location: ../Admin/AdminDashboard.php');
                         exit();
-                    } elseif ($_SESSION['usertype'] === 'Trainee') {
+                    }elseif($_SESSION['usertype'] === 'Trainee') {
                         header('location: ../Users/UserDashboard.php');
                         exit();
                     }
                 } 
-            } else {
+            }  else {
                 $error_msg = "Incorrect password.";
             }
         } else {

@@ -1,7 +1,7 @@
 
 <?php
 session_start();
-include 'authenticate.php';
+
 include 'db_connect.php';
 
 require '../vendor/autoload.php';

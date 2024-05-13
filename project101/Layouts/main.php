@@ -1,6 +1,7 @@
 <?php
 
 include '../Php/db_connect.php';
+
 ?>
 
 
@@ -18,7 +19,9 @@ include '../Php/db_connect.php';
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-
+      <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
       <title><?php echo $title; ?></title>
 
     <meta name="description" content="" />
@@ -85,6 +88,9 @@ include '../Php/db_connect.php';
     <script src="../assets/vendor/js/bootstrap.js"></script>
     <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
     <script src="../assets/vendor/js/menu.js"></script>
+    <script src="../Assets/js/jquery.js"></script>
+    <script src="../Assets/js/datatables.js"></script>
+
 
     <!-- endbuild -->
 

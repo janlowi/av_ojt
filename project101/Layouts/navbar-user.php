@@ -2,7 +2,7 @@
 
 include 'main-user.php';
 include '../Php/db_connect.php';
-include '../Php/authenticate.php';
+
 
 ?>
 

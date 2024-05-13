@@ -1,10 +1,11 @@
 <?php
 session_start();
 
-include "authenticate.php";
-if (isset($_SESSION['Admin']) ||isset($_SESSION['Trainee'])   || isset($_SESSION['email'])  || isset($_SESSION['user_id']) ) {
+
+if (isset($_SESSION['logged_in']) ||isset($_SESSION['logged_in'])===true   || isset($_SESSION['Admin'])  || isset($_SESSION['Trainee']) ) {
     // Redirect user to login page if not logged in
     session_destroy();
+
 }
 header("Cache-Control: no-cache, no-store, must-revalidate");
 header("Pragma: no-cache");
@@ -15,8 +16,3 @@ header("Location: ../Login/index.php");
 exit();
 ?>
 
-<script>
-    if (window.history.replaceState) {
-        window.history.replaceState(null, null, window.location.href);
-    }
-</script>

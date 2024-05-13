@@ -1,5 +1,5 @@
 <?php   
-
+session_start();
 $title="Time Tracking System";
 include '../Php/authenticate.php';
 include '../Layouts/main-user.php'; 

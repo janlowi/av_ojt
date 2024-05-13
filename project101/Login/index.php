@@ -1,23 +1,24 @@
 <?php 
 session_start();
 $title= "Log in";
-
 include "../Layouts/main.php";
-?>
-<?php 
-if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']===true ){
-    if(isset($_SESSION['Admin'])){
-        header('location: ../Admin/AdminDashboard.php');
 
-        exit();
-    }elseif(isset($_SESSION['Trainee'])) {
-        header('location: ../Users/UserDashboard.php');
-        exit();
 
-    }
-}
 
 ?>
+
+<?php if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true ){
+ 
+ if(isset($_SESSION['Admin'])){
+     header('location: ../Admin/AdminDashboard.php');
+     exit();
+ }
+
+ elseif(isset($_SESSION['Trainee'])) {
+     header('location: ../Users/UserDashboard.php');
+     exit();
+ }
+} ?> 
     <style>
         body {
             position: relative;
@@ -211,5 +212,6 @@ if(isset($_SESSION['logged_in']) && $_SESSION['logged_in']===true ){
                                                              
                                                                                                 </form>
  </div>
+
 
  

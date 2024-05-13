@@ -2,7 +2,7 @@
 
 session_start();
 include 'db_connect.php';
-include 'authenticate.php';
+
 ?>
 <?php
 if(isset($_GET['deactivate'])){
