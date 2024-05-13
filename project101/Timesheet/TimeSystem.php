@@ -1,9 +1,6 @@
 <?php   
 session_start();
-if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
-    header("Location: ../Login/index.php");
-    exit();
-}
+include '../Php/authenticate.php';
 $title="Time Tracking System";
 include '../Layouts/main-user.php'; 
  include '../Php/db_connect.php';
