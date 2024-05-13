@@ -1,7 +1,16 @@
 <?php 
 session_start();
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header("Location: ../Login/index.php");
+    exit();
+}elseif($_SESSION['Admin']){
+        
+}elseif($_SESSION['Trainee']) {
+        header("Location: ../Users/UserDashboard.php");
+        exit();
+}
+include '../Php/php-authenticate.php';
 $title="Admin Dashboard";
-include '../Php/authenticate.php';
 include '../Layouts/main.php'; 
  include '../Layouts/sidebar.php';
  include '../Layouts/navbar.php';

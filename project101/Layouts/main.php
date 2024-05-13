@@ -1,7 +1,7 @@
-<?php
-
+<?php 
+ob_start();
+include '../Php/php-authenticate.php';
 include '../Php/db_connect.php';
-
 ?>
 
 
@@ -110,10 +110,7 @@ include '../Php/db_connect.php';
   <!-- toast -->
    
   <?php
-
 if(isset($_SESSION['success'])){
-
-
 ?>
     <div
     class="bs-toast toast fade show toast-placement-ex m-2 bottom-0 end-0 bg-success"
@@ -132,9 +129,9 @@ if(isset($_SESSION['success'])){
             </div>
 <?php
     unset($_SESSION['success']);
+
 }
 ?>
-
     <?php
 
     if(isset($_SESSION['error'])){
@@ -158,8 +155,8 @@ if(isset($_SESSION['success'])){
                 </div>
     <?php
         unset($_SESSION['error']);
+
+
     }
     ?>
-
-
     <!-- /toast -->

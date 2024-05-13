@@ -1,8 +1,7 @@
 <?php
-
+ob_start();
+include '../Php/php-authenticate.php';
 include '../Php/db_connect.php';
-
-
 ?>
 
 

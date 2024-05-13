@@ -1,9 +1,11 @@
 <?php 
 session_start();
-
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header("Location: ../Login/index.php");
+    exit();
+}
 $title="Trainees";
 include '../Php/authenticate.php';
-
 include '../Layouts/main.php'; 
  include '../Layouts/sidebar.php';
  include '../Layouts/navbar.php';
@@ -247,6 +249,7 @@ error_reporting (0);
                                         </div>
                                 <?php
                                   unset($_SESSION['success']);
+                                  
                       }
                     ?>
 
@@ -360,14 +363,10 @@ error_reporting (0);
                   </div>
                 </div>
 
-
             <!-- / Content -->
             <div class="content-backdrop fade"></div>
           </div>
         </div>
           <!-- Content wrapper -->
-
-
-
 
    <script src="../Assets/js/tables-datatables-advanced.js"></script>

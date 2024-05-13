@@ -38,9 +38,9 @@ include '../Layouts/main-user.php';
                                                                                           $user_id=$_SESSION['user_id'];
                                                                                           $res = mysqli_query($connect, "SELECT profile
                                                                                                       
-                                                                                                          FROM users
+                                                                                                          FROM trainees
                                                                                                           
-                                                                                                          WHERE id='$user_id'
+                                                                                                          WHERE user_id='$user_id'
                                                                                                           
                                                                                                       ");
                                                                                           while($row = mysqli_fetch_assoc($res)) {
@@ -48,7 +48,7 @@ include '../Layouts/main-user.php';
                                                                                               ?>
                                                 <figure class="figure">                                   
                                                 <img class="card-img " src="../assets/img/avatars/<?php echo $row['profile']; ?>" alt="Card image cap" />
-                                                <figcaption class="figure-caption">.</figcaption>
+                                                <figcaption class="figure-caption">A caption for the above image.</figcaption>
                                                
                                           
                                               </figure>
@@ -65,7 +65,7 @@ include '../Layouts/main-user.php';
                                                     Cookie topping caramels jujubes gingerbread. Lollipop apple pie cupcake candy canes cookie ice
                                                     cream. Wafer chocolate bar carrot cake jelly-o.
                                                   </p> -->
-       
+                                                  <div class="card-footer"><div class="position-relative">
                                                         <button
                                                         type="button"
                                                         class="btn btn-dark"
@@ -73,7 +73,7 @@ include '../Layouts/main-user.php';
                                                         data-bs-target="#modalProfile">
                                                         Upload Picture
                                                       </button>
-
+                                                          </div>
                                                 </div>
                                                 
                                               </div>
@@ -406,7 +406,7 @@ include '../Layouts/main-user.php';
                                                                     <div class="toast-header">
                                                                       <i class="bx bx-bell me-2"></i>
                                                                       <div class="me-auto fw-medium">Success</div>
-                                                                      <small></small>
+                                                                      <small>11 mins ago</small>
                                                                       <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
                                                                     </div>
                                                                     <div class="toast-body">
@@ -432,7 +432,7 @@ include '../Layouts/main-user.php';
                                                                         <div class="toast-header">
                                                                           <i class="bx bx-bell me-2"></i>
                                                                           <div class="me-auto fw-medium">Error</div>
-                                                                          <small></small>
+                                                                          <small>11 mins ago</small>
                                                                           <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
                                                                         </div>
                                                                         <div class="toast-body">

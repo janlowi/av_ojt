@@ -1,10 +1,13 @@
 <?php
 session_start();
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header("Location: ../Login/index.php");
+    exit();
+}
 $title = "Attendance Record";
 include '../Php/db_connect.php';
 include '../Layouts/navbar-user.php';
 include '../Layouts/sidebar-user.php';
-include '../Php/authenticate.php';
 include '../Layouts/main-user.php';
 ?>
 <!-- Content wrapper -->

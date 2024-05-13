@@ -1,9 +1,13 @@
 <?php 
 session_start();
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header("Location: ../Login/index.php");
+    exit();
+}
 
 $title="Update";
 include '../Layouts/main.php'; 
-include '../Php/authenticate.php';
+include '../Php/php-authenticate.php';
 
  include '../Layouts/sidebar.php';
  include '../Layouts/navbar.php';

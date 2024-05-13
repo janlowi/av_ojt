@@ -1,4 +1,7 @@
-       <?php include 'main.php';
+       <?php 
+       ob_start();
+     
+       include 'main.php';
        ?>
        
        <!-- Menu -->

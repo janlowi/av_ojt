@@ -1,4 +1,8 @@
-       <?php include 'main.php';?>
+       <?php
+       ob_start();
+  
+       include 'main.php';?>
+       
        
         <!-- Menu -->
         <aside id="layout-menu" class=" layout-menu menu-vertical menu bg-menu-theme px-2 ">
