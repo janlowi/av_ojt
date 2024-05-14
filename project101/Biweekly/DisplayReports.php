@@ -28,13 +28,9 @@ include '../Layouts/main-user.php';
         <div class="card-title mb-2">
           <h5 class="m-0 me-2 text-uppercase"><?php echo $_SESSION['firstname']."'s", " ", "Response";?> </h5>
           
-        <button
-                         type="button"
-                         class="btn btn-success"
-                         data-bs-toggle="modal"
-                         data-bs-target="#modalView">
-                        View Responses
-                       </button>
+                <a href="../biweekly/viewReports.php">
+                    <butto class="btn btn-success">View Responses</button>
+                </a>
         </div>
         </div>
 
@@ -389,11 +385,10 @@ if(isset($_SESSION['saved_success'])){
 </div>
 </div>
 
-
                        <!-- Modal -->
                     <div class="modal fade" id="modalView" tabindex="-1" aria-hidden="true">
-                         <div class="modal-dialog modal-dialog-centered" role="document">
-                         <div class="modal-dialog modal-lg">
+                         <div class="modal-dialog-centered" role="document">
+                         <div class="modal-dialog modal-xl">
                          <div class="modal-content">
                          <div class="modal-header">
                          <div class="modal-body">
@@ -681,7 +676,7 @@ if(isset($_SESSION['saved_success'])){
                                             </td>
                                          
                                                     </tr> 
-                                            <?php
+                                            <?php 
 
                                                         $_SESSION['id'] = $row['id'];
                                                         $_SESSION['ojt_id'] = $row['ojt_id'];
@@ -709,3 +704,4 @@ if(isset($_SESSION['saved_success'])){
                        </div>
                      </div>
                    </div>
+                                        </div>
