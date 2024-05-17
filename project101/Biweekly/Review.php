@@ -1,8 +1,8 @@
 
 <?php
-include '../Layouts/main-user.php'; 
+session_start();
 include '../Php/authenticate.php';
-
+include '../Layouts/main-user.php'; 
 include '../Php/db_connect.php';
 
 ?>
@@ -267,27 +267,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 } 
                                 
                             ?>
-        <!-- // $query = "INSERT INTO reports (user_id, dos, doe, assigned_dept, summary, accomplishment, challenges, learnings, status) VALUES (?, ?, ?, ?, ?, ?, ?,?, ?)";
-        // $stmt = mysqli_prepare($connect, $query);
-        // mysqli_stmt_bind_param($stmt, 'issssssss', $_SESSION['user_id'], $dos, $doe, $assigned_department, $summary, $accomplishments, $challenges, $learning, $status);
-        // mysqli_stmt_execute($stmt);
-
-        // Check if the query was successful -->
-        <!-- if(mysqli_stmt_affected_rows($stmt) > 0) {
-            $_SESSION['success']= "Report submitted successfully.";
-            header("Location: ../Users/DisplayReports.php"); -->
-        <!-- } else {
-            $_SESSION['error']= "Failed to submit.";
-            header("Location: ../Users/UserDashboard.php");
-        }
-    } else {
-        // Display errors
-        foreach ($errors as $error) {
-            echo $error . "<br>";
-        }
-    }
-}
-?> -->
+<?php include '../Layouts/footer.php';?> 
 
 
 

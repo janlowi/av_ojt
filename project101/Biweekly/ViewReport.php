@@ -1,8 +1,7 @@
 <?php 
-
 session_start();
-$title="Weekly Response";
 include '../Php/authenticate.php';
+$title="Weekly Response";
 include '../Layouts/main-user.php'; 
  include '../Layouts/sidebar-user.php';
  include '../Layouts/navbar-user.php';

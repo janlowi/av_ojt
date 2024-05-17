@@ -81,15 +81,12 @@ include 'db_connect.php';
                     if($result==true){
                     
                     $success_msg = "Trainee Updated successfully.";
-                    $_SESSION['success'] = $success_msg;
-                    
-                    header("Location: ../Admin/AdminDashboard.php");
+                 
                     }
                     else {
     
                       $error_msg = "Password does not match";
-                      $_SESSION['error'] = $error_msg;
-                      header("Location: ../Admin/AdminDashboard.php");
+                 ;
                     
                        }    
 }

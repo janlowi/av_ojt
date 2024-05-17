@@ -1,66 +1,80 @@
-
 <?php 
-
-include '../Php/authenticate.php';
-include '../Layouts/main-user.php'; 
+include '../Layouts/main-user1.php'; 
  include '../Php/db_connect.php';
 
 
 ?>
+                       
+                                                        <canvas id="myChart"></canvas>
+                                                        <?php
+                                                        $user_id = $_SESSION['user_id'];        
+                                                        $sql_time = "SELECT SUM(total_hours) AS total_hours, tr.hours_to_render
+                                                                    FROM timesheet ts
+                                                                    INNER JOIN trainees tr ON tr.user_id = ts.user_id
+                                                                    WHERE ts.user_id = '$user_id'";
+                                                        
+                                                        $result_time = mysqli_query($connect, $sql_time);
+                                                  
+                                                        
+                                                        if ($result_time && mysqli_num_rows($result_time) > 0) {
+                                                            // Fetch the result row
+                                                            $row_time = mysqli_fetch_assoc($result_time);
+                                                            
+                                                     
+                                                            $total_hours = $row_time['total_hours'];
+                                                            $hours_to_render = $row_time['hours_to_render'];
+                                                            $totalHours = intval($total_hours);
+                                                              $hoursToRender = intval($hours_to_render);
 
+                                                       
+                                                          
+                                                        }
+                                                    ?>            
 
-                                    <div class="col-12 col-lg-8 order-2 order-md-3 order-lg-2 mb-4">
-                                                    <div class="card">
-                                                        <div class="row row-bordered g-0">
-                                                        <div class="col-md-8">
-                                                            <h5 class="card-header m-0 me-2 pb-3">Total Revenue</h5>
-                                                            <div id="totalRevenueChart" class="px-2"></div>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <div class="card-body">
-                                                            <div class="text-center">
-                                                                <div class="dropdown">
-                                                                <button
-                                                                    class="btn btn-sm btn-outline-primary dropdown-toggle"
-                                                                    type="button"
-                                                                    id="growthReportId"
-                                                                    data-bs-toggle="dropdown"
-                                                                    aria-haspopup="true"
-                                                                    aria-expanded="false">
-                                                                    2022
-                                                                </button>
-                                                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="growthReportId">
-                                                                    <a class="dropdown-item" href="javascript:void(0);">2021</a>
-                                                                    <a class="dropdown-item" href="javascript:void(0);">2020</a>
-                                                                    <a class="dropdown-item" href="javascript:void(0);">2019</a>
-                                                                </div>
-                                                                </div>
-                                                            </div>
-                                                            </div>
-                                                            <div id="growthChart"></div>
-                                                            <div class="text-center fw-medium pt-3 mb-2">62% Company Growth</div>
+                                                    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                                                    <script>
 
-                                                            <div class="d-flex px-xxl-4 px-lg-2 p-4 gap-xxl-3 gap-lg-1 gap-3 justify-content-between">
-                                                            <div class="d-flex">
-                                                                <div class="me-2">
-                                                                <span class="badge bg-label-primary p-2"><i class="bx bx-dollar text-primary"></i></span>
-                                                                </div>
-                                                                <div class="d-flex flex-column">
-                                                                <small>2022</small>
-                                                                <h6 class="mb-0">$32.5k</h6>
-                                                                </div>
-                                                            </div>
-                                                            <div class="d-flex">
-                                                                <div class="me-2">
-                                                                <span class="badge bg-label-info p-2"><i class="bx bx-wallet text-info"></i></span>
-                                                                </div>
-                                                                <div class="d-flex flex-column">
-                                                                <small>2021</small>
-                                                                <h6 class="mb-0">$41.2k</h6>
-                                                                </div>
-                                                            </div>
-                                                            </div>
-                                                        </div>
-                                                        </div>
-                                                    </div>
-                                                    </div>
+                                                        const totalHours = <?php echo json_encode($totalHours); ?>;
+                                                        const hoursToRender = <?php echo json_encode($hoursToRender); ?>;
+// console.log(totalHours, hoursToRender);
+                                                        // Calculate the remaining progress
+                                                        const remainingProgress = totalHours - hoursToRender;
+console.log(remainingProgress); 
+                                                        // Calculate the completed progress percentage
+                                                        const completedProgressPercentage = (hoursToRender / totalHours)    *100;
+console.log(completedProgressPercentage);
+                                                        // Create the doughnut chart data
+                                                        const chartData = {
+                                                            labels: ['Hours Rendered', 'Hours to be Rendered'],
+                                                            datasets: [{
+                                                                label: 'Progress',
+                                                                data: [completedProgressPercentage, 100 - completedProgressPercentage],
+                                                                backgroundColor: [
+                                                                    'rgba(75, 192, 192, 0.2)', // Completed Progress color
+                                                                    'rgba(255, 99, 132, 0.2)', // Remaining Progress color
+                                                                ],
+                                                                borderColor: [
+                                                                    'rgba(75, 192, 192, 1)',
+                                                                    'rgba(255, 99, 132, 1)',
+                                                                ],
+                                                                borderWidth: 1
+                                                            }]
+                                                        };
+
+                                                        const myChart = new Chart('myChart', {
+                                                            type: 'doughnut',
+                                                            data: chartData,
+                                                            options: {
+                                                                cutout: '80%', // Adjust the size of the hole in the middle
+                                                                animation: true, // Disable animation for a progress bar effect
+                                                                plugins: {
+                                                                    legend: {
+                                                                        display: true // Hide the legend
+                                                                    }
+                                                                }
+                                                            }
+                                                        });
+                                                    </script>
+
+                                                                
+

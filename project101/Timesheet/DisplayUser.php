@@ -1,17 +1,10 @@
 <?php
 session_start();
+include '../Php/authenticate.php';
 $title = "Attendance Record";
 include '../Php/db_connect.php';
-include '../Layouts/navbar-user.php';
-include '../Layouts/sidebar-user.php';
-include '../Php/authenticate.php';
 include '../Layouts/main-user.php';
 ?>
-<!-- Content wrapper -->
-<div class="content-wrapper">
-    <!-- Content -->
-    <!-- Layout container -->
-
     <style>
         table {
             border-collapse: collapse;
@@ -38,11 +31,8 @@ include '../Layouts/main-user.php';
             background-color: #ddd;
         }
     </style>
-    <div class="layout-page">
-        <div class="container-xxl flex-grow-1 container-p-y">
-            <div class="row">
                 <table>
-                    <thead>
+                    <thead >
                         <tr>
                             <th>Name</th>
                             <th>Department</th>
@@ -111,9 +101,5 @@ include '../Layouts/main-user.php';
                         </tr>
                     </tbody>
                 </table>
-                <!-- / Content -->
-            </div>
-        </div>
-        <!-- Content wrapper -->
-    </div>
-</div>
+  
+<?php  include '../Layouts/footer.php';?> 

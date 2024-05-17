@@ -2,17 +2,18 @@
 session_start();
 
 
-if (isset($_SESSION['logged_in']) ||isset($_SESSION['logged_in'])===true   || isset($_SESSION['Admin'])  || isset($_SESSION['Trainee']) ) {
+// unset($_SESSION['logged_in']);
     // Redirect user to login page if not logged in
+    $_SESSION = array ();
     session_destroy();
 
-}
-header("Cache-Control: no-cache, no-store, must-revalidate");
-header("Pragma: no-cache");
-header("Expires: 0");
-// Redirect the user to the login page or any other page after logout
+
+
+header("Cache-Control: no-cache, must-revalidate");
+header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 
 header("Location: ../Login/index.php");
-exit();
+
+
 ?>
 

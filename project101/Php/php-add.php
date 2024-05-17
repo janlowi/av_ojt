@@ -277,10 +277,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $error_msg = "Error adding user.";
   }
   
-  $_SESSION['error'] = $error_msg;
-  header("Location: ../Admin/AdminDashboard.php");
-  exit();
+
 
 }
+$_SESSION['error'] = $error_msg;
+header("Location: ../Admin/AdminDashboard.php");
+exit();
 
 ?>

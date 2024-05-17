@@ -1,4 +1,6 @@
-       <?php include 'main.php';
+       <?php 
+       ob_start();
+       include 'main.php';
        ?>
        
        <!-- Menu -->
@@ -46,7 +48,7 @@
                   </a>
 
                   <li class="menu-item active mb-3">
-                  <a href="../Timesheet/print.php" class="menu-link">
+                  <a href="../Timesheet/DisplayAdmin.php" class="menu-link">
                     <div data-i18n="Notifications">Attendance Record</div>
                   </a>
                 </li>
@@ -67,16 +69,17 @@
 
             <!-- Misc -->
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
-            <li class="menu-item">
+            <li class="menu-item active">
               <a
-                href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
+                href=""
                 target="_blank"
-                class="menu-link">
-                <i class="menu-icon tf-icons  bx bx-support" ></i>
-                <div data-i18n="Support">Support</div>
+                class="menu-link active ">
+                <i class='fa-solid fa-gear' style='color:#6f6e67'></i>
+                <div data-i18n="Support">Settings</div>
               </a>
             </li>
             </ul>
           </ul>
         </aside>
+        
         <!-- / Menu -->
