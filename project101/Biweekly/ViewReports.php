@@ -39,14 +39,14 @@ include '../Layouts/main.php';
                                                     </div>
 
                                                 </th>
-                                                <th scope="col">
+                                                <!-- <th scope="col">
                                                     
 
                                                     <div class="d-flex flex-column justify-content-center align-items-center">
                                                         <p class="mb-1 ">OJT ID </p>
                                                     </div>
 
-                                                </th>
+                                                </th> -->
                                                 <th scope="col">
 
                       
@@ -94,10 +94,7 @@ include '../Layouts/main.php';
                                                     </div>
 
 
-                                                    </th>
-
-                                                    
-                                                </th>
+                                            
                                                 
                                                 <th scope="col">
 
@@ -107,11 +104,6 @@ include '../Layouts/main.php';
                                                     </div>
 
 
-                                                    </th>
-
-                                                    
-                                                </th>
-                                                
                                                 <th scope="col">
 
                                                                     
@@ -120,10 +112,7 @@ include '../Layouts/main.php';
                                                     </div>
 
 
-                                                    </th>
-
-                                                    
-                                                </th>
+                                              
                                                 
                                                 <th scope="col">
 
@@ -143,12 +132,7 @@ include '../Layouts/main.php';
                                                         </div>
 
 
-                                                        </th>
-                                                                                                    
-
-                                                
-
-                                            </tr>
+                                                   
                                             
                                         </thead>
                                      
@@ -170,6 +154,8 @@ include '../Layouts/main.php';
                                             $query = mysqli_query($connect, $sql);
                                             if(mysqli_num_rows($query) > 0) {
                                                 while ($row = mysqli_fetch_assoc($query)) { ?>
+
+
                                                     <tr>
                                                         <td>
                                                             
@@ -178,14 +164,14 @@ include '../Layouts/main.php';
                                                             </div>
                                                         
                                                         </td>
-                                                        <td>
+                                                        <!-- <td>
 
                                                             <div class="d-flex flex-column justify-content-center align-items-center">
                                                                 <p class="mb-1 "> <?= $row['ojt_id']; ?></p>
                                                             </div>
                                                             </div>   
                                                         
-                                                        </td>
+                                                        </td> -->
                                                         <td>
 
                                                             <div class="d-flex flex-column justify-content-center align-items-center">
@@ -260,6 +246,7 @@ include '../Layouts/main.php';
 
                                                         
                                                             <div class="d-flex flex-column justify-content-center align-items-center d-grid gap-2">
+                                                              
                                     
                                          <?php
                                                 if( $row['status']=='Pending'){
@@ -306,6 +293,8 @@ include '../Layouts/main.php';
                                             </td>
                                          
                                                     </tr> 
+
+                                                    
                                             <?php 
 
                                                         $_SESSION['id'] = $row['id'];
@@ -332,3 +321,4 @@ include '../Layouts/main.php';
           </div>
         </div>
           <!-- Content wrapper -->
+          

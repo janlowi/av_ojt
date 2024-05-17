@@ -249,6 +249,7 @@ include '../Layouts/main-user.php';
                                          
                                                     </tr> 
                                             <?php
+                                            
 
                                                         $_SESSION['id'] = $row['id'];
                                                         $_SESSION['ojt_id'] = $row['ojt_id'];
@@ -677,7 +678,7 @@ if(isset($_SESSION['saved_success'])){
                                          
                                                     </tr> 
                                             <?php 
-
+            
                                                         $_SESSION['id'] = $row['id'];
                                                         $_SESSION['ojt_id'] = $row['ojt_id'];
                                                         $_SESSION['timestamp'] = $row['timestamp'];
