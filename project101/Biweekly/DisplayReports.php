@@ -208,7 +208,8 @@ include '../Layouts/main-user.php';
 
                                             echo'
                                             
-                                            
+                                                
+                                                 
                                                 <style>
                                                         #save_'.$row['id'].' {
                                                                 display:block;
@@ -219,6 +220,7 @@ include '../Layouts/main-user.php';
                                             }else{
                                                 echo'
                                                 <span class="badge bg-label-success me-1">Saved</span>
+                                                <button type="button" class="btn btn-primary"> View </button>
                                                 <style>
                                                         #save_'.$row['id'].' {
                                                                 display:none;
@@ -229,7 +231,21 @@ include '../Layouts/main-user.php';
                                                   
 
                                             ?>
-
+                                        </div>
+                                        <!-- <div id="results_'.$row['id'].'" style="display: none;"> -->
+                                        </div>
+                                    <!-- </td>
+<script>
+    function toggleResults(id) {
+        var resultsDiv = document.getElementById('results_' + id);
+        if (resultsDiv.style.display === "none") {
+            resultsDiv.style.display = "block";
+            // Here you can populate the resultsDiv with the data using AJAX or other methods
+        } else {
+            resultsDiv.style.display = "none";
+        }
+    }
+</script> -->
                                             <div class="d-flex flex-column justify-content-center align-items-center d-grid gap-2">
     
     

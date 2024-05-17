@@ -124,17 +124,17 @@ include '../Layouts/main.php';
 
                                                     </th>
 
-                                                    <th scope="col">
+                                                    <!-- <th scope="col">
 
                                                                                                                             
                                                         <div class="d-flex flex-column justify-content-center align-items-center">
                                                             <p class="mb-1 ">STATUS</p>
-                                                        </div>
+                                                        </div> -->
 
 
                                                    
                                             
-                                        </thead>
+                                        <!-- </thead> -->
                                      
                                             
                                             <?php 
@@ -156,6 +156,8 @@ include '../Layouts/main.php';
                                                 while ($row = mysqli_fetch_assoc($query)) { ?>
 
 
+
+                                                            
                                                     <tr>
                                                         <td>
                                                             
@@ -241,14 +243,14 @@ include '../Layouts/main.php';
                                                                 <p class="mb-1 "> <?= $row['learnings']; ?></p>
                                                             </div>
 
-                                                            <td>
+                                                            <!-- <td>
 
 
                                                         
-                                                            <div class="d-flex flex-column justify-content-center align-items-center d-grid gap-2">
+                                                            <div class="d-flex flex-column justify-content-center align-items-center d-grid gap-2"> -->
                                                               
                                     
-                                         <?php
+                                         <!-- <?php
                                                 if( $row['status']=='Pending'){
 
                                             echo'
@@ -292,7 +294,7 @@ include '../Layouts/main.php';
     
                                             </td>
                                          
-                                                    </tr> 
+                                                    </tr>  -->
 
                                                     
                                             <?php 
