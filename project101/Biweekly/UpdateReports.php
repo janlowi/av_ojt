@@ -3,28 +3,18 @@ session_start();
 include '../Php/authenticate.php';
 $title="User Dashboard";
 include '../Layouts/main-user.php'; 
- include '../Layouts/sidebar-user.php';
- include '../Layouts/navbar-user.php';
  include '../Php/db_connect.php';
 
   ?>
 
-        <!-- Content wrapper -->
-         <div class="content-wrapper">
-            <!-- Content --> 
-          <!-- Layout container -->
-          <div class="layout-page">
 
             <div class="container-xxl flex-grow-1 container-p-y">
                   <div class="row">
 
-
-
- <!-- Modal  for report-->
  
                                           <div class="modal-content">
                                             <div class="modal-header">
-                                              <h2 class="modal-title" id="modalCenterTitle">Write your weekly report.</h2>
+                                              <h2 class="modal-title" id="modalCenterTitle">Update Report.</h2>
 
                                               <a href="../Biweekly/DisplayReports.php"><button
                                                 type="button"
@@ -45,15 +35,12 @@ include '../Layouts/main-user.php';
                                                             tr.id
                                             
                                             
-                                                    FROM trainees tr, reports rp, users us
+                                                    FROM trainees tr, reports rp
 
-                                                    WHERE  us.id=rp.user_id
-                                                     AND tr.user_id=us.id 
-                                                     AND us.id='$user_id'
+                                                    WHERE rp.user_id='$user_id'
+                                                     AND tr.user_id= '$user_id'
                                                      AND rp.id='$row_id'
-                                                    
-                                                    
-                                                    
+                                                                 
                 
                                             "; 
                                             
@@ -62,7 +49,7 @@ include '../Layouts/main-user.php';
                                             if(mysqli_num_rows($query) > 0) {
    
                                                 while ($row = mysqli_fetch_assoc($query)) { 
-                                                    
+
                                             ?>
 
                                             <div class="row">
@@ -120,16 +107,8 @@ include '../Layouts/main-user.php';
                                             }
                                             }
                                             ?>
-
-                                                      <!-- update php -->
-
-                        <!-- right layout -->
                     </div>
                   </div>
                 </div>
 
-            <!-- / Content -->
-            <div class="content-backdrop fade"></div>
-          <!-- </div> -->
-        </div>
-          <!-- Content wrapper -->
+  <?php include '../Layouts/footer.php'; ?>

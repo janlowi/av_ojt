@@ -25,15 +25,19 @@ include '../Layouts/main-user.php';
                             
                                                                                 <?php
                                                                                           $user_id=$_SESSION['user_id'];
-                                                                                          $res = mysqli_query($connect, "SELECT profile
+                                                                                          $res = mysqli_query($connect, "SELECT us.*,
+                                                                                                                                tr.qoute,
+                                                                                                                                tr.author
                                                                                                       
-                                                                                                          FROM users
-                                                                                                          
-                                                                                                          WHERE id='$user_id'
+                                                                                                          FROM users us
+                                                                                                          INNER JOIN trainees tr ON tr.user_id = us.id
+                                                                                                          WHERE us.id='$user_id'
                                                                                                           
                                                                                                       ");
                                                                                           while($row = mysqli_fetch_assoc($res)) {
                                                                                             $_SESSION['profile']=$row['profile'];
+                                                                                            $_SESSION['qoute']=$row['qoute'];
+                                                                                            $_SESSION['author']=$row['author'];
                                                                                               ?>
                                                 <figure class="figure">                                   
                                                 <img class="card-img " src="../assets/img/avatars/<?php echo $row['profile']; ?>" />
@@ -78,13 +82,13 @@ include '../Layouts/main-user.php';
 
      <!-- qoute    -->
       <div class="col-sm-6 col-lg-6 mt-5">
-                  <div class="card bg-primary text-white text-center p-3 justify-content-center" style="height: 20rem; width: 30rem;">
+                  <div class="card bg-dark text-white text-center p-3 justify-content-center" style="height: 20rem; width: 30rem;">
                     <figure class="mb-0 ">
                       <blockquote class="blockquote">
-                        <p>A well-known quote, contained in a blockquote element.</p>
+                        <p><?= $_SESSION['qoute']; ?>
                       </blockquote>
                       <figcaption class="blockquote-footer mb-0 text-white">
-                        Someone famous in <cite title="Source Title">Source Title</cite>
+                     <cite title="Source Title">   <?=$_SESSION['author']; ?></cite>
                       </figcaption>
                     </figure>
                   </div>
@@ -358,8 +362,11 @@ include '../Layouts/main-user.php';
                                                                   <div class="card-body">
                                                             <form method="POST" enctype="multipart/form-data" action="../Php/php-upload.php ">
                                                               <input type="file" name="image" class="form-control"/>
-                                                              <input type="text" name="qoute" class="form-control"/>
-                                                              <input type="text" name="author" class="form-control"/>
+                                                              <label for="qoute">Phrase</label>
+                                                     
+                                                              <input type="text" name="qoute" class="form-control" id= "qoute"/>
+                                                              <label for="author">Author</label>
+                                                              <input type="text" name="author" class="form-control" id="author"/>
                                                               <br><br>
                                                             <div class="d-grid gap-2 col-6 mx-auto">
                                                               <button type="submit" name="submit" class="btn btn-primary">Submit</button>

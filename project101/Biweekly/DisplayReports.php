@@ -3,8 +3,6 @@ session_start();
 $title="Weekly Response";
 include '../Php/authenticate.php';
 include '../Layouts/main-user.php'; 
- include '../Layouts/sidebar-user.php';
- include '../Layouts/navbar-user.php';
  include '../Php/db_connect.php';
 
 ?>     
@@ -56,14 +54,6 @@ include '../Layouts/main-user.php';
 
 
 </style>
-<!-- Content wrapper -->
-<div class="content-wrapper">
-  <!-- Content --> 
-<!-- Layout container -->
-<div class="layout-page">
-
-<div class="container-xxl flex-grow-1 container-p-y">
-        <div class="row">
 
      
 
@@ -290,9 +280,7 @@ include '../Layouts/main-user.php';
 
                                                         </td>
 
-                                                   <td>
-                                                            <div class="d-flex flex-column justify-content-center align-items-center d-grid gap-2">
-                                    
+                                                   <td>                                    
                                          <?php
                                                 if( $row['status']=='Pending'){
 
@@ -308,7 +296,11 @@ include '../Layouts/main-user.php';
                                             ';
                                             }else{
                                                 echo'
-                                                <span class="badge bg-label-success me-1">Saved</span>
+                                                <div class="d-grid gap-2">                                    
+                                                    <span class="badge bg-label-success me-1">Saved</span>
+                                                    <button class="btn btn-info" type="button">View</button>
+
+                                                </div>
                                                 <style>
                                                         #save_'.$row['id'].' {
                                                                 display:none;
@@ -320,21 +312,17 @@ include '../Layouts/main-user.php';
 
                                             ?>
 
-                                            <div class="d-flex flex-column justify-content-center align-items-center d-grid gap-2">
-    
-    
-                                            <a href="../Biweekly/UpdateReports.php? update_report=<?= $_SESSION['user_id'] ?>" class="btn btn-warning btn-lg row-"id='save_<?= $row['id'] ?>'>
+                                        <div class="d-grid gap-2">
+                                            <a href="../Biweekly/UpdateReports.php? update_report=<?= $row['id'] ?>" class="btn btn-warning "id='save_<?= $row['id'] ?>'>
                                             Edit
                                                 </a>
     
-                                                    <a href="../Php/php-weekly-update.php? save_report=<?= $row['id'] ?>"  class="btn btn-success btn-lg row-"  id='save_<?= $row['id'] ?>' >
+                                                    <a href="../Php/php-weekly-update.php? save_report=<?= $row['id'] ?>"  class="btn btn-success "  id='save_<?= $row['id'] ?>' >
                                                Submit
                                                     </a>
-    
-                                                
+ 
                                             </div>
-    
-    
+
                                             </td>
                                          
                                                     </tr> 
@@ -465,14 +453,10 @@ if(isset($_SESSION['saved_success'])){
 }
 ?>
 
-</div>
-</div>
-</div>
-</div>
-
 
     <!-- filter data -->
                         <script>
                         new DataTable('#dataTable');
                         </script>
                         <!-- filter data -->
+<?php include '../Layouts/footer.php'; ?>
