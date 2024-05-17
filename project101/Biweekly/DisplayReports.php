@@ -1,7 +1,7 @@
 <?php 
 session_start();
-include '../Php/authenticate.php';
 $title="Weekly Response";
+include '../Php/authenticate.php';
 include '../Layouts/main-user.php'; 
  include '../Layouts/sidebar-user.php';
  include '../Layouts/navbar-user.php';
@@ -45,6 +45,10 @@ include '../Layouts/main-user.php';
            padding: 0 0 10px 5px;
 
 
+        }
+        .dt-paging-button{
+            border: 1px solid dark;
+            border-radius: 3px
         }
        
       

@@ -1,4 +1,4 @@
-<?php 
+<?php
 ob_start();
 include '../Php/db_connect.php';
 ?>
@@ -24,7 +24,7 @@ include '../Php/db_connect.php';
       <title><?php echo $title; ?></title>
 
     <meta name="description" content="" />
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js" integrity="sha512-L0Shl7nXXzIlBSUUPpxrokqq4ojqgZFQczTYlGjzONGTDAcLremjwaWv5A+EDLnxhQzY5xUZPWLOLqYRkY0Cbw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="../assets/img/favicon/avlogo.png" />
 
@@ -59,24 +59,7 @@ include '../Php/db_connect.php';
 
 
   <body>
-    <!-- Layout wrapper -->
-    <div class="layout-wrapper layout-content-navbar">
-      
-              <!-- Layout container -->
-              <div class="layout-page">
-                  <div class="content-backdrop fade"></div>
-
-
-
-
-
-
-              </div>
-              <!-- / Layout page -->
-      <!-- Overlay -->
-      <div class="layout-overlay layout-menu-toggle"></div>
-    </div>
-    <!-- / Layout wrapper -->
+  
 
 
     <!-- Core JS -->
@@ -86,10 +69,9 @@ include '../Php/db_connect.php';
     <script src="../assets/vendor/libs/popper/popper.js"></script>
     <script src="../assets/vendor/js/bootstrap.js"></script>
     <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="../Assets/vendor/js/menu.js"></script>
+    <script src="../assets/vendor/js/menu.js"></script>
     <script src="../Assets/js/jquery.js"></script>
     <script src="../Assets/js/datatables.js"></script>
-
 
     <!-- endbuild -->
 
@@ -106,56 +88,3 @@ include '../Php/db_connect.php';
     <script async defer src="https://buttons.github.io/buttons.js"></script>
   </body>
 </html>
-  <!-- toast -->
-   
-  <?php
-if(isset($_SESSION['success'])){
-?>
-    <div
-    class="bs-toast toast fade show toast-placement-ex m-2 bottom-0 end-0 bg-success"
-              role="alert"
-              aria-live="assertive"
-              aria-atomic="true">
-              <div class="toast-header">
-                <i class="bx bx-bell me-2"></i>
-                <div class="me-auto fw-medium">Success</div>
-
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-              </div>
-              <div class="toast-body">
-               <?= $_SESSION['success'] ?>
-              </div>
-            </div>
-<?php
-    unset($_SESSION['success']);
-
-}
-?>
-    <?php
-
-    if(isset($_SESSION['error'])){
-
-
-    ?>
-        <div
-        class="bs-toast toast fade show toast-placement-ex m-2 bottom-0 end-0 bg-danger"
-                  role="alert"
-                  aria-live="assertive"
-                  aria-atomic="true">
-                  <div class="toast-header">
-                    <i class="bx bx-bell me-2"></i>
-                    <div class="me-auto fw-medium">Error</div>
-
-                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                  </div>
-                  <div class="toast-body">
-                  <?= $_SESSION['error'] ?>
-                  </div>
-                </div>
-    <?php
-        unset($_SESSION['error']);
-
-
-    }
-    ?>
-    <!-- /toast -->

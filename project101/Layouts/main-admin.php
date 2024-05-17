@@ -55,7 +55,6 @@
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
         <!-- Menu -->
- <!-- Menu -->
  <aside id="layout-menu" class=" layout-menu menu-vertical menu bg-menu-theme px-2 ">
           <div class=" bg-dark mt-2 ">
           <div class="app-brand demoh-25 d-inline-block d-flex justify-content-center mt-2">
@@ -72,34 +71,40 @@
           </div>
 
 
-
           <div class="menu-inner-shadow"></div>
           <li class="menu-header small text-uppercase"><span class="menu-header-text">Dashboard</span></li>
-      <li class="menu-item">
-        <ul class="menu-inner py-2 ">
+            <li class="menu-item">
+          <ul class="menu-inner py-1 ">
           <ul class="menu-item ">
             <li class="menu-item active mb-3">
-                  <a href="../Users/UserDashboard.php" class="menu-link ">
-                    <div data-i18n="Analytics">Dashboard</div>
+                  <a href="../Admin/AdminDashboard.php" class="menu-link ">
+                    <div data-i18n="Connections">Dashboard</div>
                   </a>
                 </li>
                 <li class="menu-item active mb-3">
-                  <a href="../Users/UserProfile.php" class="menu-link">
-                    <div data-i18n="Analytics">Profile</div>
+                  <a href="../Timesheet/DisplayAdmin.php" class="menu-link">
+                    <div data-i18n="Analytics">Attendance Record</div>
                   </a>
                 </li>
-                <li class="menu-item mb-3 active">
-                  <a href="../Biweekly/DisplayReports.php" class="menu-link">
+
+                <li class="menu-item active mb-3">
+                  <a href="../Biweekly/AllReports.php " class="menu-link">
                     <div data-i18n="Analytics">Weekly Reports</div>
                   </a>
                 </li>
-
+            
                 <li class="menu-item active mb-3">
-                  <a href="../Timesheet/DisplayUser.php" class="menu-link">
+                  <a href="../Admin/Trainees.php" class="menu-link">
+                    <div data-i18n="Analytics">Trainees</div>
+                  </a>
+
+                  <li class="menu-item active mb-3">
+                  <a href="../Timesheet/DisplayAdmin.php" class="menu-link">
                     <div data-i18n="Notifications">Attendance Record</div>
                   </a>
                 </li>
 
+                </li>
                 <li class="menu-item active mb-3">
                   <a href="pages-account-settings-notifications.html" class="menu-link">
                     <div data-i18n="Notifications">Notifications</div>
@@ -110,37 +115,26 @@
                     <div data-i18n="Connections">Connections</div>
                   </a>
                 </li>
-                
               
             </li>
 
             <!-- Misc -->
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
-            <li class="menu-item active mb-3">
+            <li class="menu-item active">
               <a
-                href="../Functions/Settings.php"
+                href=""
                 target="_blank"
-                class="menu-link ">
+                class="menu-link active ">
                 <i class='fa-solid fa-gear' style='color:#6f6e67'></i>
                 <div data-i18n="Support">Settings</div>
               </a>
             </li>
-            <li class="menu-item active mb-3">
-              <a
-                href=""
-                target="_blank"
-                class="menu-link ">
-                <i class='fa-solid fa-gear' style='color:#6f6e67'></i>
-                <div data-i18n="Support">About Us</div>
-              </a>
-            </li>
             </ul>
           </ul>
-          </div>
         </aside>
 
    <!-- Layout container -->
-   <div class="layout-page =-2">
+   <div class="layout-page">
           <!-- Navbar -->
 
           <nav
@@ -169,17 +163,38 @@
               <ul class="navbar-nav flex-row align-items-center ms-auto">
                 <!-- Place this tag where you want the button to render. -->
 
+                <!-- time -->
+                <li class="nav-item lh-7 me-5">
+                    
+                                           
+                                                      
+                                                          <div class="display-date  ">
+                                                            <span id="day">day</span>,
+                                                            <span id="daynum" >00</span>
+                                                            <span id="month" >month</span>
+                                                            <span id="year" >0000</span>
+                                                          <span  id ="currentTime">	</span>
+                                                    
+                                                          </div>
+
+                            <!-- Show current time -->
+                        <script src="../Assets/js/dateTime.js"> </script>
+                      <!-- Show current time -->
+                  </li>
+
 
                 <li class="nav-item lh-7 me-5">
                   <a
                   
-                    class="text-muted"
-                    href="../Users/UserDashboard.php"
+                    class="text-dark text-muted"
+                    href="../Admin/AdminDashboard.php"
                     
-                    ><i class="fas fa-home text-muted" style="color: dark;"></i> Home
+                    ><i class="fas fa-home  text-muted" style="color: #000;"></i> Home
                     </a>
                    
                 </li>
+
+
 
                 <li class="nav-item lh-1 me-3">
                   <a
@@ -190,57 +205,69 @@
                   >
                 </li>
 
-                   <!-- User -->
-                            <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                              <a class="nav-link dropdown-toggle hide-arrow" href="#" data-bs-toggle="dropdown">
-                              <div class="avatar avatar-online">
-                                <img src="../assets/img/avatars/<?= $_SESSION['profile']; ?>" alt class="w-px-40 h-px-40 rounded-circle" />
-                              </div>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                              <li>
-                                <a class="dropdown-item" href="#">
-                                  <div class="d-flex">
-                                    <div class="flex-shrink-0 me-3">
-                                      <div class="avatar avatar-online">
-                                        <img src="../assets/img/avatars/<?= $_SESSION['profile']; ?>" alt class="w-px-40 h-px-40 rounded-circle" />
-                                      </div>
-                                    </div>
-                                    <div class="flex-grow-1">
-                                      <span class="fw-medium d-block"><?= $_SESSION['firstname'];?></span>
-                                      <small class="text-muted"><?= $_SESSION['usertype'];?></small>
-                                    </div>
-                                  </div>
-                                </a>
-                              </li>
-                              <li>
-                                <div class="dropdown-divider"></div>
-                              </li>
-                              <li>
-                                <a class="dropdown-item" href="../Users/UserProfile.php">
-                                  <i class="bx bx-user me-2"></i>
-                                  <span class="align-middle">My Profile</span>
-                                </a>
-                              </li>
 
-                              <li>
-                                <div class="dropdown-divider"></div>
-                              </li>
-                              <li>
-                                <a class="dropdown-item" href="../Php/php-logout.php">
-                                  <i class="bx bx-power-off me-2"></i>
-                                  <span class="align-middle">Log Out</span>
-                                </a>
-                              </li>
-                            </ul>
-                          </li>
-                          <!--/ User -->  
+                   <!-- User -->
+                <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                  <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                    <div class="avatar avatar-online">
+                      <img src="../assets/img/avatars/av.png" alt class="w-px-40 h-px-40 rounded-circle" />
+                    </div>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <li>
+                      <a class="dropdown-item" href="#">
+                        <div class="d-flex">
+                          <div class="flex-shrink-0 me-3">
+                            <div class="avatar avatar-online">
+                              <img src="../assets/img/avatars/av.png" alt class="w-px-40 h-px-40 rounded-circle" />
+                            </div>
+                          </div>
+                          <div class="flex-grow-1">
+                            <span class="fw-medium d-block"><?= $_SESSION['email'];?></span>
+                            <small class="text-muted"><?= $_SESSION['usertype'];?></small>
+                          </div>
+                        </div>
+                      </a>
+                    </li>
+                    <li>
+                      <div class="dropdown-divider"></div>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="">
+                        <i class="bx bx-user me-2"></i>
+                        <span class="align-middle">My Profile</span>
+                      </a>
+                    </li>
+                    <!-- <li>
+                      <a class="dropdown-item" href="#">
+                        <i class="bx bx-cog me-2"></i>
+                        <span class="align-middle">Settings</span>
+                      </a>
+                    </li> -->
+                    <!-- <li>
+                      <a class="dropdown-item" href="#">
+                        <span class="d-flex align-items-center align-middle">
+                          <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
+                          <span class="flex-grow-1 align-middle ms-1">Billing</span>
+                          <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
+                        </span>
+                      </a>
+                    </li> -->
+                    <li>
+                      <div class="dropdown-divider"></div>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="../Php/php-logout.php">
+                        <i class="bx bx-power-off me-2"></i>
+                        <span class="align-middle">Log Out</span>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <!--/ User -->  
               </ul>
             </div>
           </nav>
-
-          <!-- / Navbar -->
-
 
           <!-- / Navbar -->
           <!-- Content wrapper -->
@@ -262,3 +289,56 @@
 
 
         
+<!-- toast -->
+   
+<?php
+if(isset($_SESSION['success'])){
+?>
+    <div
+    class="bs-toast toast fade show toast-placement-ex m-2 bottom-0 end-0 bg-success"
+              role="alert"
+              aria-live="assertive"
+              aria-atomic="true">
+              <div class="toast-header">
+                <i class="bx bx-bell me-2"></i>
+                <div class="me-auto fw-medium">Success</div>
+
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+              </div>
+              <div class="toast-body">
+               <?= $_SESSION['success'] ?>
+              </div>
+            </div>
+<?php
+    unset($_SESSION['success']);
+
+}
+?>
+    <?php
+
+    if(isset($_SESSION['error'])){
+
+
+    ?>
+        <div
+        class="bs-toast toast fade show toast-placement-ex m-2 bottom-0 end-0 bg-danger"
+                  role="alert"
+                  aria-live="assertive"
+                  aria-atomic="true">
+                  <div class="toast-header">
+                    <i class="bx bx-bell me-2"></i>
+                    <div class="me-auto fw-medium">Error</div>
+
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                  </div>
+                  <div class="toast-body">
+                  <?= $_SESSION['error'] ?>
+                  </div>
+                </div>
+    <?php
+        unset($_SESSION['error']);
+
+
+    }
+    ?>
+    <!-- /toast -->

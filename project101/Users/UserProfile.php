@@ -3,21 +3,10 @@ session_start();
 $title=$_SESSION['firstname']." ". "Profile";
 include '../Php/authenticate.php';
 include '../Layouts/main-user.php'; 
- include '../Layouts/sidebar-user.php';
- include '../Layouts/navbar-user.php';
  include '../Php/db_connect.php';
 
 
   ?>
-
-              <!-- Content wrapper -->
-              <div class="content-wrapper">
-            <!-- Content --> 
-          <!-- Layout container -->
-          <div class="layout-page">
-
-          <div class="container-xxl flex-grow-1 container-p-y">
-                  <div class="row">
 
   <div class="col-2 col-xl-12 col-md-6" >
     <div class="card h-70 p-4">
@@ -47,7 +36,7 @@ include '../Layouts/main-user.php';
                                                                                             $_SESSION['profile']=$row['profile'];
                                                                                               ?>
                                                 <figure class="figure">                                   
-                                                <img class="card-img " src="../assets/img/avatars/<?php echo $row['profile']; ?>" alt="Card image cap" />
+                                                <img class="card-img " src="../assets/img/avatars/<?php echo $row['profile']; ?>" />
                                                 <figcaption class="figure-caption">.</figcaption>
                                                
                                           
@@ -66,18 +55,18 @@ include '../Layouts/main-user.php';
                                                     cream. Wafer chocolate bar carrot cake jelly-o.
                                                   </p> -->
        
-                                                        <button
+                                                    
+
+                                                </div>
+                                                <button
                                                         type="button"
                                                         class="btn btn-dark"
                                                         data-bs-toggle="modal"
                                                         data-bs-target="#modalProfile">
-                                                        Upload Picture
+                                                        <i class='fa-solid fa-camera-retro'></i>
                                                       </button>
-
-                                                </div>
-                                                
                                               </div>
-                                              
+                                           
                                             </div>
                                             <div class="card-title mb-2">
                                             <h5 class="m-0 me-2 text-uppercase"><?php echo $_SESSION['firstname']."'s", " ", "INFORMATION";?> </h5>
@@ -369,6 +358,8 @@ include '../Layouts/main-user.php';
                                                                   <div class="card-body">
                                                             <form method="POST" enctype="multipart/form-data" action="../Php/php-upload.php ">
                                                               <input type="file" name="image" class="form-control"/>
+                                                              <input type="text" name="qoute" class="form-control"/>
+                                                              <input type="text" name="author" class="form-control"/>
                                                               <br><br>
                                                             <div class="d-grid gap-2 col-6 mx-auto">
                                                               <button type="submit" name="submit" class="btn btn-primary">Submit</button>
@@ -447,15 +438,8 @@ include '../Layouts/main-user.php';
 
                                                           <!-- /toast -->
 
+ <?php
 
-                  <!-- right layout -->
+include '../Layouts/footer.php'; 
 
-                    </div>
-                  </div>
-                </div>
-
-            <!-- / Content -->
-            <div class="content-backdrop fade"></div>
-          <!-- </div> -->
-        </div>
-          <!-- Content wrapper -->
+ ?>

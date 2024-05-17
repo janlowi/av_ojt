@@ -1,8 +1,6 @@
 <?php   
-session_start();
 include '../Php/authenticate.php';
 $title="Time Tracking System";
-include '../Layouts/main-user.php'; 
  include '../Php/db_connect.php';
   ?>
 

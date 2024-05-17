@@ -44,7 +44,7 @@
                 </li>
 
                 <li class="menu-item active mb-3">
-                  <a href="../Timesheet/Display.php" class="menu-link">
+                  <a href="../Timesheet/DisplayUser.php" class="menu-link">
                     <div data-i18n="Notifications">Attendance Record</div>
                   </a>
                 </li>
@@ -65,13 +65,22 @@
 
             <!-- Misc -->
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
-            <li class="menu-item">
+            <li class="menu-item active mb-3">
               <a
-                href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
+                href="../Functions/Settings.php"
                 target="_blank"
-                class="menu-link">
-                <i class="menu-icon tf-icons  bx bx-support" ></i>
-                <div data-i18n="Support">Support</div>
+                class="menu-link ">
+                <i class='fa-solid fa-gear' style='color:#6f6e67'></i>
+                <div data-i18n="Support">Settings</div>
+              </a>
+            </li>
+            <li class="menu-item active mb-3">
+              <a
+                href=""
+                target="_blank"
+                class="menu-link ">
+                <i class='fa-solid fa-gear' style='color:#6f6e67'></i>
+                <div data-i18n="Support">About Us</div>
               </a>
             </li>
             </ul>

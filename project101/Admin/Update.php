@@ -1,10 +1,8 @@
 <?php 
 session_start();
 $title="Update";
-include '../Layouts/main.php'; 
+include '../Layouts/main-admin.php'; 
 include '../Php/authenticate.php';
- include '../Layouts/sidebar.php';
- include '../Layouts/navbar.php';
  include '../Php/db_connect.php';
 
 
@@ -41,17 +39,6 @@ include '../Php/authenticate.php';
 
   ?>
 
-
-
-          <!-- Content wrapper -->
-          <div class="content-wrapper">
-            <!-- Content --> 
-          <!-- Layout container -->
-          <div class="layout-page">
-            <div class="container-xxl flex-grow-1 container-p-y">
-  
-
-           <!--   center layout -->
 
            <div class="card ">
            <div class="card-body">
@@ -245,22 +232,4 @@ include '../Php/authenticate.php';
                                                </form>
                                          
                         
-                                                              
-                                                       
-                                            </div>
-                                       </div>
-                                    </div>
-                               </div>  
-
-
-</div>
-</div>
-              <!-- center layout -->
-
-
-
-            <!-- / Content -->
-            <div class="content-backdrop fade"></div>
-          </div>
-        </div>
-          <!-- Content wrapper -->
+  <?php include '../Layouts/footer.php';?>                      

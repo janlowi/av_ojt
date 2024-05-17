@@ -1,17 +1,9 @@
 <?php
 session_start();
-include '../Php/authenticate.php';
 $title = "Attendance Record";
+include '../Php/authenticate.php';
 include '../Php/db_connect.php';
-include '../Layouts/navbar-user.php';
-include '../Layouts/sidebar-user.php';
-include '../Layouts/main-user.php';
-?>
-<!-- Content wrapper -->
-<div class="content-wrapper">
-    <!-- Content -->
-    <!-- Layout container -->
-
+include '../Layouts/main-admin.php'; ?>
     <style>
         table {
             border-collapse: collapse;
@@ -38,81 +30,157 @@ include '../Layouts/main-user.php';
             background-color: #ddd;
         }
     </style>
-    <div class="layout-page">
-        <div class="container-xxl flex-grow-1 container-p-y">
-            <div class="row">
-                <table>
-                    <thead>
+
+
+  
+              <div class="card ">
+        
+              <table class="table">
+                        <thead>
+                            <tr>
+                            <th scope="col">User Id</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Last Timestamp</th>
+                            <th scope="col">Handle</th>
+                            </tr>
+                        </thead>
+                     <tbody>
+                         <?php 
+                         $sql = "SELECT user_id, timestamp  
+                         FROM timesheet WHERE DATE(timestamp) = DATE_SUB(CURDATE(), INTERVAL 1 DAY )
+                         AND event_type = 'In' 
+                         AND user_id NOT IN (SELECT user_id  FROM timesheet WHERE DATE(timestamp) = DATE_SUB(CURDATE(), INTERVAL 1 DAY)  AND event_type = 'Out')";
+                         $result = mysqli_query($connect, $sql);
+                         
+                         if ($result) {
+                             // Ste 3: Process the Results
+                             if (mysqli_num_rows($result) > 0) {
+                                 echo "Users who have failed to clock out yesterday:<br>";
+
+                                
+                                 while ($row = mysqli_fetch_assoc($result)) {
+                                    $user_id = $row['user_id'];
+                                    $_SESSION['failed_to_out'] = $row['user_id'];
+                                     $yesterday_In_timestamp=$row['timestamp'];
+                                     $_SESSION['last_timestamp']  =$yesterday_In_timestamp;
+
+                                     $sql_names="SELECT * FROM trainees WHERE user_id= '$user_id'";
+                                     $result_names = mysqli_query($connect, $sql_names);
+                                     if ($result_names && mysqli_num_rows($result_names)>0 ) {
+                                        while ($row_names = mysqli_fetch_assoc($result_names)) {
+                                            $_SESSION['name']=$row_names['last_name'].','.' '.$row_names['first_name'].' '.$row_names['middle_name'];
+                        
+                         
+                                 }
+                                 }
+                                 }
+                         ?>
                         <tr>
-                            <th>Name</th>
-                            <th>Department</th>
-                            <th>Date</th>
-                            <th>Day</th>
-                            <th>Time In</th>
-                            <th>Time Out</th>
-                            <th>Hours Worked</th>
+                        <td> <?= $_SESSION['failed_to_out']; ?> </td>  
+                        <td><?=  $_SESSION['name'];?></td>     
+                         <td><?= $_SESSION['last_timestamp'];?> </td>
+
+
+                            <td>
+                                <form action="../Php/update-time.php" method="POST">
+                                <div class="d-grid gap-2 col-lg-6 mx-auto"> 
+                                <label for="logout">Update Log out time</label>    
+                                <input type="datetime-local" id="logout" name="dateNtime" required class="form-control">
+                                </div>
+                                <input type="text" value ="<?= $_SESSION['failed_to_out']; ?>" name ="failed_to_out" hidden>
+                                <input type="text" value ="<?= $_SESSION['last_timestamp']; ?>" name ="yesterday_In_timestamp" hidden>
+
+                            <div class="d-grid gap-2 col-lg-6 mx-auto">
+                               <button class="btn btn-info" name="update_time">Update</button>
+                            </div>
+                             </form>
+                        </td>
+
                         </tr>
-                    </thead>
-                    <tbody>
                         <?php
-                        $user_id = $_SESSION['user_id'];
-                        $sql = "SELECT  ts.*, us.id, us.department, tr.user_id, tr.first_name, tr.middle_name, tr.last_name
-                        FROM timesheet ts
-                        INNER JOIN users us ON ts.user_id = us.id
-                        INNER JOIN trainees tr ON tr.user_id = us.id
-                        WHERE event_type IN ('In', 'Out')
-                        ORDER BY timestamp";
-
-
-                        $query = mysqli_query($connect, $sql);
-                        $prev_row = null;
-                        $totalHours = 0; // Initialize total hours variable
-
-                        if ($query && mysqli_num_rows($query) > 0) {
-
-                            while ($row = mysqli_fetch_assoc($query)) {
-                                $date = date('Y-m-d', strtotime($row['timestamp']));
-                                $event_type = $row['event_type'];
-                                $today = date("D", strtotime($row['timestamp']));
-                                $time = date('H:i:s', strtotime($row['timestamp']));
-
-                                // Add the total hours for each record to the total
-                                $totalHours += $row['total_hours'];
-
-                                // Check if the previous row exists and if the current row's event type is different from the previous one
-                                if ($prev_row && $prev_row['event_type'] !== $event_type && $date === date('Y-m-d', strtotime($prev_row['timestamp']))) {
-                                    ?>
-                                    <tr>
-                                        <td><?php echo $prev_row['last_name'] . ", " . $prev_row['first_name'] . " " . $prev_row['middle_name']; ?></td>
-                                        <td><?php echo $prev_row['department']; ?></td>
-                                        <td><?php echo $date; ?></td>
-                                        <td><?php echo $today; ?></td>
-                                        <?php if ($prev_row['event_type'] === 'In') { ?>
-                                            <td><?php echo date('H:i:s', strtotime($prev_row['timestamp'])); ?></td>
-                                            <td><?php echo $time; ?></td>
-                                        <?php } else { ?>
-                                            <td><?php echo $time; ?></td>
-                                            <td><?php echo date('H:i:s', strtotime($prev_row['timestamp'])); ?></td>
-                                        <?php } ?>
-
-                                        <td><?php echo $row['total_hours']; ?></td>
-                                    </tr>
-                                <?php
-                                }
-                                $prev_row = $row;
-                            }
-                        }
-
+                       } else {
+                        echo "No users have failed to clock out today.";
+                    } 
+                } else {
+                    // Handle query execution error
+                    echo "Error executing query: " . mysqli_error($connect);
+                }
+                
                         ?>
-                        <tr>
-                            <td colspan="6" style="text-align: right;"><strong>Total Hours:</strong></td>
-                            <td><?php echo $totalHours; ?></td>
-                        </tr>
                     </tbody>
                 </table>
-                <!-- / Content -->
-            </div>
-        </div>
-        <!-- Content wrapper -->
+<div></div>
+
+            <div class="card">
+                <table class="table table-responsive">
+                    <thead class="bg-success">
+                      
+                        <tr>
+                            <th scope="col" class="sticky">ID</th>
+                            <th scope="col"  class="sticky">Name</th>
+                            <th scope="col"  class="sticky">Department</th>
+                     
+                            <?php 
+                             // Fetch all unique dates from the timestamp column
+                                $sql_dates = "SELECT DISTINCT DATE(timestamp) AS date FROM timesheet";
+                                $result_dates = mysqli_query($connect, $sql_dates);
+                                if ($result_dates && mysqli_num_rows($result_dates) > 0) {
+                                    while ($row_date = mysqli_fetch_assoc($result_dates)) {
+                                        echo "<th scope='col'>" . date("D M j", strtotime($row_date['date'])) . "</th>";
+                                       
+                                    }
+                                }
+                              
+                                ?>
+                            <th scope='col' class="bg-dark text-light sticky">Total</th>
+
+                            </tr> 
+                      
+                        
+                    </thead>
+                    <tbody>
+                    <?php
+                            $sql_trainees = "SELECT us.*, 
+                                        tr.first_name,
+                                        tr.last_name,
+                                        tr.middle_name,
+                                        tr.ojt_id
+                                FROM users us
+                                INNER JOIN trainees tr ON tr.user_id = us.id
+                                WHERE us.user_type = 'Trainee'";
+                                 $result_trainees = mysqli_query($connect, $sql_trainees);
+
+                                        if ($result_trainees && mysqli_num_rows($result_trainees) > 0) {
+                                            while ($row_trainee = mysqli_fetch_assoc($result_trainees)) {
+                                                $user_total_hours = 0;
+                                                echo "<tr>";
+                                                echo "<td>" . $row_trainee['ojt_id'] . "</td>";
+                                                echo "<td>" . $row_trainee['last_name'] . ", " . $row_trainee['first_name'] . " " . $row_trainee['middle_name'] . "</td>";
+                                                echo "<td>" . $row_trainee['department'] . "</td>";
+                // Fetch total hours worked by trainee for each date
+                $userId = $row_trainee['id'];
+                // echo $userId;
+                $result_dates = mysqli_query($connect, $sql_dates);
+                if ($result_dates && mysqli_num_rows($result_dates) > 0) {
+                    while ($row_date = mysqli_fetch_assoc($result_dates)) {
+                        $date = $row_date['date'];
+                        $sql_total_hours = "SELECT SUM(total_hours) AS total_hours
+                                            FROM timesheet
+                                            WHERE user_id = $userId
+                                            AND DATE(timestamp) = '$date'";
+                        $result_total_hours = mysqli_query($connect, $sql_total_hours);
+                        $total_hours_row = mysqli_fetch_assoc($result_total_hours);
+                        $user_total_hours += $total_hours_row['total_hours'];
+                        echo "<td>" . $total_hours_row['total_hours'] . "</td>";
+               
+                    }
+                }
+                echo "<td  class='bg-dark text-light'>" .$user_total_hours. "</td>";
+                echo "</tr>";
+            }
+        }
+        ?>
+                </tbody>
+                </table>
     </div>
-</div>
+<?php include '../Layouts/footer.php'; ?>

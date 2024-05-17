@@ -1,14 +1,11 @@
 <?php 
 session_start();
-include '../Php/authenticate.php';
 $title="Admin Dashboard";
-include '../Layouts/main.php'; 
- include '../Layouts/sidebar.php';
- include '../Layouts/navbar.php';
+include '../Php/authenticate.php'; 
+include '../Layouts/main-admin.php'; 
  include '../Php/db_connect.php';
 
   ?>
-   
 
 <?php
 
@@ -276,22 +273,15 @@ error_reporting (0);
                              </div>
                            </div>
                          </div>
-                       </div>
-                     </div>
-                   </div>
+                         </div>
+
                    <script src="../Assets/js/form.js"></script>
 
 
 
 
                              <!-- Content wrapper -->
-          <div class="content-wrapper">
-            <!-- Content --> 
-          <!-- Layout container -->
-          <div class="layout-page">
 
-          <div class="container-xxl flex-grow-1 container-p-y">
-                  <div class="row">
 
 
 
@@ -366,27 +356,9 @@ error_reporting (0);
                       </div>
                     </div>
      
-          </div>          
-        </div>  
-    </div>  
+      
 
 
-
-
-  
-
-          <!-- Content wrapper -->
-          <div class="content-wrapper">
-            <!-- Content --> 
-          <!-- Layout container -->
-          <div class="layout-page">
-
-            <div class="container-xxl flex-grow-1 container-p-y">
-            <div class="row">                
-
-
-
-            <!-- center layout -->
 
                 <!-- trainee table -->
                 <!-- Bootstrap Dark Table -->
@@ -494,7 +466,14 @@ error_reporting (0);
 ?>
                       </tbody>
                   </table>
-                </div>
-              </div>
-              <!--/ Bootstrap Dark Table -->
 
+              <!--/ Bootstrap Dark Table -->
+  </div>
+
+
+
+    <?php
+
+include '../Layouts/footer.php'; 
+
+ ?>
