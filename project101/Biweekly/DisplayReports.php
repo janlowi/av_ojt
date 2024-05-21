@@ -253,6 +253,7 @@ include '../Layouts/main-user.php';
                                             echo'
                                             
                                             
+                                            
                                                 <style>
                                                         #save_'.$row['id'].' {
                                                                 display:block;
@@ -275,6 +276,11 @@ include '../Layouts/main-user.php';
                                             ?>
 
                                             <div class="d-flex flex-column justify-content-center align-items-center d-grid gap-2">
+                                                
+                                           <a href="../Biweekly/UpdateReports.php? update_report=<?= $_SESSION['user_id'] ?>" class="btn btn-warning btn-lg row-"id='save_<?= $row['id'] ?>'>
+                                            Draft
+                                                </a>
+
     
     
                                             <a href="../Biweekly/UpdateReports.php? update_report=<?= $_SESSION['user_id'] ?>" class="btn btn-warning btn-lg row-"id='save_<?= $row['id'] ?>'>

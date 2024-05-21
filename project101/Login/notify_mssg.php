@@ -1,33 +1,23 @@
 <?php
+// User registration process...
 
-$subject = "Email Notification";
-$message = "Thank you for your email";
-$message = "Your Registering details are as follows:";
-$message .= "<br><br>";
-$message .= "<table border='1'>";
-$message .= "<tr><td>Name</td><td>".$_POST['name']."</td></tr>";
-$message .= "<tr><td>Email</td><td>".$_POST['email']."</td></tr>";
-$message .= "</table>";
+// Assuming you have user details like email stored in variables
+$user_email = "salgarinocharity@gmail.com";
+$user_name = "John Doe";
 
-$from = $_POST['email'];
-$to =  array('my_address@example.com', 'my_address2@example.com', $from);
-$lp = "notification@example.com";
+// Email details
+$to = $user_email;
+$subject = "Welcome to our website!";
+$message = "Dear $user_name,\n\nThank you for registering on our website. We are glad to have you with us!";
+$headers = "From: bebelynrodrigo00@gmail.com";
 
-$headers = "MIME-Version: 1.0\r\n"; 
+// Send email
+$mail_sent = mail($to, $subject, $message, $headers);
 
-$headers .= "Content-type: text/html; charset=utf-8\r\n"; 
-
-$headers .=  'from: '.$lp .'' . "\r\n" .
-
-            'Reply-To: '.$lp.'' . "\r\n" .
-
-            'X-Mailer: PHP/' . phpversion();
-
-foreach($to as $row)
-{
-   mail($row,$subject,$message,$headers);
+// Check if mail sent successfully
+if ($mail_sent) {
+    echo "Email sent successfully to $user_email";
+} else {
+    echo "Failed to send email";
 }
-
-echo "Mail Sent.";
-die;
 ?>

@@ -74,9 +74,12 @@ include '../Layouts/main-user.php';
                                                         Upload Picture
                                                       </button>
 
+                                                    
+
                                                 </div>
                                                 
                                               </div>
+                                              
                                               
                                             </div>
                                             <div class="card-title mb-2">
