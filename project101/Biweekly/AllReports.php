@@ -1,7 +1,7 @@
 <?php 
 session_start();
 
-$title="Trainees Responses";
+$title="View";
 include '../Php/authenticate.php';
 include '../Layouts/main-admin.php'; 
  include '../Php/db_connect.php';
@@ -16,7 +16,8 @@ include '../Layouts/main-admin.php';
         .dt-length{
             position: relative;
             display: flex;
-            flex-direction: row-reverse;
+            flex-direction: right;
+            padding: 10px;
 
         }
         .dt-length .dt-input{
@@ -30,6 +31,7 @@ include '../Layouts/main-admin.php';
             position: relative;
             border: none;
             outline:none;
+
 
         }
         .dt-search .dt-input{
@@ -45,7 +47,7 @@ include '../Layouts/main-admin.php';
             border: 1px solid dark;
             border-radius: 3px
         }
-        .content-wrapper {
+        .content-wrapper, .card {
             overflow-y: scroll
         }
     
@@ -54,26 +56,15 @@ include '../Layouts/main-admin.php';
 </style>
 
 <div class="col-2 col-xl-12 col-md-6" >
-    <div class="card  p-4">
+    <div class="card  p-4 " >
       <div class="card-header d-flex align-items-right justify-content-between">
         <div class="card-title mb-2">
           <h5 class="m-0 me-2 text-uppercase">Responses</h5>
         </div>
         </div>
-
-        <!-- modal responses -->
-                        <button
-                         type="button"
-                         class="btn btn-success"
-                         data-bs-toggle="modal"
-                         data-bs-target="#allResponses">
-                         View Responses
-                       </button>
-
-        <!-- modal responses -->
         
-        <div class="table-responsive-xl text-nowrap  pt-5">
-        <table class="table table-bordered border-secondary " >
+        <div class="table-responsive text-nowrap  pt-5">
+        <table class="table table-bordered border-secondary table-striped "id="dataTable" >
           <thead class="border-bottom">
 
                                             <tr>
@@ -149,9 +140,9 @@ include '../Layouts/main-admin.php';
                                             <?php 
                                             $sql = "SELECT rp.*,
                                                             tr.ojt_id,
-                                                            tr.first_name,
-                                                            tr.last_name,
-                                                            tr.middle_name
+                                                            us.first_name,
+                                                            us.last_name,
+                                                            us.middle_name
                                             
                                             
                                                     FROM trainees tr, reports rp, users us
@@ -267,17 +258,6 @@ include '../Layouts/main-admin.php';
                                                     </tr> 
                                             <?php
 
-                                                        $_SESSION['id'] = $row['id'];
-                                                        $_SESSION['ojt_id'] = $row['ojt_id'];
-                                                        $_SESSION['timestamp'] = $row['timestamp'];
-                                                        $_SESSION['assigned_dept'] = $row['assigned_dept'];
-                                                        $_SESSION['dos'] = $row['dos'];
-                                                        $_SESSION['doe'] = $row['doe'];
-                                                        $_SESSION['summary'] = $row['summary'];
-                                                        $_SESSION['accomplishment'] = $row['accomplishment'];
-                                                        $_SESSION['challenges'] = $row['challenges'];
-                                                        $_SESSION['learnings'] = $row['learnings'];
-                                                        $_SESSION['status'] = $row['status'];
                                                 }
                                             }
                                             ?>
@@ -287,280 +267,230 @@ include '../Layouts/main-admin.php';
                 </div>
             </div>
                   
-            
+<script src="../Assets/js/jquery.js"></script>
+<script src="../Assets/js/datatables.js"></script>
+<script>
+new DataTable('#dataTable');
+</script>        
 <!-- Modal -->
 
+   <!-- Contextual Classes -->
+  
+   <div class="card">
+                <div class="table-responsive text-nowrap">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>OJT ID</th>
+                        <th>Name</th>
+                        <th>Profile</th>
+                        <th>Department</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                                      
+                    <tbody class="table-border-bottom-0">
 
-
-<div class="card  p-4">
-<div class="modal fade" id="allResponses" tabindex="-1" aria-hidden="true">
-                   <div class="modal-dialog modal-fullscreen ">
-
-
-    <div class="modal-content ">
-                            
-    
-                            
-          <!-- Content wrapper -->
-          <div class="content-wrapper">
-            <!-- Content -->
-
-            <div class="container-xxl flex-grow-1 container-m-0-p-0">
-              <div class="row">
-
-              <div class="modal-header">
-                               <h2 class="modal-title" id="modalCenterTitle">Responses</h2>
-                               <button
-                                 type="button"
-                                class="btn btn-dark"
-                                 data-bs-dismiss="modal"
-                                 aria-label="Close">
-                                    Back
-                               </button>
-                            </div>
-
-
-        <div class=" table-reponsive-xxl text-nowrap" >
-        <table class="table table-bordered border-secondary" id="dataTable">
-          <thead class="border-bottom">
-
-                                            <tr >
-                                                <th scope="col">
-
-                                                    <div class="d-flex flex-column justify-content-center align-items-center">
-                                                        <p class="mb-1">OJT ID </p>
-                                                    </div>
-
-                                                </th>
-                                                <th scope="col">
-                                                    
-
-                                                    <div class="d-flex flex-column justify-content-center align-items-center">
-                                                        <p class="mb-1 "> NAME</p>
-                                                    </div>
-                                             
-
-                                                </th>
-                                            
-                                                <th scope="col">
-
-                   
-                                                    <div class="d-flex flex-column justify-content-center align-items-center">
-                                                        <p class="mb-1 ">DEPARTMENT</p>
-                                                    </div>
-                                     
-
-                                                </th>
-
-                                                <th scope="col">
-
-                   
-                                                    <div class="d-flex flex-column justify-content-center align-items-center">
-                                                        <p class="mb-1 ">START</p>
-                                                    </div>
-
-
-                                                </th>
-                                                
-                                                <th scope="col">
-
-                   
-                                                    <div class="d-flex flex-column justify-content-center align-items-center">
-                                                        <p class="mb-1 ">END</p>
-                                                    </div>
-
-
-                                                </th>
-
-                                                <th scope="col">
-
-                   
-                                                    <div class="d-flex flex-column justify-content-center align-items-center">
-                                                        <p class="mb-1 ">SUMMARY</p>
-                                                    </div>
-
-
-                                                </th>
-
-                                                <th scope="col">
-
-                   
-                                                    <div class="d-flex flex-column justify-content-center align-items-center">
-                                                        <p class="mb-1 ">ACCOMPLISHMENTS</p>
-                                                    </div>
-
-
-                                                </th>
-
-                                                <th scope="col">
-
-                   
-                                                    <div class="d-flex flex-column justify-content-center align-items-center">
-                                                        <p class="mb-1 ">CHALLENGES</p>
-                                                    </div>
-
-
-                                                </th>
-
-                                                <th scope="col">
-
-                   
-                                                    <div class="d-flex flex-column justify-content-center align-items-center">
-                                                        <p class="mb-1 ">LEARNINGS</p>
-                                                    </div>
-
-
-                                                </th>
-                                                <th scope="col">
-
-                   
-                                                    <div class="d-flex flex-column justify-content-center align-items-center">
-                                                        <p class="mb-1 ">STATUS</p>
-                                                    </div>
-
-
-                                                </th>
-
-                                            </tr>
-                                        </thead>
-                                        <tbody class="table-border-bottom-0">
-                                            <?php 
+                                             <?php 
                                             $sql = "SELECT rp.*,
                                                             tr.ojt_id,
-                                                            tr.first_name,
-                                                            tr.last_name,
-                                                            tr.middle_name
+                                                            us.first_name,
+                                                            us.last_name,
+                                                            us.middle_name,
+                                                            us.department,
+                                                            us.profile
                                             
                                             
                                                     FROM trainees tr, reports rp, users us
 
                                                     WHERE  us.id=rp.user_id 
                                                     AND us.id=tr.user_id
-                                                    AND rp.status='Saved'
                                                     
                                                     
                 
                                             "; // Fetch data from the reports table
                                             $query = mysqli_query($connect, $sql);
                                             if(mysqli_num_rows($query) > 0) {
-                                                while ($row = mysqli_fetch_assoc($query)) { ?>
-                                                    <tr>
+                                                while ($row = mysqli_fetch_assoc($query)) {     
+                                                    $defaultProfileImage = '../Assets/img/avatars/av.png';
+                                                    $profileImage = !empty($row['profile']) ? $row['profile'] : $defaultProfileImage;
+                                                   $name= $row['first_name'].' '.$row['middle_name'].' '.$row['last_name']; 
+                                                    ?>
+                                                <?php if($row['department']==='IT'): ?>
+                                                    <tr class="table-info">
                                                         <td>
-                                                            
-                                                            <div class="d-flex flex-column justify-content-center align-items-center">
-                                                                <p class="mb-1 "><?= $row['ojt_id'];?></p>
-                                                            </div>
-                                                        
+                                                        <i class='fas fa-user'></i>
+                                                            <span class="fw-medium"><?= $row['ojt_id'] ?></span>
                                                         </td>
+                                                        <td><?= $name ?></td>
                                                         <td>
-
-                                                            <div class="d-flex flex-column justify-content-center align-items-center">
-                                                                <p class="mb-1 "> <?= $row['first_name']." ".$row['middle_name']." ".$row['last_name'];?></p>
-
+                                                            <div
+                                                            data-bs-toggle="tooltip"
+                                                            data-popup="tooltip-custom"
+                                                            data-bs-placement="top"
+                                                            class="avatar pull-up"
+                                                            title="<?= $name ?>">
+                                                            <img src="<?= $profileImage?>" alt="Avatar" class="rounded-circle" />
                                                             </div>
-                                                            </div>   
-                                                        
                                                         </td>
-                                                       
+
+                                                        <td><span class="badge bg-label-info me-1"><?=$row['department'] ?></span></td>
                                                         <td>
-
-                                           
-                                                            <div class="d-flex flex-column justify-content-center align-items-center">
-                                                                <p class="mb-1 "> <?= $row['assigned_dept']; ?></p>
+                                                            <div class="dropdown">
+                                                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                                                </button>
+                                                                <div class="dropdown-menu">
+                                                                    <a class="dropdown-item" href="javascript:void(0);"><i class='fa fa-files-o'></i> View Reports</a>
+                                                                    <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
+                                                                </div>
                                                             </div>
-                                                      
-
-
                                                         </td>
+                                                    </tr>
+                                                <?php elseif ($row[	'department'] === 'HR'): ?>
+
+                                                    <tr class="table-warning">
                                                         <td>
-
-                                                            <div class="d-flex flex-column justify-content-center align-items-center">
-                                                                <p class="mb-1 "> <?= $row['dos']; ?></p>
-                                                            </div>
-
-
+                                                        <i class='fas fa-user'></i>
+                                                         <span class="fw-medium"><?= $row['ojt_id']?></span>
                                                         </td>
+                                                        <td><?= $name ?></td>
                                                         <td>
-
-                                                            <div class="d-flex flex-column justify-content-center align-items-center">
-                                                                <p class="mb-1 "> <?= $row['doe']; ?></p>
+                                                        <div
+                                                            data-bs-toggle="tooltip"
+                                                            data-popup="tooltip-custom"
+                                                            data-bs-placement="top"
+                                                            class="avatar pull-up"
+                                                            title="<?= $name ?>">
+                                                            <img src="<?= $profileImage?>" alt="Avatar" class="rounded-circle" />
                                                             </div>
-
-
+                                                        </ul>
                                                         </td>
+                                                        <td><span class="badge bg-label-warning me-1"><?=$row['department'] ?></span></td>
+
                                                         <td>
-
-                                                            <div class="d-flex flex-column justify-content-center align-items-center">
-                                                                <p class="mb-1 "> <?= $row['summary']; ?></p>
+                                                        <div class="dropdown">
+                                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                            <i class="bx bx-dots-vertical-rounded"></i>
+                                                            </button>
+                                                            <div class="dropdown-menu">
+                                                            <a class="dropdown-item" href="javascript:void(0);"><i class='fa fa-files-o'></i> View Reports</a>
+                                                            <a class="dropdown-item" href="javascript:void(0);"
+                                                                ><i class="bx bx-trash me-1"></i> Delete</a
+                                                            >
                                                             </div>
-
-
+                                                        </div>
                                                         </td>
+                                                    </tr>
+                                                <?php elseif($row['department'] === 'Admin'): ?>
+
+                                                    <tr class="table-primary">
                                                         <td>
-
-                                                            <div class="d-flex flex-column justify-content-center align-items-center">
-                                                                <p class="mb-1 "> <?= $row['accomplishment']; ?></p>
-                                                            </div>
-
-
+                                                        <i class='fas fa-user'></i>
+                                                        <span class="fw-medium"><?= $row['ojt_id']?></span>
                                                         </td>
+                                                        <td><?= $name ?></td>
                                                         <td>
-
-                                                            <div class="d-flex flex-column justify-content-center align-items-center">
-                                                                <p class="mb-1 "> <?= $row['challenges']; ?></p>
+                                                        <div
+                                                            data-bs-toggle="tooltip"
+                                                            data-popup="tooltip-custom"
+                                                            data-bs-placement="top"
+                                                            class="avatar pull-up"
+                                                            title="<?= $name ?>">
+                                                            <img src="<?= $profileImage?>" alt="Avatar" class="rounded-circle" />
                                                             </div>
-
-
+                                                        </ul>
                                                         </td>
+                                                        <td><span class="badge bg-label-primary me-1"><?=$row['department'] ?></span></td>
+
                                                         <td>
-
-                                                            <div class="d-flex flex-column justify-content-center align-items-center">
-                                                                <p class="mb-1 "> <?= $row['learnings']; ?></p>
+                                                        <div class="dropdown">
+                                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                            <i class="bx bx-dots-vertical-rounded"></i>
+                                                            </button>
+                                                            <div class="dropdown-menu">
+                                                            <a class="dropdown-item" href="javascript:void(0);"><i class='fa fa-files-o'></i> View Reports</a>
+                                                            <a class="dropdown-item" href="javascript:void(0);"
+                                                                ><i class="bx bx-trash me-1"></i> Delete</a
+                                                            >
                                                             </div>
-
-
+                                                        </div>
                                                         </td>
-                                                        <td>
+                                                    </tr>
+                                                    <?php elseif($row['department'] === 'Finance'): ?>
 
-                                                            <div class="d-flex flex-column justify-content-center align-items-center">
-                                                                <p class="mb-1 "> <span class="badge bg-label-success me-1"> <?= $row['status']; ?></span></p>
-                                                            </div>
-
-
+                                                        <tr class="table-danger">
+                                                            <td>
+                                                            <i class='fas fa-user'></i>
+                                                            <span class="fw-medium"><?= $row['ojt_id']?></span>
                                                             </td>
+                                                            <td><?= $name ?></td>
+                                                            <td>
+                                                            <div
+                                                                data-bs-toggle="tooltip"
+                                                                data-popup="tooltip-custom"
+                                                                data-bs-placement="top"
+                                                                class="avatar pull-up"
+                                                                title="<?= $name ?>">
+                                                                <img src="<?= $profileImage?>" alt="Avatar" class="rounded-circle" />
+                                                                </div>
+                                                            </ul>
+                                                            </td>
+                                                            <td><span class="badge bg-label-danger me-1"><?=$row['department'] ?></span></td>
 
+                                                            <td>
+                                                            <div class="dropdown">
+                                                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                                <i class="bx bx-dots-vertical-rounded"></i>
+                                                                </button>
+                                                                <div class="dropdown-menu">
+                                                                <a class="dropdown-item" href="javascript:void(0);"><i class='fa fa-files-o'></i> View Reports</a>
+                                                                <a class="dropdown-item" href="javascript:void(0);"
+                                                                    ><i class="bx bx-trash me-1"></i> Delete</a
+                                                                >
+                                                                </div>
+                                                            </div>
+                                                            </td>
+                                                        </tr>
+                                                        <?php elseif($row['department'] === 'Accounting'): ?>
 
-                                              
-                                         
-                                                    </tr> 
-                                            <?php
+                                                        <tr class="table-success">
+                                                            <td>
+                                                            <i class='fas fa-user'></i>
+                                                             <span class="fw-medium"><?= $row['ojt_id']?></span>
+                                                            </td>
+                                                            <td><?= $name ?></td>
+                                                            <td>
+                                                            <div
+                                                                data-bs-toggle="tooltip"
+                                                                data-popup="tooltip-custom"
+                                                                data-bs-placement="top"
+                                                                class="avatar pull-up"
+                                                                title="<?= $name ?>">
+                                                                <img src="<?= $profileImage?>" alt="Avatar" class="rounded-circle" />
+                                                                </div>
+                                                            </ul>
+                                                            </td>
+                                                            <td><span class="badge bg-label-success me-1"><?=$row['department'] ?></span></td>
 
-                                                        $_SESSION['id'] = $row['id'];
-                                                        $_SESSION['ojt_id'] = $row['ojt_id'];
-                                                        $_SESSION['timestamp'] = $row['timestamp'];
-                                                        $_SESSION['assigned_dept'] = $row['assigned_dept'];
-                                                        $_SESSION['dos'] = $row['dos'];
-                                                        $_SESSION['doe'] = $row['doe'];
-                                                        $_SESSION['summary'] = $row['summary'];
-                                                        $_SESSION['accomplishment'] = $row['accomplishment'];
-                                                        $_SESSION['challenges'] = $row['challenges'];
-                                                        $_SESSION['learnings'] = $row['learnings'];
-                                                        $_SESSION['status'] = $row['status'];
-                                                }
-                                            }
-                                            ?>
-                        </tbody>
-                    </table>
+                                                            <td>
+                                                            <div class="dropdown">
+                                                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                                <i class="bx bx-dots-vertical-rounded"></i>
+                                                                </button>
+                                                                <div class="dropdown-menu">
+                                                                <a class="dropdown-item" href="javascript:void(0);"><i class='fa fa-files-o'></i> View Reports</a>
+                                                                <a class="dropdown-item" href="javascript:void(0);"
+                                                                    ><i class="bx bx-trash me-1"></i> Delete</a
+                                                                >
+                                                                </div>
+                                                            </div>
+                                                            </td>
+                                                        </tr>
+                                                <?php endif; ?>
 
- 
-<script src="../Assets/js/jquery.js"></script>
-<script src="../Assets/js/datatables.js"></script>
-<script>
-new DataTable('#dataTable');
-</script>
-
-
-
+<?php }} ?>
+                                    <!--/ Contextual Classes -->
 
 
                 <?php

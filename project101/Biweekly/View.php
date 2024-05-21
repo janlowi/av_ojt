@@ -1,8 +1,8 @@
 <?php 
 session_start();
-$title="Weekly Response";
+$title="View";
 include '../Php/authenticate.php';
-include '../Layouts/main-user.php'; 
+include '../Layouts/main-user1.php'; 
  include '../Php/db_connect.php';
 
 ?>     
@@ -55,11 +55,36 @@ include '../Layouts/main-user.php';
 
 </style>
 
-     
+    <?php 
+            if(isset($_GET['view_report'])){
+
+                $view_id=$_GET['view_report'];
+             
+            }
+    ?>
 
 
 <div class="col-2 col-xl-12 col-md-6" >
     <div class="card  p-4">
+
+          <!-- Content wrapper -->
+          <div class="content-wrapper">
+            <!-- Content -->
+
+            <div class="container-xxl flex-grow-1 container-m-0-p-0">
+              <div class="row">
+
+                               <!-- <h2 class="modal-title" id="modalCenterTitle">Responses</h2> -->
+                               <a href="../Biweekly/DisplayReports.php" class="d-flex justify-content-end">
+                               <button
+                                 type="button"
+                                class="btn btn-dark d-flex"
+                                 data-bs-dismiss="modal"
+                                 aria-label="Close">
+                                    Back
+                               </button>
+                               </a>
+
       <div class="card-header d-flex align-items-right justify-content-between">
         <div class="card-title mb-2">
           <h5 class="m-0 me-2 text-uppercase"><?php echo $_SESSION['firstname']."'s", " ", "Response";?> </h5>
@@ -69,27 +94,12 @@ include '../Layouts/main-user.php';
 
 
         <div class="table-responsive text-nowrap  pt-5">
-        <table class="table table-bordered border-secondary " id="dataTable">
-          <thead class="border-bottom">
+        <table class="table table-bordered border-secondary " >
+          <thead class="border-bottom bg-dark">
 
                                             <tr>
-                                                <th scope="col">
-
-                                                    <div class="d-flex flex-column justify-content-center align-items-center">
-                                                        <p class="mb-1">ID </p>
-                                                    </div>
-
-                                                </th>
-
-                                                <th scope="col">
-
-                      
-                                                    <div class="d-flex flex-column justify-content-center align-items-center">
-                                                        <p class="mb-1 ">TIMESTAMP</p>
-                                                    </div>
-                         
-
-                                                </th>
+     
+                                             
                                                 <th scope="col">
 
                    
@@ -120,24 +130,46 @@ include '../Layouts/main-user.php';
 
                                                 </th>
 
-                                            
                                                 <th scope="col">
 
                    
                                                     <div class="d-flex flex-column justify-content-center align-items-center">
-                                                        <p class="mb-1 ">STATUS</p>
+                                                        <p class="mb-1 ">SUMMARY</p>
                                                     </div>
 
 
-                                                </th>  <th scope="col">
+                                                </th>
+
+                                                <th scope="col">
 
                    
                                                     <div class="d-flex flex-column justify-content-center align-items-center">
-                                                        <p class="mb-1 ">OPERATION</p>
+                                                        <p class="mb-1 ">ACCOMPLISHMENTS</p>
                                                     </div>
 
 
-                                                    </th>
+                                                </th>
+
+                                                <th scope="col">
+
+                   
+                                                    <div class="d-flex flex-column justify-content-center align-items-center">
+                                                        <p class="mb-1 ">CHALLENGES</p>
+                                                    </div>
+
+
+                                                </th>
+
+                                                <th scope="col">
+
+                   
+                                                    <div class="d-flex flex-column justify-content-center align-items-center">
+                                                        <p class="mb-1 ">LEARNINGS</p>
+                                                    </div>
+
+
+                                                </th>
+                                            
 
                                             </tr>
                                         </thead>
@@ -149,7 +181,7 @@ include '../Layouts/main-user.php';
                                             
                                                     FROM trainees tr, reports rp, users us
 
-                                                    WHERE  us.id=rp.user_id 
+                                                    WHERE  rp.id='$view_id' 
                                                     AND us.id=$_SESSION[user_id] 
                                                     AND us.id=tr.user_id
                                                     
@@ -160,22 +192,8 @@ include '../Layouts/main-user.php';
                                             if(mysqli_num_rows($query) > 0) {
                                                 while ($row = mysqli_fetch_assoc($query)) { ?>
                                                     <tr>
-                                                        <td>
-                                                            
-                                                            <div class="d-flex flex-column justify-content-center align-items-center">
-                                                                <p class="mb-1 "><?=  $row['id']; ?></p>
-                                                            </div>
-                                                        
-                                                        </td>
-
-                                                        <td>
-
-                                                            <div class="d-flex flex-column justify-content-center align-items-center">
-                                                                <p class="mb-1 "> <?= $row['timestamp']; ?></p>
-                                                            </div>
-                                                           
-                                                        
-                                                        </td>
+                                                    
+                                                      
                                                         <td>
 
                                            
@@ -202,66 +220,39 @@ include '../Layouts/main-user.php';
 
 
                                                         </td>
-
                                                         <td>
+
                                                             <div class="d-flex flex-column justify-content-center align-items-center">
-                                                                <?php if($row['status']=='Pending') { ?>
-                                                                    <span class="badge bg-label-warning me-1"><?= $row['status']; ?></span>
-                                                                <?php } elseif($row['status']=='Submitted') { ?>
-                                                                    <span class="badge bg-label-success me-1"><?= $row['status']; ?></span>
-                                                                <?php } else { ?>
-                                                                    <span class="badge bg-label-warning me-1"><?= $row['status']; ?></span>
-                                                                <?php } ?>
+                                                                <p class="mb-1 "> <?= $row['summary']; ?></p>
                                                             </div>
+
+
+                                                        </td>
+                                                        <td>
+
+                                                            <div class="d-flex flex-column justify-content-center align-items-center">
+                                                                <p class="mb-1 "> <?= $row['accomplishment']; ?></p>
+                                                            </div>
+
+
+                                                        </td>
+                                                        <td>
+
+                                                            <div class="d-flex flex-column justify-content-center align-items-center">
+                                                                <p class="mb-1 "> <?= $row['challenges']; ?></p>
+                                                            </div>
+
+
+                                                        </td>
+                                                        <td>
+
+                                                            <div class="d-flex flex-column justify-content-center align-items-center">
+                                                                <p class="mb-1 "> <?= $row['learnings']; ?></p>
+                                                            </div>
+
+
                                                         </td>
 
-
-                                                   <td>                                    
-                                         <?php
-                                                if( $row['status']=='Pending'){
-
-                                            echo'
-                                            
-                                            
-                                                <style>
-                                                        #save_'.$row['id'].' {
-                                                                display:block;
-                                                        }
-                                                </style>
-                                                
-                                            ';
-                                            }else{
-                                                echo'
-                                                <div class="d-grid gap-2">                                    
-                                                    <a href="../Biweekly/View.php? view_report='.$row['id'].'"  class="btn btn-success ">
-                                               View
-                                                    </a>
-
-                                                </div>
-                                                <style>
-                                                        #save_'.$row['id'].' {
-                                                                display:none;
-                                                        }
-                                                </style>
-                                            ';
-                                            }
-                                                  
-
-                                            ?>
-
-                                        <div class="d-grid gap-2">
-
-                                            <a href="../Biweekly/UpdateReports.php?update_report=<?= $row['id'] ?>" class="btn btn-warning "id='save_<?= $row['id'] ?>'>
-                                            Edit
-                                                </a>
-    
-                                                    <a href="../Php/php-weekly-update.php?save_report=<?= $row['id'] ?>"  class="btn btn-success "  id='save_<?= $row['id'] ?>' >
-                                               Submit
-                                                    </a>
- 
-                                            </div>
-
-                                            </td>
                                          
                                                     </tr> 
                                             <?php
@@ -381,9 +372,5 @@ if(isset($_SESSION['saved_success'])){
 ?>
 
 
-    <!-- filter data -->
-                        <script>
-                        new DataTable('#dataTable');
-                        </script>
-                        <!-- filter data -->
+ 
 <?php include '../Layouts/footer.php'; ?>

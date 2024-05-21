@@ -12,16 +12,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         header('location: ../Login/index.php');
         exit();
     } else {
-        $query = "SELECT  u.password,
-                          u.id,
-                          u.email,
-                          u.profile,
-                          u.status,
-                          u.user_type,
-                          t.first_name
-                    FROM users u
-                    LEFT JOIN trainees t ON u.id = t.user_id
-                    WHERE u.email = ?";
+        $query = "SELECT  *
+                    FROM users 
+                    WHERE email = ?";
         
         $stmt = mysqli_prepare($connect, $query);
         mysqli_stmt_bind_param($stmt, "s", $email);

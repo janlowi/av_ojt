@@ -49,7 +49,9 @@ include '../Php/db_connect.php';
     <!-- Font awersome -->
     <script src="https://kit.fontawesome.com/19fed37d60.js" crossorigin="anonymous"></script>
     
-    
+    <!-- datatables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/v/dt/jqc-1.12.4/dt-2.0.7/b-3.0.2/sl-2.0.2/datatables.min.css"/>
+<link rel="stylesheet" href="Editor-2.3.2/css/editor.dataTables.css">
     <!-- Helpers -->
     <script src="../assets/vendor/js/helpers.js"></script>
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->

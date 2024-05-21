@@ -13,11 +13,9 @@
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-
-    <title>Dashboard - Analytics | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+      <title><?php echo $title; ?></title>
 
     <meta name="description" content="" />
-
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="../assets/img/favicon/avlogo.png" />
 
@@ -41,8 +39,9 @@
     <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <link rel="stylesheet" href="../assets/vendor/libs/apex-charts/apex-charts.css" />
 
-    <!-- Page CSS -->
-
+    <!-- datatables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/v/dt/jqc-1.12.4/dt-2.0.7/b-3.0.2/sl-2.0.2/datatables.min.css"/>
+<link rel="stylesheet" href="Editor-2.3.2/css/editor.dataTables.css">
     <!-- Helpers -->
     <script src="../assets/vendor/js/helpers.js"></script>
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
@@ -105,12 +104,7 @@
                     <div data-i18n="Notifications">Notifications</div>
                   </a>
                 </li>
-                <li class="menu-item active mb-3">
-                  <a href="pages-account-settings-connections.html" class="menu-link">
-                    <div data-i18n="Connections">Connections</div>
-                  </a>
-                </li>
-                
+           
               
             </li>
 
@@ -169,6 +163,24 @@
               <ul class="navbar-nav flex-row align-items-center ms-auto">
                 <!-- Place this tag where you want the button to render. -->
 
+                   <!-- time -->
+                   <li class="nav-item lh-7 me-5">
+                    
+                                           
+                                                      
+                    <div class="display-date  ">
+                      <span id="day">day</span>,
+                      <span id="daynum" >00</span>
+                      <span id="month" >month</span>
+                      <span id="year" >0000</span>
+                    <span  id ="currentTime">	</span>
+              
+                    </div>
+
+                    <!-- Show current time -->
+                    <script src="../Assets/js/dateTime.js"> </script>
+                    <!-- Show current time -->
+                    </li>
 
                 <li class="nav-item lh-7 me-5">
                   <a

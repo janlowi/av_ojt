@@ -10,7 +10,19 @@ include '../Php/authenticate.php';
  if(isset($_GET['update'])) 
  
  $user_id= $_GET['update'];
-         $sql = "SELECT * FROM trainees tr,users us WHERE us.id = '$user_id' AND us.id = tr.user_id ";
+         $sql = "SELECT us.*,
+                        tr.id,
+                        tr.ojt_id,
+                        tr.contact_num,
+                        tr.degree,
+                        tr.university,
+                        tr.hours_to_render,
+                        tr.dos
+         
+          FROM users us
+        INNER JOIN trainees tr ON tr.user_id = us.id
+          WHERE us.id = '$user_id' 
+           ";
          $result = mysqli_query($connect, $sql);
          $row = mysqli_fetch_assoc($result);
        if ($row>0 ) {
@@ -19,7 +31,7 @@ include '../Php/authenticate.php';
         $firstname = $row["first_name"];
          $middlename = $row["middle_name"];
           $lastname = $row["last_name"];
-          $age = $row["age"];
+          $dob =  $row["dob"];
            $sex = $row["sex"];
              $course = $row["degree"];
              $university = $row["university"];
@@ -32,7 +44,17 @@ include '../Php/authenticate.php';
                    $usertype = $row["user_type"];
                    $contact= $row["contact_num"];
                    $status = $row["status"];
-                   $department = $row["department"];
+                   $department = $row["department"]; 
+                   date_default_timezone_set('Asia/Manila');// local timezone
+
+                   $dateOfBirth =   date($row['dob']);
+                   $dateOfStart =   date($row['dos']);
+                   $start = new DateTime($dateOfStart);
+                   // Calculate age
+                   $today = new DateTime();
+                   $birthdate = new DateTime($dateOfBirth);
+                
+                   $age = $birthdate->diff($today)->y;
     
        }
                 
@@ -111,8 +133,8 @@ include '../Php/authenticate.php';
                                                                </div>
 
                                                                <div class="col-md-2">
-                                                                       <label for="inputZip" class="form-label">Age</label>
-                                                                       <input type="number" class="form-control" id="inputZip"name = "Age"  value = "<?php echo $age?>">
+                                                                       <label for="inputZip" class="form-label">Birthday</label>
+                                                                       <input type="date" class="form-control" id="inputZip"name = "Birthday"  value = "<?php echo $dob;?>">
                                                                </div>
 
                                                                
@@ -191,11 +213,11 @@ include '../Php/authenticate.php';
                                                                        <label for="inputZip" class="form-label">Email</label>
                                                                        <input type="email" class="form-control" id="inputZip"name = "Email" value = "<?php echo $email?>">
                                                                </div>
-                                                               <div class="col-md-12">
+                                                               <!-- <div class="col-md-12">
                                                                        <label for="password" class="form-label">Password</label>
                                                                        <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" class="form-control" id="password"name = "Password" value = "<?php echo $password?>">
-                                                               </div>  
-                                                               <div id="passwordHelpBlock" class="form-text">
+                                                               </div>   -->
+                                                               <!-- <div id="passwordHelpBlock" class="form-text">
                                                                   Your password must be 8-20 characters long, contains an UPPERCASE, a lowercase, a number and must have special characters.
                                                               </div>
                                                                               password must contain the following
@@ -208,12 +230,12 @@ include '../Php/authenticate.php';
                                                                                                 <p id="number" class= "invalid">A number</p>
                                                                                                 <p id="length" class= "invalid">Minimum of 8 characters</p>
                                                                                             </div>
-                                                                                </div>
+                                                                                </div> -->
 
-                                                               <div class="col-md-12">
+                                                               <!-- <div class="col-md-12">
                                                                        <label for="inputZip" class="form-label">Confirm Password</label>
                                                                        <input type="password" class="form-control" id="inputZip"name = "Confirm" value = "<?php echo $confirm_pass?>">
-                                                               </div>
+                                                               </div> -->
                                                                <div class="col-md-12">
                                                                        <label for="inputGroupFile04" class="form-label"> Profile</label>
                                                                        <input type="file" class="form-control" id="inputGroupFile04"  aria-label="Upload" name='Profile'>

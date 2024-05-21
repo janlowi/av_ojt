@@ -46,7 +46,13 @@ include '../Layouts/main-user.php';
                     <tbody>
                         <?php
                         $user_id = $_SESSION['user_id'];
-                        $sql = "SELECT  ts.*, us.id, us.department, tr.user_id, tr.first_name, tr.middle_name, tr.last_name
+                        $sql = "SELECT  ts.*,
+                         us.id,
+                          us.department,
+                            us.first_name,
+                             us.middle_name,
+                              us.last_name
+
                         FROM timesheet ts
                         INNER JOIN users us ON ts.user_id = us.id
                         INNER JOIN trainees tr ON tr.user_id = us.id

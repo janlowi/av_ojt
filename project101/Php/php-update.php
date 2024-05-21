@@ -11,7 +11,7 @@ include 'db_connect.php';
     $firstname = $_POST["Firstname"];
      $middlename = $_POST["Middlename"];
       $lastname = $_POST["Lastname"];
-      $age = $_POST["Age"];
+      $dob = $_POST["Birthday"];
        $sex = $_POST["Sex"];
          $course = $_POST["Course"];
          $university = $_POST["University"];
@@ -19,9 +19,6 @@ include 'db_connect.php';
            $dos = $_POST["Dos"];
             $office = $_POST["Office"];
              $email = $_POST["Email"];
-             $password = $_POST["Password"];
-             $confirm_pass = $_POST["Confirm"];
-             
                $usertype = $_POST["Usertype"];
                $contact = $_POST["Contact"];
                $status = $_POST["Status"];
@@ -31,11 +28,10 @@ include 'db_connect.php';
 
 
     if( !empty( $ojtid)&&     
-        !empty( $id)&&
         !empty( $firstname)&&
         !empty( $middlename)&&
         !empty( $lastname)&&
-        !empty( $age)&&
+        !empty( $dob)&&
         !empty( $sex)&&
         !empty( $course)&&
         !empty( $university)&&
@@ -43,26 +39,23 @@ include 'db_connect.php';
         !empty( $dos)&&
         !empty( $office)&&
         !empty( $email)&&  
-        !empty( $password)&&
-        !empty( $confirm_pass)&& 
         !empty( $department)&& 
         !empty( $status)&&
         !empty( $usertype)&&
         !empty( $contact)) {
 
-                  if($_POST["Password"] ===  $_POST["Confirm"]) {
-                    $pass_hashed= password_hash($password, PASSWORD_DEFAULT);
+
                     $sql = "UPDATE  
                                   users us, 
                                   trainees tr 
                                   
                                   SET 
                                       tr.ojt_id = '$ojtid', 
-                                      tr.first_name = '$firstname', 
-                                      tr.middle_name = '$middlename', 
-                                      tr.last_name = '$lastname', 
-                                      tr.age = '$age', 
-                                      tr.sex = '$sex', 
+                                      us.first_name = '$firstname', 
+                                      us.middle_name = '$middlename', 
+                                      us.last_name = '$lastname', 
+                                      us.dob = '$dob', 
+                                      us.sex = '$sex', 
                                       tr.contact_num = '$contact', 
                                       tr.degree = '$course', 
                                       tr.university = '$university', 
@@ -70,7 +63,6 @@ include 'db_connect.php';
                                       tr.dos = '$dos', 
                                       us.office_assigned = '$office', 
                                       tr.email = '$email', 
-                                      us.password = '$pass_hashed', 
                                       us.user_type = '$usertype', 
                                       us.status = '$status', 
                                       us.department = '$department'
@@ -81,6 +73,7 @@ include 'db_connect.php';
                     if($result==true){
                     
                     $success_msg = "Trainee Updated successfully.";
+                    header("Location: ../Admin/AdminDashboard.php");
                  
                     }
                     else {
@@ -97,6 +90,6 @@ include 'db_connect.php';
       header("Location: ../Admin/AdminDashboard.php");
      
   }
-}
+
 
 ?>

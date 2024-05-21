@@ -4,33 +4,6 @@ $title = "Attendance Record";
 include '../Php/authenticate.php';
 include '../Php/db_connect.php';
 include '../Layouts/main-admin.php'; ?>
-    <style>
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        th,
-        td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #4CAF50;
-            color: white;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        tr:hover {
-            background-color: #ddd;
-        }
-    </style>
-
 
   
               <div class="card ">
@@ -112,13 +85,13 @@ include '../Layouts/main-admin.php'; ?>
 <div></div>
 
             <div class="card">
-                <table class="table table-responsive">
-                    <thead class="bg-success">
+                <table class=" table table-dark table-responsive">
+                    <thead >
                       
                         <tr>
-                            <th scope="col" class="sticky">ID</th>
-                            <th scope="col"  class="sticky">Name</th>
-                            <th scope="col"  class="sticky">Department</th>
+                            <th scope="col" >ID</th>
+                            <th scope="col" >Name</th>
+                            <th scope="col" >Department</th>
                      
                             <?php 
                              // Fetch all unique dates from the timestamp column
@@ -132,7 +105,7 @@ include '../Layouts/main-admin.php'; ?>
                                 }
                               
                                 ?>
-                            <th scope='col' class="bg-dark text-light sticky">Total</th>
+                            <th scope='col' class="">Total</th>
 
                             </tr> 
                       
@@ -141,9 +114,6 @@ include '../Layouts/main-admin.php'; ?>
                     <tbody>
                     <?php
                             $sql_trainees = "SELECT us.*, 
-                                        tr.first_name,
-                                        tr.last_name,
-                                        tr.middle_name,
                                         tr.ojt_id
                                 FROM users us
                                 INNER JOIN trainees tr ON tr.user_id = us.id
@@ -153,10 +123,10 @@ include '../Layouts/main-admin.php'; ?>
                                         if ($result_trainees && mysqli_num_rows($result_trainees) > 0) {
                                             while ($row_trainee = mysqli_fetch_assoc($result_trainees)) {
                                                 $user_total_hours = 0;
-                                                echo "<tr>";
-                                                echo "<td>" . $row_trainee['ojt_id'] . "</td>";
-                                                echo "<td>" . $row_trainee['last_name'] . ", " . $row_trainee['first_name'] . " " . $row_trainee['middle_name'] . "</td>";
-                                                echo "<td>" . $row_trainee['department'] . "</td>";
+                                                echo "<tr >";
+                                                echo "<td  class='bg-light text-dark '>" . $row_trainee['ojt_id'] . "</td>";
+                                                echo "<td  class='bg-light text-dark '>" . $row_trainee['last_name'] . ", " . $row_trainee['first_name'] . " " . $row_trainee['middle_name'] . "</td>";
+                                                echo "<td  class='bg-light text-dark '>" . $row_trainee['department'] . "</td>";
                 // Fetch total hours worked by trainee for each date
                 $userId = $row_trainee['id'];
                 // echo $userId;
@@ -171,7 +141,7 @@ include '../Layouts/main-admin.php'; ?>
                         $result_total_hours = mysqli_query($connect, $sql_total_hours);
                         $total_hours_row = mysqli_fetch_assoc($result_total_hours);
                         $user_total_hours += $total_hours_row['total_hours'];
-                        echo "<td>" . $total_hours_row['total_hours'] . "</td>";
+                        echo "<td  class='bg-light text-dark '>" . $total_hours_row['total_hours'] . "</td>";
                
                     }
                 }

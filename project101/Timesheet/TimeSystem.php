@@ -19,51 +19,60 @@ if ($query && mysqli_num_rows($query) > 0) {
     if ($latest_event_type == 'In') {
         // If the latest event type is "In", display the "Out" button
         echo '
+        <div class="card-body text-center">               
         <form action="../Php/time-in-out.php" method="POST">
         <div class="d-grid gap-2">
-            <input type="submit" name="Time_Out" value="Out" class="btn btn-dark">
+            <input type="submit" name="Time_Out" value="Out" class="btn btn-info">
             </div>
         </form>
-      
+
+        <p class="card-text mt-2">
+            Dont forget to time Out.
+        </p>
+
+        </div> 
         ';
     } else {
         // If the latest event type is "Out", display the "In" button
         echo '
-       
+        <div class="card-body text-center">
+           
         <form action="../Php/time-in-out.php" method="POST">
         <div class="d-grid gap-2">
-            <input type="submit" name="Time_In" value="In" class="btn btn-dark" >
+            <input type="submit" name="Time_In" value="In" class="btn btn-success" >
             </div>
         </form>
-      
+
+        <p class="card-text mt-2">
+            Dont forget to time In.
+        </p>
+
+        </div>  
         ';
     }
 
 } else {
     // If there are no events for the user, display the "In" button by default
     echo '
+    <div class="card-body text-center">       
     <form action="../Php/time-in-out.php" method="POST">
     <div class="d-grid gap-2">
-
-        <input type="submit" name="Time_In" value="In" class="btn btn-dark">
+        <input type="submit" name="Time_In" value="In" class="btn btn-info">
         </div>
-    </form>';
+    </form>
+    
+  
+    <p class="card-text mt-2">
+        Dont forget to time Out.
+
+    </p>
+
+    </div>
+    ';
+    
 }
 ?>
-                                        
-                                          <div class="card-body text-center">
-                                            <h5 class="card-title">Time In/Out System</h5>
-                                                        <div class="container">
-                                                          <div class="display-date  ">
-                                                            <span id="day">day</span>,
-                                                            <span id="daynum" >00</span>
-                                                            <span id="month" >month</span>
-                                                            <span id="year" >0000</span>
-                                                            <div class="d-grid gap-2">
-                                                          <h2  id ="currentTime" class="btn btn-outline-success">	</h2>
-                                                        </div>
-                                          </div>
-
+             <br>               
           <!-- Show current time -->
       <script src="../Assets/js/dateTime.js"> </script>
     <!-- Show current time -->

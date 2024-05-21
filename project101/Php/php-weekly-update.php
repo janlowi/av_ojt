@@ -57,41 +57,15 @@ if(!empty($assigned_department) &&
 
     <?php
     $user_id =$_SESSION['user_id'];
-    $report_id = $_GET['save_report'];
-
+  
     if(isset($_GET['save_report'])) {
+        $report_id = $_GET['save_report'];
 
-
-
-        $assigned_department = $_SESSION['assigned_dept'];
-        $dos =   $_SESSION['dos'];
-        $doe =  $_SESSION['doe'];
-        $summary =  $_SESSION['summary'];
-        $accomplishments = $_SESSION['accomplishment'] ;
-        $challenges =  $_SESSION['challenges'];
-        $learning =  $_SESSION['learnings'];
-        $status = 'Saved';
-
-    if(!empty($assigned_department) && 
-        !empty($dos) &&
-        !empty($doe) &&
-        !empty($summary) &&
-        !empty($accomplishments) &&
-        !empty($challenges) &&
-        !empty($learning)
-        ) {
-        
-            }
+        $status = 'Submitted';
         $update= "UPDATE 
                         reports 
                                     SET
-                                    assigned_dept = '$assigned_department',
-                                    dos = '$dos',
-                                    doe = '$doe',
-                                    summary = '$summary',
-                                    accomplishment = '$accomplishments',
-                                    challenges = '$challenges',
-                                    learnings = '$learning',
+
                                     status= '$status'
                             
         
