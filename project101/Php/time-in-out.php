@@ -1,7 +1,7 @@
 <?php
 session_start();
     include 'db_connect.php';
-    include 'authenticate.php';
+
 
 ?>
 
@@ -24,10 +24,12 @@ $event_type = $_POST['Time_In'];
             
         $_SESSION['success'] = "Time In Succesfully";
          header("location: ../Users/UserDashboard.php");
+         exit();
     }else {
 
         $_SESSION['error'] = "Failed to time in";
         header("location: ../Users/UserDashboard.php");
+        exit();
     }
 }
 
@@ -47,7 +49,7 @@ $event_type = $_POST['Time_In'];
 
         if ($row) {
             $current_time = time();
-            $timeIn = strtotime(($row['timestamp']));
+            $timeIn = strtotime($row['timestamp']);
             $timeOut = $current_time;
 
             // echo "Time In: " . date('Y-m-d H:i:s', $timeIn) . "<br>";
@@ -65,7 +67,7 @@ $event_type = $_POST['Time_In'];
                 if ($timeDifferenceSeconds < (2 * 3600)) {
                     $_SESSION['error'] = "You cannot time out within 2 hours of your last time in.";
                     header("location: ../Users/UserDashboard.php");
-                    exit;
+                    exit();
                 }
                 $sql2 = "INSERT INTO timesheet (event_type, user_id, total_hours) VALUES ('$event_type', '$user_id', '$totalHours')";
                 $query2 = mysqli_query($connect, $sql2);
@@ -73,20 +75,23 @@ $event_type = $_POST['Time_In'];
                 if ($query2) {
                     $_SESSION['success'] = "Time Out Successfully";
                     header("location: ../Users/UserDashboard.php"); 
-                    exit;
+                    exit();
                 } else {
                     $_SESSION['error'] = "Failed to time out";
                     header("location: ../Users/UserDashboard.php");
-                    exit;
+                    exit();
                 }
             } else {
                 $_SESSION['error'] = "Invalid time out. Time out cannot be before time in.";
                 header("location: ../Users/UserDashboard.php");
-                exit;
+                exit();
             }
         } else {
             $_SESSION['error'] = "No corresponding 'In' entry found";
             header("location: ../Users/UserDashboard.php");
-            exit;
+            exit();
         }
-    }
+    } 
+
+
+?>

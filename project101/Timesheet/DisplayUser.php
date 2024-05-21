@@ -1,17 +1,10 @@
 <?php
 session_start();
+include '../Php/authenticate.php';
 $title = "Attendance Record";
 include '../Php/db_connect.php';
-include '../Layouts/navbar-user.php';
-include '../Layouts/sidebar-user.php';
-include '../Php/authenticate.php';
 include '../Layouts/main-user.php';
 ?>
-<!-- Content wrapper -->
-<div class="content-wrapper">
-    <!-- Content -->
-    <!-- Layout container -->
-
     <style>
         table {
             border-collapse: collapse;
@@ -38,11 +31,8 @@ include '../Layouts/main-user.php';
             background-color: #ddd;
         }
     </style>
-    <div class="layout-page">
-        <div class="container-xxl flex-grow-1 container-p-y">
-            <div class="row">
                 <table>
-                    <thead>
+                    <thead >
                         <tr>
                             <th>Name</th>
                             <th>Department</th>
@@ -56,7 +46,13 @@ include '../Layouts/main-user.php';
                     <tbody>
                         <?php
                         $user_id = $_SESSION['user_id'];
-                        $sql = "SELECT  ts.*, us.id, us.department, tr.user_id, tr.first_name, tr.middle_name, tr.last_name
+                        $sql = "SELECT  ts.*,
+                         us.id,
+                          us.department,
+                            us.first_name,
+                             us.middle_name,
+                              us.last_name
+
                         FROM timesheet ts
                         INNER JOIN users us ON ts.user_id = us.id
                         INNER JOIN trainees tr ON tr.user_id = us.id
@@ -111,9 +107,5 @@ include '../Layouts/main-user.php';
                         </tr>
                     </tbody>
                 </table>
-                <!-- / Content -->
-            </div>
-        </div>
-        <!-- Content wrapper -->
-    </div>
-</div>
+  
+<?php  include '../Layouts/footer.php';?> 

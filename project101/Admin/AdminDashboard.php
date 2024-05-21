@@ -1,14 +1,11 @@
 <?php 
 session_start();
 $title="Admin Dashboard";
-include '../Php/authenticate.php';
-include '../Layouts/main.php'; 
- include '../Layouts/sidebar.php';
- include '../Layouts/navbar.php';
+include '../Php/authenticate.php'; 
+include '../Layouts/main-admin.php'; 
  include '../Php/db_connect.php';
 
   ?>
-   
 
 <?php
 
@@ -28,6 +25,8 @@ error_reporting (0);
            $ojt_ID = "AVOJT-00" . ($last_id + 1);
        }
    ?>
+ 
+
 
                        <!-- Modal -->
                        <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
@@ -89,9 +88,9 @@ error_reporting (0);
                                                                        <input type="number" class="form-control" id="inputZip"name = "Contact">
                                                                </div>
 
-                                                               <div class="col-md-2">
-                                                                       <label for="inputZip" class="form-label">Age</label>
-                                                                       <input type="number" class="form-control" id="inputZip"name = "Age">
+                                                               <div class="col-md-6">
+                                                                       <label for="inputZip" class="form-label">Birthday</label>
+                                                                       <input type="date" class="form-control" id="inputCity"name = "Birthday">
                                                                </div>
 
                                                                
@@ -150,13 +149,13 @@ error_reporting (0);
                                                                        <label for="inputZip" class="form-label">Email</label>
                                                                        <input type="email" class="form-control" id="inputZip"name = "Email">
                                                                </div>
-                                                               <div class="col-md-12">
+                                                               <!-- <div class="col-md-12">
                                                                        <label for="password" class="form-label">Password</label>
                                                                        <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" class="form-control" id="password"name = "Password" data-bs-toggle="collapse" data-bs-target="#collapseExample">
                                                                </div>  
                                                                <div id="passwordHelpBlock" class="form-text">
                                                                   Your password must be 8-20 characters long, contains an UPPERCASE, a lowercase, a number and must have special characters.
-                                                              </div>
+                                                              </div> -->
                                                                               <!-- password must contain the following
                                                                               <div class="collapse" id="collapseExample" aria-expanded="false" aria-controls="collapseExample">
                                                                                             <div class="card card-body" id="message">
@@ -168,10 +167,10 @@ error_reporting (0);
                                                                                             </div>
                                                                                 </div> -->
 
-                                                               <div class="col-md-12">
+                                                               <!-- <div class="col-md-12">
                                                                        <label for="inputZip" class="form-label">Confirm Password</label>
                                                                        <input type="password" class="form-control" id="inputZip"name = "Confirm">
-                                                               </div><br><br>
+                                                               </div><br><br> -->
 
                                                               
                                                                 <div class=" d-grid gap-2 col-6 mx-auto">
@@ -232,18 +231,30 @@ error_reporting (0);
                                                                                 <option value="NRA">NRA</option>
                                                                         </select>
                                                                         </div>
+                                                                        <div class="col-md-6">
+                                                                       <label for="inputZip" class="form-label">Birthday</label>
+                                                                       <input type="date" class="form-control" id="inputCity"name = "Birthday">
+                                                                         </div>
 
+                                                                        
+                                                                        <div class="col-md-4">    
+                                                                                <label for="sex" class="form-label">Sex</label>
+                                                                                <select name="Sex" id="sex" class="form-select">
+                                                                                        <option value="Male">Male</option>
+                                                                                        <option value="Female">Female</option>
+                                                                                </select>
+                                                                        </div>
                                                                         <div class="col-md-12">
                                                                         <label for="inputZip" class="form-label">Email</label>
                                                                         <input type="email" class="form-control" id="inputZip"name = "Email">
                                                                         </div>
-                                                                        <div class="col-md-12">
+                                                                        <!-- <div class="col-md-12">
                                                                         <label for="password" class="form-label">Password</label>
                                                                         <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" class="form-control" id="password"name = "Password" data-bs-toggle="collapse" data-bs-target="#collapseExample">
                                                                         </div>  
                                                                         <div id="passwordHelpBlock" class="form-text">
                                                                         Your password must be 8-20 characters long, contains an UPPERCASE, a lowercase, a number and must have special characters.
-                                                                        </div>
+                                                                        </div> -->
                                                                                 <!-- password must contain the following
                                                                                 <div class="collapse" id="collapseExample" aria-expanded="false" aria-controls="collapseExample">
                                                                                                 <div class="card card-body" id="message">
@@ -255,10 +266,10 @@ error_reporting (0);
                                                                                                 </div>
                                                                                         </div> -->
 
-                                                                        <div class="col-md-12">
+                                                                        <!-- <div class="col-md-12">
                                                                         <label for="inputZip" class="form-label">Confirm Password</label>
                                                                         <input type="password" class="form-control" id="inputZip"name = "Confirm">
-                                                                        </div>
+                                                                        </div> -->
                                                                         <div>
                                                                         <div class=" d-grid gap-2 col-6 mx-auto ">
                                                                         <button id="register-btn" type="submit" name ="adminSubmit"class="btn btn-dark ">Register</button>
@@ -276,22 +287,15 @@ error_reporting (0);
                              </div>
                            </div>
                          </div>
-                       </div>
-                     </div>
-                   </div>
+                         </div>
+
                    <script src="../Assets/js/form.js"></script>
 
 
 
 
                              <!-- Content wrapper -->
-          <div class="content-wrapper">
-            <!-- Content --> 
-          <!-- Layout container -->
-          <div class="layout-page">
 
-          <div class="container-xxl flex-grow-1 container-p-y">
-                  <div class="row">
 
 
 
@@ -366,46 +370,26 @@ error_reporting (0);
                       </div>
                     </div>
      
-          </div>          
-        </div>  
-    </div>  
+      
 
 
-
-
-  
-
-          <!-- Content wrapper -->
-          <div class="content-wrapper">
-            <!-- Content --> 
-          <!-- Layout container -->
-          <div class="layout-page">
-
-            <div class="container-xxl flex-grow-1 container-p-y">
-            <div class="row">                
-
-
-
-            <!-- center layout -->
 
                 <!-- trainee table -->
                 <!-- Bootstrap Dark Table -->
   
-              <div class="card ">
+    
         
                           <!-- Table -->
 
-
-      
-                      
-                      <button
+                          <button
                          type="button"
                          class="btn btn-success"
                          data-bs-toggle="modal"
                          data-bs-target="#modalCenter">
                          ADD USER
                        </button>
-                       
+<div class="card ">
+                                       
                 <h5 class="card-header">Users</h5>
                 <div class=" table-responsive    text-nowrap">
                   <table class="table table-dark">
@@ -418,7 +402,7 @@ error_reporting (0);
                     <th scope="col">Department</th>
                     <th scope="col">Office</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Password</th>
+                    <!-- <th scope="col">Password</th> -->
                     <th scope="col">Usertype</th>
                     <th scope="col">Status</th>
                     <th scope="col">Operation</th>
@@ -428,11 +412,6 @@ error_reporting (0);
             <?php 
     
     $sql= "SELECT  us.*,
-                   tr.email, 
-                   tr.sex, 
-                   tr.first_name, 
-                   tr.middle_name, 
-                   tr.last_name,
                    tr.dos
 
            FROM    users us, 
@@ -460,7 +439,7 @@ error_reporting (0);
                         <td><?= $row ['department']; ?></td>
                         <td><?= $row ['office_assigned']; ?></td>
                         <td><?= $row ['email']; ?></td>
-                        <td><?= $row ['password']; ?></td>
+                        <!-- <td><?= $row ['password']; ?></td> -->
                         <td><?= $row ['user_type']; ?></td>
                        <td><?php  
                             $status = $row ['status'];
@@ -494,7 +473,14 @@ error_reporting (0);
 ?>
                       </tbody>
                   </table>
-                </div>
-              </div>
-              <!--/ Bootstrap Dark Table -->
 
+              <!--/ Bootstrap Dark Table -->
+  </div>
+
+
+
+    <?php
+
+include '../Layouts/footer.php'; 
+
+ ?>

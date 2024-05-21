@@ -2,7 +2,6 @@
 <?php
 session_start();
 include 'db_connect.php';
-include 'authenticate.php';
 $user_id = $_SESSION['user_id'];
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {

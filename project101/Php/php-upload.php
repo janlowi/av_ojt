@@ -1,14 +1,16 @@
 <?php
 session_start();
 include('../Php/db_connect.php');
-include('../Php/authenticate.php');
+
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user_id = $_SESSION['user_id'];
-
+    $qoute=$_POST['qoute'];
+    $author=$_POST['author'];
     // Check if file is selected
     if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
         // Get file details
+
         $file_name = $_FILES['image']['name'];
         $tempname = $_FILES['image']['tmp_name'];
         $folder = '../Assets/img/avatars/' . $file_name;
@@ -28,7 +30,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         // Update user profile in the database
-        $sql = "UPDATE trainees SET profile = '$file_name' WHERE user_id = '$user_id'";
+        $sql = "UPDATE users us, 
+                        trainees tr 
+
+                        SET us.profile = '$file_name',
+                         tr.qoute='$qoute',
+                          tr.author='$author'
+
+                            WHERE us.id = '$user_id' 
+                            AND tr.user_id = '$user_id'
+                            ";
         $query = mysqli_query($connect, $sql);
 
         // Move uploaded file to destination folder
