@@ -1,43 +1,59 @@
 <?php
+include '../Login/index.php';
 session_start();
+include '../Php/db_connect.php';
 
-if (isset($_POST['login'])) {
-  $username = $_POST['username'];
-  $password = $_POST['password'];
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
 
-  // Check if the username and password are correct
-  if ($username === 'admin' && $password === 'password') {
-    // Redirect to the dashboard page
-    header('Location: login.php');
-    exit();
-  } else {
-    // Increment the failed login attempts counter
-    if (!isset($_SESSION['attempts'])) {
-      $_SESSION['attempts'] = 1;
+    // Fetch user data from the database
+    $stmt = $conn->prepare("SELECT id, password, is_active, login_attempts FROM users WHERE username = ?");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($user_id, $hashed_password, $is_active, $login_attempts);
+    $stmt->fetch();
+
+    // Check if user exists
+    if ($stmt->num_rows == 1) {
+        // Check if account is active
+        if ($is_active) {
+            // Verify password
+            if (password_verify($password, $hashed_password)) {
+                // Successful login, reset login attempts
+                $stmt = $conn->prepare("UPDATE users SET login_attempts = 0 WHERE id = ?");
+                $stmt->bind_param("i", $user_id);
+                $stmt->execute();
+
+                echo "<div class='success'>Login successful!</div>";
+                // Perform any other login success logic (e.g., set session variables)
+            } else {
+                // Increment login attempts
+                $login_attempts++;
+                $stmt = $conn->prepare("UPDATE users SET login_attempts = ? WHERE id = ?");
+                $stmt->bind_param("ii", $login_attempts, $user_id);
+                $stmt->execute();
+
+                if ($login_attempts >= 3) {
+                    // Disable the account after 3 unsuccessful attempts
+                    $stmt = $conn->prepare("UPDATE users SET is_active = FALSE WHERE id = ?");
+                    $stmt->bind_param("i", $user_id);
+                    $stmt->execute();
+
+                    echo "<div class='error'>Maximum login attempts exceeded. Your account has been deactivated. Please contact support.</div>";
+                } else {
+                    echo "<div class='error'>Invalid login credentials. Attempt $login_attempts of 3.</div>";
+                }
+            }
+        } else {
+            echo "<div class='error'>Your account is deactivated. Please contact support.</div>";
+        }
     } else {
-      $_SESSION['attempts']++;
+        echo "<div class='error'>Invalid username or password.</div>";
     }
 
-    // If the number of failed attempts exceeds 3, disable the form inputs
-    if ($_SESSION['attempts'] > 3) {
-      echo '<script>document.getElementById("username").disabled = true;</script>';
-      echo '<script>document.getElementById("password").disabled = true;</script>';
-      echo '<script>document.getElementById("login-form").innerHTML += "<p>The form inputs have been disabled due to too many failed login attempts. Please try again later.</p>";</script>';
-      exit();
-    }
-
-    // Display a message to the user if the login attempt was unsuccessful
-    echo '<script>document.getElementById("login-form").innerHTML += "<p>Invalid username or password. Please try again.</p>";</script>';
-  }
+    $stmt->close();
+    $conn->close();
 }
 ?>
-
-<form id="login-form" method="post">
-  <label for="username">Username:</label>
-  <input type="text" id="username" name="username" required>
-
-  <label for="password">Password:</label>
-  <input type="password" id="password" name="password" required>
-
-  <button type="submit" name="login">Login</button>
-</form>
