@@ -6,6 +6,7 @@ include '../Layouts/navbar-user.php';
 include '../Layouts/sidebar-user.php';
 include '../Php/authenticate.php';
 include '../Layouts/main-user.php';
+
 ?>
 <!-- Content wrapper -->
 <div class="content-wrapper">

@@ -19,46 +19,19 @@ include '../Layouts/main-user.php';
           <div class="container-xxl flex-grow-1 container-p-y">
                   <div class="row">
                     
-
-
  
 
-                    <!-- welcome -->
-                    <div class="col-lg-6 mb-4 order-0 ">
-                  <div class="card">
-                    <div class="d-flex align-items-end row">
-                      <div class="col-sm-7">
-                        <div class="card-body">
-                          <h5 class="card-title text-primary">Welcome Trainee <?= $_SESSION['firstname'];?>! 🎉</h5>
-                          <figure>
-                            <blockquote class="blockquote">
-                              <p>Kung gikapoy naka  :>, pahuway na aysig daghan storya.tsk tsk </p>
-                            </blockquote>
-                            <figcaption class="blockquote-footer">
-                            Janlowi <cite title="Source Title">The Great Philosopher</cite>
-                            </figcaption>
-                          </figure>
-                        </div>
-                      </div>
-                      <div class="col-sm-5 text-center text-sm-left">
-                        <div class="card-body pb-0 px-0 px-md-4">
-                          <img
-                            src="../assets/img/illustrations/nice1.png"
-                            height="140"
-                            alt="View Badge User"
-                            data-app-dark-img="illustrations/man-with-laptop-dark.png"
-                            data-app-light-img="illustrations/man-with-laptop-light.png" />
-                        </div>
-                      </div>
 
-                    </div>
-                  </div>
-                </div>
-
-          <!-- welcome -->
 
   <!-- report -->
+  
     
+  <div class="dashboard">
+            <div class="total-hours-box">
+                <!-- <h2><?php echo $totalHours; ?></h2> -->
+              
+            </div>
+            
                 <div class="col-md-0 col-xl-3 order-0">
                   <div class="card mb-0">
                   <button
@@ -92,8 +65,45 @@ include '../Layouts/main-user.php';
 
                     </div>
                  </div>
+
+
          <!--/ time -->
 
+
+                                 
+         <?php
+
+
+// Function to calculate total hours
+function calculateTotalHours($connect, $user_id) {
+    $totalHours = 0; // Initialize total hours variable
+    
+    // Prepare and execute SQL query
+    $sql = "SELECT total_hours
+            FROM timesheet
+            WHERE user_id=? AND event_type IN ('In', 'Out')";
+    $stmt = mysqli_prepare($connect, $sql);
+    mysqli_stmt_bind_param($stmt, "i", $user_id);
+    mysqli_stmt_execute($stmt);
+    $result = mysqli_stmt_get_result($stmt);
+    
+    // Fetch and sum total hours
+    while ($row = mysqli_fetch_assoc($result)) {
+        $totalHours += $row['total_hours'];
+    }
+    
+    return $totalHours;
+}
+// Check connection
+$user_id = $_SESSION['user_id'] ?? null; // Get user ID from session or set to null if not exists
+
+if ($user_id) {
+
+    // Call the function to calculate total hours
+    $totalHours = calculateTotalHours($connect, $user_id);
+    echo $totalHours;
+
+?>
 
 
     <!-- Modal  for report-->
@@ -237,11 +247,19 @@ include '../Layouts/main-user.php';
    <!-- time tracking -->
 
    <?php include '../Timesheet/TimeTracking.php'; ?>
-
+              
+   
 <!-- time tracking -->
 
 
             <!-- / Content -->
           </div>
+
         </div>
           <!-- Content wrapper -->
+
+          <?php
+} else {
+
+}
+?>
