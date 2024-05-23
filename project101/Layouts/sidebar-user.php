@@ -38,7 +38,7 @@
                   </a>
                 </li>
                 <li class="menu-item mb-3 active">
-                  <a href="../Biweekly/DisplayReports.php" class="menu-link">
+                  <a href="../Reports/DisplayReports.php" class="menu-link">
                     <div data-i18n="Analytics">Weekly Reports</div>
                   </a>
                 </li>

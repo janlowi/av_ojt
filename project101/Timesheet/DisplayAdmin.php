@@ -6,8 +6,8 @@ include '../Php/db_connect.php';
 include '../Layouts/main-admin.php'; ?>
 
   
-              <div class="card ">
-        
+            <div class="card ">
+            
               <table class="table">
                         <thead>
                             <tr>
@@ -37,7 +37,7 @@ include '../Layouts/main-admin.php'; ?>
                                      $yesterday_In_timestamp=$row['timestamp'];
                                      $_SESSION['last_timestamp']  =$yesterday_In_timestamp;
 
-                                     $sql_names="SELECT * FROM trainees WHERE user_id= '$user_id'";
+                                     $sql_names="SELECT * FROM users WHERE id= '$user_id'";
                                      $result_names = mysqli_query($connect, $sql_names);
                                      if ($result_names && mysqli_num_rows($result_names)>0 ) {
                                         while ($row_names = mysqli_fetch_assoc($result_names)) {
@@ -81,8 +81,39 @@ include '../Layouts/main-admin.php'; ?>
                 
                         ?>
                     </tbody>
-                </table>
-<div></div>
+                </table><br>
+
+
+<form action="../Php/php-datepicker.php" method="POST">
+                <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-info text-white" id="basic-addon1"><i
+                                        class="fas fa-calendar-alt"></i></span>
+                            </div>
+                            <input type="text" class="form-control" id="start_date" name="start_date" placeholder="Start Date" readonly>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-info text-white" id="basic-addon1"><i
+                                        class="fas fa-calendar-alt"></i></span>
+                            </div>
+                            <input type="text" class="form-control" id="end_date" name=" end_date" placeholder="End Date" readonly>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <button id="filter" type="submit" class="btn btn-outline-info btn-sm" name="submit">Filter</button>
+                    <button id="reset" class="btn btn-outline-warning btn-sm">Reset</button>
+                </div><br>
+     </form>
+
+
 
             <div class="card">
                 <table class=" table table-dark table-responsive">
@@ -153,4 +184,110 @@ include '../Layouts/main-admin.php'; ?>
                 </tbody>
                 </table>
     </div>
+
 <?php include '../Layouts/footer.php'; ?>
+
+
+<script>
+    $(function() {
+        $("#start_date").datepicker({
+            "dateFormat": "yy-mm-dd"
+        });
+        $("#end_date").datepicker({
+            "dateFormat": "yy-mm-dd"
+        });
+    });
+    </script>
+
+    <script>
+    // // Fetch records
+
+    // function fetch(start_date, end_date) {
+    //     $.ajax({
+    //         url: "records.php",
+    //         type: "POST",
+    //         data: {
+    //             start_date: start_date,
+    //             end_date: end_date
+    //         },
+    //         dataType: "json",
+    //         success: function(data) {
+    //             // Datatables
+    //             var i = "1";
+
+    //             $('#records').DataTable({
+    //                 "data": data,
+    //                 // buttons
+    //                 "dom": "<'row'<'col-sm-12 col-md-4'l><'col-sm-12 col-md-4'B><'col-sm-12 col-md-4'f>>" +
+    //                     "<'row'<'col-sm-12'tr>>" +
+    //                     "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+    //                 "buttons": [
+    //                     'copy', 'csv', 'excel', 'pdf', 'print'
+    //                 ],
+    //                 // responsive
+    //                 "responsive": true,
+    //                 "columns": [{
+    //                         "data": "id",
+    //                         "render": function(data, type, row, meta) {
+    //                             return i++;
+    //                         }
+    //                     },
+    //                     {
+    //                         "data": "name"
+    //                     },
+    //                     {
+    //                         "data": "standard",
+    //                         "render": function(data, type, row, meta) {
+    //                             return `${row.standard}th Standard`;
+    //                         }
+    //                     },
+    //                     {
+    //                         "data": "percentage",
+    //                         "render": function(data, type, row, meta) {
+    //                             return `${row.percentage}%`;
+    //                         }
+    //                     },
+    //                     {
+    //                         "data": "result"
+    //                     },
+    //                     {
+    //                         "data": "created_at",
+    //                         "render": function(data, type, row, meta) {
+    //                             return moment(row.created_at).format('DD-MM-YYYY');
+    //                         }
+    //                     }
+    //                 ]
+    //             });
+    //         }
+    //     });
+    // }
+    // fetch();
+
+    // Filter
+
+    // $(document).on("click", "#filter", function(e) {
+    //     e.preventDefault();
+
+    //     var start_date = $("#start_date").val();
+    //     var end_date = $("#end_date").val();
+
+    //     if (start_date == "" || end_date == "") {
+    //         alert("both date required");
+    //     } else {
+    //         $('#records').DataTable().destroy();
+    //         fetch(start_date, end_date);
+    //     }
+    // });
+
+    // Reset
+
+    $(document).on("click", "#reset", function(e) {
+        e.preventDefault();
+
+        $("#start_date").val(''); // empty value
+        $("#end_date").val('');
+
+        $('#records').DataTable().destroy();
+        fetch();
+    });
+    </script>

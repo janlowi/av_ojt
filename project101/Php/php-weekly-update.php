@@ -44,10 +44,10 @@ if(!empty($assigned_department) &&
 
     if($query==1){
         $_SESSION['success'] = "Report Updated Successfully";
-        header('location: ../Biweekly/DisplayReports.php');
+        header('location: ../Reports/DisplayReports.php');
     }else {
         $_SESSION['error'] = "Report Failed Successfully";
-        header('location: ../Biweekly/DisplayReports.php');
+        header('location: ../Reports/DisplayReports.php');
     }
 }
 
@@ -78,11 +78,11 @@ if(!empty($assigned_department) &&
         if($query==1){
             $_SESSION['success'] = "Report Saved Successfully";
             $_SESSION['report_saved'] = true;
-            header('location: ../Biweekly/DisplayReports.php');
+            header('location: ../Reports/DisplayReports.php');
 
         }else {
             $_SESSION['error'] = "Report Failed Successfully";
-            header('location: ../Biweekly/DisplayReports.php');
+            header('location: ../Reports/DisplayReports.php');
         }
     }
 

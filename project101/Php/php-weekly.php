@@ -49,15 +49,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Check if the query was successful
         if(mysqli_stmt_affected_rows($stmt) > 0) {
             $_SESSION['success']= "Report submitted successfully.";
-            header("Location: ../Biweekly/DisplayReports.php");
+            header("Location: ../Reports/DisplayReports.php");
         } else {
             $_SESSION['error']= "Failed to submit.";
-            header("Location: ../Biweekly/DisplayReports.php");
+            header("Location: ../Reports/DisplayReports.php");
         }
     } else {
         // Display errors
         foreach ($errors as $error) {
-            echo $error . "<br>";
+            $_SESSION['error']= $error;
+            header("Location: ../Reports/DisplayReports.php");
         }
     }
 }

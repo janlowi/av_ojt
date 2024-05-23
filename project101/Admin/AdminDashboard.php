@@ -105,8 +105,8 @@ error_reporting (0);
                                                                <div class="col-md-6">    
                                                                        <label for="usertype" class="form-label">Department</label>
                                                                        <select name="Department" id="usertype" class="form-select">
-                                                                               <option value="IT">IT</option>
-                                                                               <option value="Accounitng">Accounitng</option>
+                                                                               <option value="IT-Dept.">IT</option>
+                                                                               <option value="Accounting">Accounting</option>
                                                                                <option value="Finance">Finance</option>
                                                                                <option value="Admin">Admin</option>
                                                                                <option value="HR">HR</option>
@@ -207,8 +207,8 @@ error_reporting (0);
                                                                         <div class="col-5">    
                                                                         <label for="usertype" class="form-label">Department</label>
                                                                         <select name="Department" id="usertype" class="form-select">
-                                                                                <option value="IT">IT</option>
-                                                                                <option value="Accounitng">Accounitng</option>
+                                                                                <option value="IT-Dept">IT</option>
+                                                                                <option value="Accounting">Accounting</option>
                                                                                 <option value="Finance">Finance</option>
                                                                                 <option value="Admin">Admin</option>
                                                                                 <option value="HR">HR</option>
@@ -381,14 +381,15 @@ error_reporting (0);
         
                           <!-- Table -->
 
-                          <button
+<div class="card ">
+<div class="card-body">
+                        <button
                          type="button"
                          class="btn btn-success"
                          data-bs-toggle="modal"
                          data-bs-target="#modalCenter">
                          ADD USER
                        </button>
-<div class="card ">
                                        
                 <h5 class="card-header">Users</h5>
                 <div class=" table-responsive    text-nowrap">
@@ -475,6 +476,7 @@ error_reporting (0);
                   </table>
 
               <!--/ Bootstrap Dark Table -->
+              </div>
   </div>
 
 

@@ -12,24 +12,22 @@ include '../Layouts/main-admin.php';
                 position: relative;
 
             }
-           
         .dt-length{
             position: relative;
-            display: flex;
-            flex-direction: right;
             padding: 10px;
 
         }
         .dt-length .dt-input{
-            padding: 0 45px;
+            padding: 0 10px;
             border: none;
             outline: none;
 
         }
          
         .dt-search {
-            position: relative;
-            border: none;
+            display:flex;
+            flex-direction: end;
+            border: transparent ;
             outline:none;
 
 
@@ -38,14 +36,15 @@ include '../Layouts/main-admin.php';
             position: relative;
            height: 30px;
            outline: none;
-           border:none;
-           padding: 0 0 10px 5px;
+           border:transparent;
+           border-bottom: 1px solid var(--bs-secondary);
+           padding: 0 0 5px 5px;
 
 
         }
         .dt-paging-button{
-            border: 1px solid dark;
-            border-radius: 3px
+            padding-right: 12px;
+            border-radius: 3px; 
         }
         .content-wrapper, .card {
             overflow-y: scroll
@@ -55,236 +54,19 @@ include '../Layouts/main-admin.php';
 
 </style>
 
-<div class="col-2 col-xl-12 col-md-6" >
-    <div class="card  p-4 " >
-      <div class="card-header d-flex align-items-right justify-content-between">
-        <div class="card-title mb-2">
-          <h5 class="m-0 me-2 text-uppercase">Responses</h5>
-        </div>
-        </div>
-        
-        <div class="table-responsive text-nowrap  pt-5">
-        <table class="table table-bordered border-secondary table-striped "id="dataTable" >
-          <thead class="border-bottom">
-
-                                            <tr>
-                                                <th scope="col">
-
-                                                    <div class="d-flex flex-column justify-content-center align-items-center">
-                                                        <p class="mb-1">OJT ID </p>
-                                                    </div>
-
-                                                </th>
-                                                <th scope="col">
-                                                    
-
-                                                    <div class="d-flex flex-column justify-content-center align-items-center">
-                                                        <p class="mb-1 "> NAME</p>
-                                                    </div>
-                                             
-
-                                                </th>
-                                                <th scope="col">
-
-                      
-                                                    <div class="d-flex flex-column justify-content-center align-items-center">
-                                                        <p class="mb-1 ">TIMESTAMP</p>
-                                                    </div>
-                         
-
-                                                </th>
-                                                <th scope="col">
-
-                   
-                                                    <div class="d-flex flex-column justify-content-center align-items-center">
-                                                        <p class="mb-1 ">DEPARTMENT</p>
-                                                    </div>
-                                     
-
-                                                </th>
-
-                                                <th scope="col">
-
-                   
-                                                    <div class="d-flex flex-column justify-content-center align-items-center">
-                                                        <p class="mb-1 ">START</p>
-                                                    </div>
-
-
-                                                </th>
-                                                
-                                                <th scope="col">
-
-                   
-                                                    <div class="d-flex flex-column justify-content-center align-items-center">
-                                                        <p class="mb-1 ">END</p>
-                                                    </div>
-
-
-                                                </th>
-
-                                              
-                                                <th scope="col">
-
-                   
-                                                    <div class="d-flex flex-column justify-content-center align-items-center">
-                                                        <p class="mb-1 ">STATUS</p>
-                                                    </div>
-
-
-                                                </th>
-
-                                            </tr>
-                                        </thead>
-                                        <tbody class="table-border-bottom-0">
-                                            <?php 
-                                            $sql = "SELECT rp.*,
-                                                            tr.ojt_id,
-                                                            us.first_name,
-                                                            us.last_name,
-                                                            us.middle_name
-                                            
-                                            
-                                                    FROM trainees tr, reports rp, users us
-
-                                                    WHERE  us.id=rp.user_id 
-                                                    AND us.id=tr.user_id
-                                                    
-                                                    
-                
-                                            "; // Fetch data from the reports table
-                                            $query = mysqli_query($connect, $sql);
-                                            if(mysqli_num_rows($query) > 0) {
-                                                while ($row = mysqli_fetch_assoc($query)) { ?>
-                                                    <tr>
-                                                        <td>
-                                                            
-                                                            <div class="d-flex flex-column justify-content-center align-items-center">
-                                                                <p class="mb-1 "><?= $row['ojt_id'];?></p>
-                                                            </div>
-                                                        
-                                                        </td>
-                                                        <td>
-
-                                                            <div class="d-flex flex-column justify-content-center align-items-center">
-                                                                <p class="mb-1 "> <?= $row['first_name']." ".$row['middle_name']." ".$row['last_name'];?></p>
-
-                                                            </div>
-                                                            </div>   
-                                                        
-                                                        </td>
-                                                        <td>
-
-                                                            <div class="d-flex flex-column justify-content-center align-items-center">
-                                                                <p class="mb-1 "> <?= $row['timestamp']; ?></p>
-                                                            </div>
-                                                           
-                                                        
-                                                        </td>
-                                                        <td>
-
-                                           
-                                                            <div class="d-flex flex-column justify-content-center align-items-center">
-                                                                <p class="mb-1 "> <?= $row['assigned_dept']; ?></p>
-                                                            </div>
-                                                      
-
-
-                                                        </td>
-                                                        <td>
-
-                                                            <div class="d-flex flex-column justify-content-center align-items-center">
-                                                                <p class="mb-1 "> <?= $row['dos']; ?></p>
-                                                            </div>
-
-
-                                                        </td>
-                                                        <td>
-
-                                                            <div class="d-flex flex-column justify-content-center align-items-center">
-                                                                <p class="mb-1 "> <?= $row['doe']; ?></p>
-                                                            </div>
-
-
-                                                        </td>
-
-                                                   <td>
-                                                            <div class="d-flex flex-column justify-content-center align-items-center d-grid gap-2">
-                                    
-                                         <?php
-                                                if( $row['status']=='Pending'){
-
-                                            echo'
-                                            
-                                            
-                                                <style>
-                                                        #save_'.$row['id'].' {
-                                                                display:block;
-                                                        }
-                                                </style>
-                                                
-                                            ';
-                                            }else{
-                                                echo'
-                                                <span class="badge bg-label-success me-1">Saved</span>
-                                                <style>
-                                                        #save_'.$row['id'].' {
-                                                                display:none;
-                                                        }
-                                                </style>
-                                            ';
-                                            }
-                                                  
-
-                                            ?>
-
-                                            <div class="d-flex flex-column justify-content-center align-items-center d-grid gap-2">
-    
-    
-                                            <a href="../Biweekly/UpdateReports.php? update_report=<?= $_SESSION['user_id'] ?>" class="btn btn-warning btn-lg row-"id='save_<?= $row['id'] ?>'>
-                                            Edit
-                                                </a>
-    
-                                                    <a href="../Php/php-weekly-update.php? save_report=<?= $row['id'] ?>"  class="btn btn-success btn-lg row-"  id='save_<?= $row['id'] ?>' >
-                                               Submit
-                                                    </a>
-    
-                                                
-                                            </div>
-    
-    
-                                            </td>
-                                         
-                                                    </tr> 
-                                            <?php
-
-                                                }
-                                            }
-                                            ?>
-                        </tbody>
-                    </table>
-                </div>
-                </div>
-            </div>
-                  
-<script src="../Assets/js/jquery.js"></script>
-<script src="../Assets/js/datatables.js"></script>
-<script>
-new DataTable('#dataTable');
-</script>        
-<!-- Modal -->
 
    <!-- Contextual Classes -->
   
-   <div class="card">
+   <div class="card position-relative   ">
                 <div class="table-responsive text-nowrap">
-                  <table class="table">
+                  <table class="table my-2" id="dataReport">
                     <thead>
                       <tr>
                         <th>OJT ID</th>
                         <th>Name</th>
                         <th>Profile</th>
                         <th>Department</th>
+                        <th>University</th>
                         <th>Actions</th>
                       </tr>
                     </thead>
@@ -292,31 +74,26 @@ new DataTable('#dataTable');
                     <tbody class="table-border-bottom-0">
 
                                              <?php 
-                                            $sql = "SELECT rp.*,
+                                            $sql = "SELECT us.*,
                                                             tr.ojt_id,
-                                                            us.first_name,
-                                                            us.last_name,
-                                                            us.middle_name,
-                                                            us.department,
-                                                            us.profile
-                                            
-                                            
-                                                    FROM trainees tr, reports rp, users us
+                                                            tr.university
 
-                                                    WHERE  us.id=rp.user_id 
-                                                    AND us.id=tr.user_id
+                                            
+                                            
+                                                    FROM trainees tr, users us
+
+                                                    WHERE  us.id=tr.user_id 
+                                        
                                                     
-                                                    
-                
                                             "; // Fetch data from the reports table
                                             $query = mysqli_query($connect, $sql);
                                             if(mysqli_num_rows($query) > 0) {
                                                 while ($row = mysqli_fetch_assoc($query)) {     
                                                     $defaultProfileImage = '../Assets/img/avatars/av.png';
-                                                    $profileImage = !empty($row['profile']) ? $row['profile'] : $defaultProfileImage;
+                                                    $profileImage = !empty($row['profile']) ? '../Assets/img/avatars/'.$row['profile'] : $defaultProfileImage;
                                                    $name= $row['first_name'].' '.$row['middle_name'].' '.$row['last_name']; 
                                                     ?>
-                                                <?php if($row['department']==='IT'): ?>
+                                                <?php if($row['department']==='IT-Dept'): ?>
                                                     <tr class="table-info">
                                                         <td>
                                                         <i class='fas fa-user'></i>
@@ -335,13 +112,15 @@ new DataTable('#dataTable');
                                                         </td>
 
                                                         <td><span class="badge bg-label-info me-1"><?=$row['department'] ?></span></td>
+                                                        <td><?=  $row['university'] ?></td>
+
                                                         <td>
                                                             <div class="dropdown">
                                                                 <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                                                                     <i class="bx bx-dots-vertical-rounded"></i>
                                                                 </button>
                                                                 <div class="dropdown-menu">
-                                                                    <a class="dropdown-item" href="javascript:void(0);"><i class='fa fa-files-o'></i> View Reports</a>
+                                                                    <a class="dropdown-item" href="../Reports/ViewReport.php?view_report=<?=$row['id']?>"><i class='fa fa-files-o'></i> View Reports</a>
                                                                     <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
                                                                 </div>
                                                             </div>
@@ -367,6 +146,7 @@ new DataTable('#dataTable');
                                                         </ul>
                                                         </td>
                                                         <td><span class="badge bg-label-warning me-1"><?=$row['department'] ?></span></td>
+                                                        <td><?=  $row['university'] ?></td>
 
                                                         <td>
                                                         <div class="dropdown">
@@ -374,7 +154,7 @@ new DataTable('#dataTable');
                                                             <i class="bx bx-dots-vertical-rounded"></i>
                                                             </button>
                                                             <div class="dropdown-menu">
-                                                            <a class="dropdown-item" href="javascript:void(0);"><i class='fa fa-files-o'></i> View Reports</a>
+                                                            <a class="dropdown-item" href="../Reports/ViewReport.php?view_report=<?=$row['id']?>"><i class='fa fa-files-o'></i> View Reports</a>
                                                             <a class="dropdown-item" href="javascript:void(0);"
                                                                 ><i class="bx bx-trash me-1"></i> Delete</a
                                                             >
@@ -402,6 +182,7 @@ new DataTable('#dataTable');
                                                         </ul>
                                                         </td>
                                                         <td><span class="badge bg-label-primary me-1"><?=$row['department'] ?></span></td>
+                                                        <td><?=  $row['university'] ?></td>
 
                                                         <td>
                                                         <div class="dropdown">
@@ -409,7 +190,7 @@ new DataTable('#dataTable');
                                                             <i class="bx bx-dots-vertical-rounded"></i>
                                                             </button>
                                                             <div class="dropdown-menu">
-                                                            <a class="dropdown-item" href="javascript:void(0);"><i class='fa fa-files-o'></i> View Reports</a>
+                                                            <a class="dropdown-item" href="../Reports/ViewReport.php?view_report=<?=$row['id']?>"><i class='fa fa-files-o'></i> View Reports</a>
                                                             <a class="dropdown-item" href="javascript:void(0);"
                                                                 ><i class="bx bx-trash me-1"></i> Delete</a
                                                             >
@@ -437,6 +218,7 @@ new DataTable('#dataTable');
                                                             </ul>
                                                             </td>
                                                             <td><span class="badge bg-label-danger me-1"><?=$row['department'] ?></span></td>
+                                                            <td><?=  $row['university'] ?></td>
 
                                                             <td>
                                                             <div class="dropdown">
@@ -444,7 +226,7 @@ new DataTable('#dataTable');
                                                                 <i class="bx bx-dots-vertical-rounded"></i>
                                                                 </button>
                                                                 <div class="dropdown-menu">
-                                                                <a class="dropdown-item" href="javascript:void(0);"><i class='fa fa-files-o'></i> View Reports</a>
+                                                                <a class="dropdown-item" href="../Reports/ViewReport.php?view_report=<?=$row['id']?>"><i class='fa fa-files-o'></i> View Reports</a>
                                                                 <a class="dropdown-item" href="javascript:void(0);"
                                                                     ><i class="bx bx-trash me-1"></i> Delete</a
                                                                 >
@@ -472,6 +254,7 @@ new DataTable('#dataTable');
                                                             </ul>
                                                             </td>
                                                             <td><span class="badge bg-label-success me-1"><?=$row['department'] ?></span></td>
+                                                            <td><?=  $row['university'] ?></td>
 
                                                             <td>
                                                             <div class="dropdown">
@@ -479,7 +262,7 @@ new DataTable('#dataTable');
                                                                 <i class="bx bx-dots-vertical-rounded"></i>
                                                                 </button>
                                                                 <div class="dropdown-menu">
-                                                                <a class="dropdown-item" href="javascript:void(0);"><i class='fa fa-files-o'></i> View Reports</a>
+                                                                <a class="dropdown-item" href="../Reports/ViewReport.php?view_report=<?=$row['id']?>"><i class='fa fa-files-o'></i> View Reports</a>
                                                                 <a class="dropdown-item" href="javascript:void(0);"
                                                                     ><i class="bx bx-trash me-1"></i> Delete</a
                                                                 >
@@ -491,7 +274,14 @@ new DataTable('#dataTable');
 
 <?php }} ?>
                                     <!--/ Contextual Classes -->
+                                    <script src="../Assets/js/jquery.js"></script>
+<script src="../Assets/js/datatables.js"></script>
+<script>
+$(document).ready( function () {
+    $('#dataReport').DataTable();
 
+} );
+</script>    
 
                 <?php
 

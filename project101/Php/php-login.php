@@ -4,6 +4,8 @@ include 'db_connect.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     
+    $max_login_attempts= 3;
+    $status='Deactivated';
     $email = $_POST['email'];
     $password = $_POST['password'];
 
@@ -37,10 +39,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     exit();
                 } elseif ($status == "Active")  {
                     if (empty($row['profile'])) {
-                        $default_image = 'av.png'; 
-                        $profile_image_path = '../Assets/img/avatars/' . $default_image;
+                        $default_image = '../Assets/img/avatars/av.png'; 
+                      
 
-                        $update_query = "UPDATE users SET profile ='$profile_image_path' WHERE id = '$user_id'";
+                        $update_query = "UPDATE users SET profile ='$default_image' WHERE id = '$user_id'";
                         $update_result = mysqli_query($connect, $update_query);
                         $_SESSION['profile'] = $profile_image_path;
                     } else {
@@ -50,21 +52,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     if ($_SESSION['usertype'] === 'Admin') {
                         $_SESSION['Admin']=true;
                         header('location: ../Admin/AdminDashboard.php');
+                        unset($_SESSION['login_incorrect']);
                         exit();
                     } elseif ($_SESSION['usertype'] === 'Trainee') {
                         $_SESSION['Trainee']=true;
                         header('location: ../Users/UserDashboard.php');
+                        unset($_SESSION['login_incorrect']);
                         exit();
+
+                        
                     } else {
                         $_SESSION['error'] ="Unknown user type: " . $_SESSION['usertype'];
                     }
                 } 
-            }  else {
-                $_SESSION['error'] = "Incorrect password.";
+            } else {
+                // Increment login attempt count on incorrect password
+                $_SESSION['login_incorrect'] = isset($_SESSION['login_incorrect']) ? $_SESSION['login_incorrect'] + 1 : 1;
+
+                if ($_SESSION['login_incorrect'] >= $max_login_attempts) {
+                    $account_deactivate = "UPDATE users SET status ='Deactivated' WHERE email = '$email'";
+                    $query = mysqli_query($connect, $account_deactivate);
+                    $_SESSION['error'] = "Your account has been deactivated due to multiple failed login attempts.";
+                } else {
+                    $_SESSION['error'] = "Incorrect password. Attempt " . $_SESSION['login_incorrect'] . " of $max_login_attempts";
+                }
+
                 header('location: ../Login/index.php');
                 exit();
             }
-        } else {
+            }else {
             $_SESSION['error'] = "User does not exist.";
             header('location: ../Login/index.php');
             exit();
