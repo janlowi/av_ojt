@@ -43,12 +43,16 @@
 
         <!-- Datepicker -->
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <!-- datatables CSS -->
+    <!-- datatables CSS
     <link rel="stylesheet" href="https://cdn.datatables.net/v/dt/jqc-1.12.4/dt-2.0.7/b-3.0.2/sl-2.0.2/datatables.min.css"/>
-    <link rel="stylesheet" href="Editor-2.3.2/css/editor.dataTables.css">
+    <link rel="stylesheet" href="Editor-2.3.2/css/editor.dataTables.css"> -->
+
+    <!-- data tables -->
+    <link href="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-2.0.7/af-2.7.0/b-3.0.2/b-colvis-3.0.2/b-html5-3.0.2/b-print-3.0.2/cr-2.0.2/date-1.5.2/fc-5.0.0/fh-4.0.1/kt-2.12.0/r-3.0.2/rg-1.5.0/rr-1.5.0/sc-2.4.2/sb-1.7.1/sp-2.3.1/sl-2.0.1/sr-1.4.1/datatables.min.css" rel="stylesheet">
+
     <!-- jquery -->
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
-      <link rel="stylesheet" href="/resources/demos/style.css">
+    <!-- <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
+      <link rel="stylesheet" href="/resources/demos/style.css"> -->
 
     <script src="../assets/js/config.js"></script>
   </head>
@@ -91,7 +95,7 @@
                 </li>
 
                 <li class="menu-item active mb-3">
-                  <a href="../Biweekly/AllReports.php " class="menu-link">
+                  <a href="../Reports/AllReports.php " class="menu-link">
                     <div data-i18n="Analytics">Weekly Reports</div>
                   </a>
                 </li>
@@ -101,35 +105,38 @@
                     <div data-i18n="Analytics">Trainees</div>
                   </a>
 
-                  <li class="menu-item active mb-3">
-                  <a href="../Timesheet/DisplayAdmin.php" class="menu-link">
-                    <div data-i18n="Notifications">Attendance Record</div>
-                  </a>
-                </li>
-
                 </li>
                 <li class="menu-item active mb-3">
                   <a href="pages-account-settings-notifications.html" class="menu-link">
                     <div data-i18n="Notifications">Notifications</div>
                   </a>
                 </li>
-                <li class="menu-item active mb-3">
+                <!-- <li class="menu-item active mb-3">
                   <a href="pages-account-settings-connections.html" class="menu-link">
                     <div data-i18n="Connections">Connections</div>
                   </a>
-                </li>
+                </li> -->
               
             </li>
 
             <!-- Misc -->
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
-            <li class="menu-item active">
+            <li class="menu-item active  mb-3">
               <a
                 href=""
                 target="_blank"
                 class="menu-link active ">
                 <i class='fa-solid fa-gear' style='color:#6f6e67'></i>
                 <div data-i18n="Support">Settings</div>
+              </a>
+            </li>
+            <li class="menu-item active mb-3">
+              <a
+                href=""
+                target="_blank"
+                class="menu-link ">
+                <i class='fa-solid fa-gear' style='color:#6f6e67'></i>
+                <div data-i18n="Support">About Us</div>
               </a>
             </li>
             </ul>

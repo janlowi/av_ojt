@@ -1,58 +1,91 @@
 <?php
 session_start();
-require 'database_connection.php'; // Make sure to include your database connection file
+include 'db_connect.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST['username'];
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    
+    $max_login_attempts= 3;
+    $status='Deactivated';
+    $email = $_POST['email'];
     $password = $_POST['password'];
 
-    // Fetch user data from the database
-    $stmt = $conn->prepare("SELECT id, password, is_active, login_attempts FROM users WHERE username = ?");
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $stmt->store_result();
-    $stmt->bind_result($user_id, $hashed_password, $is_active, $login_attempts);
-    $stmt->fetch();
-
-    // Check if user exists
-    if ($stmt->num_rows == 1) {
-        // Check if account is active
-        if ($is_active) {
-            // Verify password
-            if (password_verify($password, $hashed_password)) {
-                // Successful login, reset login attempts
-                $stmt = $conn->prepare("UPDATE users SET login_attempts = 0 WHERE id = ?");
-                $stmt->bind_param("i", $user_id);
-                $stmt->execute();
-
-                echo "<div class='success'>Login successful!</div>";
-                // Perform any other login success logic (e.g., set session variables)
-            } else {
-                // Increment login attempts
-                $login_attempts++;
-                $stmt = $conn->prepare("UPDATE users SET login_attempts = ? WHERE id = ?");
-                $stmt->bind_param("ii", $login_attempts, $user_id);
-                $stmt->execute();
-
-                if ($login_attempts >= 3) {
-                    // Disable the account after 3 unsuccessful attempts
-                    $stmt = $conn->prepare("UPDATE users SET is_active = FALSE WHERE id = ?");
-                    $stmt->bind_param("i", $user_id);
-                    $stmt->execute();
-
-                    echo "<div class='error'>Maximum login attempts exceeded. Your account has been deactivated. Please contact support.</div>";
-                } else {
-                    echo "<div class='error'>Invalid login credentials. Attempt $login_attempts of 3.</div>";
-                }
-            }
-        } else {
-            echo "<div class='error'>Your account is deactivated. Please contact support.</div>";
-        }
+    if (empty($email) || empty($password)) {
+        $_SESSION['error'] = "Fill all required fields";
+        header('location: ../Login/index.php');
+        exit();
     } else {
-        echo "<div class='error'>Invalid username or password.</div>";
-    }
+        $query = "SELECT  *
+                    FROM users 
+                    WHERE email = ?";
+        
+        $stmt = mysqli_prepare($connect, $query);
+        mysqli_stmt_bind_param($stmt, "s", $email);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        
+        if ($row = mysqli_fetch_assoc($result)) {
+            $hashed_password = $row['password'];
+            $user_id = $row['id'];
+            $status = $row['status'];
+            $_SESSION['usertype'] = $row['user_type'];
+            $_SESSION['email'] = $row['email'];
+            $_SESSION['user_id'] = $user_id;
+            $_SESSION['firstname'] = $row['first_name'];
 
-    $stmt->close();
-    $conn->close();
+            if (password_verify($password, $hashed_password)) {
+                if ($status == "Deactivated") {
+                    $_SESSION['error'] = "Your account has been deactivated";
+                    header('location: ../Login/index.php');
+                    exit();
+                } elseif ($status == "Active")  {
+                    if (empty($row['profile'])) {
+                        $default_image = '../Assets/img/avatars/av.png'; 
+                      
+
+                        $update_query = "UPDATE users SET profile ='$default_image' WHERE id = '$user_id'";
+                        $update_result = mysqli_query($connect, $update_query);
+                        $_SESSION['profile'] = $profile_image_path;
+                    } else {
+                        $_SESSION['profile'] = $row['profile'];
+                    }
+                    $_SESSION['logged_in']=true;
+                    if ($_SESSION['usertype'] === 'Admin') {
+                        $_SESSION['Admin']=true;
+                        header('location: ../Admin/AdminDashboard.php');
+                        unset($_SESSION['login_incorrect']);
+                        exit();
+                    } elseif ($_SESSION['usertype'] === 'Trainee') {
+                        $_SESSION['Trainee']=true;
+                        header('location: ../Users/UserDashboard.php');
+                        unset($_SESSION['login_incorrect']);
+                        exit();
+
+                        
+                    } else {
+                        $_SESSION['error'] ="Unknown user type: " . $_SESSION['usertype'];
+                    }
+                } 
+            } else {
+                // Increment login attempt count on incorrect password
+                $_SESSION['login_incorrect'] = isset($_SESSION['login_incorrect']) ? $_SESSION['login_incorrect'] + 1 : 1;
+
+                if ($_SESSION['login_incorrect'] >= $max_login_attempts) {
+                    $account_deactivate = "UPDATE users SET status ='Deactivated' WHERE email = '$email'";
+                    $query = mysqli_query($connect, $account_deactivate);
+                    $_SESSION['login_incorrect']=true;
+                    $_SESSION['error'] = "Your account has been deactivated due to multiple failed login attempts.";
+                } else {
+                    $_SESSION['error'] = "Incorrect password. Attempt " . $_SESSION['login_incorrect'] . " of $max_login_attempts";
+                }
+
+                header('location: ../Login/index.php');
+                exit();
+            }
+            }else {
+            $_SESSION['error'] = "User does not exist.";
+            header('location: ../Login/index.php');
+            exit();
+        }
+    }
 }
 ?>

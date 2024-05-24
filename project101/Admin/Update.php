@@ -10,19 +10,7 @@ include '../Php/authenticate.php';
  if(isset($_GET['update'])) 
  
  $user_id= $_GET['update'];
-         $sql = "SELECT us.*,
-                        tr.id,
-                        tr.ojt_id,
-                        tr.contact_num,
-                        tr.degree,
-                        tr.university,
-                        tr.hours_to_render,
-                        tr.dos
-         
-          FROM users us
-        INNER JOIN trainees tr ON tr.user_id = us.id
-          WHERE us.id = '$user_id' 
-           ";
+         $sql = "SELECT * FROM trainees tr,users us WHERE us.id = '$user_id' AND us.id = tr.user_id ";
          $result = mysqli_query($connect, $sql);
          $row = mysqli_fetch_assoc($result);
        if ($row>0 ) {
@@ -44,18 +32,9 @@ include '../Php/authenticate.php';
                    $usertype = $row["user_type"];
                    $contact= $row["contact_num"];
                    $status = $row["status"];
-                   $department = $row["department"]; 
-                   date_default_timezone_set('Asia/Manila');// local timezone
-
-                   $dateOfBirth =   date($row['dob']);
-                   $dateOfStart =   date($row['dos']);
-                   $start = new DateTime($dateOfStart);
-                   // Calculate age
-                   $today = new DateTime();
-                   $birthdate = new DateTime($dateOfBirth);
-                
-                   $age = $birthdate->diff($today)->y;
-    
+                   $department = $row["department"];
+                   
+                  
        }
                 
 
@@ -159,9 +138,9 @@ include '../Php/authenticate.php';
                                                                <div class="col-md-6">    
                                                                        <label for="usertype" class="form-label">Department</label>
                                                                        <select name="Department" id="usertype" class="form-select">
-                                                                               <option value="IT" <?php if ($department == 'IT' ) {
+                                                                               <option value="IT-Dept" <?php if ($department == 'IT-Dept' ) {
                                                                                 echo 'selected'; }?>>IT</option>
-                                                                               <option value="Accounitng" <?php if ($department == 'Accounting' ) {
+                                                                               <option value="Accounting" <?php if ($department == 'Accounting' ) {
                                                                                 echo 'selected'; }?>>Accounting</option>
                                                                                <option value="Finance" <?php if ($department == 'Finance' ) {
                                                                                 echo 'selected'; }?>>Finance</option>

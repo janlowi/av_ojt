@@ -62,17 +62,20 @@ include 'db_connect.php';
                                       tr.hours_to_render = '$hours', 
                                       tr.dos = '$dos', 
                                       us.office_assigned = '$office', 
-                                      tr.email = '$email', 
+                                      tr.email = '$email',
+                                      us.email = '$email',
                                       us.user_type = '$usertype', 
                                       us.status = '$status', 
                                       us.department = '$department'
                                       
-                            WHERE us.id = '$id' AND us.id=tr.user_id";
+                            WHERE us.id=tr.user_id 
+                            AND us.id = '$id'";
                     $result = mysqli_query($connect, $sql);
 
                     if($result==true){
-                    
+                  
                     $success_msg = "Trainee Updated successfully.";
+                    $_SESSION['success'] = $success_msg;
                     header("Location: ../Admin/AdminDashboard.php");
                  
                     }
@@ -93,3 +96,4 @@ include 'db_connect.php';
 
 
 ?>
+

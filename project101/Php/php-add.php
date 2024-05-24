@@ -44,6 +44,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $default_profile = '../Assets/img/avatars/av.png';
 
         // Extract initials from the user's full name
+        $stmt=$connect->prepare("SELECT * FROM users WHERE email=?");
+                $stmt->execute([$email]);
+                $check_email=$stmt->fetch(); 
+               if($check_email) {
+                $error_msg="Email arlready in use.";
+                $_SESSION['error'] = $error_msg;
+                header("Location: ../Admin/AdminDashboard.php");
+                exit();
+               }else {
+
+             
+              
+
         $full_name = $firstname . ' ' . $lastname;
         $name_parts = explode(' ', $full_name);
         $initials = '';
@@ -58,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // echo "Generated Password: " . $password_generated;
 
         // Construct email body
-        $mail_body = 'This is your OJT account body:<br><br>'
+        $mail_body = 'This is your OJT account:<br><br>'
                     . 'Email: ' . $email . '<br>'
                     . 'Password:' . $password_generated;
 
@@ -122,7 +135,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         password, 
                         user_type,  
                         department,
-                        status
+                        status,
                         profile
                     ) VALUES (         
                         '$firstname',
@@ -135,7 +148,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         '$pass_hashed',
                         '$user_type',
                         '$department',
-                        '$status'
+                        '$status',
                         '$default_profile'
                     )";
   
@@ -179,6 +192,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         } else {
             $error_msg = "Please fill all the fields.";
         }
+
+     }    
+
     } elseif (isset($_POST['adminSubmit'])) {
         $firstname = $_POST["Firstname"];
         $middlename = $_POST["Middlename"];
@@ -191,6 +207,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $department = $_POST["Department"];
         $dob = $_POST["Birthday"];
     
+
+         $stmt=$connect->prepare("SELECT * FROM users WHERE email=?");
+                $stmt->execute([$email]);
+                $check_email=$stmt->fetch(); 
+               if($check_email) {
+                $error_msg="Email arlready in use.";
+                $_SESSION['error'] = $error_msg;
+                header("Location: ../Admin/AdminDashboard.php");
+                exit();
+               }else {
           // Extract initials from the user's full name
           $full_name = $firstname . ' ' . $lastname;
           $name_parts = explode(' ', $full_name);
@@ -298,5 +324,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     exit();
 }
     }
+}
 }
 ?>

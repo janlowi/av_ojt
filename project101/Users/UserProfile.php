@@ -69,19 +69,8 @@ include '../Layouts/main-user.php';
                                                         data-bs-target="#modalProfile">
                                                         <i class='fa-solid fa-camera-retro'></i>
                                                       </button>
-<<<<<<< HEAD
-
-                                                    
-
-                                                </div>
-                                                
-                                              </div>
-                                              
-                                              
-=======
                                               </div>
                                            
->>>>>>> ea62c509dfb03b15437536949e809c098c263c32
                                             </div>
                                             <div class="card-title mb-2">
                                             <h5 class="m-0 me-2 text-uppercase"><?php echo $_SESSION['firstname']."'s", " ", "INFORMATION";?> </h5>
@@ -248,6 +237,7 @@ include '../Layouts/main-user.php';
                                                                   <div class="user-progress mt-lg-4">
                                                                     <p class="mb-1 text-start"><?= $formatted_date; ?></p>
                                                                   </div>
+                                                                  <i class='fa fa-edit align-items-center'  data-bs-toggle="modal" data-bs-target="#updateBirthday"></i>
                                                                 </th>
                                                               </tr> <tr>
                                                                 <th>
@@ -290,6 +280,7 @@ include '../Layouts/main-user.php';
                                                                 <th class="text-end">
                                                                   <div class="user-progress mt-lg-4">
                                                                     <p class="mb-1 text-start"><?= $row ['contact_num']; ?></p>
+                                                                    <i class='fa fa-edit' ></i>
                                                                   </div>
                                                                 </th>
                                                               </tr>
@@ -431,6 +422,55 @@ include '../Layouts/main-user.php';
 
 
 
+   <!-- Modal edit birhtday -->
+  <div class="modal fade" id="updateBirthday" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+         <form action="../Php/php-profile-update.php" method="POST">
+
+         <label for="date ">Update Birthday</label>
+        <input type="date" name="updatedob" class="form-control" id="date" />
+        <input type="text" value="<?= $user_id ?>" name="user_id"  hidden />
+      
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" name="updateBirthday" >Update</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal edit birhtday -->
+  <div class="modal fade" id="updateContacts" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+         <form action="../Php/php-profile-update.php" method="POST">
+
+         <label for="date ">Update Birthday</label>
+        <input type="date" name="updatedob" class="form-control" id="date" />
+        <input type="text" value="<?= $user_id ?>" name="user_id"  hidden />
+      
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" name="updateBirthday" >Update</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
                                         <!-- toast -->
                                         <?php
                                                       if(isset($_SESSION['success'])){

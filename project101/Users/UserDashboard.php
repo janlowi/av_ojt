@@ -7,8 +7,8 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !==true){
 $title="User Dashboard";
 include '../Layouts/main-user.php'; 
  include '../Php/db_connect.php';
- 
   ?>
+<<<<<<< HEAD
 
               <!-- Content wrapper
            <div class="content-wrapper"> -->
@@ -43,6 +43,63 @@ include '../Layouts/main-user.php';
               
             </div>
             
+=======
+                                              
+                <div class="col-lg-6 mb-4 order-0 d-flex justify-content-center ">
+                  <div class="card ">
+                        <div class="card-body ">
+                       
+                                                  s<?php
+                                                      $user_id = $_SESSION['user_id'];
+                                                      $sql = "SELECT  ts.*,
+                                                                      us.id
+                                                      FROM timesheet ts, users us
+                                                      WHERE user_id=us.id
+                                                      AND us.id= '$user_id'
+                                                      AND event_type IN ('In', 'Out')
+                                                      ORDER BY timestamp";
+
+
+                                                      $query = mysqli_query($connect, $sql);
+                                                      $totalHours = 0;
+                                                      if ($query && mysqli_num_rows($query) > 0) {
+                                                      while ($row = mysqli_fetch_assoc($query)) {
+                                                      $totalHours += $row['total_hours'];
+                                                    ?>
+                                                <div class="row">
+                                                <div class="col-sm-6">
+                                                  <div class="card">
+                                                 
+                                                    <div class="card-body">
+                                                    
+                                                      <h5 class="card-title"><?= $totalHours ?></h5>
+                                                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                                      <a href="#" class="btn btn-primary">Time In</a>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                  <div class="card">
+                                                    <div class="card-body">
+                                                      <h5 class="card-title">Special title treatment</h5>
+                                                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                                      <a href="#" class="btn btn-primary">Total Hours</a>
+                                                    </div>
+                                                 
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <?php
+                                                         }
+                                                    }
+                                                ?>
+                        </div>
+                      </div>
+                </div>
+
+         
+  <!-- report -->
+>>>>>>> d5aac13620f13fd4d2f15650065bee2e97bcf1c3
                 <div class="col-md-0 col-xl-3 order-0">
                   <div class="card mb-0">
                     <!-- <img class="card-img-top" src="../assets/img/elements/18.jpg" alt="Card image cap" /> -->
@@ -64,8 +121,7 @@ include '../Layouts/main-user.php';
                     </div>
                   </div>
                 </div>
-              <!--/ report -->
-
+ <!--/ report -->
 
 
       <!-- time -->
@@ -175,13 +231,13 @@ if ($user_id) {
                                                           <textarea id="summary" name="summary" rows="4" required class="form-control"></textarea>
 
                                                           <label for="accomplishments">Accomplishments:</label><br>
-                                                          <textarea id="accomplishments" name="accomplishments" rows="4" class="form-control"></textarea>
+                                                          <textarea id="accomplishments" name="accomplishments" rows="4" class="form-control"required></textarea>
 
                                                           <label for="challenges">Challenges:</label>
-                                                          <textarea id="challenges" name="challenges" rows="4" class="form-control"></textarea>
+                                                          <textarea id="challenges" name="challenges" rows="4" class="form-control"required></textarea>
 
                                                           <label for="learning">Learning:</label>
-                                                          <textarea id="learning" name="learning" rows="4" class="form-control"></textarea>
+                                                          <textarea id="learning" name="learning" rows="4" class="form-control"required></textarea>
                                                           
                                                           <input type="text" value="<?= $_SESSION['user_id'] ?>" hidden>
 
@@ -199,11 +255,6 @@ if ($user_id) {
                            </div>
                          </div>
                        </div>
-
-
-                    
-             
-
 
 
         <!-- toast -->
@@ -267,6 +318,7 @@ if ($user_id) {
 include '../Layouts/footer.php'; 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                                 <!-- right layout -->
                                 </div>
                   </div>
@@ -294,3 +346,8 @@ include '../Layouts/footer.php';
 =======
  ?>
 >>>>>>> 9c0377cc3fba3f0e80c8d4510f22d2cf3e16de02
+=======
+ ?>
+
+ 
+>>>>>>> d5aac13620f13fd4d2f15650065bee2e97bcf1c3

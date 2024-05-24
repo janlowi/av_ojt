@@ -7,22 +7,32 @@ include '../Layouts/main-admin.php'; ?>
 
   
 <<<<<<< HEAD
+<<<<<<< HEAD
             <div class="card ">
             
 =======
               <div class="card ">
         
 >>>>>>> 9c0377cc3fba3f0e80c8d4510f22d2cf3e16de02
+=======
+            <div class="card ">
+            
+>>>>>>> d5aac13620f13fd4d2f15650065bee2e97bcf1c3
               <table class="table">
                         <thead>
                             <tr>
                             <th scope="col">User Id</th>
-                            <th scope="col">Name</th>
+                            <th scope="col">Name</th> 
                             <th scope="col">Last Timestamp</th>
                             <th scope="col">Handle</th>
                             </tr>
                         </thead>
                      <tbody>
+                     <div>
+                            <button id="exportButton" class="btn btn-outline-success btn-sm">Export Data</button>
+                        </div>
+
+                        
                          <?php 
                          $sql = "SELECT user_id, timestamp  
                          FROM timesheet WHERE DATE(timestamp) = DATE_SUB(CURDATE(), INTERVAL 1 DAY )
@@ -43,10 +53,14 @@ include '../Layouts/main-admin.php'; ?>
                                      $_SESSION['last_timestamp']  =$yesterday_In_timestamp;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                                      $sql_names="SELECT * FROM users WHERE id= '$user_id'";
 =======
                                      $sql_names="SELECT * FROM trainees WHERE user_id= '$user_id'";
 >>>>>>> 9c0377cc3fba3f0e80c8d4510f22d2cf3e16de02
+=======
+                                     $sql_names="SELECT * FROM users WHERE id= '$user_id'";
+>>>>>>> d5aac13620f13fd4d2f15650065bee2e97bcf1c3
                                      $result_names = mysqli_query($connect, $sql_names);
                                      if ($result_names && mysqli_num_rows($result_names)>0 ) {
                                         while ($row_names = mysqli_fetch_assoc($result_names)) {
@@ -91,6 +105,9 @@ include '../Layouts/main-admin.php'; ?>
                         ?>
                     </tbody>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> d5aac13620f13fd4d2f15650065bee2e97bcf1c3
                 </table><br>
 
 
@@ -124,10 +141,13 @@ include '../Layouts/main-admin.php'; ?>
      </form>
 
 
+<<<<<<< HEAD
 =======
                 </table>
 <div></div>
 >>>>>>> 9c0377cc3fba3f0e80c8d4510f22d2cf3e16de02
+=======
+>>>>>>> d5aac13620f13fd4d2f15650065bee2e97bcf1c3
 
             <div class="card">
                 <table class=" table table-dark table-responsive">
@@ -199,6 +219,9 @@ include '../Layouts/main-admin.php'; ?>
                 </table>
     </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> d5aac13620f13fd4d2f15650065bee2e97bcf1c3
 
 <?php include '../Layouts/footer.php'; ?>
 
@@ -305,7 +328,11 @@ include '../Layouts/main-admin.php'; ?>
         $('#records').DataTable().destroy();
         fetch();
     });
+<<<<<<< HEAD
     </script>
 =======
 <?php include '../Layouts/footer.php'; ?>
 >>>>>>> 9c0377cc3fba3f0e80c8d4510f22d2cf3e16de02
+=======
+    </script>
+>>>>>>> d5aac13620f13fd4d2f15650065bee2e97bcf1c3

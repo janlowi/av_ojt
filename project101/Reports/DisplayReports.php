@@ -1,22 +1,59 @@
 <?php 
 session_start();
-include '../Php/authenticate.php';
 $title="Weekly Response";
+include '../Php/authenticate.php';
 include '../Layouts/main-user.php'; 
- include '../Layouts/sidebar-user.php';
- include '../Layouts/navbar-user.php';
  include '../Php/db_connect.php';
 
 ?>     
+<style>
+            .dt-layout-row .dt-paging, .dt-info {
+                position: relative;
+                display: flex;
+                flex-direction: row-reverse;
+            }
+           
+        .dt-length{
+            position: relative;
+            display: flex;
+            flex-direction: row-reverse;
+            top: -10px;
 
-<!-- Content wrapper -->
-<div class="content-wrapper">
-  <!-- Content --> 
-<!-- Layout container -->
-<div class="layout-page">
+        }
+        .dt-length .dt-input{
+            padding: 0 20px 0 58px;
+            border: none;
+            outline: none;
 
-<div class="container-xxl flex-grow-1 container-p-y">
-        <div class="row">
+        }
+         
+        .dt-search {
+            position: relative;
+            display: flex;
+            justify-content: flex-end;
+            border: none;
+            outline:none;
+
+        }
+        .dt-search .dt-input{
+            position: relative;
+           height: 30px;
+           outline: none;
+           border:none;
+           padding: 0 0 10px 5px;
+
+
+        }
+        .dt-paging-button{
+            border: 1px solid dark;
+            border-radius: 3px
+        }
+       
+      
+    
+
+
+</style>
 
      
 
@@ -31,7 +68,7 @@ include '../Layouts/main-user.php';
 
 
 
-        <div class="table-responsive text-nowrap">
+        <div class="table-responsive text-nowrap  pt-5">
         <table class="table table-bordered border-secondary " id="dataTable">
           <thead class="border-bottom">
 
@@ -41,15 +78,6 @@ include '../Layouts/main-user.php';
                                                     <div class="d-flex flex-column justify-content-center align-items-center">
                                                         <p class="mb-1">ID </p>
                                                     </div>
-
-                                                </th>
-                                                <th scope="col">
-                                                    
-
-                                                    <div class="d-flex flex-column justify-content-center align-items-center">
-                                                        <p class="mb-1 ">OJT ID </p>
-                                                    </div>
-                                             
 
                                                 </th>
                                                 <th scope="col">
@@ -91,45 +119,7 @@ include '../Layouts/main-user.php';
 
                                                 </th>
 
-                                                <th scope="col">
-
-                   
-                                                    <div class="d-flex flex-column justify-content-center align-items-center">
-                                                        <p class="mb-1 ">SUMMARY</p>
-                                                    </div>
-
-
-                                                </th>
-
-                                                <th scope="col">
-
-                   
-                                                    <div class="d-flex flex-column justify-content-center align-items-center">
-                                                        <p class="mb-1 ">ACCOMPLISHMENTS</p>
-                                                    </div>
-
-
-                                                </th>
-
-                                                <th scope="col">
-
-                   
-                                                    <div class="d-flex flex-column justify-content-center align-items-center">
-                                                        <p class="mb-1 ">CHALLENGES</p>
-                                                    </div>
-
-
-                                                </th>
-
-                                                <th scope="col">
-
-                   
-                                                    <div class="d-flex flex-column justify-content-center align-items-center">
-                                                        <p class="mb-1 ">LEARNINGS</p>
-                                                    </div>
-
-
-                                                </th>
+                                            
                                                 <th scope="col">
 
                    
@@ -138,28 +128,46 @@ include '../Layouts/main-user.php';
                                                     </div>
 
 
-                                                </th>
+                                                </th>  <th scope="col">
+
+                   
+                                                    <div class="d-flex flex-column justify-content-center align-items-center">
+                                                        <p class="mb-1 ">OPERATION</p>
+                                                    </div>
+
+
+                                                    </th>
 
                                             </tr>
                                         </thead>
                                         <tbody class="table-border-bottom-0">
                                             <?php 
+                                            $user_id= $_SESSION['user_id'];
                                             $sql = "SELECT rp.*,
-                                                            tr.ojt_id
-                                            
-                                            
-                                                    FROM trainees tr, reports rp, users us
+                                            tr.ojt_id,
+                                            us.first_name,
+                                            us.last_name,
+                                            us.middle_name
+                            
+                            
+                                            FROM trainees tr, reports rp, users us
 
-                                                    WHERE  us.id=rp.user_id 
-                                                    AND us.id=$_SESSION[user_id] 
-                                                    AND us.id=tr.user_id
+                                            WHERE  us.id=rp.user_id 
+                                            AND us.id=tr.user_id
+                                            AND us.id='$user_id'
+                                            ORDER BY id DESC
+                                            
                                                     
                                                     
                 
                                             "; // Fetch data from the reports table
                                             $query = mysqli_query($connect, $sql);
                                             if(mysqli_num_rows($query) > 0) {
-                                                while ($row = mysqli_fetch_assoc($query)) { ?>
+                                                while ($row = mysqli_fetch_assoc($query)) { 
+                                                    $_SESSION['reportname']= $row['first_name'];
+                                                    $_SESSION['user_report_id']= $user_id;
+                                                    ?>
+                                               
                                                     <tr>
                                                         <td>
                                                             
@@ -168,14 +176,7 @@ include '../Layouts/main-user.php';
                                                             </div>
                                                         
                                                         </td>
-                                                        <td>
 
-                                                            <div class="d-flex flex-column justify-content-center align-items-center">
-                                                                <p class="mb-1 "> <?= $row['ojt_id']; ?></p>
-                                                            </div>
-                                                            </div>   
-                                                        
-                                                        </td>
                                                         <td>
 
                                                             <div class="d-flex flex-column justify-content-center align-items-center">
@@ -210,42 +211,21 @@ include '../Layouts/main-user.php';
 
 
                                                         </td>
+
                                                         <td>
-
                                                             <div class="d-flex flex-column justify-content-center align-items-center">
-                                                                <p class="mb-1 "> <?= $row['summary']; ?></p>
+                                                                <?php if($row['status']=='Pending') { ?>
+                                                                    <span class="badge bg-label-warning me-1"><?= $row['status']; ?></span>
+                                                                <?php } elseif($row['status']=='Submitted') { ?>
+                                                                    <span class="badge bg-label-success me-1"><?= $row['status']; ?></span>
+                                                                <?php } else { ?>
+                                                                    <span class="badge bg-label-warning me-1"><?= $row['status']; ?></span>
+                                                                <?php } ?>
                                                             </div>
-
-
-                                                        </td>
-                                                        <td>
-
-                                                            <div class="d-flex flex-column justify-content-center align-items-center">
-                                                                <p class="mb-1 "> <?= $row['accomplishment']; ?></p>
-                                                            </div>
-
-
-                                                        </td>
-                                                        <td>
-
-                                                            <div class="d-flex flex-column justify-content-center align-items-center">
-                                                                <p class="mb-1 "> <?= $row['challenges']; ?></p>
-                                                            </div>
-
-
-                                                        </td>
-                                                        <td>
-
-                                                            <div class="d-flex flex-column justify-content-center align-items-center">
-                                                                <p class="mb-1 "> <?= $row['learnings']; ?></p>
-                                                            </div>
-
-
                                                         </td>
 
-                                                   <td>
-                                                            <div class="d-flex flex-column justify-content-center align-items-center d-grid gap-2">
-                                    
+
+                                                   <td>                                    
                                          <?php
                                                 if( $row['status']=='Pending'){
 
@@ -261,7 +241,12 @@ include '../Layouts/main-user.php';
                                             ';
                                             }else{
                                                 echo'
-                                                <span class="badge bg-label-success me-1">Saved</span>
+                                                <div class="d-grid gap-2">                                    
+                                                    <a href="../Reports/UserView.php?view_report='.$row['id'].'"  class="btn btn-success ">
+                                               View
+                                                    </a>
+
+                                                </div>
                                                 <style>
                                                         #save_'.$row['id'].' {
                                                                 display:none;
@@ -273,37 +258,23 @@ include '../Layouts/main-user.php';
 
                                             ?>
 
-                                            <div class="d-flex flex-column justify-content-center align-items-center d-grid gap-2">
-    
-    
-                                            <a href="../Biweekly/UpdateReports.php? update_report=<?= $_SESSION['user_id'] ?>" class="btn btn-warning btn-lg row-"id='save_<?= $row['id'] ?>'>
+                                        <div class="d-grid gap-2">
+
+                                            <a href="../Reports/UpdateReports.php?update_report=<?= $row['id'] ?>" class="btn btn-warning "id='save_<?= $row['id'] ?>'>
                                             Edit
                                                 </a>
     
-                                                    <a href="../Php/php-weekly-update.php? save_report=<?= $row['id'] ?>"  class="btn btn-success btn-lg row-"  id='save_<?= $row['id'] ?>' >
+                                                    <a href="../Php/php-weekly-update.php?save_report=<?= $row['id'] ?>"  class="btn btn-success "  id='save_<?= $row['id'] ?>' >
                                                Submit
                                                     </a>
-    
-                                                
+ 
                                             </div>
-    
-    
+
                                             </td>
                                          
                                                     </tr> 
                                             <?php
 
-                                                        $_SESSION['id'] = $row['id'];
-                                                        $_SESSION['ojt_id'] = $row['ojt_id'];
-                                                        $_SESSION['timestamp'] = $row['timestamp'];
-                                                        $_SESSION['assigned_dept'] = $row['assigned_dept'];
-                                                        $_SESSION['dos'] = $row['dos'];
-                                                        $_SESSION['doe'] = $row['doe'];
-                                                        $_SESSION['summary'] = $row['summary'];
-                                                        $_SESSION['accomplishment'] = $row['accomplishment'];
-                                                        $_SESSION['challenges'] = $row['challenges'];
-                                                        $_SESSION['learnings'] = $row['learnings'];
-                                                        $_SESSION['status'] = $row['status'];
                                                 }
                                             }
                                             ?>
@@ -312,12 +283,7 @@ include '../Layouts/main-user.php';
                 </div>
                 </div>
             </div>
-                        <!-- filter data -->
-                        <script>
-                        new DataTable('#dataTable');
-                        </script>
-                        <!-- filter data -->
-
+                       
                 <?php
 
 if(isset($_SESSION['success'])){
@@ -423,9 +389,13 @@ if(isset($_SESSION['saved_success'])){
 }
 ?>
 
-</div>
-</div>
-</div>
-</div>
 
+<script>
+$(document).ready( function () {
+    $('#dataTable').DataTable({
 
+    });
+
+} );
+</script> 
+<?php include '../Layouts/footer.php'; ?>

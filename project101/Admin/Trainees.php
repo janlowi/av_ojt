@@ -8,6 +8,52 @@ include '../Layouts/main-admin.php';
 
   ?>
                 
+                <style>
+            .dt-layout-row .dt-paging, .dt-info {
+                position: relative;
+
+            }
+        .dt-length{
+            position: relative;
+            padding: 10px;
+
+        }
+        .dt-length .dt-input{
+            padding: 0 10px;
+            border: none;
+            outline: none;
+
+        }
+         
+        .dt-search {
+            display:flex;
+            flex-direction: end;
+            border: transparent ;
+            outline:none;
+
+
+        }
+        .dt-search .dt-input{
+            position: relative;
+           height: 30px;
+           outline: none;
+           border:transparent;
+           border-bottom: 1px solid var(--bs-secondary);
+           padding: 0 0 5px 5px;
+
+
+        }
+        .dt-paging-button{
+            padding-right: 12px;
+            border-radius: 3px; 
+        }
+        .content-wrapper, .card {
+            overflow-y: scroll
+        }
+    
+
+
+</style>
 
 
 
@@ -46,39 +92,27 @@ include '../Layouts/main-admin.php';
                                 
                 <h5 class="card-header">Trainees</h5>
                 <div class="table-responsive text-nowrap">
-                <table class="datatables-ajax table table-bordered">
+                <table class="datatables-ajax table table-bordered my-2" id="dataTrainee">
                     <thead>
                 <tr>
-                    <th scope="col">OJT ID</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Profile</th>
-                    <th scope="col">Age</th>
-                    <th scope="col">Sex</th>
-                    <th scope="col">Department</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Actions</th>
-                    <!-- <th scope="col">Date started</th> -->
-                    <!-- <th scope="col">Department</th> -->
-
-                    <!-- <th scope="col">Office</th> -->
-
-                    <!-- <th scope="col">Email</th> -->
-                    <!-- <th scope="col">Password</th>
-                    <th scope="col">Usertype</th>
-                    <th scope="col">Status</th> -->
-                    <!-- <th scope="col">Operation</th> -->
+                    <th >OJT ID</th>
+                    <th>Name</th>
+                    <th >Profile</th>
+                    <th >Age</th>
+                    <th >Sex</th>
+                    <th >Department</th>
+                    <th >Email</th>
+                    <th >Actions</th>
                 </tr>
             </thead>
-            <tbody class="table-border-bottom-0">
+
   <?php 
      
-     $sql= "SELECT tr.*,
-                    us.first_name,
-                    us.middle_name,
-                    us.last_name,
-                    us.sex,
-                    us.department,
-                    us.dob
+     $sql= "SELECT us.*,
+                    tr.ojt_id,
+                    tr.degree,
+                    tr.university
+
 
       FROM trainees tr, users us 
       WHERE us.id = tr.user_id
@@ -87,30 +121,23 @@ include '../Layouts/main-admin.php';
     if(mysqli_num_rows($query)>0) {
 
      while ($row=mysqli_fetch_assoc($query))  {
-      $name=$row ['last_name'].","." ". $row['first_name']." ". $row['middle_name']; 
- date_default_timezone_set('Asia/Manila');// local timezone
+        
+        $defaultProfileImage = '../Assets/img/avatars/av.png';
+        $profileImage = !empty($row['profile']) ? '../Assets/img/avatars/'.$row['profile'] : $defaultProfileImage;
 
-$dateOfBirth =   date($row['dob']); // Example date of birth
-// Calculate age
-$today = new DateTime();
-$birthdate = new DateTime($dateOfBirth);
-$age = $birthdate->diff($today)->y;
-     
+        $name=$row ['last_name'].","." ". $row['first_name']." ". $row['middle_name']; 
+
+        date_default_timezone_set('Asia/Manila');// local timezone
+
+        $dateOfBirth =   date($row['dob']); // Example date of birth
+        // Calculate age
+        $today = new DateTime();
+        $birthdate = new DateTime($dateOfBirth);
+        $age = $birthdate->diff($today)->y;
+            
       ?>
-
-                     <tr>
-
-                        <!-- <td><?= $row ['id']; ?></td> -->
-                        <!-- <td><?= $row ['ojt_id']; ?></td> -->
-
-                        <!-- <td><?=  $row ['last_name'].","." ". $row['first_name']." ". $row['middle_name']; ?></td>;    -->
-                        <!-- <td><?= $age; ?></td>;                   -->
-                        <!-- <td><?= $row ['sex']; ?></td> -->
-                        <!-- <td><?= $row ['contact_num']; ?></td> -->
-                        <!-- <td><?= $row ['degree']; ?></td> -->
-                        <!-- <td><?= $row ['university']; ?></td> -->
-                        <!-- <td><?= $row ['hours_to_render']; ?></td> -->
-                        <?php if($row['department']==='IT'): ?>
+                  <tbody>
+                        <?php if($row['department']==='IT-Dept'): ?>
                                                     <tr class="table-info">
                                                         <td>
                                                         <i class='fas fa-user'></i>
@@ -139,7 +166,7 @@ $age = $birthdate->diff($today)->y;
                                                                     <i class="bx bx-dots-vertical-rounded"></i>
                                                                 </button>
                                                                 <div class="dropdown-menu">
-                                                                    <a class="dropdown-item" href="javascript:void(0);"><i class='fa fa-user-circle'></i> View Profile</a>
+                                                                    <a class="dropdown-item" href="../Admin/TraineeProfile.php?trainee_profile=<?=$row['id'] ?>"><i class='fa fa-user-circle'></i> View Profile</a>
                                                                     <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
                                                                 </div>
                                                             </div>
@@ -162,17 +189,20 @@ $age = $birthdate->diff($today)->y;
                                                             title="<?= $name ?>">
                                                             <img src="<?= $profileImage?>" alt="Avatar" class="rounded-circle" />
                                                             </div>
-                                                        </ul>
+ 
                                                         </td>
+                                                        <td><?= $age; ?></td>
+                                                        <td><?= $row ['sex']; ?></td>
+                                                     
                                                         <td><span class="badge bg-label-warning me-1"><?=$row['department'] ?></span></td>
-
+                                                        <td><?= $row ['email']; ?></td>
                                                         <td>
                                                         <div class="dropdown">
                                                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                                                             <i class="bx bx-dots-vertical-rounded"></i>
                                                             </button>
                                                             <div class="dropdown-menu">
-                                                            <a class="dropdown-item" href="javascript:void(0);"><i class='fa fa-user-circle'></i> View Profile</a>
+                                                            <a class="dropdown-item" href="../Admin/TraineeProfile.php?trainee_profile=<?=$row['id'] ?>"><i class='fa fa-user-circle'></i> View Profile</a>
                                                             <a class="dropdown-item" href="javascript:void(0);"
                                                                 ><i class="bx bx-trash me-1"></i> Delete</a
                                                             >
@@ -197,17 +227,19 @@ $age = $birthdate->diff($today)->y;
                                                             title="<?= $name ?>">
                                                             <img src="<?= $profileImage?>" alt="Avatar" class="rounded-circle" />
                                                             </div>
-                                                        </ul>
-                                                        </td>
+                                                            
+                                                        <td><?= $age; ?></td>
+                                                        <td><?= $row ['sex']; ?></td>
+                                                     
                                                         <td><span class="badge bg-label-primary me-1"><?=$row['department'] ?></span></td>
-
+                                                        <td><?= $row ['email']; ?></td>
                                                         <td>
                                                         <div class="dropdown">
                                                             <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                                                             <i class="bx bx-dots-vertical-rounded"></i>
                                                             </button>
                                                             <div class="dropdown-menu">
-                                                            <a class="dropdown-item" href="javascript:void(0);">   <i class='fa fa-user-circle'></i> View Profile</a>
+                                                            <a class="dropdown-item" href="../Admin/TraineeProfile.php?trainee_profile=<?=$row['id'] ?>">   <i class='fa fa-user-circle'></i> View Profile</a>
 
                                                             <a class="dropdown-item" href="javascript:void(0);"
                                                                 ><i class="bx bx-trash me-1"></i> Delete</a
@@ -233,17 +265,18 @@ $age = $birthdate->diff($today)->y;
                                                                 title="<?= $name ?>">
                                                                 <img src="<?= $profileImage?>" alt="Avatar" class="rounded-circle" />
                                                                 </div>
-                                                            </ul>
-                                                            </td>
-                                                            <td><span class="badge bg-label-danger me-1"><?=$row['department'] ?></span></td>
-
+                                                        <td><?= $age; ?></td>
+                                                        <td><?= $row ['sex']; ?></td>
+                                                     
+                                                        <td><span class="badge bg-label-danger me-1"><?=$row['department'] ?></span></td>
+                                                        <td><?= $row ['email']; ?></td>
                                                             <td>
                                                             <div class="dropdown">
                                                                 <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                                                                 <i class="bx bx-dots-vertical-rounded"></i>
                                                                 </button>
                                                                 <div class="dropdown-menu">
-                                                                <a class="dropdown-item" href="javascript:void(0);">  <i class='fa fa-user-circle'></i> View Profile</a>
+                                                                <a class="dropdown-item" href="../Admin/TraineeProfile.php?trainee_profile=<?=$row['id'] ?>">  <i class='fa fa-user-circle'></i> View Profile</a>
 
                                                                 <a class="dropdown-item" href="javascript:void(0);"
                                                                     ><i class="bx bx-trash me-1"></i> Delete</a
@@ -269,17 +302,18 @@ $age = $birthdate->diff($today)->y;
                                                                 title="<?= $name ?>">
                                                                 <img src="<?= $profileImage?>" alt="Avatar" class="rounded-circle" />
                                                                 </div>
-                                                            </ul>
-                                                            </td>
-                                                            <td><span class="badge bg-label-success me-1"><?=$row['department'] ?></span></td>
-
+                                                        <td><?= $age; ?></td>
+                                                        <td><?= $row ['sex']; ?></td>
+                                                     
+                                                        <td><span class="badge bg-label-success me-1"><?=$row['department'] ?></span></td>
+                                                        <td><?= $row ['email']; ?></td>
                                                             <td>
                                                             <div class="dropdown">
                                                                 <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                                                                 <i class="bx bx-dots-vertical-rounded"></i>
                                                                 </button>
                                                                 <div class="dropdown-menu">
-                                                                <a class="dropdown-item" href="javascript:void(0);">
+                                                                <a class="dropdown-item" href="../Admin/TraineeProfile.php?trainee_profile=<?=$row['id'] ?>">
                                                                 <i class='fa fa-user-circle'></i> View Profile</a>
                                                                 <a class="dropdown-item" href="javascript:void(0);"
                                                                     ><i class="bx bx-trash me-1"></i> Delete</a
@@ -288,38 +322,24 @@ $age = $birthdate->diff($today)->y;
                                                             </div>
                                                             </td>
                                                         </tr>
-                                                <?php endif; ?>
+                                                    </tbody>
+                                                </table>
+                                                <?php endif;?>
+                                             </div>
+                                        </div>
+                                 <?php }} ?>
 
-                        <!-- <td><?= $row ['dos']; ?></td> -->
-                        <!-- <td><?= $row ['department']; ?></td> -->
+<script src="../Assets/js/jquery.js"></script>
+<script src="../Assets/js/datatables.js"></script>
+<script>
+$(document).ready( function () {
+    $('#dataTrainee').DataTable({
 
-                        <!-- <td><?= $row ['office_assigned']; ?></td> -->
-                        <!-- <td><?= $row ['email']; ?></td> -->
-                        <!-- <td><?= $row ['password']; ?></td>
-                        <td><?= $row ['user_type']; ?></td>
+    });
 
-                       <td><span class="badge bg-label-primary me-1"><?= $row ['status']; ?></span></td> -->
-                       <!-- <td>
-                            <div class="menu">
-                              <a class="item" href="../Admin/Update.php? update=<?= $row ['id']; ?>"
-                                ><i class='bx bx-edit'>EDIT</i></a
-                              >
-                              <a class="item" href="javascript:void(0);"
-                                ><i class="bx bx-trash me-2"></i></a
-                              >
-                            </div>
+} );
 
-                        </td> -->
-                      </tr> 
-<?php
-}
-    }
-?>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <!--/ Bootstrap Dark Table -->
-
-   <script src="../Assets/js/tables-datatables-advanced.js"></script>
+</script>       
+<script>
+</script>
    <?php include '../Layouts/footer.php'; ?>

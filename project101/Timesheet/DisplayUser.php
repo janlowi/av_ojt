@@ -35,7 +35,6 @@ include '../Layouts/main-user.php';
                 <table>
                     <thead >
                         <tr>
-                            <th>Name</th>
                             <th>Department</th>
                             <th>Date</th>
                             <th>Day</th>
@@ -81,7 +80,7 @@ include '../Layouts/main-user.php';
                                 if ($prev_row && $prev_row['event_type'] !== $event_type && $date === date('Y-m-d', strtotime($prev_row['timestamp']))) {
                                     ?>
                                     <tr>
-                                        <td><?php echo $prev_row['last_name'] . ", " . $prev_row['first_name'] . " " . $prev_row['middle_name']; ?></td>
+                                        <!-- <td><?php echo $prev_row['last_name'] . ", " . $prev_row['first_name'] . " " . $prev_row['middle_name']; ?></td> -->
                                         <td><?php echo $prev_row['department']; ?></td>
                                         <td><?php echo $date; ?></td>
                                         <td><?php echo $today; ?></td>
@@ -103,7 +102,7 @@ include '../Layouts/main-user.php';
 
                         ?>
                         <tr>
-                            <td colspan="6" style="text-align: right;"><strong>Total Hours:</strong></td>
+                            <td colspan="5" style="text-align: right;"><strong>Total Hours:</strong></td>
                             <td><?php echo $totalHours; ?></td>
                         </tr>
                     </tbody>
