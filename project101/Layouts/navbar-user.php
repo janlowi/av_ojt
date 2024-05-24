@@ -1,9 +1,8 @@
 <?php 
+ob_start();
 
 include 'main-user.php';
 include '../Php/db_connect.php';
-include '../Php/authenticate.php';
-
 ?>
 
         <!-- Layout container -->

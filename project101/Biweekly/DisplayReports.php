@@ -67,7 +67,10 @@ include '../Layouts/main-user.php';
         </div>
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9c0377cc3fba3f0e80c8d4510f22d2cf3e16de02
         <div class="table-responsive text-nowrap  pt-5">
         <table class="table table-bordered border-secondary " id="dataTable">
           <thead class="border-bottom">
@@ -80,15 +83,7 @@ include '../Layouts/main-user.php';
                                                     </div>
 
                                                 </th>
-                                                <th scope="col">
-                                                    
 
-                                                    <div class="d-flex flex-column justify-content-center align-items-center">
-                                                        <p class="mb-1 ">OJT ID </p>
-                                                    </div>
-                                             
-
-                                                </th>
                                                 <th scope="col">
 
                       
@@ -128,16 +123,25 @@ include '../Layouts/main-user.php';
 
                                                 </th>
 
+<<<<<<< HEAD
+=======
+                                            
+>>>>>>> 9c0377cc3fba3f0e80c8d4510f22d2cf3e16de02
                                                 <th scope="col">
 
                    
                                                     <div class="d-flex flex-column justify-content-center align-items-center">
+<<<<<<< HEAD
                                                         <p class="mb-1 ">SUMMARY</p>
+=======
+                                                        <p class="mb-1 ">STATUS</p>
+>>>>>>> 9c0377cc3fba3f0e80c8d4510f22d2cf3e16de02
                                                     </div>
 
 
-                                                </th>
+                                                </th>  <th scope="col">
 
+<<<<<<< HEAD
                                                 <th scope="col">
 
                    
@@ -176,6 +180,15 @@ include '../Layouts/main-user.php';
 
 
                                                 </th>
+=======
+                   
+                                                    <div class="d-flex flex-column justify-content-center align-items-center">
+                                                        <p class="mb-1 ">OPERATION</p>
+                                                    </div>
+
+
+                                                    </th>
+>>>>>>> 9c0377cc3fba3f0e80c8d4510f22d2cf3e16de02
 
                                             </tr>
                                         </thead>
@@ -205,14 +218,7 @@ include '../Layouts/main-user.php';
                                                             </div>
                                                         
                                                         </td>
-                                                        <td>
 
-                                                            <div class="d-flex flex-column justify-content-center align-items-center">
-                                                                <p class="mb-1 "> <?= $row['ojt_id']; ?></p>
-                                                            </div>
-                                                            </div>   
-                                                        
-                                                        </td>
                                                         <td>
 
                                                             <div class="d-flex flex-column justify-content-center align-items-center">
@@ -247,6 +253,7 @@ include '../Layouts/main-user.php';
 
 
                                                         </td>
+<<<<<<< HEAD
                                                         <td>
 
                                                             <div class="d-flex flex-column justify-content-center align-items-center">
@@ -279,12 +286,28 @@ include '../Layouts/main-user.php';
 
 
                                                         </td>
+=======
+
+                                                        <td>
+                                                            <div class="d-flex flex-column justify-content-center align-items-center">
+                                                                <?php if($row['status']=='Pending') { ?>
+                                                                    <span class="badge bg-label-warning me-1"><?= $row['status']; ?></span>
+                                                                <?php } elseif($row['status']=='Submitted') { ?>
+                                                                    <span class="badge bg-label-success me-1"><?= $row['status']; ?></span>
+                                                                <?php } else { ?>
+                                                                    <span class="badge bg-label-warning me-1"><?= $row['status']; ?></span>
+                                                                <?php } ?>
+                                                            </div>
+                                                        </td>
+
+>>>>>>> 9c0377cc3fba3f0e80c8d4510f22d2cf3e16de02
 
                                                    <td>                                    
                                          <?php
                                                 if( $row['status']=='Pending'){
 
                                             echo'
+                                            
                                             
                                             
                                                 <style>
@@ -297,11 +320,17 @@ include '../Layouts/main-user.php';
                                             }else{
                                                 echo'
                                                 <div class="d-grid gap-2">                                    
+<<<<<<< HEAD
                                                     <span class="badge bg-label-success me-1">Saved</span>
                                                     <a href="../Biweekly/response.php? update_report='.$row['id'].'" class="btn btn-warning ">
                                                   View
                                                         </a>
             
+=======
+                                                    <a href="../Biweekly/View.php? view_report='.$row['id'].'"  class="btn btn-success ">
+                                               View
+                                                    </a>
+>>>>>>> 9c0377cc3fba3f0e80c8d4510f22d2cf3e16de02
 
                                                 </div>
                                                 <style>
@@ -315,12 +344,33 @@ include '../Layouts/main-user.php';
 
                                             ?>
 
+<<<<<<< HEAD
                                         <div class="d-grid gap-2">
                                             <a href="../Biweekly/UpdateReports.php? update_report=<?= $row['id'] ?>" class="btn btn-warning "id='save_<?= $row['id'] ?>'>
                                             Edit
                                                 </a>
     
                                                     <a href="../Php/php-weekly-update.php? save_report=<?= $row['id'] ?>"  class="btn btn-success "  id='save_<?= $row['id'] ?>' >
+=======
+<<<<<<< HEAD
+                                            <div class="d-flex flex-column justify-content-center align-items-center d-grid gap-2">
+                                                
+                                           <a href="../Biweekly/UpdateReports.php? update_report=<?= $_SESSION['user_id'] ?>" class="btn btn-warning btn-lg row-"id='save_<?= $row['id'] ?>'>
+                                            Draft
+                                                </a>
+
+    
+    
+                                            <a href="../Biweekly/UpdateReports.php? update_report=<?= $row['id'] ?>" class="btn btn-warning btn-lg row-"id='save_<?= $row['id'] ?>'>
+=======
+                                        <div class="d-grid gap-2">
+
+                                            <a href="../Biweekly/UpdateReports.php?update_report=<?= $row['id'] ?>" class="btn btn-warning "id='save_<?= $row['id'] ?>'>
+                                            Edit
+                                                </a>
+    
+                                                    <a href="../Php/php-weekly-update.php?save_report=<?= $row['id'] ?>"  class="btn btn-success "  id='save_<?= $row['id'] ?>' >
+>>>>>>> 9c0377cc3fba3f0e80c8d4510f22d2cf3e16de02
                                                Submit
                                                     </a>
  
@@ -331,6 +381,7 @@ include '../Layouts/main-user.php';
                                                     </tr> 
                                             <?php
 
+<<<<<<< HEAD
                                                         $_SESSION['id'] = $row['id'];
                                                         $_SESSION['ojt_id'] = $row['ojt_id'];
                                                         $_SESSION['timestamp'] = $row['timestamp'];
@@ -342,6 +393,8 @@ include '../Layouts/main-user.php';
                                                         $_SESSION['challenges'] = $row['challenges'];
                                                         $_SESSION['learnings'] = $row['learnings'];
                                                         $_SESSION['status'] = $row['status'];
+=======
+>>>>>>> 9c0377cc3fba3f0e80c8d4510f22d2cf3e16de02
                                                 }
                                             }
                                             ?>
@@ -457,9 +510,341 @@ if(isset($_SESSION['saved_success'])){
 ?>
 
 
+<<<<<<< HEAD
+=======
+<<<<<<< .merge_file_Ph0BBB
+>>>>>>> 9c0377cc3fba3f0e80c8d4510f22d2cf3e16de02
     <!-- filter data -->
                         <script>
                         new DataTable('#dataTable');
                         </script>
                         <!-- filter data -->
+<<<<<<< HEAD
 <?php include '../Layouts/footer.php'; ?>
+=======
+<<<<<<< HEAD
+=======
+                       <!-- Modal -->
+                    <div class="modal fade" id="modalView" tabindex="-1" aria-hidden="true">
+                         <div class="modal-dialog modal-dialog-centered" role="document">
+                         <div class="modal-dialog modal-lg">
+                         <div class="modal-content">
+                         <div class="modal-header">
+                         <div class="modal-body">
+        	        </div>   
+                               <!-- <h2 class="modal-title" id="modalCenterTitle">Register user.</h2> -->
+                               <button
+                                 type="button"
+                                 class="btn-close"
+                                 data-bs-dismiss="modal"
+                                 aria-label="Close">
+                               </button>
+                             </div>
+
+<div class="table-responsive text-nowrap">
+        <table class="table table-bordered border-secondary " id="dataTable">
+          <thead class="border-bottom">
+
+                                            <tr>
+                                                <th scope="col">
+
+                                                    <div class="d-flex flex-column justify-content-center align-items-center">
+                                                        <p class="mb-1">ID </p>
+                                                    </div>
+
+                                                </th>
+                                                <th scope="col">
+                                                    
+
+                                                    <div class="d-flex flex-column justify-content-center align-items-center">
+                                                        <p class="mb-1 ">OJT ID </p>
+                                                    </div>
+                                             
+
+                                                </th>
+                                                <th scope="col">
+
+                      
+                                                    <div class="d-flex flex-column justify-content-center align-items-center">
+                                                        <p class="mb-1 ">TIMESTAMP</p>
+                                                    </div>
+                         
+
+                                                </th>
+                                                <th scope="col">
+
+                   
+                                                    <div class="d-flex flex-column justify-content-center align-items-center">
+                                                        <p class="mb-1 ">DEPARTMENT</p>
+                                                    </div>
+                                     
+
+                                                </th>
+
+                                                <th scope="col">
+
+                   
+                                                    <div class="d-flex flex-column justify-content-center align-items-center">
+                                                        <p class="mb-1 ">START</p>
+                                                    </div>
+
+
+                                                </th>
+                                                
+                                                <th scope="col">
+
+                   
+                                                    <div class="d-flex flex-column justify-content-center align-items-center">
+                                                        <p class="mb-1 ">END</p>
+                                                    </div>
+
+
+                                                </th>
+                                                
+                                                <th scope="col">
+
+                                                                    
+                                                    <div class="d-flex flex-column justify-content-center align-items-center">
+                                                        <p class="mb-1 ">SUMMARY</p>
+                                                    </div>
+
+
+                                                    </th>
+
+                                                    
+                                                </th>
+                                                
+                                                <th scope="col">
+
+                                                                    
+                                                    <div class="d-flex flex-column justify-content-center align-items-center">
+                                                        <p class="mb-1 ">ACCOMPLISHMENT</p>
+                                                    </div>
+
+
+                                                    </th>
+
+                                                    
+                                                </th>
+                                                
+                                                <th scope="col">
+
+                                                                    
+                                                    <div class="d-flex flex-column justify-content-center align-items-center">
+                                                        <p class="mb-1 ">CHALLENGES/p>
+                                                    </div>
+
+
+                                                    </th>
+
+                                                    
+                                                </th>
+                                                
+                                                <th scope="col">
+
+                                                                    
+                                                    <div class="d-flex flex-column justify-content-center align-items-center">
+                                                        <p class="mb-1 ">LEARNINGS</p>
+                                                    </div>
+
+
+                                                    </th>
+
+                                                    <th scope="col">
+
+                                                                                                                            
+                                                        <div class="d-flex flex-column justify-content-center align-items-center">
+                                                            <p class="mb-1 ">STATUS</p>
+                                                        </div>
+
+
+                                                        </th>
+                                                                                                    
+
+                                                
+
+                                            </tr>
+                                            
+                                        </thead>
+                                        <tbody class="table-border-bottom-0">
+                                            <?php 
+                                            $sql = "SELECT rp.*,
+                                                            tr.ojt_id
+                                            
+                                            
+                                                    FROM trainees tr, reports rp, users us
+
+                                                    WHERE  us.id=rp.user_id 
+                                                    AND us.id=$_SESSION[user_id] 
+                                                    AND us.id=tr.user_id
+                                                    
+                                                    
+                
+                                            "; // Fetch data from the reports table
+                                            $query = mysqli_query($connect, $sql);
+                                            if(mysqli_num_rows($query) > 0) {
+                                                while ($row = mysqli_fetch_assoc($query)) { ?>
+                                                    <tr>
+                                                        <td>
+                                                            
+                                                            <div class="d-flex flex-column justify-content-center align-items-center">
+                                                                <p class="mb-1 "><?=  $row['id']; ?></p>
+                                                            </div>
+                                                        
+                                                        </td>
+                                                        <td>
+
+                                                            <div class="d-flex flex-column justify-content-center align-items-center">
+                                                                <p class="mb-1 "> <?= $row['ojt_id']; ?></p>
+                                                            </div>
+                                                            </div>   
+                                                        
+                                                        </td>
+                                                        <td>
+
+                                                            <div class="d-flex flex-column justify-content-center align-items-center">
+                                                                <p class="mb-1 "> <?= $row['timestamp']; ?></p>
+                                                            </div>
+                                                           
+                                                        
+                                                        </td>
+                                                        <td>
+
+                                           
+                                                            <div class="d-flex flex-column justify-content-center align-items-center">
+                                                                <p class="mb-1 "> <?= $row['assigned_dept']; ?></p>
+                                                            </div>
+                                                      
+
+
+                                                        </td>
+                                                        <td>
+
+                                                            <div class="d-flex flex-column justify-content-center align-items-center">
+                                                                <p class="mb-1 "> <?= $row['dos']; ?></p>
+                                                            </div>
+
+
+                                                        </td>
+                                                        <td>
+
+                                                            <div class="d-flex flex-column justify-content-center align-items-center">
+                                                                <p class="mb-1 "> <?= $row['doe']; ?></p>
+                                                            </div>
+
+
+                                                        </td>
+                                                        <td>
+
+                                                            <div class="d-flex flex-column justify-content-center align-items-center">
+                                                                <p class="mb-1 "> <?= $row['summary']; ?></p>
+                                                            </div>
+
+
+                                                        </td>
+                                                        <td>
+
+                                                            <div class="d-flex flex-column justify-content-center align-items-center">
+                                                                <p class="mb-1 "> <?= $row['accomplishment']; ?></p>
+                                                            </div>
+
+
+                                                        </td>
+                                                        <td>
+
+                                                            <div class="d-flex flex-column justify-content-center align-items-center">
+                                                                <p class="mb-1 "> <?= $row['challenges']; ?></p>
+                                                            </div>
+
+
+                                                        </td>
+                                                        <td>
+
+                                                            <div class="d-flex flex-column justify-content-center align-items-center">
+                                                                <p class="mb-1 "> <?= $row['learnings']; ?></p>
+                                                            </div>
+
+                                                            <td>
+
+
+                                                        
+                                                            <div class="d-flex flex-column justify-content-center align-items-center d-grid gap-2">
+                                    
+                                         <?php
+                                                if( $row['status']=='Pending'){
+
+                                            echo'
+                                            
+                                            
+                                                <style>
+                                                        #save_'.$row['id'].' {
+                                                                display:block;
+                                                        }
+                                                </style>
+                                                
+                                            ';
+                                            }else{
+                                                echo'
+                                                <span class="badge bg-label-success me-1">Saved</span>
+                                                <style>
+                                                        #save_'.$row['id'].' {
+                                                                display:none;
+                                                        }
+                                                </style>
+                                            ';
+                                            }
+                                                  
+
+                                            ?>
+
+                                            <div class="d-flex flex-column justify-content-center align-items-center d-grid gap-2">
+    
+    
+                                            <a href="../Biweekly/UpdateReports.php? update_report=<?= $row['id'] ?>" class="btn btn-warning btn-lg row-"id='save_<?= $row['id'] ?>'>
+                                            Edit
+                                                </a>
+    
+                                                    <a href="../Php/php-weekly-update.php? save_report=<?= $row['id'] ?>"  class="btn btn-success btn-lg row-"  id='save_<?= $row['id'] ?>' >
+                                               Submit
+                                                    </a>
+    
+                                                
+                                            </div>
+    
+    
+                                            </td>
+                                         
+                                                    </tr> 
+                                            <?php
+
+                                                        $_SESSION['id'] = $row['id'];
+                                                        $_SESSION['ojt_id'] = $row['ojt_id'];
+                                                        $_SESSION['timestamp'] = $row['timestamp'];
+                                                        $_SESSION['assigned_dept'] = $row['assigned_dept'];
+                                                        $_SESSION['dos'] = $row['dos'];
+                                                        $_SESSION['doe'] = $row['doe'];
+                                                        $_SESSION['summary'] = $row['summary'];
+                                                        $_SESSION['accomplishment'] = $row['accomplishment'];
+                                                        $_SESSION['challenges'] = $row['challenges'];
+                                                        $_SESSION['learnings'] = $row['learnings'];
+                                                        $_SESSION['status'] = $row['status'];
+                                                }
+                                            }
+                                            ?>
+                        </tbody>
+                    </table>
+                </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                             </div>
+                           </div>
+                         </div>
+                       </div>
+                     </div>
+                   </div>
+>>>>>>> .merge_file_sI9c61
+=======
+<?php include '../Layouts/footer.php'; ?>
+>>>>>>> 4efea181b1499dd1d15040205a6233f7841da6a6
+>>>>>>> 9c0377cc3fba3f0e80c8d4510f22d2cf3e16de02

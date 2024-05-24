@@ -3,21 +3,10 @@ session_start();
 $title=$_SESSION['firstname']." ". "Profile";
 include '../Php/authenticate.php';
 include '../Layouts/main-user.php'; 
- include '../Layouts/sidebar-user.php';
- include '../Layouts/navbar-user.php';
  include '../Php/db_connect.php';
 
 
   ?>
-
-              <!-- Content wrapper -->
-              <div class="content-wrapper">
-            <!-- Content --> 
-          <!-- Layout container -->
-          <div class="layout-page">
-
-          <div class="container-xxl flex-grow-1 container-p-y">
-                  <div class="row">
 
   <div class="col-2 col-xl-12 col-md-6" >
     <div class="card h-70 p-4">
@@ -26,7 +15,22 @@ include '../Layouts/main-user.php';
       <div class="card-header d-flex align-items-right justify-content-between">
      
          <!-- profile pic -->
-                    
+                                                                                       <?php
+                                                                                          $user_id=$_SESSION['user_id'];
+                                                                                          $res = mysqli_query($connect, "SELECT us.*,
+                                                                                                                                tr.qoute,
+                                                                                                                                tr.author
+                                                                                                      
+                                                                                                          FROM users us
+                                                                                                          INNER JOIN trainees tr ON tr.user_id = us.id
+                                                                                                          WHERE us.id='$user_id'
+                                                                                                          
+                                                                                                      ");
+                                                                                          while($row = mysqli_fetch_assoc($res)) {
+                                                                                            $_SESSION['profile']=$row['profile'];
+                                                                                            $_SESSION['qoute']=$row['qoute'];
+                                                                                            $_SESSION['author']=$row['author'];
+                                                                                              ?>
                      
                                     <div class="row mb-0">
                                             <div class="col-md-6 col-lg-4 ">
@@ -34,20 +38,9 @@ include '../Layouts/main-user.php';
                                               <div class="card-body ">
                                             
                             
-                                                                                <?php
-                                                                                          $user_id=$_SESSION['user_id'];
-                                                                                          $res = mysqli_query($connect, "SELECT profile
-                                                                                                      
-                                                                                                          FROM trainees
-                                                                                                          
-                                                                                                          WHERE user_id='$user_id'
-                                                                                                          
-                                                                                                      ");
-                                                                                          while($row = mysqli_fetch_assoc($res)) {
-                                                                                            $_SESSION['profile']=$row['profile'];
-                                                                                              ?>
+                                                                              
                                                 <figure class="figure">                                   
-                                                <img class="card-img " src="../assets/img/avatars/<?php echo $row['profile']; ?>" alt="Card image cap" />
+                                                <img class="card-img " src="../assets/img/avatars/<?php echo $row['profile']; ?>" />
                                                 <figcaption class="figure-caption">.</figcaption>
                                                
                                           
@@ -66,18 +59,29 @@ include '../Layouts/main-user.php';
                                                     cream. Wafer chocolate bar carrot cake jelly-o.
                                                   </p> -->
        
-                                                        <button
+                                                    
+
+                                                </div>
+                                                <button
                                                         type="button"
                                                         class="btn btn-dark"
                                                         data-bs-toggle="modal"
                                                         data-bs-target="#modalProfile">
-                                                        Upload Picture
+                                                        <i class='fa-solid fa-camera-retro'></i>
                                                       </button>
+<<<<<<< HEAD
+
+                                                    
 
                                                 </div>
                                                 
                                               </div>
                                               
+                                              
+=======
+                                              </div>
+                                           
+>>>>>>> ea62c509dfb03b15437536949e809c098c263c32
                                             </div>
                                             <div class="card-title mb-2">
                                             <h5 class="m-0 me-2 text-uppercase"><?php echo $_SESSION['firstname']."'s", " ", "INFORMATION";?> </h5>
@@ -89,13 +93,13 @@ include '../Layouts/main-user.php';
 
      <!-- qoute    -->
       <div class="col-sm-6 col-lg-6 mt-5">
-                  <div class="card bg-primary text-white text-center p-3 justify-content-center" style="height: 20rem; width: 30rem;">
+                  <div class="card bg-dark text-white text-center p-3 justify-content-center" style="height: 20rem; width: 30rem;">
                     <figure class="mb-0 ">
                       <blockquote class="blockquote">
-                        <p>A well-known quote, contained in a blockquote element.</p>
+                        <p><?= $_SESSION['qoute']; ?>
                       </blockquote>
                       <figcaption class="blockquote-footer mb-0 text-white">
-                        Someone famous in <cite title="Source Title">Source Title</cite>
+                     <cite title="Source Title">   <?=$_SESSION['author']; ?></cite>
                       </figcaption>
                     </figure>
                   </div>
@@ -120,21 +124,38 @@ include '../Layouts/main-user.php';
                                                         </div>
                                                         <?php 
                                                         $user_id = $_SESSION['user_id'];
-                                                      $sql = "SELECT tr.*,
-                                                                      us.id 
+                                                      $sql = "SELECT us.*,
+                                                                     tr.ojt_id,
+                                                                     tr.university,
+                                                                     tr.dos,
+                                                                     tr.degree,
+                                                                     tr.contact_num,
+                                                                     tr.hours_to_render
+
                                                       
                                                       FROM trainees tr,
                                                             users us
                                                                             
-                                                                            WHERE tr.user_id = us.id AND us.id= '$user_id' ";
+                                                      WHERE tr.user_id = us.id AND us.id= '$user_id' ";
                                                       $query =mysqli_query($connect, $sql);
                                                       if(mysqli_num_rows($query)>0) {
 
                                                       while ($row=mysqli_fetch_assoc($query))  {
 
-                                                      
-                                                        ?>
+                                                        date_default_timezone_set('Asia/Manila');// local timezone
 
+                                                        $dateOfBirth =   date($row['dob']);
+                                                        $dateOfStart =   date($row['dos']);
+                                                        $start = new DateTime($dateOfStart);
+                                                        // Calculate age
+                                                        $today = new DateTime();
+                                                        $birthdate = new DateTime($dateOfBirth);
+                                                     
+                                                        $age = $birthdate->diff($today)->y;
+
+                                                         $formatted_date=$birthdate->format('F j, Y'); 
+                                                         $formatted_date2=$start->format('F j, Y');
+                                                         ?>
                                                         <div class="table-responsive ">
                                                           <table class="table table-bordered border-secondary">
                                                             <thead class="border-bottom">
@@ -219,13 +240,26 @@ include '../Layouts/main-user.php';
                                                                 <th>
                                                                   <div class="d-flex justify-content-start align-items-right mt-lg-4">
                                                                     <div class="d-flex flex-column">
+                                                                      <p class="mb-1 text-truncate ">Birthday :</p>
+                                                                    </div>
+                                                                  </div>
+                                                                </th>
+                                                                <th class="text-end">
+                                                                  <div class="user-progress mt-lg-4">
+                                                                    <p class="mb-1 text-start"><?= $formatted_date; ?></p>
+                                                                  </div>
+                                                                </th>
+                                                              </tr> <tr>
+                                                                <th>
+                                                                  <div class="d-flex justify-content-start align-items-right mt-lg-4">
+                                                                    <div class="d-flex flex-column">
                                                                       <p class="mb-1 text-truncate ">Age :</p>
                                                                     </div>
                                                                   </div>
                                                                 </th>
                                                                 <th class="text-end">
                                                                   <div class="user-progress mt-lg-4">
-                                                                    <p class="mb-1 text-start"><?= $row ['age']; ?></p>
+                                                                    <p class="mb-1 text-start"><?= $age; ?></p>
                                                                   </div>
                                                                 </th>
                                                               </tr>
@@ -330,7 +364,7 @@ include '../Layouts/main-user.php';
                                                                 </th>
                                                                 <th class="text-end">
                                                                   <div class="user-progress mt-lg-4">
-                                                                    <p class="mb-1 text-start"><?= $row ['dos']; ?></p>
+                                                                    <p class="mb-1 text-start"><?= $formatted_date2;  ?></p>
                                                                   </div>
                                                                 </th>
                                                               </tr>
@@ -369,6 +403,11 @@ include '../Layouts/main-user.php';
                                                                   <div class="card-body">
                                                             <form method="POST" enctype="multipart/form-data" action="../Php/php-upload.php ">
                                                               <input type="file" name="image" class="form-control"/>
+                                                              <label for="qoute">Phrase</label>
+                                                     
+                                                              <input type="text" name="qoute" class="form-control" id= "qoute"/>
+                                                              <label for="author">Author</label>
+                                                              <input type="text" name="author" class="form-control" id="author"/>
                                                               <br><br>
                                                             <div class="d-grid gap-2 col-6 mx-auto">
                                                               <button type="submit" name="submit" class="btn btn-primary">Submit</button>
@@ -447,15 +486,8 @@ include '../Layouts/main-user.php';
 
                                                           <!-- /toast -->
 
+ <?php
 
-                  <!-- right layout -->
+include '../Layouts/footer.php'; 
 
-                    </div>
-                  </div>
-                </div>
-
-            <!-- / Content -->
-            <div class="content-backdrop fade"></div>
-          <!-- </div> -->
-        </div>
-          <!-- Content wrapper -->
+ ?>

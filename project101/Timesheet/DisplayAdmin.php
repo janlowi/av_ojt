@@ -6,8 +6,13 @@ include '../Php/db_connect.php';
 include '../Layouts/main-admin.php'; ?>
 
   
+<<<<<<< HEAD
             <div class="card ">
             
+=======
+              <div class="card ">
+        
+>>>>>>> 9c0377cc3fba3f0e80c8d4510f22d2cf3e16de02
               <table class="table">
                         <thead>
                             <tr>
@@ -37,7 +42,11 @@ include '../Layouts/main-admin.php'; ?>
                                      $yesterday_In_timestamp=$row['timestamp'];
                                      $_SESSION['last_timestamp']  =$yesterday_In_timestamp;
 
+<<<<<<< HEAD
                                      $sql_names="SELECT * FROM users WHERE id= '$user_id'";
+=======
+                                     $sql_names="SELECT * FROM trainees WHERE user_id= '$user_id'";
+>>>>>>> 9c0377cc3fba3f0e80c8d4510f22d2cf3e16de02
                                      $result_names = mysqli_query($connect, $sql_names);
                                      if ($result_names && mysqli_num_rows($result_names)>0 ) {
                                         while ($row_names = mysqli_fetch_assoc($result_names)) {
@@ -81,6 +90,7 @@ include '../Layouts/main-admin.php'; ?>
                 
                         ?>
                     </tbody>
+<<<<<<< HEAD
                 </table><br>
 
 
@@ -114,6 +124,10 @@ include '../Layouts/main-admin.php'; ?>
      </form>
 
 
+=======
+                </table>
+<div></div>
+>>>>>>> 9c0377cc3fba3f0e80c8d4510f22d2cf3e16de02
 
             <div class="card">
                 <table class=" table table-dark table-responsive">
@@ -184,6 +198,7 @@ include '../Layouts/main-admin.php'; ?>
                 </tbody>
                 </table>
     </div>
+<<<<<<< HEAD
 
 <?php include '../Layouts/footer.php'; ?>
 
@@ -291,3 +306,6 @@ include '../Layouts/main-admin.php'; ?>
         fetch();
     });
     </script>
+=======
+<?php include '../Layouts/footer.php'; ?>
+>>>>>>> 9c0377cc3fba3f0e80c8d4510f22d2cf3e16de02

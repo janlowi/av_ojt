@@ -1,27 +1,38 @@
 <?php 
 session_start();
-include '../Php/authenticate.php';
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !==true){
+  header('location: ../Login/index.php');
+  exit();
+}
 $title="User Dashboard";
-include '../Layouts/navbar-user.php';
-include '../Layouts/sidebar-user.php';
-
 include '../Layouts/main-user.php'; 
  include '../Php/db_connect.php';
  
   ?>
 
-              <!-- Content wrapper -->
-           <div class="content-wrapper">
+              <!-- Content wrapper
+           <div class="content-wrapper"> -->
             <!-- Content --> 
           <!-- Layout container -->
-          <div class="layout-page">
+          <!-- <div class="layout-page"> -->
 
-          <div class="container-xxl flex-grow-1 container-p-y">
+          <!-- <div class="container-xxl flex-grow-1 container-p-y"> -->
                   <div class="row">
                     
  
 
 
+
+
+               <!-- welcome
+               <div class="col-lg-6 mb-4 order-1 ">
+                  <div class="card">
+
+ 
+                  </div>
+                </div> -->
+
+          <!-- welcome -->
 
   <!-- report -->
   
@@ -34,18 +45,19 @@ include '../Layouts/main-user.php';
             
                 <div class="col-md-0 col-xl-3 order-0">
                   <div class="card mb-0">
-                  <button
+                    <!-- <img class="card-img-top" src="../assets/img/elements/18.jpg" alt="Card image cap" /> -->
+                    <div class="card-body text-center">
+                    <h4 class="card-title">Weekly report</h4>
+                    <div class="d-grid gap-2">
+                    <button
                          type="button"
                          class="btn btn-dark"
                          data-bs-toggle="modal"
                          data-bs-target="#modalReport">
                          Add report
                        </button>
-
-                    <!-- <img class="card-img-top" src="../assets/img/elements/18.jpg" alt="Card image cap" /> -->
-                    <div class="card-body text-center">
-                      <h5 class="card-title">Weekly report</h5>
-                      <p class="card-text">
+                    </div>
+                      <p class="card-text mt-4">
                         PLease submit a response weekly of your weekly duties.
                       </p>
 
@@ -57,17 +69,21 @@ include '../Layouts/main-user.php';
 
 
       <!-- time -->
-       <div class="col-md-0 col-xl-3 order-0 tabindex=-1">
-                 <div class="card mb-0">
-
+      <div class="col-md-0 col-xl-3 order-0">
+                  <div class="card mb-0">
+                    <!-- <img class="card-img-top" src="../assets/img/elements/18.jpg" alt="Card image cap" /> -->
+                    <div class="card-body text-center">
+                    <h4 class="card-title">Attendance</h4>
                         <?php include '../Timesheet/TimeSystem.php'; ?>
-              
-
-                    </div>
+                        </div>
                  </div>
+<<<<<<< HEAD
 
 
          <!--/ time -->
+=======
+       
+>>>>>>> 9c0377cc3fba3f0e80c8d4510f22d2cf3e16de02
 
 
                                  
@@ -106,6 +122,13 @@ if ($user_id) {
 ?>
 
 
+
+
+
+
+
+
+                 
     <!-- Modal  for report-->
     <div class="modal fade" id="modalReport" tabindex="-1" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -178,6 +201,9 @@ if ($user_id) {
                        </div>
 
 
+                    
+             
+
 
 
         <!-- toast -->
@@ -214,8 +240,7 @@ if ($user_id) {
 
 
               ?>
-                  <div
-                  class="bs-toast toast fade show toast-placement-ex m-2 bottom-0 end-0 bg-danger"
+                  <div class="bs-toast toast fade show toast-placement-ex m-2 bottom-0 end-0 bg-danger"
                             role="alert"
                             aria-live="assertive"
                             aria-atomic="true">
@@ -237,8 +262,11 @@ if ($user_id) {
 
               <!-- /toast -->
 
+          <?php
 
+include '../Layouts/footer.php'; 
 
+<<<<<<< HEAD
                                 <!-- right layout -->
                                 </div>
                   </div>
@@ -263,3 +291,6 @@ if ($user_id) {
 
 }
 ?>
+=======
+ ?>
+>>>>>>> 9c0377cc3fba3f0e80c8d4510f22d2cf3e16de02

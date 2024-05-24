@@ -1,95 +1,58 @@
 <?php
 session_start();
-include 'db_connect.php';
+require 'database_connection.php'; // Make sure to include your database connection file
 
-if ($_SERVER['REQUEST_METHOD']=='POST') {
-    
-$email = $_POST['email'];
-$password = $_POST['password'];
-$user_id='';
-$user_type = "";
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
 
+    // Fetch user data from the database
+    $stmt = $conn->prepare("SELECT id, password, is_active, login_attempts FROM users WHERE username = ?");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $stmt->store_result();
+    $stmt->bind_result($user_id, $hashed_password, $is_active, $login_attempts);
+    $stmt->fetch();
 
-if (empty($email) || empty($password)) {
-    // Email is invalid
-    $error_msg="Fill all required firlds";
+    // Check if user exists
+    if ($stmt->num_rows == 1) {
+        // Check if account is active
+        if ($is_active) {
+            // Verify password
+            if (password_verify($password, $hashed_password)) {
+                // Successful login, reset login attempts
+                $stmt = $conn->prepare("UPDATE users SET login_attempts = 0 WHERE id = ?");
+                $stmt->bind_param("i", $user_id);
+                $stmt->execute();
 
-} else {
-    if (strlen($password) < 8) {
-        // Password is too short
-        $error_msg= 'Password must be 8 characters long';
-        // Handle the error accordingly
-    } else {
-        $pass_hashed= password_hash($password, PASSWORD_DEFAULT);
-        $query = "SELECT  us.*,
-                        tr.user_id,
-                          tr.email,
-                          tr.first_name,
-                          tr.profile
+                echo "<div class='success'>Login successful!</div>";
+                // Perform any other login success logic (e.g., set session variables)
+            } else {
+                // Increment login attempts
+                $login_attempts++;
+                $stmt = $conn->prepare("UPDATE users SET login_attempts = ? WHERE id = ?");
+                $stmt->bind_param("ii", $login_attempts, $user_id);
+                $stmt->execute();
 
-                          
-            	    FROM users us,
-                        trainees tr
+                if ($login_attempts >= 3) {
+                    // Disable the account after 3 unsuccessful attempts
+                    $stmt = $conn->prepare("UPDATE users SET is_active = FALSE WHERE id = ?");
+                    $stmt->bind_param("i", $user_id);
+                    $stmt->execute();
 
-        
-                    WHERE  us.id=tr.user_id 
-                    AND tr.email='$email' ";
-
-
-        $result =mysqli_query($connect, $query);
-        
-
-        if ($row = mysqli_fetch_assoc($result)) {
-            $row['status'];
-            $_SESSION['firstname'] = $row['first_name'];
-            $_SESSION['profile'] = $row['profile'];
-            $hashed_password = $row['password'];
-            $_SESSION['user_id'] = $row['id'];
-            $_SESSION['usertype'] = $row['user_type'];
-
-
-            // Verify the password -- not hashed temporarily
-            if ($hashed_password=$pass_hashed) {
-                $_SESSION['email'] = $row['email'];
-                $_SESSION['user_id'] = $row['id'];
-                        // Store the user's email in a session variable
-                        if($row['status']=="Deactivated"){
-
-                            $error_msg = "Your account has been deactivated";
-                
-                    }elseif($row['status']=="Active")  {
-                // Redirect based on user type
-                if ($_SESSION['usertype'] === 'Admin') {
-                    $_SESSION['Admin'] = true;
-
-                } elseif ($_SESSION['usertype'] === 'Trainee') {
-                $_SESSION['Trainee'] = true;
-
-                } 
-                $_SESSION['logged_in']=true;
-                if($_SESSION['usertype'] === 'Admin'){
-                    header('location: ../Admin/AdminDashboard.php');
-                    exit();
-                }elseif($_SESSION['usertype'] === 'Trainee') {
-                    header('location: ../Users/UserDashboard.php');
-                    exit();
+                    echo "<div class='error'>Maximum login attempts exceeded. Your account has been deactivated. Please contact support.</div>";
+                } else {
+                    echo "<div class='error'>Invalid login credentials. Attempt $login_attempts of 3.</div>";
                 }
-            } 
+            }
         } else {
-            // Password does not match
-            $error_msg="Incorrect password.";
-          
+            echo "<div class='error'>Your account is deactivated. Please contact support.</div>";
         }
-    }else {
-        // Password does not match
-        $error_msg="User does not exist.";
-      
+    } else {
+        echo "<div class='error'>Invalid username or password.</div>";
     }
-}
-}
 
+    $stmt->close();
+    $conn->close();
 }
-$_SESSION['error']=$error_msg;
-header('location: ../Login/index.php');
-exit();
 ?>
