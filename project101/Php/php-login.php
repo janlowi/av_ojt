@@ -72,6 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 if ($_SESSION['login_incorrect'] >= $max_login_attempts) {
                     $account_deactivate = "UPDATE users SET status ='Deactivated' WHERE email = '$email'";
                     $query = mysqli_query($connect, $account_deactivate);
+                    $_SESSION['login_incorrect']=true;
                     $_SESSION['error'] = "Your account has been deactivated due to multiple failed login attempts.";
                 } else {
                     $_SESSION['error'] = "Incorrect password. Attempt " . $_SESSION['login_incorrect'] . " of $max_login_attempts";

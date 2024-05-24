@@ -28,8 +28,9 @@ if(isset($_GET['activate'])){
 
     $sql = "UPDATE users SET status= '$status' WHERE id='$id'";
     $query=mysqli_query($connect,$sql);
-    if ($query==1) {
+    if ($query==1) {  
        $_SESSION['success']= "Status updated successfully";
+       unset($_SESSION['login_incorrect']);
        header("location:../Admin/AdminDashboard.php");
     }else {
         $_SESSION['error']= "Error updating trainee status. ";

@@ -41,6 +41,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $learning = $_POST['learning'];
         $status = "Pending";
 
+        if($dos >= $doe){
+            $error= "Start date must be before end date.";
+            $_SESSION['error']= $error;
+        }else {
+
         $query = "INSERT INTO reports (user_id, dos, doe, assigned_dept, summary, accomplishment, challenges, learnings, status) VALUES (?, ?, ?, ?, ?, ?, ?,?, ?)";
         $stmt = mysqli_prepare($connect, $query);
         mysqli_stmt_bind_param($stmt, 'issssssss', $_SESSION['user_id'], $dos, $doe, $assigned_department, $summary, $accomplishments, $challenges, $learning, $status);
@@ -50,17 +55,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if(mysqli_stmt_affected_rows($stmt) > 0) {
             $_SESSION['success']= "Report submitted successfully.";
             header("Location: ../Reports/DisplayReports.php");
+            exit();
         } else {
             $_SESSION['error']= "Failed to submit.";
             header("Location: ../Reports/DisplayReports.php");
+            exit();
         }
-    } else {
-        // Display errors
-        foreach ($errors as $error) {
-            $_SESSION['error']= $error;
-            header("Location: ../Reports/DisplayReports.php");
-        }
+    } 
+}else {
+    // Display errors
+    foreach ($errors as $error) {
+        $_SESSION['error']= $error;
+        header("Location: ../Users/UserDashboard.php");
+         exit();
     }
+}
 }
 ?>
 

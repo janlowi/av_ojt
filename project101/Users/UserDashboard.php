@@ -7,69 +7,62 @@ if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !==true){
 $title="User Dashboard";
 include '../Layouts/main-user.php'; 
  include '../Php/db_connect.php';
- 
   ?>
+                                              
+                <div class="col-lg-6 mb-4 order-0 d-flex justify-content-center ">
+                  <div class="card ">
+                        <div class="card-body ">
+                       
+                                                  s<?php
+                                                      $user_id = $_SESSION['user_id'];
+                                                      $sql = "SELECT  ts.*,
+                                                                      us.id
+                                                      FROM timesheet ts, users us
+                                                      WHERE user_id=us.id
+                                                      AND us.id= '$user_id'
+                                                      AND event_type IN ('In', 'Out')
+                                                      ORDER BY timestamp";
 
-              <!-- Content wrapper
-           <div class="content-wrapper"> -->
-            <!-- Content --> 
-          <!-- Layout container -->
-          <!-- <div class="layout-page"> -->
 
-          <!-- <div class="container-xxl flex-grow-1 container-p-y"> -->
-                  <div class="row">
-                    
-
-
- 
-
-                    <!-- welcome -->
-                    <div class="col-lg-6 mb-4 order-0 ">
-                  <div class="card">
-                    <div class="d-flex align-items-end row">
-                      <div class="col-sm-7">
-                        <div class="card-body">
-                          <h5 class="card-title text-primary">Welcome Trainee <?= $_SESSION['firstname'];?>! 🎉</h5>
-                          <figure>
-                            <blockquote class="blockquote">
-                              <p>Kung gikapoy naka  :>, pahuway na aysig daghan storya.tsk tsk </p>
-                            </blockquote>
-                            <figcaption class="blockquote-footer">
-                            Janlowi <cite title="Source Title">The Great Philosopher</cite>
-                            </figcaption>
-                          </figure>
+                                                      $query = mysqli_query($connect, $sql);
+                                                      $totalHours = 0;
+                                                      if ($query && mysqli_num_rows($query) > 0) {
+                                                      while ($row = mysqli_fetch_assoc($query)) {
+                                                      $totalHours += $row['total_hours'];
+                                                    ?>
+                                                <div class="row">
+                                                <div class="col-sm-6">
+                                                  <div class="card">
+                                                 
+                                                    <div class="card-body">
+                                                    
+                                                      <h5 class="card-title"><?= $totalHours ?></h5>
+                                                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                                      <a href="#" class="btn btn-primary">Time In</a>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                  <div class="card">
+                                                    <div class="card-body">
+                                                      <h5 class="card-title">Special title treatment</h5>
+                                                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                                                      <a href="#" class="btn btn-primary">Total Hours</a>
+                                                    </div>
+                                                 
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <?php
+                                                         }
+                                                    }
+                                                ?>
                         </div>
                       </div>
-                      <div class="col-sm-5 text-center text-sm-left">
-                        <div class="card-body pb-0 px-0 px-md-4">
-                          <img
-                            src="../assets/img/illustrations/nice1.png"
-                            height="140"
-                            alt="View Badge User"
-                            data-app-dark-img="illustrations/man-with-laptop-dark.png"
-                            data-app-light-img="illustrations/man-with-laptop-light.png" />
-                        </div>
-                      </div>
-
-                    </div>
-                  </div>
                 </div>
 
-          <!-- welcome -->
-
-
-               <!-- welcome
-               <div class="col-lg-6 mb-4 order-1 ">
-                  <div class="card">
-
- 
-                  </div>
-                </div> -->
-
-          <!-- welcome -->
-
+         
   <!-- report -->
-    
                 <div class="col-md-0 col-xl-3 order-0">
                   <div class="card mb-0">
                     <!-- <img class="card-img-top" src="../assets/img/elements/18.jpg" alt="Card image cap" /> -->
@@ -91,8 +84,7 @@ include '../Layouts/main-user.php';
                     </div>
                   </div>
                 </div>
-              <!--/ report -->
-
+ <!--/ report -->
 
 
       <!-- time -->
@@ -161,13 +153,13 @@ include '../Layouts/main-user.php';
                                                           <textarea id="summary" name="summary" rows="4" required class="form-control"></textarea>
 
                                                           <label for="accomplishments">Accomplishments:</label><br>
-                                                          <textarea id="accomplishments" name="accomplishments" rows="4" class="form-control"></textarea>
+                                                          <textarea id="accomplishments" name="accomplishments" rows="4" class="form-control"required></textarea>
 
                                                           <label for="challenges">Challenges:</label>
-                                                          <textarea id="challenges" name="challenges" rows="4" class="form-control"></textarea>
+                                                          <textarea id="challenges" name="challenges" rows="4" class="form-control"required></textarea>
 
                                                           <label for="learning">Learning:</label>
-                                                          <textarea id="learning" name="learning" rows="4" class="form-control"></textarea>
+                                                          <textarea id="learning" name="learning" rows="4" class="form-control"required></textarea>
                                                           
                                                           <input type="text" value="<?= $_SESSION['user_id'] ?>" hidden>
 
@@ -185,11 +177,6 @@ include '../Layouts/main-user.php';
                            </div>
                          </div>
                        </div>
-
-
-                    
-             
-
 
 
         <!-- toast -->
@@ -253,3 +240,5 @@ include '../Layouts/main-user.php';
 include '../Layouts/footer.php'; 
 
  ?>
+
+ 

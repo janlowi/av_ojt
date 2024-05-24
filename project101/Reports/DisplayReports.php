@@ -155,6 +155,7 @@ include '../Layouts/main-user.php';
                                             WHERE  us.id=rp.user_id 
                                             AND us.id=tr.user_id
                                             AND us.id='$user_id'
+                                            ORDER BY id DESC
                                             
                                                     
                                                     
@@ -389,9 +390,12 @@ if(isset($_SESSION['saved_success'])){
 ?>
 
 
-    <!-- filter data -->
-                        <script>
-                        new DataTable('#dataTable');
-                        </script>
-                        <!-- filter data -->
+<script>
+$(document).ready( function () {
+    $('#dataTable').DataTable({
+
+    });
+
+} );
+</script> 
 <?php include '../Layouts/footer.php'; ?>

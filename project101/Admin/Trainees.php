@@ -137,7 +137,6 @@ include '../Layouts/main-admin.php';
             
       ?>
                   <tbody>
-                     <tr>
                         <?php if($row['department']==='IT-Dept'): ?>
                                                     <tr class="table-info">
                                                         <td>
@@ -334,7 +333,9 @@ include '../Layouts/main-admin.php';
 <script src="../Assets/js/datatables.js"></script>
 <script>
 $(document).ready( function () {
-    $('#dataTrainee').DataTable();
+    $('#dataTrainee').DataTable({
+
+    });
 
 } );
 

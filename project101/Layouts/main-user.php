@@ -112,7 +112,7 @@
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
             <li class="menu-item active mb-3">
               <a
-                href="../Functions/Settings.php"
+                href="../Functions/SettingsUser.php"
                 target="_blank"
                 class="menu-link ">
                 <i class='fa-solid fa-gear' style='color:#6f6e67'></i>

@@ -12,12 +12,17 @@ include '../Layouts/main-admin.php'; ?>
                         <thead>
                             <tr>
                             <th scope="col">User Id</th>
-                            <th scope="col">Name</th>
+                            <th scope="col">Name</th> 
                             <th scope="col">Last Timestamp</th>
                             <th scope="col">Handle</th>
                             </tr>
                         </thead>
                      <tbody>
+                     <div>
+                            <button id="exportButton" class="btn btn-outline-success btn-sm">Export Data</button>
+                        </div>
+
+                        
                          <?php 
                          $sql = "SELECT user_id, timestamp  
                          FROM timesheet WHERE DATE(timestamp) = DATE_SUB(CURDATE(), INTERVAL 1 DAY )

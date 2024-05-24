@@ -262,7 +262,11 @@ include '../Layouts/main-admin.php';
 <script src="../Assets/js/jquery.js"></script>
 <script src="../Assets/js/datatables.js"></script>
 <script>
-new DataTable('#dataTable');
-</script>  
+$(document).ready( function () {
+    $('#dataTable').DataTable({
 
+    });
+
+} );
+</script> 
 <?php include '../Layouts/footer.php';?>

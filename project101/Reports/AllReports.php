@@ -83,6 +83,7 @@ include '../Layouts/main-admin.php';
                                                     FROM trainees tr, users us
 
                                                     WHERE  us.id=tr.user_id 
+                                                  
                                         
                                                     
                                             "; // Fetch data from the reports table
@@ -278,7 +279,9 @@ include '../Layouts/main-admin.php';
 <script src="../Assets/js/datatables.js"></script>
 <script>
 $(document).ready( function () {
-    $('#dataReport').DataTable();
+    $('#dataReport').DataTable({
+
+    });
 
 } );
 </script>    
