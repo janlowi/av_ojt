@@ -60,7 +60,7 @@ include '../Layouts/main-admin.php';
                 <!-- trainee table -->
                 <!-- Bootstrap Dark Table -->
   
-              <div class="card ">
+          
               <?php 
                                if(isset($_SESSION['success']))
                                 {
@@ -89,7 +89,7 @@ include '../Layouts/main-admin.php';
                                   unset($_SESSION['error']);
                       }
                     ?>
-                                
+        <div class="card ">              
                 <h5 class="card-header">Trainees</h5>
                 <div class="table-responsive text-nowrap">
                 <table class="datatables-ajax table table-bordered my-2" id="dataTrainee">
@@ -113,7 +113,6 @@ include '../Layouts/main-admin.php';
                     tr.degree,
                     tr.university
 
-
       FROM trainees tr, users us 
       WHERE us.id = tr.user_id
        ";
@@ -136,7 +135,6 @@ include '../Layouts/main-admin.php';
         $age = $birthdate->diff($today)->y;
             
       ?>
-                  <tbody>
                         <?php if($row['department']==='IT-Dept'): ?>
                                                     <tr class="table-info">
                                                         <td>
@@ -322,12 +320,11 @@ include '../Layouts/main-admin.php';
                                                             </div>
                                                             </td>
                                                         </tr>
-                                                    </tbody>
-                                                </table>
+
                                                 <?php endif;?>
-                                             </div>
-                                        </div>
+                                   
                                  <?php }} ?>
+
 
 <script src="../Assets/js/jquery.js"></script>
 <script src="../Assets/js/datatables.js"></script>
@@ -339,7 +336,5 @@ $(document).ready( function () {
 
 } );
 
-</script>       
-<script>
-</script>
+</script> 
    <?php include '../Layouts/footer.php'; ?>

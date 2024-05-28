@@ -2,7 +2,7 @@
 session_start();
 $title="View";
 include '../Php/authenticate.php';
-include '../Layouts/main-admin.php'; 
+include '../Layouts/main-user.php'; 
  include '../Php/db_connect.php';
 
 ?>     

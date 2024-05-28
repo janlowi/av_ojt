@@ -8,104 +8,91 @@ $title="User Dashboard";
 include '../Layouts/main-user.php'; 
  include '../Php/db_connect.php';
   ?>
+  
                                               
-                <div class="col-lg-6 mb-4 order-0 d-flex justify-content-center ">
+                <div class="col-lg-12 mb-4 order-0 d-flex justify-content-center ">
                   <div class="card ">
                         <div class="card-body ">
                        
-                                                  s<?php
-                                                      $user_id = $_SESSION['user_id'];
-                                                      $sql = "SELECT  ts.*,
-                                                                      us.id
-                                                      FROM timesheet ts, users us
-                                                      WHERE user_id=us.id
-                                                      AND us.id= '$user_id'
-                                                      AND event_type IN ('In', 'Out')
-                                                      ORDER BY timestamp";
-
-
-                                                      $query = mysqli_query($connect, $sql);
-                                                      $totalHours = 0;
-                                                      if ($query && mysqli_num_rows($query) > 0) {
-                                                      while ($row = mysqli_fetch_assoc($query)) {
-                                                      $totalHours += $row['total_hours'];
-                                                    ?>
-                                                <div class="row">
-                                                <div class="col-sm-6">
-                                                  <div class="card">
+                                                
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                  <div class="card ">
                                                  
-                                                    <div class="card-body">
-                                                    
-                                                      <h5 class="card-title"><?= $totalHours ?></h5>
-                                                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                                      <a href="#" class="btn btn-primary">Time In</a>
+                                                    <div class="card-body ">
+                                                      <?php
+                                                        $user_id = $_SESSION['user_id'];
+                                                        $sql = "SELECT SUM(total_hours) AS total_hours
+                                                        FROM timesheet
+                                                        WHERE user_id = '$user_id'
+                                                        AND event_type IN ('In', 'Out')";
+                                
+                                                          $query = mysqli_query($connect, $sql);
+                                                          $totalHours = 0;
+                                          
+                                                          if ($query && mysqli_num_rows($query) > 0) {
+                                                              $row = mysqli_fetch_assoc($query);
+                                                              $totalHours = $row['total_hours'];
+                                                          }
+                                                          ?>
+                                                      <h4><span class="d-flex justify-content-center">Total Hours</span></h4>
+                                                      <p class="card-text">This is the total hours you have rendered : </p>
+
+                                                      <h5 class="card-title d-flex justify-content-center" ><i class="fa-regular fa-clock" style="color: var(--bs-success); font-size: 60px;"> <?php echo $totalHours ?></i></h5>
+                                                     
                                                     </div>
                                                   </div>
                                                 </div>
-                                                <div class="col-sm-6">
-                                                  <div class="card">
-                                                    <div class="card-body">
-                                                      <h5 class="card-title">Special title treatment</h5>
-                                                      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                                      <a href="#" class="btn btn-primary">Total Hours</a>
+                                                      <?php
+                                                        $user_id = $_SESSION['user_id'];
+                                                      $today=date('Y-m-d');
+                                                      $currentTimeInRecord= " ";
+                                                        $currentTImeIn="SELECT timestamp 
+                                                        FROM timesheet
+                                                        WHERE DATE(timestamp)='$today'
+                                                        AND user_id='$user_id'
+                                                        ";
+                                                        $currentTImeIn_query=  mysqli_query($connect, $currentTImeIn);
+                                                        if($currentTImeIn_query && mysqli_num_rows($currentTImeIn_query)>0){
+                                                          $row=mysqli_fetch_assoc($currentTImeIn_query);
+                                                          $currentTimeInRecord= date('Y-m-d H:i:s', strtotime($row['timestamp']));
+                                                        }
+                                                        ?>
+                                                <div class="col-sm-4">
+                                                  <div class="card ">
+                                                    <div class="card-body  text-center">
+                                                    <h4 class="card-title">Attendance</h4>
+                                                    <p class="card-text">Clocked In at :</p>
+                                                    <h5 class="card-title  d-flex justify-content-center"><i class="fa-regular fa-clock" style="color: var(--bs-info); font-size: 16px;"> <?php if (mysqli_num_rows($currentTImeIn_query)>0)
+                                                      {echo $currentTimeInRecord;}else{echo "No Record";} ?></i></h5>
+                                                    <?php include '../Timesheet/TimeSystem.php'; ?>
                                                     </div>
-                                                 
                                                   </div>
                                                 </div>
-                                              </div>
-                                              <?php
-                                                         }
-                                                    }
-                                                ?>
+                                       
+                                               <div class="col-sm-4">
+                                                  <div class="card ">
+                                                  <div class="card-body text-center">
+                                                      <h4 class="card-title">Weekly Report</h4>
+                                                        <p class="card-text mt-4">
+                                                          PLease submit a response weekly of your weekly duties or reports.
+                                                        </p>
+                                                        <button
+                                                          type="button"
+                                                          class="btn "
+                                                          style="background-color: var(--bs-teal); color: white; width: 200px;"
+                                                          data-bs-toggle="modal"
+                                                          data-bs-target="#modalReport">
+                                                          Add report
+                                                        </button>
+                                                      </div>
+                                                  </div>
+                                                </div>
+                                          </div>
+
                         </div>
                       </div>
                 </div>
-
-         
-  <!-- report -->
-                <div class="col-md-0 col-xl-3 order-0">
-                  <div class="card mb-0">
-                    <!-- <img class="card-img-top" src="../assets/img/elements/18.jpg" alt="Card image cap" /> -->
-                    <div class="card-body text-center">
-                    <h4 class="card-title">Weekly report</h4>
-                    <div class="d-grid gap-2">
-                    <button
-                         type="button"
-                         class="btn btn-dark"
-                         data-bs-toggle="modal"
-                         data-bs-target="#modalReport">
-                         Add report
-                       </button>
-                    </div>
-                      <p class="card-text mt-4">
-                        PLease submit a response weekly of your weekly duties.
-                      </p>
-
-                    </div>
-                  </div>
-                </div>
- <!--/ report -->
-
-
-      <!-- time -->
-      <div class="col-md-0 col-xl-3 order-0">
-                  <div class="card mb-0">
-                    <!-- <img class="card-img-top" src="../assets/img/elements/18.jpg" alt="Card image cap" /> -->
-                    <div class="card-body text-center">
-                    <h4 class="card-title">Attendance</h4>
-                        <?php include '../Timesheet/TimeSystem.php'; ?>
-                        </div>
-                 </div>
-       
-
-
-
-
-
-
-
-
-
                  
     <!-- Modal  for report-->
     <div class="modal fade" id="modalReport" tabindex="-1" aria-hidden="true">
@@ -146,20 +133,20 @@ include '../Layouts/main-user.php';
                                                           <input type="date" id="start_date" name="start_date" required class="form-control">
 
                                                           <label for="end_date">Assignment Period End:</label>
-                                                          <input type="date" id="end_date" name="end_date" required class="form-control">
+                                                          <input type="date" id="end_date" name="end_date" required class="form-control" >
                                                           <br>
 
                                                           <label for="summary">Summary or Scope of Work:</label>
-                                                          <textarea id="summary" name="summary" rows="4" required class="form-control"></textarea>
+                                                          <textarea id="summary" name="summary" rows="4" required class="form-control"  minlength="30" maxlength="500"></textarea>
 
                                                           <label for="accomplishments">Accomplishments:</label><br>
-                                                          <textarea id="accomplishments" name="accomplishments" rows="4" class="form-control"required></textarea>
+                                                          <textarea id="accomplishments" name="accomplishments" rows="4" class="form-control"required minlength="30" maxlength="500"></textarea>
 
                                                           <label for="challenges">Challenges:</label>
-                                                          <textarea id="challenges" name="challenges" rows="4" class="form-control"required></textarea>
+                                                          <textarea id="challenges" name="challenges" rows="4" class="form-control"required minlength="30" maxlength="500"></textarea>
 
                                                           <label for="learning">Learning:</label>
-                                                          <textarea id="learning" name="learning" rows="4" class="form-control"required></textarea>
+                                                          <textarea id="learning" name="learning" rows="4" class="form-control"required minlength="30" maxlength="500"></textarea>
                                                           
                                                           <input type="text" value="<?= $_SESSION['user_id'] ?>" hidden>
 
@@ -240,5 +227,26 @@ include '../Layouts/main-user.php';
 include '../Layouts/footer.php'; 
 
  ?>
+<script>
+        function validateDates() {
+            var startDate = document.getElementById("start_date").value;
+            var endDate = document.getElementById("end_date").value;
 
+            if (startDate && endDate) {
+                if (new Date(startDate) >= new Date(endDate)) {
+                    alert("The start date must be before the end date.");
+                    document.getElementById("end_date").value = "";
+                }
+            }
+
+            if (startDate) {
+                document.getElementById("end_date").setAttribute("min", startDate);
+            }
+        }
+
+        window.onload = function() {
+            document.getElementById("start_date").addEventListener("change", validateDates);
+            document.getElementById("end_date").addEventListener("change", validateDates);
+        };
+    </script>
  

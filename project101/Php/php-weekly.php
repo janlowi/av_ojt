@@ -44,6 +44,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if($dos >= $doe){
             $error= "Start date must be before end date.";
             $_SESSION['error']= $error;
+            header("Location: ../Users/UserDashboard.php");
+            exit();
         }else {
 
         $query = "INSERT INTO reports (user_id, dos, doe, assigned_dept, summary, accomplishment, challenges, learnings, status) VALUES (?, ?, ?, ?, ?, ?, ?,?, ?)";

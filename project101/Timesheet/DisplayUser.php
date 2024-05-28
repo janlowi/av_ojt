@@ -5,34 +5,9 @@ $title = "Attendance Record";
 include '../Php/db_connect.php';
 include '../Layouts/main-user.php';
 ?>
-    <style>
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        th,
-        td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #4CAF50;
-            color: white;
-        }
-
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-
-        tr:hover {
-            background-color: #ddd;
-        }
-    </style>
-                <table>
-                    <thead >
+    <div class="card table-responsive">
+                <table class="table table-stripes" id ="userAttendance">
+                    <thead class="bg-warning" >
                         <tr>
                             <th>Department</th>
                             <th>Date</th>
@@ -79,7 +54,6 @@ include '../Layouts/main-user.php';
                                 if ($prev_row && $prev_row['event_type'] !== $event_type && $date === date('Y-m-d', strtotime($prev_row['timestamp']))) {
                                     ?>
                                     <tr>
-                                        <!-- <td><?php echo $prev_row['last_name'] . ", " . $prev_row['first_name'] . " " . $prev_row['middle_name']; ?></td> -->
                                         <td><?php echo $prev_row['department']; ?></td>
                                         <td><?php echo $date; ?></td>
                                         <td><?php echo $today; ?></td>
@@ -100,11 +74,17 @@ include '../Layouts/main-user.php';
                         }
 
                         ?>
-                        <tr>
-                            <td colspan="5" style="text-align: right;"><strong>Total Hours:</strong></td>
-                            <td><?php echo $totalHours; ?></td>
-                        </tr>
                     </tbody>
-                </table>
-  
+
+                        <tr class="d-flex justify-content-end">
+                            <td><strong>Total Hours: </strong></td>
+                            <td> <?php echo " ".$totalHours; ?></td>
+                        </tr>
+                        </table>
+                </div>
 <?php  include '../Layouts/footer.php';?> 
+<script>
+new DataTable('#userAttendance', {
+   
+});
+</script>

@@ -97,6 +97,7 @@ error_reporting (0);
                                                                <div class="col-md-4">    
                                                                        <label for="sex" class="form-label">Sex</label>
                                                                        <select name="Sex" id="sex" class="form-select" required>
+                                                                                <option value="">--Select Gender--</option>
                                                                                <option value="Male">Male</option>
                                                                                <option value="Female">Female</option>
                                                                        </select>
@@ -218,6 +219,7 @@ error_reporting (0);
                                                                         <div class="col-md-4">    
                                                                                 <label for="sex" class="form-label">Sex</label>
                                                                                 <select name="Sex" id="sex" class="form-select" required>
+                                                                                        <option value="">--Select Gender--</option>
                                                                                         <option value="Male">Male</option>
                                                                                         <option value="Female">Female</option>
                                                                                 </select>
@@ -419,10 +421,7 @@ error_reporting (0);
                             </td>
                                 <td>
                             <a class="item" href="../Admin/Update.php? update=<?= $row ['id']; ?>"
-                                ><button class= "btn btn-info">Update</button></i></a
-                              >
-
-
+                                ><button class= "btn btn-info">Update</button></i></a>
                         </td>
                       </tr> 
 <?php

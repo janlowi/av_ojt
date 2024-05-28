@@ -283,7 +283,17 @@ include '../Layouts/main-user.php';
                 </div>
                 </div>
             </div>
-                       
+
+<script src="../Assets/js/jquery.js"></script>
+<script src="../Assets/js/datatables.js"></script>
+<script>
+$(document).ready( function () {
+    $('#dataTable').DataTable({
+
+    });
+
+} );  
+</script>
                 <?php
 
 if(isset($_SESSION['success'])){
@@ -389,13 +399,4 @@ if(isset($_SESSION['saved_success'])){
 }
 ?>
 
-
-<script>
-$(document).ready( function () {
-    $('#dataTable').DataTable({
-
-    });
-
-} );
-</script> 
 <?php include '../Layouts/footer.php'; ?>

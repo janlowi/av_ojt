@@ -38,14 +38,17 @@
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <link rel="stylesheet" href="../assets/vendor/libs/apex-charts/apex-charts.css" />
+    
+<!-- data tables -->
+<link href="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-2.0.7/af-2.7.0/b-3.0.2/b-colvis-3.0.2/b-html5-3.0.2/b-print-3.0.2/cr-2.0.2/date-1.5.2/fc-5.0.0/fh-4.0.1/kt-2.12.0/r-3.0.2/rg-1.5.0/rr-1.5.0/sc-2.4.2/sb-1.7.1/sp-2.3.1/sl-2.0.1/sr-1.4.1/datatables.min.css" rel="stylesheet">
 
-    <!-- datatables CSS -->
+    <!-- datatables CSS
     <link rel="stylesheet" href="https://cdn.datatables.net/v/dt/jqc-1.12.4/dt-2.0.7/b-3.0.2/sl-2.0.2/datatables.min.css"/>
-<link rel="stylesheet" href="Editor-2.3.2/css/editor.dataTables.css">
+<link rel="stylesheet" href="Editor-2.3.2/css/editor.dataTables.css"> -->
+
     <!-- Helpers -->
     <script src="../assets/vendor/js/helpers.js"></script>
-    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+  
     <script src="../assets/js/config.js"></script>
   </head>
 
@@ -110,7 +113,7 @@
 
             <!-- Misc -->
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
-            <li class="menu-item active mb-3">
+            <!-- <li class="menu-item active mb-3">
               <a
                 href="../Functions/SettingsUser.php"
                 target="_blank"
@@ -118,7 +121,7 @@
                 <i class='fa-solid fa-gear' style='color:#6f6e67'></i>
                 <div data-i18n="Support">Settings</div>
               </a>
-            </li>
+            </li> -->
             <li class="menu-item active mb-3">
               <a
                 href=""
@@ -182,7 +185,7 @@
                     <!-- Show current time -->
                     </li>
 
-                <li class="nav-item lh-7 me-5">
+                <!-- <li class="nav-item lh-7 me-5">
                   <a
                   
                     class="text-muted"
@@ -191,15 +194,13 @@
                     ><i class="fas fa-home text-muted" style="color: dark;"></i> Home
                     </a>
                    
-                </li>
+                </li> -->
 
                 <li class="nav-item lh-1 me-3">
                   <a
                     class="text-muted"
-                    href="#"
+                    href="#"> <?= $_SESSION['usertype']. " " .$_SESSION['firstname'] ?> </a>
 
-                    > <?= $_SESSION['email']; ?></a
-                  >
                 </li>
 
                    <!-- User -->
@@ -219,7 +220,7 @@
                                       </div>
                                     </div>
                                     <div class="flex-grow-1">
-                                      <span class="fw-medium d-block"><?= $_SESSION['firstname'];?></span>
+                                      <span class="fw-medium d-block"><?= $_SESSION['email'];?></span>
                                       <small class="text-muted"><?= $_SESSION['usertype'];?></small>
                                     </div>
                                   </div>
@@ -234,7 +235,15 @@
                                   <span class="align-middle">My Profile</span>
                                 </a>
                               </li>
-
+                              <li>
+                                <div class="dropdown-divider"></div>
+                              </li>
+                              <li>
+                                <a class="dropdown-item" href="../Functions/SettingsUser.php">
+                                <i class='fa-solid fa-gear'></i>
+                                  <span class="align-middle">Change Password</span>
+                                </a>
+                              </li>
                               <li>
                                 <div class="dropdown-divider"></div>
                               </li>

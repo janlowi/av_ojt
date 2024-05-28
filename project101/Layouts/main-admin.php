@@ -38,27 +38,21 @@
     <link rel="stylesheet" href="../Assets/css/demo.css" />
 
     <!-- Vendors CSS -->
-    <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-    <link rel="stylesheet" href="../assets/vendor/libs/apex-charts/apex-charts.css" />
+    <!-- <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="../assets/vendor/libs/apex-charts/apex-charts.css" /> -->
 
-        <!-- Datepicker -->
-        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <!-- datatables CSS
-    <link rel="stylesheet" href="https://cdn.datatables.net/v/dt/jqc-1.12.4/dt-2.0.7/b-3.0.2/sl-2.0.2/datatables.min.css"/>
-    <link rel="stylesheet" href="Editor-2.3.2/css/editor.dataTables.css"> -->
-
+       <!-- Datepicker -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <!-- data tables -->
     <link href="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-2.0.7/af-2.7.0/b-3.0.2/b-colvis-3.0.2/b-html5-3.0.2/b-print-3.0.2/cr-2.0.2/date-1.5.2/fc-5.0.0/fh-4.0.1/kt-2.12.0/r-3.0.2/rg-1.5.0/rr-1.5.0/sc-2.4.2/sb-1.7.1/sp-2.3.1/sl-2.0.1/sr-1.4.1/datatables.min.css" rel="stylesheet">
-
-    <!-- jquery -->
-    <!-- <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
-      <link rel="stylesheet" href="/resources/demos/style.css"> -->
+ <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.bootstrap5.css">
+ <link rel="stylesheet" href="https://cdn.datatables.net/2.0.7/css/dataTables.bootstrap5.css">
 
     <script src="../assets/js/config.js"></script>
   </head>
 
   <body>
-    <!-- Layout wrapper -->
+    <!-- Layout wrapper --> 
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
         <!-- Menu -->
@@ -121,16 +115,16 @@
 
             <!-- Misc -->
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
-            <li class="menu-item active  mb-3">
+            <!-- <li class="menu-item active  mb-3">
               <a
-                href=""
+                href="../Functions/SettingsAdmin.php"
                 target="_blank"
                 class="menu-link active ">
                 <i class='fa-solid fa-gear' style='color:#6f6e67'></i>
                 <div data-i18n="Support">Settings</div>
               </a>
             </li>
-            <li class="menu-item active mb-3">
+            <li class="menu-item active mb-3"> -->
               <a
                 href=""
                 target="_blank"
@@ -192,7 +186,7 @@
                       <!-- Show current time -->
                   </li>
 
-
+<!-- 
                 <li class="nav-item lh-7 me-5">
                   <a
                   
@@ -202,17 +196,15 @@
                     ><i class="fas fa-home  text-muted" style="color: #000;"></i> Home
                     </a>
                    
-                </li>
+                </li> -->
 
 
 
                 <li class="nav-item lh-1 me-3">
                   <a
                     class="text-muted"
-                    href="#"
+                    href="#"> <?= $_SESSION['usertype']. " " .$_SESSION['firstname'] ?> </a>
 
-                    > <?= $_SESSION['email']; ?></a
-                  >
                 </li>
 
 
@@ -248,21 +240,16 @@
                         <span class="align-middle">My Profile</span>
                       </a>
                     </li>
-                    <!-- <li>
-                      <a class="dropdown-item" href="#">
-                        <i class="bx bx-cog me-2"></i>
-                        <span class="align-middle">Settings</span>
-                      </a>
-                    </li> -->
-                    <!-- <li>
-                      <a class="dropdown-item" href="#">
-                        <span class="d-flex align-items-center align-middle">
-                          <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
-                          <span class="flex-grow-1 align-middle ms-1">Billing</span>
-                          <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-                        </span>
-                      </a>
-                    </li> -->
+                    <li>
+                                <div class="dropdown-divider"></div>
+                              </li>
+                              <li>
+                                <a class="dropdown-item" href="../Functions/SettingsAdmin.php">
+                                <i class='fa-solid fa-gear'></i>
+                                  <span class="align-middle">Change Password</span>
+                                </a>
+                              </li>
+                              <li>
                     <li>
                       <div class="dropdown-divider"></div>
                     </li>

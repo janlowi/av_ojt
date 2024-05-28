@@ -234,7 +234,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           // Construct email body
           $mail_body = 'This is your OJT account body:<br><br>'
                       . 'Email: ' . $email . '<br>'
-                      . 'Password:' . $password_generated;
+                      . 'Password:' . $password_generated
+                      . 'Link:' . 'http://localhost:8080/av_ojt/project101/Login/index.php';
         if (
             !empty($firstname) &&   
             !empty($middlename) &&

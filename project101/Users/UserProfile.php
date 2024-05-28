@@ -280,8 +280,8 @@ include '../Layouts/main-user.php';
                                                                 <th class="text-end">
                                                                   <div class="user-progress mt-lg-4">
                                                                     <p class="mb-1 text-start"><?= $row ['contact_num']; ?></p>
-                                                                    <i class='fa fa-edit' ></i>
                                                                   </div>
+                                                                  <i class='fa fa-edit align-items-center'  data-bs-toggle="modal" data-bs-target="#updateContacts"></i>
                                                                 </th>
                                                               </tr>
 
@@ -434,7 +434,7 @@ include '../Layouts/main-user.php';
          <form action="../Php/php-profile-update.php" method="POST">
 
          <label for="date ">Update Birthday</label>
-        <input type="date" name="updatedob" class="form-control" id="date" />
+        <input type="date" name="updatedob" class="form-control" id="date" required />
         <input type="text" value="<?= $user_id ?>" name="user_id"  hidden />
       
         </div>
@@ -458,14 +458,14 @@ include '../Layouts/main-user.php';
         <div class="modal-body">
          <form action="../Php/php-profile-update.php" method="POST">
 
-         <label for="date ">Update Birthday</label>
-        <input type="date" name="updatedob" class="form-control" id="date" />
+         <label for="date ">Update Contact Info</label>
+        <input type="number" name="updateContact" class="form-control" id="date"  required/>
         <input type="text" value="<?= $user_id ?>" name="user_id"  hidden />
       
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary" name="updateBirthday" >Update</button>
+          <button type="submit" class="btn btn-primary" name="updateContacts" >Update</button>
         </div>
         </form>
       </div>

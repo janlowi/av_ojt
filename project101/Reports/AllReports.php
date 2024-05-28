@@ -59,7 +59,8 @@ include '../Layouts/main-admin.php';
   
    <div class="card position-relative   ">
                 <div class="table-responsive text-nowrap">
-                  <table class="table my-2" id="dataReport">
+
+                  <table class="datatables-ajax table table-bordered my-2" id="dataReport">
                     <thead>
                       <tr>
                         <th>OJT ID</th>
@@ -69,8 +70,7 @@ include '../Layouts/main-admin.php';
                         <th>University</th>
                         <th>Actions</th>
                       </tr>
-                    </thead>
-                                      
+                    </thead>             
                     <tbody class="table-border-bottom-0">
 
                                              <?php 

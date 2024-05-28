@@ -149,6 +149,15 @@ include '../Layouts/main-admin.php';
 
 
                                                 </th>
+                                                <th scope="col">
+
+                   
+                                                <div class="d-flex flex-column justify-content-center align-items-center">
+                                                    <p class="mb-1 ">ACTION</p>
+                                                </div>
+
+
+                                                </th>
 
 
 
@@ -232,12 +241,25 @@ include '../Layouts/main-admin.php';
 
 
                                                         </td>
+                                                        <td>
+
+                                                            <div class="d-flex flex-column justify-content-center align-items-center">
+                                                              <?php  if( $row['status']==='Submitted') { ?>
+
+                                                            <span class="badge bg-label-success me-1"><?= $row['status']; ?></span>
+                                                           <?php } else if( $row['status']==='Pending') {?>   
+                                                            <span class="badge bg-label-warning me-1"><?= $row['status']; ?></span>  
+                                                            <?php } ?> 
+                                                            </div>
+
+
+                                                        </td>
 
                                                    <td>
                                                            
                                             <div class="d-flex flex-column justify-content-center align-items-center d-grid gap-2">
                                                     
-                                                <span class="badge bg-label-success me-1"><?= $row['status']; ?></span>
+                                            
                                                     <a href="../Reports/AdminView.php?view=<?= $row['id'] ?>"  class="btn btn-success btn-md row-">
                                               View
                                                     </a>      
