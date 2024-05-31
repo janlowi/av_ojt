@@ -1,11 +1,9 @@
 <?php 
 session_start();
-$title="View";
-include '../Php/authenticate.php';
-include '../Layouts/main-user.php'; 
- include '../Php/db_connect.php';
+include '../Php/db_connect.php';
+include '../Layouts/main-user.php';
+?>
 
-?>     
 
 <div class="col-2 col-xl-12 col-md-6" >
     <div class="card  p-4">
@@ -18,7 +16,7 @@ include '../Layouts/main-user.php';
               <div class="row">
 
                                <!-- <h2 class="modal-title" id="modalCenterTitle">Responses</h2> -->
-                               <a href="../Reports/DisplayReports.php" class="d-flex justify-content-end">
+                               <a href="../Reports/DisplayReports.php?view_report=<?=$_SESSION['user_report_id']?>" class="d-flex justify-content-end">
                                <button
                                  type="button"
                                 class="btn btn-dark d-flex"
@@ -34,183 +32,48 @@ include '../Layouts/main-user.php';
         </div>
         </div>
 
+<div class="card-body">
+            <?php
+            if (isset($_GET['view_report'])) {
+                $report_id = $_GET['view_report'];
+                $user_id = $_SESSION['user_report_id'];
 
+                $sql = "SELECT rp.*,
+                                us.id,
+                                tr.ojt_id
+                        FROM reports rp
+                        INNER JOIN trainees tr ON tr.user_id=rp.user_id
+                        INNER JOIN users us ON rp.user_id= us.id
+                        WHERE  rp.id=? 
+                        AND us.id=? ";
 
-        <div class="table-responsive text-nowrap ">
-        <table class="table table-bordered border-secondary " >
-          <thead class="border-bottom bg-dark">
+                $stmt = mysqli_prepare($connect, $sql);
+                mysqli_stmt_bind_param($stmt, "ii", $report_id, $user_id);
+                mysqli_stmt_execute($stmt);
+                $result = mysqli_stmt_get_result($stmt);
 
-                                            <tr>
-     
-                                             
-                                                <th scope="col">
+                if ($result && mysqli_num_rows($result) > 0) {
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $summary = $row['summary'];
+                        $accomplishment = $row['accomplishment'];
+                        $challenges = $row['challenges'];
+                        $learnings = $row['learnings'];
+                            echo '<div class="container">';
+                            echo "<div class='section'><strong><label for='summary'>Summary:</label></strong><p>$summary</p></div>";
+                            echo "<div class='section'><strong><label for='accomplishments'>Accomplishments:</label></strong><p>$accomplishment</p></div>";
+                            echo "<div class='section'><strong><label for='challenges'>Challenges:</label></strong><p>$challenges</p></div>";
+                            echo "<div class='section'><strong><label for='learnings'>Learnings:</label></strong><p>$learnings</p></div>";
+                            echo '</div>';
 
-                   
-                                                    <div class="d-flex flex-column justify-content-center align-items-center">
-                                                        <p class="mb-1 ">DEPARTMENT</p>
-                                                    </div>
-                                     
+                        echo '</div>';
+                    }
+                } else {
+                    echo "No data found!";
+                }
+            }
+            ?>
+        </div> <!-- End of card-body -->
+    </div> <!-- End of card -->
+</div>
 
-                                                </th>
-
-                                                <th scope="col">
-
-                   
-                                                    <div class="d-flex flex-column justify-content-center align-items-center">
-                                                        <p class="mb-1 ">START</p>
-                                                    </div>
-
-
-                                                </th>
-                                                
-                                                <th scope="col">
-
-                   
-                                                    <div class="d-flex flex-column justify-content-center align-items-center">
-                                                        <p class="mb-1 ">END</p>
-                                                    </div>
-
-
-                                                </th>
-
-                                                <th scope="col">
-
-                   
-                                                    <div class="d-flex flex-column justify-content-center align-items-center">
-                                                        <p class="mb-1 ">SUMMARY</p>
-                                                    </div>
-
-
-                                                </th>
-
-                                                <th scope="col">
-
-                   
-                                                    <div class="d-flex flex-column justify-content-center align-items-center">
-                                                        <p class="mb-1 ">ACCOMPLISHMENTS</p>
-                                                    </div>
-
-
-                                                </th>
-
-                                                <th scope="col">
-
-                   
-                                                    <div class="d-flex flex-column justify-content-center align-items-center">
-                                                        <p class="mb-1 ">CHALLENGES</p>
-                                                    </div>
-
-
-                                                </th>
-
-                                                <th scope="col">
-
-                   
-                                                    <div class="d-flex flex-column justify-content-center align-items-center">
-                                                        <p class="mb-1 ">LEARNINGS</p>
-                                                    </div>
-
-
-                                                </th>
-                                            
-
-                                            </tr>
-                                        </thead>
-                                        <tbody class="table-border-bottom-0">
-                                            <?php 
-                                            if(isset($_GET['view_report']))
-                                            $report_id=$_GET['view_report'];
-                                            $user_id=$_SESSION['user_report_id'];
-
-                                            $sql = "SELECT rp.*,
-                                                            tr.ojt_id
-                                            
-                                            
-                                                    FROM trainees tr, reports rp, users us
-
-                                                    WHERE  rp.id='$report_id' 
-                                                    AND tr.user_id=us.id
-                                                    AND us.id='$user_id'
-                                                    
-                                            "; // Fetch data from the reports table
-
-                                            $query = mysqli_query($connect, $sql);
-                                            if(mysqli_num_rows($query) > 0) {
-                                                while ($row = mysqli_fetch_assoc($query)) { ?>
-                                                    <tr>
-                                                    
-                                                      
-                                                        <td>
-
-                                           
-                                                            <div class="d-flex flex-column justify-content-center align-items-center">
-                                                                <p class="mb-1 "> <?= $row['assigned_dept']; ?></p>
-                                                            </div>
-                                                      
-
-
-                                                        </td>
-                                                        <td>
-
-                                                            <div class="d-flex flex-column justify-content-center align-items-center">
-                                                                <p class="mb-1 "> <?= $row['dos']; ?></p>
-                                                            </div>
-
-
-                                                        </td>
-                                                        <td>
-
-                                                            <div class="d-flex flex-column justify-content-center align-items-center">
-                                                                <p class="mb-1 "> <?= $row['doe']; ?></p>
-                                                            </div>
-
-
-                                                        </td>
-                                                        <td>
-
-                                                            <div class="d-flex flex-column justify-content-center align-items-center">
-                                                                <p class="mb-1 "> <?= $row['summary']; ?></p>
-                                                            </div>
-
-
-                                                        </td>
-                                                        <td>
-
-                                                            <div class="d-flex flex-column justify-content-center align-items-center">
-                                                                <p class="mb-1 "> <?= $row['accomplishment']; ?></p>
-                                                            </div>
-
-
-                                                        </td>
-                                                        <td>
-
-                                                            <div class="d-flex flex-column justify-content-center align-items-center">
-                                                                <p class="mb-1 "> <?= $row['challenges']; ?></p>
-                                                            </div>
-
-
-                                                        </td>
-                                                        <td>
-
-                                                            <div class="d-flex flex-column justify-content-center align-items-center">
-                                                                <p class="mb-1 "> <?= $row['learnings']; ?></p>
-                                                            </div>
-
-
-                                                        </td>
-
-                                         
-                                                    </tr> 
-                                            <?php
-
-                                                }
-                                            }
-                                            ?>
-                        </tbody>
-                    </table>
-                </div>
-                </div>
-            </div>
-                       
-               
 <?php include '../Layouts/footer.php'; ?>

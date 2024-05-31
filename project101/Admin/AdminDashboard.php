@@ -106,17 +106,25 @@ error_reporting (0);
                                                                <div class="col-md-6">    
                                                                        <label for="usertype" class="form-label">Department</label>
                                                                        <select name="Department" id="usertype" class="form-select" required>
-                                                                               <option value="IT-Dept.">IT</option>
-                                                                               <option value="Accounting">Accounting</option>
-                                                                               <option value="Finance">Finance</option>
-                                                                               <option value="Admin">Admin</option>
-                                                                               <option value="HR">HR</option>
+                                                                       <option value="">--Select Department--</option>
+                                                                        <?php $department = "SELECT * FROM departments";
+                                                                                $department_query=mysqli_query($connect, $department);
 
+                                                                                if($department_query && mysqli_num_rows($department_query)> 0){
+                                                                                        while($department_row = mysqli_fetch_assoc($department_query)){
 
+                                                                                                echo '
+                                                                                                       
+                                                                                                        <option value="'.$department_row['id'].'">'.$department_row['departments'].'</option>
+                                                                                                ';
+                                                                                        }
+                                                                                }
+                                                                        ?>
                                                                        </select>
                                                                </div>
                                                                <div class="col-md-6">    
                                                                        <select name="Status" id="status" class="form-select" hidden>
+                                                                                <option value="">--Select Office--</option>
                                                                                <option value="Active" selected >Active</option>
                                                                                <option value="Deactivated">Deactivated</option>
                                                                        </select>
@@ -141,6 +149,7 @@ error_reporting (0);
                                                                <div class="col-md-4">
                                                                        <label for="Office" class="form-label">Office Assigned</label>
                                                                        <select name="Office" id="office" class="form-select" required>
+                                                                                 <option value="">--Select Office--</option>
                                                                                <option value="Tayud">Tayud Office</option>
                                                                                <option value="Makati">Makati Office</option>
                                                                                <option value="NRA">NRA</option>
@@ -151,7 +160,11 @@ error_reporting (0);
                                                                        <input type="email" class="form-control" id="inputZip"name = "Email" required>
                                                                </div>
                                                               
-                                                              
+                                                               <div class="col-md-4">
+                                                                        <label for="inputZip" class="form-label">Rate per Hour</label>
+                                                                        <input type="number" class="form-control" id="inputZip"name = "Rph" required>
+                                                                        </div>
+                                                                        
                                                                 <div class=" d-grid gap-2 col-6 mx-auto">
                                                                        <button id="register-btn" type="submit" name ="traineeSubmit"class="btn btn-dark">Register</button>
                                                                </div>
@@ -186,11 +199,20 @@ error_reporting (0);
                                                                         <div class="col-5">    
                                                                         <label for="usertype" class="form-label">Department</label>
                                                                         <select name="Department" id="usertype" class="form-select" required>
-                                                                                <option value="IT-Dept">IT</option>
-                                                                                <option value="Accounting">Accounting</option>
-                                                                                <option value="Finance">Finance</option>
-                                                                                <option value="Admin">Admin</option>
-                                                                                <option value="HR">HR</option>
+                                                                        <option value="">--Select Department--</option>
+                                                                         <?php       
+                                                                         $department_query=mysqli_query($connect, $department);
+
+                                                                         if($department_query && mysqli_num_rows($department_query)> 0){
+                                                                                 while($department_row = mysqli_fetch_assoc($department_query)){
+
+                                                                                         echo '
+                                                                                               
+                                                                                                 <option value="'.$department_row['id'].'">'.$department_row['departments'].'</option>
+                                                                                         ';
+                                                                                 }
+                                                                         }
+                                                                 ?>
 
 
                                                                         </select>
@@ -205,6 +227,7 @@ error_reporting (0);
                                                                         <div class="col-md-6">
                                                                         <label for="Office" class="form-label">Office Assigned</label>
                                                                         <select name="Office" id="office" class="form-select" required>
+                                                                                <option value="">--Select Office--</option>
                                                                                 <option value="Tayud">Tayud Office</option>
                                                                                 <option value="Makati">Makati Office</option>
                                                                                 <option value="NRA">NRA</option>
@@ -234,6 +257,8 @@ error_reporting (0);
                                                                         <button id="register-btn" type="submit" name ="adminSubmit"class="btn btn-dark ">Register</button>
                                                                         </div>  
                                                                         </div>
+
+                                                                      
                                                                 </div>
                                                         </form>
 
@@ -251,7 +276,82 @@ error_reporting (0);
                    <script src="../Assets/js/form.js"></script>
 
 
+        <!-- Content wrapper -->
 
+
+
+
+        <div class="col-lg-3   col-md-12 col-6 mb-4">
+                      <div class="card">
+                        <div class="card-body">
+                                
+                          <div class="card-title d-flex align-items-start justify-content-between">
+
+                          <i class='fa-solid fa-people-line'></i>
+                               </i>
+                          </div>                          
+                          <?php 
+                                  $sql= "SELECT * FROM departments";
+                                  $result= mysqli_query($connect, $sql);
+                                  $count_departments= mysqli_num_rows($result )
+                
+                          ?>
+                          <span class="card-title text-success">DEPARTMENTS</span>
+                          <div class="d-grid gap-2 col-9 mx-auto">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                Add Department
+                                </button>
+                                <button class="btn btn-info" type="button" data-bs-toggle="collapse" data-bs-target="#department" aria-expanded="false" aria-controls="collapseExample">
+                                View Departments
+                                </button>
+                            </div>
+
+                                                <!-- <small class="text-success fw-medium"><i class="bx bx-up-arrow-alt"></i></small> -->
+                                <div class="collapse" id="department">
+                                        <div class="card card-body">
+                                      <?php
+                                      if($count_departments>0){
+                                        while($row_department= mysqli_fetch_assoc($result)){
+                                                echo '<span class="badge" style= "color: var(--bs-dark);"> ' .$row_department['departments']. '</span> </br>';
+                                      } 
+                                }
+                                      ?>
+                                        </div>
+                                </div>
+
+                        </div>
+                      </div>
+                    </div>
+               
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add Department</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                        <form action="../Php/php-add.php" method="POST">
+                                <div class="col-md-12">
+                               <label for="inputZip" class="form-label">Add a new department</label>
+                               <input type="text" class="form-control" id="inputZip"name = "department" required>
+                               </div><br>
+                               <div>
+                                <div class=" d-grid gap-2 col-6 mx-auto ">
+                                        <button id="register-btn" type="submit" name ="addDepartment" class="btn btn-dark ">Add</button>
+                                        </div>  
+                                </div>
+
+                        </form>
+                </div>
+                <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+                </div>
+                </div>
+                </div>
+              
 
                              <!-- Content wrapper -->
 
@@ -371,32 +471,28 @@ error_reporting (0);
             <tbody class="table-border-bottom-0">
             <?php 
     
-    $sql= "SELECT  us.*,
-                   tr.dos
+    $sql = "SELECT us.*,
+                        tr.user_id,
+                        tr.dos,
+                        dp.departments,
+                        dp.id AS department_id
 
-           FROM    users us, 
-                   trainees tr
-                   
-           WHERE   us.id=tr.user_id ";
+                        FROM users us
+                        INNER JOIN trainees tr ON tr.user_id = us.id 
+                        INNER JOIN departments dp ON dp.id= us. department_id
+                         WHERE  us.id=tr.user_id ";
+
     $query =mysqli_query($connect, $sql);
-  
-
    if( $count = mysqli_num_rows($query)>0) {
-   
     while ($row=mysqli_fetch_assoc($query))  {
-   
-  
-
      ?>
-
-
                      <tr>
 
                         <td><?= $row ['id']; ?></td>
                         <td><?=  $row ['last_name'].","." ". $row['first_name']." ". $row['middle_name']; ?></td>;                     
                         <td><?= $row ['sex']; ?></td>
                         <td><?= $row ['dos']; ?></td>
-                        <td><?= $row ['department']; ?></td>
+                        <td><?= $row ['departments']; ?></td>
                         <td><?= $row ['office_assigned']; ?></td>
                         <td><?= $row ['email']; ?></td>
                         <!-- <td><?= $row ['password']; ?></td> -->

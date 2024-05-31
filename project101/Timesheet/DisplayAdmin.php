@@ -120,20 +120,25 @@ include '../Layouts/main-admin.php'; ?>
                                 </thead>
                                 <tbody>
                                 <?php
-                                $sql_trainees = "SELECT us.*, 
-                                        tr.ojt_id
-                                FROM users us
-                                INNER JOIN trainees tr ON tr.user_id = us.id
-                                WHERE us.user_type = 'Trainee'";
-                                 $result_trainees = mysqli_query($connect, $sql_trainees);
+                                  $sql_trainees = "SELECT us.*, 
+                                  tr.ojt_id,
+                                  tr.user_id,
+                                  dp.departments,
+                                  dp.id AS department_id
+                                        FROM users us
+                                        INNER JOIN trainees tr ON tr.user_id = us.id
+                                        INNER JOIN departments dp ON us.department_id=dp.id
+                                        WHERE us.user_type = 'Trainee'
+                                        ";
+                                        $result_trainees = mysqli_query($connect, $sql_trainees);
 
-                                        if ($result_trainees && mysqli_num_rows($result_trainees) > 0) {
-                                            while ($row_trainee = mysqli_fetch_array($result_trainees)) {
-                                                $user_total_hours = 0;
-                                                echo "<tr >";
-                                                echo "<td  class='bg-light text-dark '>" . $row_trainee['ojt_id'] . "</td>";
-                                                echo "<td  class='bg-light text-dark '>" . $row_trainee['last_name'] . ", " . $row_trainee['first_name'] . " " . $row_trainee['middle_name'] . "</td>";
-                                                echo "<td  class='bg-light text-dark '>" . $row_trainee['department'] . "</td>";
+                                  if ($result_trainees && mysqli_num_rows($result_trainees) > 0) {
+                                      while ($row_trainee = mysqli_fetch_array($result_trainees)) {
+                                          $user_total_hours = 0;
+                                          echo "<tr >";
+                                          echo "<td  class='bg-light text-dark '>" . $row_trainee['ojt_id'] . "</td>";
+                                          echo "<td  class='bg-light text-dark '>" . $row_trainee['last_name'] . ", " . $row_trainee['first_name'] . " " . $row_trainee['middle_name'] . "</td>";
+                                          echo "<td  class='bg-light text-dark '>" . $row_trainee['departments'] . "</td>";
                                         // Fetch total hours worked by trainee for each date
                                         $userId = $row_trainee['id'];
                                         // echo $userId;
@@ -163,24 +168,25 @@ include '../Layouts/main-admin.php'; ?>
 </div>
 <?php include '../Layouts/footer.php'; ?>
 <script>
-new DataTable('#attendanceRecord', {
-   
-});
-</script>
-<script>
 
 $(document).ready(function(){
     $.datepicker.setDefaults({
         dateFormat: 'yy-mm-dd'
     });
 
-    $("#start_date").datepicker();
+    $("#start_date").datepicker({
+        onSelect: function(selectedDate) {
+            $("#end_date").datepicker("option", "minDate", selectedDate);
+            // validateDates(); // Call validation function when start date is selected
+        }
+    });
     $("#end_date").datepicker();
 
     $('#filter').click(function(){
     var start_date = $('#start_date').val();
     var end_date = $('#end_date').val();
 
+    if(start_date )
     if(start_date != '' && end_date != '') {
         $.ajax({
             url: "../Php/php-filter.php",
@@ -197,6 +203,11 @@ $(document).ready(function(){
         alert("Please select both start and end dates.");
     }
 });
+
+window.onload = function() {
+            document.getElementById("start_date").addEventListener("change", validateDates);
+            document.getElementById("end_date").addEventListener("change", validateDates);
+        };
 
 $('#reset').click(function(){
         // Reset start and end date inputs
@@ -229,20 +240,25 @@ $('#reset').click(function(){
                                 </thead>
                                 <tbody>
                                 <?php
-                                $sql_trainees = "SELECT us.*, 
-                                        tr.ojt_id
-                                FROM users us
-                                INNER JOIN trainees tr ON tr.user_id = us.id
-                                WHERE us.user_type = 'Trainee'";
-                                 $result_trainees = mysqli_query($connect, $sql_trainees);
+                                 $sql_trainees = "SELECT us.*, 
+                                 tr.ojt_id,
+                                 tr.user_id,
+                                 dp.departments,
+                                 dp.id AS department_id
+                                       FROM users us
+                                       INNER JOIN trainees tr ON tr.user_id = us.id
+                                       INNER JOIN departments dp ON us.department_id=dp.id
+                                       WHERE us.user_type = 'Trainee'
+                                       ";
+                                       $result_trainees = mysqli_query($connect, $sql_trainees);
 
-                                        if ($result_trainees && mysqli_num_rows($result_trainees) > 0) {
-                                            while ($row_trainee = mysqli_fetch_array($result_trainees)) {
-                                                $user_total_hours = 0;
-                                                echo "<tr >";
-                                                echo "<td  class='bg-light text-dark '>" . $row_trainee['ojt_id'] . "</td>";
-                                                echo "<td  class='bg-light text-dark '>" . $row_trainee['last_name'] . ", " . $row_trainee['first_name'] . " " . $row_trainee['middle_name'] . "</td>";
-                                                echo "<td  class='bg-light text-dark '>" . $row_trainee['department'] . "</td>";
+                                 if ($result_trainees && mysqli_num_rows($result_trainees) > 0) {
+                                     while ($row_trainee = mysqli_fetch_array($result_trainees)) {
+                                         $user_total_hours = 0;
+                                         echo "<tr >";
+                                         echo "<td  class='bg-light text-dark '>" . $row_trainee['ojt_id'] . "</td>";
+                                         echo "<td  class='bg-light text-dark '>" . $row_trainee['last_name'] . ", " . $row_trainee['first_name'] . " " . $row_trainee['middle_name'] . "</td>";
+                                         echo "<td  class='bg-light text-dark '>" . $row_trainee['departments'] . "</td>";
                                         // Fetch total hours worked by trainee for each date
                                         $userId = $row_trainee['id'];
                                         // echo $userId;

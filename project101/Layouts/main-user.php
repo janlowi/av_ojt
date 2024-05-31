@@ -51,14 +51,19 @@
   
     <script src="../assets/js/config.js"></script>
   </head>
-
+<style>
+      #hover a:hover {
+    background-color: var( --bs-link-hover-color);
+    color: var(--bs-light);
+}
+</style>
   <body>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
         <!-- Menu -->
  <!-- Menu -->
- <aside id="layout-menu" class=" layout-menu menu-vertical menu bg-menu-theme px-2 ">
+ <aside id="layout-menu" class=" layout-menu menu-vertical menu table-responsive bg-menu-theme px-2 ">
           <div class=" bg-dark mt-2 ">
           <div class="app-brand demoh-25 d-inline-block d-flex justify-content-center mt-2">
             <a href="https://www.avegabros.com/" class="app-brand-link">
@@ -80,29 +85,29 @@
       <li class="menu-item">
         <ul class="menu-inner py-2 ">
           <ul class="menu-item ">
-            <li class="menu-item active mb-3">
+            <li class="menu-item  mb-3 mx-3" id="hover">
                   <a href="../Users/UserDashboard.php" class="menu-link ">
                     <div data-i18n="Analytics">Dashboard</div>
                   </a>
                 </li>
-                <li class="menu-item active mb-3">
+                <li class="menu-item  mb-3 mx-3" id="hover">
                   <a href="../Users/UserProfile.php" class="menu-link">
                     <div data-i18n="Analytics">Profile</div>
                   </a>
                 </li>
-                <li class="menu-item mb-3 active">
+                <li class="menu-item mb-3 mx-3 ">
                   <a href="../Reports/DisplayReports.php" class="menu-link">
                     <div data-i18n="Analytics">Weekly Reports</div>
                   </a>
                 </li>
 
-                <li class="menu-item active mb-3">
+                <li class="menu-item  mb-3 mx-3" id="hover">
                   <a href="../Timesheet/DisplayUser.php" class="menu-link">
                     <div data-i18n="Notifications">Attendance Record</div>
                   </a>
                 </li>
 
-                <li class="menu-item active mb-3">
+                <li class="menu-item  mb-3 mx-3" id="hover">
                   <a href="pages-account-settings-notifications.html" class="menu-link">
                     <div data-i18n="Notifications">Notifications</div>
                   </a>
@@ -111,25 +116,17 @@
               
             </li>
 
-            <!-- Misc -->
-            <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
-            <!-- <li class="menu-item active mb-3">
-              <a
-                href="../Functions/SettingsUser.php"
-                target="_blank"
-                class="menu-link ">
-                <i class='fa-solid fa-gear' style='color:#6f6e67'></i>
-                <div data-i18n="Support">Settings</div>
-              </a>
-            </li> -->
-            <li class="menu-item active mb-3">
-              <a
-                href=""
-                target="_blank"
-                class="menu-link ">
-                <i class='fa-solid fa-gear' style='color:#6f6e67'></i>
-                <div data-i18n="Support">About Us</div>
-              </a>
+           <!-- Misc -->
+           <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
+            </li>
+                <li class="menu-item  mb-3 mx-3"id ="hover">
+          
+                  <a href="pages-account-settings-notifications.html" class="menu-link ">
+                  <i class='fa-solid fa-gear' style='color:#6f6e67'></i>
+                    <div data-i18n="Notifications">About Us</div>
+                  </a>
+                </li> 
+            </li>
             </li>
             </ul>
           </ul>

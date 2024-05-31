@@ -38,8 +38,11 @@
     <link rel="stylesheet" href="../Assets/css/demo.css" />
 
     <!-- Vendors CSS -->
-    <!-- <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-    <link rel="stylesheet" href="../assets/vendor/libs/apex-charts/apex-charts.css" /> -->
+    <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="../assets/vendor/libs/apex-charts/apex-charts.css" />
+
+    <!-- leaflit -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 
        <!-- Datepicker -->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -48,15 +51,24 @@
  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.bootstrap5.css">
  <link rel="stylesheet" href="https://cdn.datatables.net/2.0.7/css/dataTables.bootstrap5.css">
 
+    <!-- Helpers -->
+    <script src="../assets/vendor/js/helpers.js"></script>
+    
     <script src="../assets/js/config.js"></script>
   </head>
+  <style>
+    #hover a:hover {
+    background-color: var( --bs-link-hover-color);
+    color: var(--bs-light);
+}
 
+  </style>
   <body>
     <!-- Layout wrapper --> 
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
         <!-- Menu -->
- <aside id="layout-menu" class=" layout-menu menu-vertical menu bg-menu-theme px-2  ">
+    <aside id="layout-menu" class=" layout-menu menu-vertical menu table-responsive bg-menu-theme px-2  ">
           <div class=" bg-dark mt-2">
           <div class="app-brand demoh-25 d-inline-block d-flex justify-content-center mt-2">
             <a href="https://www.avegabros.com/" class="app-brand-link">
@@ -77,61 +89,47 @@
             <li class="menu-item">
           <ul class="menu-inner py-1 ">
           <ul class="menu-item ">
-            <li class="menu-item active mb-3">
-                  <a href="../Admin/AdminDashboard.php" class="menu-link ">
+            <li class="menu-item mb-3 mx-3"id ="hover">
+                  <a href="../Admin/AdminDashboard.php" class="menu-link mx-3">
                     <div data-i18n="Connections">Dashboard</div>
                   </a>
                 </li>
-                <li class="menu-item active mb-3">
-                  <a href="../Timesheet/DisplayAdmin.php" class="menu-link">
+                <li class="menu-item mb-3 mx-3"id ="hover">
+                  <a href="../Timesheet/DisplayAdmin.php" class="menu-link mx-3">
                     <div data-i18n="Analytics">Attendance Record</div>
                   </a>
                 </li>
 
-                <li class="menu-item active mb-3">
-                  <a href="../Reports/AllReports.php " class="menu-link">
+                <li class="menu-item mb-3 mx-3"id ="hover">
+                  <a href="../Reports/AllReports.php " class="menu-link mx-3">
                     <div data-i18n="Analytics">Weekly Reports</div>
                   </a>
                 </li>
             
-                <li class="menu-item active mb-3">
-                  <a href="../Admin/Trainees.php" class="menu-link">
+                <li class="menu-item mb-3 mx-3"id ="hover">
+                  <a href="../Admin/Trainees.php" class="menu-link mx-3">
                     <div data-i18n="Analytics">Trainees</div>
                   </a>
 
                 </li>
-                <li class="menu-item active mb-3">
-                  <a href="pages-account-settings-notifications.html" class="menu-link">
+                <li class="menu-item mb-3 mx-3"id ="hover">
+                  <a href="pages-account-settings-notifications.html" class="menu-link mx-3">
                     <div data-i18n="Notifications">Notifications</div>
                   </a>
-                </li>
-                <!-- <li class="menu-item active mb-3">
-                  <a href="pages-account-settings-connections.html" class="menu-link">
-                    <div data-i18n="Connections">Connections</div>
-                  </a>
-                </li> -->
-              
+                </li> 
             </li>
 
             <!-- Misc -->
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
-            <!-- <li class="menu-item active  mb-3">
-              <a
-                href="../Functions/SettingsAdmin.php"
-                target="_blank"
-                class="menu-link active ">
-                <i class='fa-solid fa-gear' style='color:#6f6e67'></i>
-                <div data-i18n="Support">Settings</div>
-              </a>
             </li>
-            <li class="menu-item active mb-3"> -->
-              <a
-                href=""
-                target="_blank"
-                class="menu-link ">
-                <i class='fa-solid fa-gear' style='color:#6f6e67'></i>
-                <div data-i18n="Support">About Us</div>
-              </a>
+                <li class="menu-item mb-3 mx-3"id ="hover">
+          
+                  <a href="pages-account-settings-notifications.html" class="menu-link mx-3">
+                  <i class='fa-solid fa-gear' style='color:var(--bs-light)'></i>
+                    <div data-i18n="Notifications">About Us</div>
+                  </a>
+                </li> 
+            </li>
             </li>
             </ul>
           </ul>
@@ -185,21 +183,6 @@
                         <script src="../Assets/js/dateTime.js"> </script>
                       <!-- Show current time -->
                   </li>
-
-<!-- 
-                <li class="nav-item lh-7 me-5">
-                  <a
-                  
-                    class="text-dark text-muted"
-                    href="../Admin/AdminDashboard.php"
-                    
-                    ><i class="fas fa-home  text-muted" style="color: #000;"></i> Home
-                    </a>
-                   
-                </li> -->
-
-
-
                 <li class="nav-item lh-1 me-3">
                   <a
                     class="text-muted"

@@ -18,17 +18,17 @@
     
         <!-- build:js assets/vendor/js/core.js -->
 
-    <script src="../assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="../assets/vendor/libs/popper/popper.js"></script>
-    <script src="../assets/vendor/js/bootstrap.js"></script>
-    <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="../assets/vendor/js/menu.js"></script>
+    <script src="../Assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="../Assets/vendor/libs/popper/popper.js"></script>
+    <script src="../Assets/vendor/js/bootstrap.js"></script>
+    <script src="../Assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="../Assets/vendor/js/menu.js"></script>
     <script src="../Assets/js/jquery.js"></script>
     <script src="../Assets/js/datatables.js"></script>
 
-    <!-- jquery -->
-    <!-- <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script> -->
-    
+   <!-- leaflit js  -->
+   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
     <!-- Vendors JS -->
     <script src="../assets/vendor/libs/apex-charts/apexcharts.js"></script>
 

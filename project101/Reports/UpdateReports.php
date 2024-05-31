@@ -16,7 +16,7 @@ include '../Layouts/main-user.php';
                                             <div class="modal-header">
                                               <h2 class="modal-title" id="modalCenterTitle">Update Report.</h2>
 
-                                              <a href="../Biweekly/DisplayReports.php"><button
+                                              <a href="../Reports/DisplayReports.php"><button
                                                 type="button"
                                                 class="btn-close"
                                                 data-bs-dismiss="modal"
@@ -30,26 +30,23 @@ include '../Layouts/main-user.php';
                                             if(isset($_GET['update_report'])){
                                                $user_id=$_SESSION['user_id'];
                                                 $row_id= $_GET['update_report'];;
-                                            $sql = "SELECT rp.*,
-                                                            tr.ojt_id,
-                                                            tr.id
-                                            
-                                            
-                                                    FROM trainees tr, reports rp
+                                                $sql = "SELECT rp.*,
+                                                    tr.ojt_id,
+                                                    dp.departments,
+                                                    dp.id AS department_id
+                                            FROM reports rp
+                                            INNER JOIN users us ON rp.user_id = us.id
+                                            INNER JOIN trainees tr ON tr.user_id = rp.user_id
+                                            INNER JOIN departments dp ON rp.department_id = dp.id
+                                            WHERE tr.user_id = '$user_id'
+                                            AND rp.id = '$row_id'";
 
-                                                    WHERE rp.user_id='$user_id'
-                                                     AND tr.user_id= '$user_id'
-                                                     AND rp.id='$row_id'
-                                                                 
-                
-                                            "; 
-                                            
                                             // Fetch data from the reports table
                                             $query = mysqli_query($connect, $sql);
                                             if(mysqli_num_rows($query) > 0) {
    
                                                 while ($row = mysqli_fetch_assoc($query)) { 
-
+                                                  $selected_department_id=$row['department_id'];
                                             ?>
 
                                             <div class="row">
@@ -60,23 +57,27 @@ include '../Layouts/main-user.php';
                                                <form class="row g-3" id="reportForm" action="../Php/php-weekly-update.php" method="post">
                                                          
                                                <div class="col-12">
-                                                          <label for="department">Assigned Department:</label><br>
-                                                          <select id="department" name="department" required class="form-control">
-                                                              <option value="">Select Department</option>
-                                                              <option value="IT" <?php if ($row['assigned_dept'] == 'IT' ) {
-                                                                                echo 'selected'; }?>>Information Technology</option>
-                                                              <option value="Accounting" <?php if ($row['assigned_dept'] == 'Accounting' ) {
-                                                                                echo 'selected'; }?>>Accounting</option>
-                                                              <option value="Finance" <?php if ($row['assigned_dept'] == 'Finance' ) {
-                                                                                echo 'selected'; }?>>Finance</option>
-                                                              <option value="Admin" <?php if ($row['assigned_dept'] == 'Admin' ) {
-                                                                                echo 'selected'; }?>>Admin</option>
-                                                              <option value="Purchasing" <?php if ($row['assigned_dept'] == 'Purchasing' ) {
-                                                                                echo 'selected'; }?>>Purchasing</option>
-                                                              <option value="Warehouse" <?php if ($row['assigned_dept'] == 'Warehouse' ) {
-                                                                                echo 'selected'; }?>>Warehouse</option>
-                                                          </select><br>
-                                               </div>
+                                                <label for="department">Assigned Department:</label><br>
+                                                <select id="department" name="department" required class="form-control">
+                                                    <option value="">Select Department</option>
+                                                    <?php       
+                                                    $selected_department_id = $row['department_id'];
+                                                    $sql = "SELECT * FROM departments";
+                                                    $department_query = mysqli_query($connect, $sql);
+                                                    
+                                                    if ($department_query && mysqli_num_rows($department_query) > 0) {
+                                                        while ($department_row = mysqli_fetch_assoc($department_query)) {
+                                                            ?>
+                                                            <option value="<?php echo $department_row['id']; ?>" <?php if ($selected_department_id == $department_row['id']) echo 'selected'; ?>>
+                                                                <?php echo $department_row['departments']; ?>
+                                                            </option>
+                                                            <?php
+                                                        }
+                                                    }
+                                                    ?>
+                                                </select><br>
+                                            </div>
+
                                                           <label for="start_date">Assignment Period Start:</label>
                                                           <input type="date" id="start_date" name="start_date" required class="form-control" value="<?= $row['dos']?>">
 

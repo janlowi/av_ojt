@@ -37,14 +37,16 @@ include '../Layouts/main-user.php';
                                                           ?>
                                                       <h4><span class="d-flex justify-content-center">Total Hours</span></h4>
                                                       <p class="card-text">This is the total hours you have rendered : </p>
-
-                                                      <h5 class="card-title d-flex justify-content-center" ><i class="fa-regular fa-clock" style="color: var(--bs-success); font-size: 60px;"> <?php echo $totalHours ?></i></h5>
+                                                        <h4 id= "realTimeDisplay"></h4>
+                                                      <h5 class="card-title d-flex justify-content-center"><i class="fa-regular fa-clock" style="color: var(--bs-success); font-size: 60px;"> <?php echo $totalHours ?></i></h5>
                                                      
                                                     </div>
                                                   </div>
                                                 </div>
                                                       <?php
                                                         $user_id = $_SESSION['user_id'];
+                                                      date_default_timezone_set('Asia/Manila'); // local timezone
+
                                                       $today=date('Y-m-d');
                                                       $currentTimeInRecord= " ";
                                                         $currentTImeIn="SELECT timestamp 
@@ -56,6 +58,7 @@ include '../Layouts/main-user.php';
                                                         if($currentTImeIn_query && mysqli_num_rows($currentTImeIn_query)>0){
                                                           $row=mysqli_fetch_assoc($currentTImeIn_query);
                                                           $currentTimeInRecord= date('Y-m-d H:i:s', strtotime($row['timestamp']));
+                                                          $timeInValue = json_encode($currentTimeInRecord);
                                                         }
                                                         ?>
                                                 <div class="col-sm-4">
@@ -120,13 +123,19 @@ include '../Layouts/main-user.php';
 
                                                           <label for="department">Assigned Department:</label><br>
                                                           <select id="department" name="department" required class="form-control">
-                                                              <option value="">Select Department</option>
-                                                              <option value="IT">Information Technology</option>
-                                                              <option value="Accounting">Accounting</option>
-                                                              <option value="Finance">Finance</option>
-                                                              <option value="Admin">Admin</option>
-                                                              <option value="Purchasing">Purchasing</option>
-                                                              <option value="Warehouse">Warehouse</option>
+                                                          <option value="">--Select Department--</option>
+                                                          <?php $department = "SELECT * FROM departments";
+                                                                                $department_query=mysqli_query($connect, $department);
+
+                                                                                if($department_query && mysqli_num_rows($department_query)> 0){
+                                                                                        while($department_row = mysqli_fetch_assoc($department_query)){
+
+                                                                                                echo '
+                                                                                                        <option value="'.$department_row['id'].'">'.$department_row['departments'].'</option>
+                                                                                                ';
+                                                                                        }
+                                                                                }
+                                                                        ?>
                                                           </select><br>
 
                                                           <label for="start_date">Assignment Period Start:</label>
@@ -249,4 +258,28 @@ include '../Layouts/footer.php';
             document.getElementById("end_date").addEventListener("change", validateDates);
         };
     </script>
- 
+ <script>
+// Function to update real-time total hours worked since clock-in
+function updateTotalHoursSinceClockIn(clockInTimestamp) {
+    // Calculate elapsed time since clock-in in seconds
+    var currentTime = Math.floor(Date.now() / 1000);
+    var elapsedTimeInSeconds = currentTime - clockInTimestamp;
+
+    // Convert elapsed time to hours
+    var elapsedTimeInHours = elapsedTimeInSeconds / 3600;
+
+    // Update the displayed total hours
+    var totalHoursElement = document.getElementById("realTimeDisplay");
+    var totalHours = parseFloat(totalHoursElement.textContent); // Total hours initially fetched from the database
+    totalHoursElement.textContent = (totalHours + elapsedTimeInHours).toFixed(2); // Update total hours
+}
+
+// Parse clock-in timestamp from PHP to JavaScript
+var clockInTimestamp = <?php echo strtotime($currentTImeInRecord); ?>;
+console.log(clockInTimestamp);
+// Call the function initially and then set interval to update every second
+updateTotalHoursSinceClockIn(clockInTimestamp);
+setInterval(function() {
+    updateTotalHoursSinceClockIn(clockInTimestamp);
+}, 1000); 
+</script>

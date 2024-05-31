@@ -6,60 +6,6 @@ include '../Layouts/main-admin.php';
  include '../Php/db_connect.php';
 
 ?>     
-<style>
-            .dt-layout-row .dt-layout-length, .dt-layout-row .dt-layout-search .dt-info {
-                position: relative;
-                margin-bottom: 0 0 20px 5px;
-                display:flex;
-                flex-direction: start;
-
-            }
-            
-           
-        .dt-length{
-            position: relative;
-            display: flex;
-            flex-direction: right;
-            padding: 10px;
-
-        }
-        .dt-length .dt-input{
-            padding: 0 10px;
-            border: none;
-            outline: none;
-
-        }
-         
-        .dt-search {
-            position: relative;
-            border: none;
-            outline:none;
-
-
-        }
-        .dt-search .dt-input{
-            position: relative;
-           height: 30px;
-           outline: none;
-           border:transparent;
-           border-bottom: 2px solid var(--bs-secondary);
-
-
-
-        }
-        .dt-paging-button{
-            border: 1px solid var(--bs-secondary);
-            padding-right: 12px;
-            border-radius: 3px; 
-
-        }
-        .content-wrapper, .card {
-            overflow-y: scroll
-        }
-    
-
-
-</style>
 
 <div class="col-2 col-xl-12 col-md-12" >
     <div class="card  p-4  " >
@@ -168,22 +114,19 @@ include '../Layouts/main-admin.php';
                                             if(isset($_GET['view_report'])){
 
                                           $user_id=$_GET['view_report'];
-                                            $sql = "SELECT rp.*,
-                                                            tr.ojt_id,
-                                                            us.first_name,
-                                                            us.last_name,
-                                                            us.middle_name
-                                            
-                                            
-                                                    FROM trainees tr, reports rp, users us
-
-                                                    WHERE  us.id=rp.user_id 
-                                                    AND us.id=tr.user_id
-                                                    AND us.id='$user_id'
-                                                    
-                                                    
-                
-                                            "; // Fetch data from the reports table
+                                          $sql = "SELECT rp.*,
+                                          tr.ojt_id,
+                                          us.first_name,
+                                          us.last_name,
+                                          us.middle_name,
+                                          dp.departments,
+                                          dp.id as department_id
+                                   FROM  reports rp
+                                   JOIN departments dp ON rp.department_id = dp.id
+                                   JOIN trainees tr ON tr.user_id = rp.user_id
+                                   JOIN users us ON us.id = rp.user_id
+                                   WHERE us.id = '$user_id'
+                                  ";
                                             $query = mysqli_query($connect, $sql);
                                             if(mysqli_num_rows($query) > 0) {
                                                 while ($row = mysqli_fetch_assoc($query)) { 
@@ -219,7 +162,7 @@ include '../Layouts/main-admin.php';
 
                                            
                                                             <div class="d-flex flex-column justify-content-center align-items-center">
-                                                                <p class="mb-1 "> <?= $row['assigned_dept']; ?></p>
+                                                                <p class="mb-1 "> <?= $row['departments']; ?></p>
                                                             </div>
                                                       
 
@@ -286,7 +229,8 @@ include '../Layouts/main-admin.php';
 <script>
 $(document).ready( function () {
     $('#dataTable').DataTable({
-
+        responsive:true,
+        "order": [[ 0, "desc" ]]
     });
 
 } );

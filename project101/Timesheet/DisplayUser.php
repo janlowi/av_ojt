@@ -20,20 +20,19 @@ include '../Layouts/main-user.php';
                     <tbody>
                         <?php
                         $user_id = $_SESSION['user_id'];
-                        $sql = "SELECT  ts.*,
-                         us.id,
-                          us.department,
-                            us.first_name,
-                             us.middle_name,
-                              us.last_name
-
-                        FROM timesheet ts
-                        INNER JOIN users us ON ts.user_id = us.id
-                        INNER JOIN trainees tr ON tr.user_id = us.id
-                        WHERE us.id='$user_id'
-                        AND event_type IN ('In', 'Out')
-                        ORDER BY timestamp";
-
+                        $sql = "SELECT ts.*, 
+                        us.department_id,  
+                        us.first_name,
+                        us.middle_name,
+                        us.last_name,
+                        dp.departments,
+                        dp.id AS department_id
+                            FROM timesheet ts 
+                            INNER JOIN users us ON ts.user_id = us.id  
+                            INNER JOIN departments dp ON us.department_id = dp.id  
+                            WHERE us.id='$user_id'
+                            AND event_type IN ('In', 'Out')
+                            ORDER BY timestamp";
 
                         $query = mysqli_query($connect, $sql);
                         $prev_row = null;
@@ -54,7 +53,7 @@ include '../Layouts/main-user.php';
                                 if ($prev_row && $prev_row['event_type'] !== $event_type && $date === date('Y-m-d', strtotime($prev_row['timestamp']))) {
                                     ?>
                                     <tr>
-                                        <td><?php echo $prev_row['department']; ?></td>
+                                        <td><?php echo $prev_row['departments']; ?></td>
                                         <td><?php echo $date; ?></td>
                                         <td><?php echo $today; ?></td>
                                         <?php if ($prev_row['event_type'] === 'In') { ?>
@@ -67,24 +66,27 @@ include '../Layouts/main-user.php';
 
                                         <td><?php echo $row['total_hours']; ?></td>
                                     </tr>
-                                <?php
+                                        <?php
                                 }
                                 $prev_row = $row;
                             }
                         }
 
                         ?>
-                    </tbody>
-
-                        <tr class="d-flex justify-content-end">
-                            <td><strong>Total Hours: </strong></td>
-                            <td> <?php echo " ".$totalHours; ?></td>
+                        </tbody>
+                        <!-- Display total hours row outside the loop -->
+                        <tr style="text-align: right;">
+                            <td colspan="5"><strong>Total Hours:</strong></td>
+                            <td colspan="5"  ><?php echo $totalHours; ?></td>
                         </tr>
+
+
                         </table>
                 </div>
 <?php  include '../Layouts/footer.php';?> 
 <script>
 new DataTable('#userAttendance', {
-   
+     responsive: true,
+     order: [[0, 'desc']]
 });
 </script>

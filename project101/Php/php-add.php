@@ -37,6 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $dos = $_POST["Dos"];
         $office = $_POST["Office"];
         $email = $_POST["Email"];
+        $rate_per_hour = $_POST['Rph'];
         $user_type = $_POST["Usertype"];
         $contact_num = $_POST["Contact"];
         $status = $_POST["Status"];
@@ -71,9 +72,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // echo "Generated Password: " . $password_generated;
 
         // Construct email body
+      // Construct email body
         $mail_body = 'This is your OJT account:<br><br>'
-                    . 'Email: ' . $email . '<br>'
-                    . 'Password:' . $password_generated;
+        . 'Email: ' . $email . '<br>'
+        . 'Password: ' . $password_generated . '<br><br>'
+        . '<a href="http://localhost:8080/av_ojt/project101/Login/index.php" style="background-color: #4CAF50; color: white; padding: 15px 25px; text-align: center; text-decoration: none; display: inline-block; border-radius: 10px;">Login</a>';
+
+
 
         // Validate form fields
         if( !empty( $ojtid)&&     
@@ -88,6 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             !empty( $dos)&&
             !empty( $office)&&
             !empty( $email)&&  
+            !empty( $rate_per_hour)&&  
             !empty( $department)&& 
             !empty( $user_type)&&
             !empty( $contact_num)) {
@@ -134,8 +140,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         email,
                         password, 
                         user_type,  
-                        department,
+                        department_id,
                         status,
+                        rph,
                         profile
                     ) VALUES (         
                         '$firstname',
@@ -149,6 +156,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         '$user_type',
                         '$department',
                         '$status',
+                        '$rate_per_hour',
                         '$default_profile'
                     )";
   
@@ -325,6 +333,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     exit();
 }
     }
+
+    //add department
+}elseif(isset($_POST['addDepartment'])){
+    $department = $_POST['department'];
+echo $department;
+        if(empty($department)){
+            $error_msg = "Department is required.";
+            $_SESSION['error'] = $error_msg;
+            header("Location: ../Admin/AdminDashboard.php");
+            exit();
+        }else {
+            $sql = "INSERT INTO departments (departments) VALUES ('$department')";
+            $query=mysqli_query($connect, $sql);
+
+            if($query = true){
+                $success_msg = "Department added successfully.";
+                $_SESSION['success'] = $success_msg;
+                header("Location: ../Admin/AdminDashboard.php");
+                exit();
+            }
+        }
 }
+
+
 }
 ?>

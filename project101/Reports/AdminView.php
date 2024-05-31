@@ -34,183 +34,46 @@ include '../Layouts/main-admin.php';
         </div>
         </div>
 
-
-
-        <div class="table-responsive text-nowrap ">
-        <table class="table table-bordered border-secondary " >
-          <thead class="border-bottom bg-dark">
-
-                                            <tr>
-     
-                                             
-                                                <th scope="col">
-
-                   
-                                                    <div class="d-flex flex-column justify-content-center align-items-center">
-                                                        <p class="mb-1 ">DEPARTMENT</p>
-                                                    </div>
-                                     
-
-                                                </th>
-
-                                                <th scope="col">
-
-                   
-                                                    <div class="d-flex flex-column justify-content-center align-items-center">
-                                                        <p class="mb-1 ">START</p>
-                                                    </div>
-
-
-                                                </th>
-                                                
-                                                <th scope="col">
-
-                   
-                                                    <div class="d-flex flex-column justify-content-center align-items-center">
-                                                        <p class="mb-1 ">END</p>
-                                                    </div>
-
-
-                                                </th>
-
-                                                <th scope="col">
-
-                   
-                                                    <div class="d-flex flex-column justify-content-center align-items-center">
-                                                        <p class="mb-1 ">SUMMARY</p>
-                                                    </div>
-
-
-                                                </th>
-
-                                                <th scope="col">
-
-                   
-                                                    <div class="d-flex flex-column justify-content-center align-items-center">
-                                                        <p class="mb-1 ">ACCOMPLISHMENTS</p>
-                                                    </div>
-
-
-                                                </th>
-
-                                                <th scope="col">
-
-                   
-                                                    <div class="d-flex flex-column justify-content-center align-items-center">
-                                                        <p class="mb-1 ">CHALLENGES</p>
-                                                    </div>
-
-
-                                                </th>
-
-                                                <th scope="col">
-
-                   
-                                                    <div class="d-flex flex-column justify-content-center align-items-center">
-                                                        <p class="mb-1 ">LEARNINGS</p>
-                                                    </div>
-
-
-                                                </th>
-                                            
-
-                                            </tr>
-                                        </thead>
-                                        <tbody class="table-border-bottom-0">
                                             <?php 
                                             if(isset($_GET['view']))
                                             $report_id=$_GET['view'];
                                             $user_id=$_SESSION['user_report_id'];
 
                                             $sql = "SELECT rp.*,
-                                                            tr.ojt_id
-                                            
-                                            
-                                                    FROM trainees tr, reports rp, users us
+                                                            us.id
+                                                    FROM reports rp
+                                                    INNER JOIN users us ON rp.user_id= us.id
+                                                    WHERE  rp.id=? 
+                                                    AND us.id=? ";
 
-                                                    WHERE  rp.id='$report_id' 
-                                                    AND tr.user_id=us.id
-                                                    AND us.id='$user_id'
-                                                    
-                                            "; // Fetch data from the reports table
+                                            $stmt = mysqli_prepare($connect, $sql);
+                                            mysqli_stmt_bind_param($stmt, "ii", $report_id, $user_id);
+                                            mysqli_stmt_execute($stmt);
+                                            $result = mysqli_stmt_get_result($stmt);
 
-                                            $query = mysqli_query($connect, $sql);
-                                            if(mysqli_num_rows($query) > 0) {
-                                                while ($row = mysqli_fetch_assoc($query)) { ?>
-                                                    <tr>
-                                                    
-                                                      
-                                                        <td>
+                    if ($result && mysqli_num_rows($result) > 0) {
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $summary = $row['summary'];
+                        $accomplishment = $row['accomplishment'];
+                        $challenges = $row['challenges'];
+                        $learnings = $row['learnings'];
+                            // Outputting the form data within the HTML structure
 
-                                           
-                                                            <div class="d-flex flex-column justify-content-center align-items-center">
-                                                                <p class="mb-1 "> <?= $row['assigned_dept']; ?></p>
-                                                            </div>
-                                                      
+                            echo '<div class="container">';
+                            echo "<div class='section'><strong><label for='summary'>Summary:</label></strong><p>$summary</p></div>";
+                            echo "<div class='section'><strong><label for='accomplishments'>Accomplishments:</label></strong><p>$accomplishment</p></div>";
+                            echo "<div class='section'><strong><label for='challenges'>Challenges:</label></strong><p>$challenges</p></div>";
+                            echo "<div class='section'><strong><label for='learnings'>Learnings:</label></strong><p>$learnings</p></div>";
+                            echo '</div>';
 
-
-                                                        </td>
-                                                        <td>
-
-                                                            <div class="d-flex flex-column justify-content-center align-items-center">
-                                                                <p class="mb-1 "> <?= $row['dos']; ?></p>
-                                                            </div>
-
-
-                                                        </td>
-                                                        <td>
-
-                                                            <div class="d-flex flex-column justify-content-center align-items-center">
-                                                                <p class="mb-1 "> <?= $row['doe']; ?></p>
-                                                            </div>
-
-
-                                                        </td>
-                                                        <td>
-
-                                                            <div class="d-flex flex-column justify-content-center align-items-center">
-                                                                <p class="mb-1 "> <?= $row['summary']; ?></p>
-                                                            </div>
-
-
-                                                        </td>
-                                                        <td>
-
-                                                            <div class="d-flex flex-column justify-content-center align-items-center">
-                                                                <p class="mb-1 "> <?= $row['accomplishment']; ?></p>
-                                                            </div>
-
-
-                                                        </td>
-                                                        <td>
-
-                                                            <div class="d-flex flex-column justify-content-center align-items-center">
-                                                                <p class="mb-1 "> <?= $row['challenges']; ?></p>
-                                                            </div>
-
-
-                                                        </td>
-                                                        <td>
-
-                                                            <div class="d-flex flex-column justify-content-center align-items-center">
-                                                                <p class="mb-1 "> <?= $row['learnings']; ?></p>
-                                                            </div>
-
-
-                                                        </td>
-
-                                         
-                                                    </tr> 
-                                            <?php
-
-                                                }
-                                            }
-                                            ?>
-                        </tbody>
-                    </table>
-                </div>
-                </div>
-            </div>
-                       
+                        echo '</div>';
+                    }
+                } else {
+                    echo "No data found!";
+                }
+            ?>
+        </div> <!-- End of card-body -->
+    </div> <!-- End of card -->
+</div>
                
 <?php include '../Layouts/footer.php'; ?>

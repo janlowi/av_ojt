@@ -7,50 +7,6 @@ include '../Layouts/main-admin.php';
  include '../Php/db_connect.php';
 
 ?>     
-<style>
-            .dt-layout-row .dt-paging, .dt-info {
-                position: relative;
-
-            }
-        .dt-length{
-            position: relative;
-            padding: 10px;
-
-        }
-        .dt-length .dt-input{
-            padding: 0 10px;
-            border: none;
-            outline: none;
-
-        }
-         
-        .dt-search {
-            display:flex;
-            flex-direction: end;
-            border: transparent ;
-            outline:none;
-
-
-        }
-        .dt-search .dt-input{
-            position: relative;
-           height: 30px;
-           outline: none;
-           border:transparent;
-           border-bottom: 1px solid var(--bs-secondary);
-           padding: 0 0 5px 5px;
-
-
-        }
-        .dt-paging-button{
-            padding-right: 12px;
-            border-radius: 3px; 
-        }
-        .content-wrapper, .card {
-            overflow-y: scroll
-        }
-    
-
 
 </style>
 
@@ -59,7 +15,6 @@ include '../Layouts/main-admin.php';
   
    <div class="card position-relative   ">
                 <div class="table-responsive text-nowrap">
-
                   <table class="datatables-ajax table table-bordered my-2" id="dataReport">
                     <thead>
                       <tr>
@@ -76,25 +31,25 @@ include '../Layouts/main-admin.php';
                                              <?php 
                                             $sql = "SELECT us.*,
                                                             tr.ojt_id,
-                                                            tr.university
+                                                            tr.university,
+                                                            dp.departments,
+                                                            dp.id AS department_id
 
-                                            
-                                            
-                                                    FROM trainees tr, users us
-
-                                                    WHERE  us.id=tr.user_id 
-                                                  
-                                        
+                                                    FROM users us
+                                                    INNER JOIN trainees tr ON tr.user_id = us.id
+                                                    INNER JOIN departments dp ON dp.id= us.department_id
+                                                    WHERE us.user_type = 'Trainee'  "; 
                                                     
-                                            "; // Fetch data from the reports table
+                                                    // Fetch data from the reports table
                                             $query = mysqli_query($connect, $sql);
-                                            if(mysqli_num_rows($query) > 0) {
-                                                while ($row = mysqli_fetch_assoc($query)) {     
+                                            
+                                            if($query && mysqli_num_rows($query) > 0) {
+                                                while ($row= mysqli_fetch_assoc($query)) {     
                                                     $defaultProfileImage = '../Assets/img/avatars/av.png';
                                                     $profileImage = !empty($row['profile']) ? '../Assets/img/avatars/'.$row['profile'] : $defaultProfileImage;
                                                    $name= $row['first_name'].' '.$row['middle_name'].' '.$row['last_name']; 
+                                                 
                                                     ?>
-                                                <?php if($row['department']==='IT-Dept'): ?>
                                                     <tr class="table-info">
                                                         <td>
                                                         <i class='fas fa-user'></i>
@@ -112,7 +67,7 @@ include '../Layouts/main-admin.php';
                                                             </div>
                                                         </td>
 
-                                                        <td><span class="badge bg-label-info me-1"><?=$row['department'] ?></span></td>
+                                                        <td><span class="badge bg-label-info me-1"><?=$row['departments'] ?></span></td>
                                                         <td><?=  $row['university'] ?></td>
 
                                                         <td>
@@ -127,166 +82,24 @@ include '../Layouts/main-admin.php';
                                                             </div>
                                                         </td>
                                                     </tr>
-                                                <?php elseif ($row[	'department'] === 'HR'): ?>
 
-                                                    <tr class="table-warning">
-                                                        <td>
-                                                        <i class='fas fa-user'></i>
-                                                         <span class="fw-medium"><?= $row['ojt_id']?></span>
-                                                        </td>
-                                                        <td><?= $name ?></td>
-                                                        <td>
-                                                        <div
-                                                            data-bs-toggle="tooltip"
-                                                            data-popup="tooltip-custom"
-                                                            data-bs-placement="top"
-                                                            class="avatar pull-up"
-                                                            title="<?= $name ?>">
-                                                            <img src="<?= $profileImage?>" alt="Avatar" class="rounded-circle" />
-                                                            </div>
-                                                        </ul>
-                                                        </td>
-                                                        <td><span class="badge bg-label-warning me-1"><?=$row['department'] ?></span></td>
-                                                        <td><?=  $row['university'] ?></td>
+<?php }
+} 
+?>
 
-                                                        <td>
-                                                        <div class="dropdown">
-                                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                            <i class="bx bx-dots-vertical-rounded"></i>
-                                                            </button>
-                                                            <div class="dropdown-menu">
-                                                            <a class="dropdown-item" href="../Reports/ViewReport.php?view_report=<?=$row['id']?>"><i class='fa fa-files-o'></i> View Reports</a>
-                                                            <a class="dropdown-item" href="javascript:void(0);"
-                                                                ><i class="bx bx-trash me-1"></i> Delete</a
-                                                            >
-                                                            </div>
-                                                        </div>
-                                                        </td>
-                                                    </tr>
-                                                <?php elseif($row['department'] === 'Admin'): ?>
-
-                                                    <tr class="table-primary">
-                                                        <td>
-                                                        <i class='fas fa-user'></i>
-                                                        <span class="fw-medium"><?= $row['ojt_id']?></span>
-                                                        </td>
-                                                        <td><?= $name ?></td>
-                                                        <td>
-                                                        <div
-                                                            data-bs-toggle="tooltip"
-                                                            data-popup="tooltip-custom"
-                                                            data-bs-placement="top"
-                                                            class="avatar pull-up"
-                                                            title="<?= $name ?>">
-                                                            <img src="<?= $profileImage?>" alt="Avatar" class="rounded-circle" />
-                                                            </div>
-                                                        </ul>
-                                                        </td>
-                                                        <td><span class="badge bg-label-primary me-1"><?=$row['department'] ?></span></td>
-                                                        <td><?=  $row['university'] ?></td>
-
-                                                        <td>
-                                                        <div class="dropdown">
-                                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                            <i class="bx bx-dots-vertical-rounded"></i>
-                                                            </button>
-                                                            <div class="dropdown-menu">
-                                                            <a class="dropdown-item" href="../Reports/ViewReport.php?view_report=<?=$row['id']?>"><i class='fa fa-files-o'></i> View Reports</a>
-                                                            <a class="dropdown-item" href="javascript:void(0);"
-                                                                ><i class="bx bx-trash me-1"></i> Delete</a
-                                                            >
-                                                            </div>
-                                                        </div>
-                                                        </td>
-                                                    </tr>
-                                                    <?php elseif($row['department'] === 'Finance'): ?>
-
-                                                        <tr class="table-danger">
-                                                            <td>
-                                                            <i class='fas fa-user'></i>
-                                                            <span class="fw-medium"><?= $row['ojt_id']?></span>
-                                                            </td>
-                                                            <td><?= $name ?></td>
-                                                            <td>
-                                                            <div
-                                                                data-bs-toggle="tooltip"
-                                                                data-popup="tooltip-custom"
-                                                                data-bs-placement="top"
-                                                                class="avatar pull-up"
-                                                                title="<?= $name ?>">
-                                                                <img src="<?= $profileImage?>" alt="Avatar" class="rounded-circle" />
-                                                                </div>
-                                                            </ul>
-                                                            </td>
-                                                            <td><span class="badge bg-label-danger me-1"><?=$row['department'] ?></span></td>
-                                                            <td><?=  $row['university'] ?></td>
-
-                                                            <td>
-                                                            <div class="dropdown">
-                                                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                                                </button>
-                                                                <div class="dropdown-menu">
-                                                                <a class="dropdown-item" href="../Reports/ViewReport.php?view_report=<?=$row['id']?>"><i class='fa fa-files-o'></i> View Reports</a>
-                                                                <a class="dropdown-item" href="javascript:void(0);"
-                                                                    ><i class="bx bx-trash me-1"></i> Delete</a
-                                                                >
-                                                                </div>
-                                                            </div>
-                                                            </td>
-                                                        </tr>
-                                                        <?php elseif($row['department'] === 'Accounting'): ?>
-
-                                                        <tr class="table-success">
-                                                            <td>
-                                                            <i class='fas fa-user'></i>
-                                                             <span class="fw-medium"><?= $row['ojt_id']?></span>
-                                                            </td>
-                                                            <td><?= $name ?></td>
-                                                            <td>
-                                                            <div
-                                                                data-bs-toggle="tooltip"
-                                                                data-popup="tooltip-custom"
-                                                                data-bs-placement="top"
-                                                                class="avatar pull-up"
-                                                                title="<?= $name ?>">
-                                                                <img src="<?= $profileImage?>" alt="Avatar" class="rounded-circle" />
-                                                                </div>
-                                                            </ul>
-                                                            </td>
-                                                            <td><span class="badge bg-label-success me-1"><?=$row['department'] ?></span></td>
-                                                            <td><?=  $row['university'] ?></td>
-
-                                                            <td>
-                                                            <div class="dropdown">
-                                                                <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                                <i class="bx bx-dots-vertical-rounded"></i>
-                                                                </button>
-                                                                <div class="dropdown-menu">
-                                                                <a class="dropdown-item" href="../Reports/ViewReport.php?view_report=<?=$row['id']?>"><i class='fa fa-files-o'></i> View Reports</a>
-                                                                <a class="dropdown-item" href="javascript:void(0);"
-                                                                    ><i class="bx bx-trash me-1"></i> Delete</a
-                                                                >
-                                                                </div>
-                                                            </div>
-                                                            </td>
-                                                        </tr>
-                                                <?php endif; ?>
-
-<?php }} ?>
-                                    <!--/ Contextual Classes -->
-                                    <script src="../Assets/js/jquery.js"></script>
+<script src="../Assets/js/jquery.js"></script>
 <script src="../Assets/js/datatables.js"></script>
 <script>
-$(document).ready( function () {
+            $(document).ready(function() {
     $('#dataReport').DataTable({
-
+        responsive: true,
+        order: [[0, 'desc']] // Sort by the first column (index 0) in descending order
     });
+});
+</script>
 
-} );
-</script>    
 
-                <?php
+<?php
 
 if(isset($_SESSION['success'])){
 

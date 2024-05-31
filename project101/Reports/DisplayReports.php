@@ -147,20 +147,17 @@ include '../Layouts/main-user.php';
                                             tr.ojt_id,
                                             us.first_name,
                                             us.last_name,
-                                            us.middle_name
-                            
-                            
-                                            FROM trainees tr, reports rp, users us
-
-                                            WHERE  us.id=rp.user_id 
-                                            AND us.id=tr.user_id
-                                            AND us.id='$user_id'
-                                            ORDER BY id DESC
-                                            
-                                                    
-                                                    
-                
-                                            "; // Fetch data from the reports table
+                                            us.middle_name,
+                                            dp.departments,
+                                            dp.id as department_id
+                                     FROM  reports rp
+                                     JOIN departments dp ON rp.department_id = dp.id
+                                     JOIN trainees tr ON tr.user_id = rp.user_id
+                                     JOIN users us ON us.id = rp.user_id
+                                     WHERE us.id = '$user_id'
+                                     ORDER BY rp.id DESC";
+                                     
+                                     // Fetch data from the reports table
                                             $query = mysqli_query($connect, $sql);
                                             if(mysqli_num_rows($query) > 0) {
                                                 while ($row = mysqli_fetch_assoc($query)) { 
@@ -189,7 +186,7 @@ include '../Layouts/main-user.php';
 
                                            
                                                             <div class="d-flex flex-column justify-content-center align-items-center">
-                                                                <p class="mb-1 "> <?= $row['assigned_dept']; ?></p>
+                                                                <p class="mb-1 "> <?= $row['departments']; ?></p>
                                                             </div>
                                                       
 
@@ -290,6 +287,8 @@ include '../Layouts/main-user.php';
 $(document).ready( function () {
     $('#dataTable').DataTable({
 
+        responsive: true,
+        order: [[0, 'desc']]
     });
 
 } );  
