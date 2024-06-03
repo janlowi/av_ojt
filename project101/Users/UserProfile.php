@@ -1,12 +1,15 @@
 <?php 
 session_start();
-$title=$_SESSION['firstname']." ". "Profile";
 include '../Php/authenticate.php';
+checkLoggedIn();
+// checkUserType();
+$title=$_SESSION['firstname']." ". "Profile";
+
 include '../Layouts/main-user.php'; 
  include '../Php/db_connect.php';
 
 
-  ?>
+  ?>s
 
   <div class="col-2 col-xl-12 col-md-6" >
     <div class="card h-70 p-4">
@@ -95,22 +98,7 @@ include '../Layouts/main-user.php';
                 </div>
 
     <!-- qoute    -->
-                   
 
-
-
-                                                  <!--         
-                                                          <div class="dropdown">
-                                                            <button class="btn p-0" type="button" id="popularInstructors" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                              <i class="bx bx-dots-vertical-rounded"></i>
-                                                            </button>
-                                                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="popularInstructors">
-                                                              <a class="dropdown-item" href="javascript:void(0);">Select All</a>
-                                                              <a class="dropdown-item" href="javascript:void(0);">Refresh</a>
-                                                              <a class="dropdown-item" href="javascript:void(0);">Share</a>
-                                                            </div>
-                                                          </div> -->
-                                                        </div>
                                                         <?php 
                                                         $user_id = $_SESSION['user_id'];
                                                       $sql = "SELECT us.*,

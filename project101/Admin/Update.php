@@ -1,8 +1,10 @@
 <?php 
 session_start();
+include '../Php/authenticate.php';
+checkLoggedIn();
+// checkUserType();
 $title="Update";
 include '../Layouts/main-admin.php'; 
-include '../Php/authenticate.php';
  include '../Php/db_connect.php';
 
 

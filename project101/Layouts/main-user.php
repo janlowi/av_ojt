@@ -30,6 +30,11 @@
 
     <link rel="stylesheet" href="../assets/vendor/fonts/boxicons.css" />
 
+    <!-- leaflet.js -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+  
     <!-- Core CSS -->
     <link rel="stylesheet" href="../assets/vendor/css/core.css" class="template-customizer-core-css" />
     <link rel="stylesheet" href="../assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
@@ -39,12 +44,12 @@
     <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <link rel="stylesheet" href="../assets/vendor/libs/apex-charts/apex-charts.css" />
     
+<!-- jquerr -->
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+
 <!-- data tables -->
 <link href="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-2.0.7/af-2.7.0/b-3.0.2/b-colvis-3.0.2/b-html5-3.0.2/b-print-3.0.2/cr-2.0.2/date-1.5.2/fc-5.0.0/fh-4.0.1/kt-2.12.0/r-3.0.2/rg-1.5.0/rr-1.5.0/sc-2.4.2/sb-1.7.1/sp-2.3.1/sl-2.0.1/sr-1.4.1/datatables.min.css" rel="stylesheet">
-
-    <!-- datatables CSS
-    <link rel="stylesheet" href="https://cdn.datatables.net/v/dt/jqc-1.12.4/dt-2.0.7/b-3.0.2/sl-2.0.2/datatables.min.css"/>
-<link rel="stylesheet" href="Editor-2.3.2/css/editor.dataTables.css"> -->
 
     <!-- Helpers -->
     <script src="../assets/vendor/js/helpers.js"></script>
@@ -95,7 +100,7 @@
                     <div data-i18n="Analytics">Profile</div>
                   </a>
                 </li>
-                <li class="menu-item mb-3 mx-3 ">
+                <li class="menu-item mb-3 mx-3 " id="hover">
                   <a href="../Reports/DisplayReports.php" class="menu-link">
                     <div data-i18n="Analytics">Weekly Reports</div>
                   </a>
@@ -122,7 +127,7 @@
                 <li class="menu-item  mb-3 mx-3"id ="hover">
           
                   <a href="pages-account-settings-notifications.html" class="menu-link ">
-                  <i class='fa-solid fa-gear' style='color:#6f6e67'></i>
+                  <i class='fa-solid fa-gear' style='color: var(--bs-mute)'></i>
                     <div data-i18n="Notifications">About Us</div>
                   </a>
                 </li> 

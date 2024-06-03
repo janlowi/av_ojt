@@ -8,40 +8,76 @@ session_start();
 <?php
 
 $user_id= $_SESSION['user_id'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    date_default_timezone_set('Asia/Manila'); // local timezone
 
-if(isset($_POST['Time_In'])){
-    date_default_timezone_set('Asia/Manila');// local timezone
+    if (isset($_POST['selfie_in'])) {
+        $lat = $_POST['lat'];
+        $long = $_POST['long'];
+        $selfie = $_POST['selfie_in'];
+        $selfie = str_replace('data:image/png;base64,', '', $selfie);
+        $selfie = str_replace(' ', '+', $selfie);
+        $imageData = base64_decode($selfie);
+        $file = 'uploads/' . uniqid() . '.png';
 
-$event_type = $_POST['Time_In'];
-    $sql = "INSERT INTO timesheet (event_type, user_id )
-             VALUES ('$event_type', '$user_id')
+        if (!is_dir('uploads')) {
+            mkdir('uploads', 0777, true);
+        }
+        if (file_put_contents($file, $imageData)) {
 
-     ";
 
-    $query= mysqli_query($connect, $sql);
-    if($query==1){
+        if (empty($selfie)) {
+            echo "<script>alert('Error: Please capture an image.');</script>";
+        } else {
+             
+            $query = "INSERT INTO timesheet (user_id, event_type, total_hours, image, location) VALUES ( ?, ?, ?, ?, ?)";
 
-            
-        $_SESSION['success'] = "Time In Succesfully";
-         header("location: ../Users/UserDashboard.php");
-         exit();
-    }else {
+             
+            $stmt = $connect->prepare($query);
 
-        $_SESSION['error'] = "Failed to time in";
-        header("location: ../Users/UserDashboard.php");
-        exit();
+            if ($stmt) {
+                
+                $stmt->bind_param("issss", $user_id, $event_type, $total_hours, $file, $coordinates);
+
+                 
+                $user_id = $user_id;  
+                $coordinates = $lat. ','. $long;
+                $event_type = 'In'; 
+                $total_hours = 0;  
+
+                if ($stmt->execute()) {
+
+                    $_SESSION['success'] = "Time In Successfully";
+                            header("location: ../Users/UserDashboard.php"); 
+                            exit();
+                } else {
+                    $error_msg="Failed to time in: " . $stmt->error;
+                    $_SESSION['error'] = $error_msg;
+                    header("location: ../Users/UserDashboard.php");
+                    exit();
+                }
+
+                
+                $stmt->close();
+            } else {
+                $error_msg= "Prepare failed: " . $connect->error;
+                $_SESSION['error'] = $error_msg;
+                    header("location: ../Users/UserDashboard.php");
+                    exit();
+            }
+        }
     }
-}
+    }elseif(isset($_POST['selfie_out'])) {
 
-?>
-
-        <?php
-
-    if(isset($_POST['Time_Out'])){  
-        date_default_timezone_set('Asia/Manila'); // local timezone
+        $lat = $_POST['lat'];
+        $long = $_POST['long'];
+        $selfie = $_POST['selfie_out'];
+        $selfie = str_replace('data:image/png;base64,', '', $selfie);
+        $selfie = str_replace(' ', '+', $selfie);
+        $imageData = base64_decode($selfie);
+        $file = 'uploads/' . uniqid() . '.png';
 
         $user_id = $_SESSION['user_id'];
-        $event_type = $_POST['Time_Out'];
 
         $sql = "SELECT timestamp, event_type FROM timesheet WHERE DATE(timestamp) = CURDATE() AND user_id = '$user_id'";
         $query = mysqli_query($connect, $sql);
@@ -69,29 +105,76 @@ $event_type = $_POST['Time_In'];
                     header("location: ../Users/UserDashboard.php");
                     exit();
                 }
-                $sql2 = "INSERT INTO timesheet (event_type, user_id, total_hours) VALUES ('$event_type', '$user_id', '$totalHours')";
-                $query2 = mysqli_query($connect, $sql2);
 
-                if ($query2) {
-                    $_SESSION['success'] = "Time Out Successfully";
-                    header("location: ../Users/UserDashboard.php"); 
-                    exit();
+                if (!is_dir('uploads')) {
+                    mkdir('uploads', 0777, true);
+                }
+                if (file_put_contents($file, $imageData)) {
+                    echo "Selfie uploaded successfully!";
+                } else {
+                    echo "Failed to upload selfie.";
+                }
+        
+                if (empty($selfie)) {
+                    echo "<script>alert('Error: Please capture an image.');</script>";
+                } else {
+                     
+                    $query = "INSERT INTO timesheet (user_id, event_type, total_hours, image, location) VALUES ( ?, ?, ?, ?, ?)";
+        
+                     
+                    $stmt = $connect->prepare($query);
+        
+                    if ($stmt) {
+                        
+                        $stmt->bind_param("issss", $user_id, $event_type, $totalHours, $file, $coordinates);
+        
+                         
+                        $user_id = $user_id;  
+                        $coordinates = $lat. ','. $long;
+                        $event_type = 'Out'; 
+      
+                         echo $coordinates;
+                        if ($stmt->execute()) {
+                            $_SESSION['success'] = "Time Out Successfully";
+                            header("location: ../Users/UserDashboard.php"); 
+                            exit();
+                        } else {
+                            $_SESSION['error'] ="Failed to upload selfie: " . $stmt->error;
+                            header("location: ../Users/UserDashboard.php");
+                            exit();
+                        }
+        
+                        
+                        $stmt->close();
+                    } else {
+                        $_SESSION['error'] = "Prepare failed: " . $connect->error;
+                        header("location: ../Users/UserDashboard.php");
+                        exit();
+                    }
+                }
+            } else {
+                "Invalid time out. Time out cannot be before time in.";
+                header("location: ../Users/UserDashboard.php");
+                exit();
+            }
+
                 } else {
                     $_SESSION['error'] = "Failed to time out";
                     header("location: ../Users/UserDashboard.php");
                     exit();
                 }
             } else {
-                $_SESSION['error'] = "Invalid time out. Time out cannot be before time in.";
+                $_SESSION['error'] = "No corresponding 'In' entry found";
                 header("location: ../Users/UserDashboard.php");
                 exit();
-            }
-        } else {
-            $_SESSION['error'] = "No corresponding 'In' entry found";
-            header("location: ../Users/UserDashboard.php");
-            exit();
+            
+        } 
         }
-    } 
+ 
+// displayImages($connect);
+
+ 
+// $connect->close();
 
 
 ?>

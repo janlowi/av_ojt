@@ -1,62 +1,13 @@
 <?php 
 session_start();
-$title="Weekly Response";
 include '../Php/authenticate.php';
+checkLoggedIn();
+// checkUserType();
+$title="Weekly Res]ponse";
 include '../Layouts/main-user.php'; 
  include '../Php/db_connect.php';
 
 ?>     
-<style>
-            .dt-layout-row .dt-paging, .dt-info {
-                position: relative;
-                display: flex;
-                flex-direction: row-reverse;
-            }
-           
-        .dt-length{
-            position: relative;
-            display: flex;
-            flex-direction: row-reverse;
-            top: -10px;
-
-        }
-        .dt-length .dt-input{
-            padding: 0 20px 0 58px;
-            border: none;
-            outline: none;
-
-        }
-         
-        .dt-search {
-            position: relative;
-            display: flex;
-            justify-content: flex-end;
-            border: none;
-            outline:none;
-
-        }
-        .dt-search .dt-input{
-            position: relative;
-           height: 30px;
-           outline: none;
-           border:none;
-           padding: 0 0 10px 5px;
-
-
-        }
-        .dt-paging-button{
-            border: 1px solid dark;
-            border-radius: 3px
-        }
-       
-      
-    
-
-
-</style>
-
-     
-
 
 <div class="col-2 col-xl-12 col-md-6" >
     <div class="card  p-4">

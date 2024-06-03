@@ -1,7 +1,9 @@
 <?php 
 session_start();
-$title="View";
 include '../Php/authenticate.php';
+checkLoggedIn();
+// checkUserType();
+$title="View";
 include '../Layouts/main-admin.php'; 
  include '../Php/db_connect.php';
 

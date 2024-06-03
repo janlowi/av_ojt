@@ -1,7 +1,9 @@
 <?php 
 session_start();
-$title=$_SESSION['firstname']." ". "Profile";
 include '../Php/authenticate.php';
+checkLoggedIn();
+// checkUserType();
+$title=$_SESSION['firstname']." ". "Profile";
 include '../Layouts/main-admin.php'; 
  include '../Php/db_connect.php';
   ?>
@@ -61,46 +63,38 @@ if (isset($_GET['trainee_profile'])){
   }
   
 ?>
-  <div class="col-2 col-xl-12 col-md-6" >
+  <div class="row" >
     <div class="card h-70 p-4">  
 
-                                              <a href="../Admin/Trainees.php" class="d-flex justify-content-end">
-                                                  <button class="btn btn-dark">
-                                                    Back
-                                                  </button>
-                                              </a>
-                            <div class="card-group mb-5">
-                              <div class="card">
-                                <img class="card-img-top" src="../assets/img/avatars/<?=$profile;?>" alt="Card image cap" />
-                              
-                                <div class="card-footer">
-                                </div>
-                              </div>
-                              
-                              <div class="card">
-                                <!-- <img class="card-img-top" src="../assets/img/elements/5.jpg" alt="Card image cap" /> -->
-                                <div class="card-body d-flex justify-content-center   align-items-center ">
-                                  <h1 class="card-title"><i class="fa-solid fa-quote-left fa-2xl"></i></h1>
-                                        <figure class="p-3 mb-0">
-                                        <blockquote class="blockquote">
-                                          <h4><?=$qoute ?></h4>
-                                        </blockquote>
-                                        <figcaption class="blockquote-footer mb-0 text-muted">
-                                         <cite title="Source Title"><?= $author ?></cite>
-                                        </figcaption>
-                                      </figure>
-                                  <h1 class="card-title"><i class="fa-solid fa-quote-right fa-2xl"></i></i></h>
+   <a href="../Admin/Trainees.php" class="d-flex justify-content-end">
+       <button class="btn btn-dark">
+         Back
+       </button>
+   </a>
 
-                                </div>
-                                <div class="card-footer">
-                                  <!-- <small class="text-muted">Last updated 3 mins ago</small> -->
-                                </div>
-                              </div>
-                            </div>
+    <img class="card-img-top d-flex align-items-start" style= "width: 300px; height: 350px;" src="../assets/img/avatars/<?=$profile;?>" alt="Card image cap" />
 
-                              <h5 class="card-header"><?= $firstname.' '. $middlename .' '. $lastname .' '. 'Information'?></h5>
+  <div class="col  align-items-middle d-flex justify-content-center">
+    <div class="card">
+      <div class="card-body align-items-middle d-flex justify-content-center  ">
+        <h1 class="card-title"><i class="fa-solid fa-quote-left fa-2xl"></i></h1>
+               <figure class="p-3 mb-0">
+               <blockquote class="blockquote">
+                 <h4><?=$qoute ?></h4>
+               </blockquote>
+               <figcaption class="blockquote-footer mb-0 text-muted">
+                <cite title="Source Title"><?= $author ?></cite>
+               </figcaption>
+             </figure>
+         <h1 class="card-title"><i class="fa-solid fa-quote-right fa-2xl"></i></i></h>
+      </div>
+    </div>
+  </div>
+
+
                                     
                                         <div class="table-responsive ">
+                                        <h5 class="card-header"><?= $firstname.' '. $middlename .' '. $lastname .' '. 'Information'?></h5>
 
                                                           <table class="table table-bordered border-secondary">
                                                             <thead class="border-bottom">

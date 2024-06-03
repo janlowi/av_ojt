@@ -1,7 +1,9 @@
 <?php 
 session_start();
-$title="Trainees";
 include '../Php/authenticate.php';
+checkLoggedIn();
+// checkUserType();
+$title="Trainees";
 include '../Layouts/main-admin.php'; 
  include '../Php/db_connect.php';
 

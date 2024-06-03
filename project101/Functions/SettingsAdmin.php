@@ -1,9 +1,12 @@
 <?php 
 session_start();
+include '../Php/authenticate.php';
+checkLoggedIn();
+// checkUserType();
 $title="Settings";
 include '../Layouts/main-admin.php'; 
  include '../Php/db_connect.php';
- 
+
   ?>
   <style>
  .valid{

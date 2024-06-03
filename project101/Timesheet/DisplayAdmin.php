@@ -1,9 +1,14 @@
 <?php
 session_start();
-$title = "Attendance Record";
 include '../Php/authenticate.php';
+checkLoggedIn();
+// checkUserType();
+$title = "Attendance Record";
+
 include '../Php/db_connect.php';
-include '../Layouts/main-admin.php'; ?>
+include '../Layouts/main-admin.php'; 
+
+?>
 
   
             <div class="card ">

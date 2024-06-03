@@ -2,6 +2,8 @@
 session_start();
 $title="Admin Dashboard";
 include '../Php/authenticate.php'; 
+checkLoggedIn();
+// checkUserType();
 include '../Layouts/main-admin.php'; 
  include '../Php/db_connect.php';
 

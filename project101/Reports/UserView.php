@@ -1,7 +1,11 @@
 <?php 
 session_start();
+include '../Php/authenticate.php';
+checkLoggedIn();
+// checkUserType();
 include '../Php/db_connect.php';
 include '../Layouts/main-user.php';
+
 ?>
 
 

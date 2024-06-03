@@ -1,9 +1,12 @@
 <?php
 session_start();
 include '../Php/authenticate.php';
+// checkLoggedIn();
+// checkUserType();
 $title = "Attendance Record";
 include '../Php/db_connect.php';
 include '../Layouts/main-user.php';
+
 ?>
     <div class="card table-responsive">
                 <table class="table table-stripes" id ="userAttendance">
