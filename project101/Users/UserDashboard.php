@@ -11,7 +11,7 @@ include '../Layouts/main-user.php';
   ?>
 
                               
-<div class="col-lg-12 mb-4 order-0 d-flex justify-content-center ">
+<div class="row order-0 d-flex justify-content-center ">
   <div class="card ">
         <div class="card-body ">
 
@@ -184,7 +184,7 @@ include '../Layouts/main-user.php';
         </div>
       <!-- Progress Bar Label -->
       <div id="progressbar" class="text-center mt-2">
-        Progress: <?php echo ($totalHours / $hoursToRender) * 100 ?>%
+        Progress: <?php echo number_format($percent, 2, '.', '') ?>%
       </div>
 
       </div>

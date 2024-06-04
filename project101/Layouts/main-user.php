@@ -69,7 +69,7 @@
         <!-- Menu -->
  <!-- Menu -->
  <aside id="layout-menu" class=" layout-menu menu-vertical menu table-responsive bg-menu-theme px-2 ">
-          <div class=" bg-dark mt-2 ">
+          <div class=" bg-dark mt-2 " style = "height: 100%;">
           <div class="app-brand demoh-25 d-inline-block d-flex justify-content-center mt-2">
             <a href="https://www.avegabros.com/" class="app-brand-link">
               <span class="app-brand-logo demo d-flex justify-content-center fixed">

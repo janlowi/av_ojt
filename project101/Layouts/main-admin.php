@@ -68,8 +68,8 @@
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
         <!-- Menu -->
-    <aside id="layout-menu" class=" layout-menu menu-vertical menu table-responsive bg-menu-theme px-2  ">
-          <div class=" bg-dark mt-2">
+    <aside id="layout-menu" class=" layout-menu menu-vertical menu table-responsive bg-menu-theme px-2 ">
+          <div class=" bg-dark mt-2" style= " height: 100%;">
           <div class="app-brand demoh-25 d-inline-block d-flex justify-content-center mt-2">
             <a href="https://www.avegabros.com/" class="app-brand-link">
               <span class="app-brand-logo demo d-flex justify-content-center fixed">
@@ -113,7 +113,7 @@
 
                 </li>
                 <li class="menu-item mb-3 mx-3"id ="hover">
-                  <a href="pages-account-settings-notifications.html" class="menu-link mx-3">
+                  <a href="../Notifications/Notification.php" class="menu-link mx-3">
                     <div data-i18n="Notifications">Notifications</div>
                   </a>
                 </li> 

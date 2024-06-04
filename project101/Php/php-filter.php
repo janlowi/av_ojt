@@ -17,7 +17,7 @@ if (isset($_POST['start_date'], $_POST['end_date'])) {
         }
 
         ?>
-        <table class="table table-borderless display-nowrap" id="filteredData">
+        <table class="table table-borderless text-nowrap" id="filteredData">
             <thead>
                 <tr>
                     <th class="bg-dark text-light" width="10%">ID</th>
