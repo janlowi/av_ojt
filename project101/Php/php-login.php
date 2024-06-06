@@ -51,11 +51,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $_SESSION['logged_in']=true;
                     if ($_SESSION['usertype'] === 'Admin') {
                         $_SESSION['Admin']=true;
+                        $_SESSION['department_id'] = $row['department_id'];
                         header('location: ../Admin/AdminDashboard.php');
                         unset($_SESSION['login_incorrect']);
                         exit();
                     } elseif ($_SESSION['usertype'] === 'Trainee') {
                         $_SESSION['Trainee']=true;
+                        $_SESSION['department_id'] = $row['department_id'];
+                        echo $_SESSION['department_id'];
                         header('location: ../Users/UserDashboard.php');
                         unset($_SESSION['login_incorrect']);
                         exit();

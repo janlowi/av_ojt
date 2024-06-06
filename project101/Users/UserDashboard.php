@@ -193,7 +193,7 @@ include '../Layouts/main-user.php';
                  
     <!-- Modal  for report-->
     <div class="modal fade" id="modalReport" tabindex="-1" aria-hidden="true">
- <div class="modal-dialog modal-dialog-centered" role="document">
+ <div class="modal-dialog modal-lg" role="document">
    <div class="modal-content">
      <div class="modal-header">
        <h2 class="modal-title" id="modalCenterTitle">Submit your weekly report.</h2>

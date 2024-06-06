@@ -1,7 +1,7 @@
 <?php
 session_start();
 include '../Php/authenticate.php';
-// checkLoggedIn();
+checkLoggedIn();
 // checkUserType();
 $title = "Attendance Record";
 include '../Php/db_connect.php';

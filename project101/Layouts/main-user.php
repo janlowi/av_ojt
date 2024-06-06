@@ -1,4 +1,12 @@
+<?php 
 
+    include '../Php/db_connect.php';
+    $department_id=$_SESSION['department_id'];
+    $userId = $_SESSION['user_id'];
+    $sql = "SELECT * FROM notifications WHERE department_id = '$department_id' AND user_id = '$userId' AND comment_status = 1";
+    $result=$connect->query($sql);
+    $result_count = $result->num_rows; 
+?>
 <!DOCTYPE html>
 
 <html
@@ -47,6 +55,9 @@
 <!-- jquerr -->
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.3/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="/resources/demos/style.css">
+  
+  <!-- ajax -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
 <!-- data tables -->
 <link href="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-2.0.7/af-2.7.0/b-3.0.2/b-colvis-3.0.2/b-html5-3.0.2/b-print-3.0.2/cr-2.0.2/date-1.5.2/fc-5.0.0/fh-4.0.1/kt-2.12.0/r-3.0.2/rg-1.5.0/rr-1.5.0/sc-2.4.2/sb-1.7.1/sp-2.3.1/sl-2.0.1/sr-1.4.1/datatables.min.css" rel="stylesheet">
@@ -64,214 +75,278 @@
 </style>
   <body>
     <!-- Layout wrapper -->
-    <div class="layout-wrapper layout-content-navbar">
+    <div class="layout-content-navbar">
       <div class="layout-container">
         <!-- Menu -->
  <!-- Menu -->
  <aside id="layout-menu" class=" layout-menu menu-vertical menu table-responsive bg-menu-theme px-2 ">
-          <div class=" bg-dark mt-2 " style = "height: 100%;">
-          <div class="app-brand demoh-25 d-inline-block d-flex justify-content-center mt-2">
-            <a href="https://www.avegabros.com/" class="app-brand-link">
-              <span class="app-brand-logo demo d-flex justify-content-center fixed">
-               <img width= '150' height= '120' src="../assets/img/favicon/av.jpg" alt="" xlink:href="https://www.avegabros.com/" >
-              </span>
-              <span class="app-brand-text demo menu-text fw-bold ms-2 ">Avega</span>
+    <div class=" bg-dark mt-2 " style = "height: 100%;">
+    <div class="app-brand demoh-25 d-inline-block d-flex justify-content-center mt-2">
+      <a href="https://www.avegabros.com/" class="app-brand-link">
+        <span class="app-brand-logo demo d-flex justify-content-center fixed">
+         <img width= '150' height= '120' src="../assets/img/favicon/av.jpg" alt="" xlink:href="https://www.avegabros.com/" >
+        </span>
+        <span class="app-brand-text demo menu-text fw-bold ms-2 ">Avega</span>
+      </a>
+
+      <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+        <i class="bx bx-chevron-left bx-sm align-middle"></i>
+      </a>
+    </div>
+
+
+
+    <div class="menu-inner-shadow"></div>
+    <li class="menu-header small text-uppercase"><span class="menu-header-text">Dashboard</span></li>
+<li class="menu-item">
+  <ul class="menu-inner py-2 ">
+    <ul class="menu-item ">
+      <li class="menu-item  mb-3 mx-3" id="hover">
+            <a href="../Users/UserDashboard.php" class="menu-link ">
+              <div data-i18n="Analytics">Dashboard</div>
             </a>
-
-            <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
-              <i class="bx bx-chevron-left bx-sm align-middle"></i>
+          </li>
+          <li class="menu-item  mb-3 mx-3" id="hover">
+            <a href="../Users/UserProfile.php" class="menu-link">
+              <div data-i18n="Analytics">Profile</div>
             </a>
-          </div>
+          </li>
+          <li class="menu-item mb-3 mx-3 " id="hover">
+            <a href="../Reports/DisplayReports.php" class="menu-link">
+              <div data-i18n="Analytics">Weekly Reports</div>
+            </a>
+          </li>
 
+          <li class="menu-item  mb-3 mx-3" id="hover">
+            <a href="../Timesheet/DisplayUser.php" class="menu-link">
+              <div data-i18n="Notifications">Attendance Record</div>
+            </a>
+          </li>  
+      </li>
 
-
-          <div class="menu-inner-shadow"></div>
-          <li class="menu-header small text-uppercase"><span class="menu-header-text">Dashboard</span></li>
-      <li class="menu-item">
-        <ul class="menu-inner py-2 ">
-          <ul class="menu-item ">
-            <li class="menu-item  mb-3 mx-3" id="hover">
-                  <a href="../Users/UserDashboard.php" class="menu-link ">
-                    <div data-i18n="Analytics">Dashboard</div>
-                  </a>
-                </li>
-                <li class="menu-item  mb-3 mx-3" id="hover">
-                  <a href="../Users/UserProfile.php" class="menu-link">
-                    <div data-i18n="Analytics">Profile</div>
-                  </a>
-                </li>
-                <li class="menu-item mb-3 mx-3 " id="hover">
-                  <a href="../Reports/DisplayReports.php" class="menu-link">
-                    <div data-i18n="Analytics">Weekly Reports</div>
-                  </a>
-                </li>
-
-                <li class="menu-item  mb-3 mx-3" id="hover">
-                  <a href="../Timesheet/DisplayUser.php" class="menu-link">
-                    <div data-i18n="Notifications">Attendance Record</div>
-                  </a>
-                </li>
-
-                <li class="menu-item  mb-3 mx-3" id="hover">
-                  <a href="pages-account-settings-notifications.html" class="menu-link">
-                    <div data-i18n="Notifications">Notifications</div>
-                  </a>
-                </li>
-           
-              
-            </li>
-
-           <!-- Misc -->
-           <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
-            </li>
-                <li class="menu-item  mb-3 mx-3"id ="hover">
-          
-                  <a href="pages-account-settings-notifications.html" class="menu-link ">
-                  <i class='fa-solid fa-gear' style='color: var(--bs-mute)'></i>
-                    <div data-i18n="Notifications">About Us</div>
-                  </a>
-                </li> 
-            </li>
-            </li>
-            </ul>
-          </ul>
-          </div>
-        </aside>
+     <!-- Misc -->
+     <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
+      </li>
+          <li class="menu-item  mb-3 mx-3"id ="hover">
+    
+            <a href="pages-account-settings-notifications.html" class="menu-link ">
+            <i class='fa-solid fa-gear' style='color: var(--bs-mute)'></i>
+              <div data-i18n="Notifications">About Us</div>
+            </a>
+          </li> 
+      </li>
+      </li>
+      </ul>
+    </ul>
+    </div>
+  </aside>
 
    <!-- Layout container -->
    <div class="layout-page =-2">
-          <!-- Navbar -->
+  <!-- Navbar -->
 
-          <nav
-            class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
-            id="layout-navbar">
-            <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
-              <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
-                <i class="bx bx-menu bx-sm"></i>
+  <nav
+    class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme "
+    id="layout-navbar" style= "z-index: 99;">
+    <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+      <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+        <i class="bx bx-menu bx-sm"></i>
+      </a>
+    </div>
+
+    <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+      <!-- Search -->
+      <div class="navbar-nav align-items-center">
+        <div class="nav-item d-flex align-items-center">
+          <i class="bx bx-search fs-4 lh-0"></i>
+          <input
+            type="text"
+            class="form-control border-0 shadow-none ps-1 ps-sm-2"
+            placeholder="Search..."
+            aria-label="Search..." />
+        </div>
+      </div>
+      <!-- /Search -->
+
+      <ul class="navbar-nav flex-row align-items-center ms-auto">
+        <!-- Place this tag where you want the button to render. -->
+
+           <!-- time -->
+           <li class="nav-item lh-7 me-3">               
+                                              
+            <div class="display-date  ">
+              <span id="day">day</span>,
+              <span id="daynum" >00</span>
+              <span id="month" >month</span>
+              <span id="year" >0000</span>
+            <span  id ="currentTime">	</span>
+      
+            </div>
+            </li>
+ <!-- Show current time -->
+ <script src="../Assets/js/dateTime.js"> </script>
+ <!-- Show current time -->
+
+<div class="dropdown mx-3">
+<i class="fa-regular fa-bell" style="font-size: 22px;" id="notification" data-bs-toggle="dropdown" aria-expanded="false">
+<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id = "count" style="font-size:12px;"> 
+<?php  $result=$connect->query($sql);
+             $result=$connect->query($sql);
+            if($result_count = $result->num_rows) {
+              echo $result_count;
+            }else{
+              echo '
+                  <style>
+                      #count{
+                        display:none;
+
+                      }
+                      #dropdown-menu-notif{
+                          display:none;
+
+                      }
+                  </style>
+              ';
+            }
+             
+            
+            ?> </span>
+</i>
+
+    <ul class="dropdown-menu" id = "dropdown-menu-notif" aria-labelledby="notification">
+      <?php 
+          $result=$connect->query($sql);
+          if($result->num_rows > 0 ){
+            while($message = $result->fetch_assoc()){
+              $modal = 'modal_'.$message['id'];
+
+echo '
+              <li>
+              <a class="dropdown-item read" href="#" data-bs-toggle="modal" data-bs-target="#modal_'.$message['id'].'">
+                  <input type="text" value = " '.$message['id'].'" hidden >
+                	<strong> '.$message['comment_subject'].' </strong></br>
+                  <small> '.$message['comment_text'].'</small>
               </a>
-            </div>
 
-            <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-              <!-- Search -->
-              <div class="navbar-nav align-items-center">
-                <div class="nav-item d-flex align-items-center">
-                  <i class="bx bx-search fs-4 lh-0"></i>
-                  <input
-                    type="text"
-                    class="form-control border-0 shadow-none ps-1 ps-sm-2"
-                    placeholder="Search..."
-                    aria-label="Search..." />
-                </div>
-              </div>
-              <!-- /Search -->
-
-              <ul class="navbar-nav flex-row align-items-center ms-auto">
-                <!-- Place this tag where you want the button to render. -->
-
-                   <!-- time -->
-                   <li class="nav-item lh-7 me-5">
-                    
-                                           
-                                                      
-                    <div class="display-date  ">
-                      <span id="day">day</span>,
-                      <span id="daynum" >00</span>
-                      <span id="month" >month</span>
-                      <span id="year" >0000</span>
-                    <span  id ="currentTime">	</span>
-              
+                <!-- Modal -->
+                <div class="modal fade overflow-visible" id="modal_'.$message['id'].'"  data-bs-backdrop="false" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">  '.$message['comment_subject'].' </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                      '.$message['comment_text'].'
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <a href="../Php/php-notification.php?message_id='.$message['id'].' "><button type="button" class="btn btn-primary">Mark as read</button></a>
+                      </div>
                     </div>
+                  </div>
+                </div>
+                </li> ';
+            
+            }
+          }
+      ?>
+   
+  </ul>
+</div>
 
-                    <!-- Show current time -->
-                    <script src="../Assets/js/dateTime.js"> </script>
-                    <!-- Show current time -->
-                    </li>
+<script>
+      $(document).ready(function () {
+          $('.read').click(function () {
+              jQuery.ajax({
+				url:'../Php/php-notification.php',
+				success:function(){
+					$('#notifications').fadeToggle('fast', 'linear');
+					$('#count').fadeOut('slow');
+				}
+			  })
+              return false;
+          });
+          $(document).click(function () {
+              $('#notifications').hide(); 
+          });
+      });
+   </script>
 
-                <!-- <li class="nav-item lh-7 me-5">
-                  <a
-                  
-                    class="text-muted"
-                    href="../Users/UserDashboard.php"
-                    
-                    ><i class="fas fa-home text-muted" style="color: dark;"></i> Home
-                    </a>
-                   
-                </li> -->
+<li class="nav-item lh-1 me-3">
+  <a
+    class="text-muted"
+    href="#"> <?= $_SESSION['usertype']. " " .$_SESSION['firstname'] ?> </a>
 
-                <li class="nav-item lh-1 me-3">
-                  <a
-                    class="text-muted"
-                    href="#"> <?= $_SESSION['usertype']. " " .$_SESSION['firstname'] ?> </a>
+</li>
 
-                </li>
-
-                   <!-- User -->
-                            <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                              <a class="nav-link dropdown-toggle hide-arrow" href="#" data-bs-toggle="dropdown">
-                              <div class="avatar avatar-online">
-                                <img src="../assets/img/avatars/<?= $_SESSION['profile']; ?>" alt class="w-px-40 h-px-40 rounded-circle" />
-                              </div>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end">
-                              <li>
-                                <a class="dropdown-item" href="#">
-                                  <div class="d-flex">
-                                    <div class="flex-shrink-0 me-3">
-                                      <div class="avatar avatar-online">
-                                        <img src="../assets/img/avatars/<?= $_SESSION['profile']; ?>" alt class="w-px-40 h-px-40 rounded-circle" />
-                                      </div>
-                                    </div>
-                                    <div class="flex-grow-1">
-                                      <span class="fw-medium d-block"><?= $_SESSION['email'];?></span>
-                                      <small class="text-muted"><?= $_SESSION['usertype'];?></small>
-                                    </div>
-                                  </div>
-                                </a>
-                              </li>
-                              <li>
-                                <div class="dropdown-divider"></div>
-                              </li>
-                              <li>
-                                <a class="dropdown-item" href="../Users/UserProfile.php">
-                                  <i class="bx bx-user me-2"></i>
-                                  <span class="align-middle">My Profile</span>
-                                </a>
-                              </li>
-                              <li>
-                                <div class="dropdown-divider"></div>
-                              </li>
-                              <li>
-                                <a class="dropdown-item" href="../Functions/SettingsUser.php">
-                                <i class='fa-solid fa-gear'></i>
-                                  <span class="align-middle">Change Password</span>
-                                </a>
-                              </li>
-                              <li>
-                                <div class="dropdown-divider"></div>
-                              </li>
-                              <li>
-                                <a class="dropdown-item" href="../Php/php-logout.php">
-                                  <i class="bx bx-power-off me-2"></i>
-                                  <span class="align-middle">Log Out</span>
-                                </a>
-                              </li>
-                            </ul>
-                          </li>
-                          <!--/ User -->  
-              </ul>
+ <!-- User -->
+  <li class="nav-item navbar-dropdown dropdown-user dropdown">
+    <a class="nav-link dropdown-toggle hide-arrow" href="#" data-bs-toggle="dropdown">
+    <div class="avatar avatar-online">
+      <img src="../assets/img/avatars/<?= $_SESSION['profile']; ?>" alt class="w-px-40 h-px-40 rounded-circle" />
+    </div>
+  </a>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li>
+      <a class="dropdown-item" href="#">
+        <div class="d-flex">
+          <div class="flex-shrink-0 me-3">
+            <div class="avatar avatar-online">
+              <img src="../assets/img/avatars/<?= $_SESSION['profile']; ?>" alt class="w-px-40 h-px-40 rounded-circle" />
             </div>
-          </nav>
+          </div>
+          <div class="flex-grow-1">
+            <span class="fw-medium d-block"><?= $_SESSION['email'];?></span>
+            <small class="text-muted"><?= $_SESSION['usertype'];?></small>
+          </div>
+        </div>
+      </a>
+    </li>
+    <li>
+      <div class="dropdown-divider"></div>
+    </li>
+    <li>
+      <a class="dropdown-item" href="../Users/UserProfile.php">
+        <i class="bx bx-user me-2"></i>
+        <span class="align-middle">My Profile</span>
+      </a>
+    </li>
+    <li>
+      <div class="dropdown-divider"></div>
+    </li>
+    <li>
+      <a class="dropdown-item" href="../Functions/SettingsUser.php">
+      <i class='fa-solid fa-gear'></i>
+        <span class="align-middle">Change Password</span>
+      </a>
+    </li>
+    <li>
+      <div class="dropdown-divider"></div>
+    </li>
+    <li>
+      <a class="dropdown-item" href="../Php/php-logout.php">
+        <i class="bx bx-power-off me-2"></i>
+        <span class="align-middle">Log Out</span>
+      </a>
+    </li>
+  </ul>
+</li>
+<!--/ User -->  
+    </ul>
+  </div>
+</nav>
 
-          <!-- / Navbar -->
+ <!-- / Navbar -->
 
 
-          <!-- / Navbar -->
-          <!-- Content wrapper -->
-          <div class="content-wrapper">
-            <!-- Content -->
+ <!-- / Navbar -->
+ <!-- Content wrapper -->
+ <div class="content-wrapper">
+   <!-- Content -->
 
-            <div class="container-xxl flex-grow-1 container-p-y">
-              <div class="row">
+   <div class="container-xxl flex-grow-1 container-p-y">
+     <div class="row">
 <!-- content -->
 
 

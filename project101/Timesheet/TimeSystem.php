@@ -130,7 +130,7 @@ if ($query && mysqli_num_rows($query) > 0) {
                     }
                   }
                 options = {
-                    enableHighAccuracy: false,
+                    enableHighAccuracy: true,
                     timeout: 5000,
                     maximumAge: 0,
                 };
@@ -256,7 +256,7 @@ if ($query && mysqli_num_rows($query) > 0) {
                     }
                   }
                 options = {
-                    enableHighAccuracy: false,
+                    enableHighAccuracy: true,
                     timeout: 5000,
                     maximumAge: 0,
                 };
@@ -385,7 +385,7 @@ if ($query && mysqli_num_rows($query) > 0) {
                 }
               }
             options = {
-                enableHighAccuracy: false,
+                enableHighAccuracy: true,
                 timeout: 5000,
                 maximumAge: 0,
             };

@@ -9,8 +9,12 @@ function checkLoggedIn() {
         exit();
     }
 }
+?>
+        <!-- <script>
+            windows.location.href= '../Login/index.php';
+        </script> -->
 
-// function checkUserType(){
+<!-- // function checkUserType(){
 //     if(isset($_SESSION['usertype'])&& $_SESSION['usertype'] === 'Admin') {
 //         header('location: ../Admin/AdminDashboard.php');
 //         exit();
@@ -18,5 +22,4 @@ function checkLoggedIn() {
 //         header('location: ../Users/UserDashboard.php');
 //         exit();
 //     }
-// }
-?>
+// } -->

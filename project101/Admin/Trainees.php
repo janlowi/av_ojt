@@ -47,6 +47,7 @@ include '../Layouts/main-admin.php';
      $defaultProfileImage = '../Assets/img/avatars/av.png';
      $profileImage = !empty($row['profile']) ? '../Assets/img/avatars/'.$row['profile'] : $defaultProfileImage;
      $name= $row['first_name'].' '.$row['middle_name'].' '.$row['last_name']; 
+     $_SESSION['user_name'] = $row['first_name'];
      date_default_timezone_set('Asia/Manila');// local timezone
 
      $dateOfBirth =   date($row['dob']); // Example date of birth

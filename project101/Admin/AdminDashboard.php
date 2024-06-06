@@ -1,9 +1,10 @@
 <?php 
 session_start();
-$title="Admin Dashboard";
 include '../Php/authenticate.php'; 
 checkLoggedIn();
 // checkUserType();
+$title="Admin Dashboard";
+
 include '../Layouts/main-admin.php'; 
  include '../Php/db_connect.php';
 
@@ -268,9 +269,6 @@ error_reporting (0);
                                        </div>
 
                                </div>  
-
-                             <div class="modal-footer">
-                             </div>
                            </div>
                          </div>
                          </div>
@@ -530,7 +528,7 @@ error_reporting (0);
                   </table>
 
               <!--/ Bootstrap Dark Table -->
-              </div>
+              </div>                            
   </div>
 
 
