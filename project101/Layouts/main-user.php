@@ -72,6 +72,14 @@
     background-color: var( --bs-link-hover-color);
     color: var(--bs-light);
 }
+.notif-info {
+    color: var(--bs-info);
+}
+
+.notif-secondary {
+    color: var(--bs-secondary);
+}
+
 </style>
   <body>
     <!-- Layout wrapper -->
@@ -147,7 +155,7 @@
 
   <nav
     class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme "
-    id="layout-navbar" style= "z-index: 99;">
+    id="layout-navbar">
     <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
       <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
         <i class="bx bx-menu bx-sm"></i>
@@ -182,12 +190,12 @@
             <span  id ="currentTime">	</span>
       
             </div>
-            </li>
+      
  <!-- Show current time -->
  <script src="../Assets/js/dateTime.js"> </script>
  <!-- Show current time -->
-
-<div class="dropdown mx-3">
+ </li>
+<div class="dropdown read mx-3">
 <i class="fa-regular fa-bell" style="font-size: 22px;" id="notification" data-bs-toggle="dropdown" aria-expanded="false">
 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id = "count" style="font-size:12px;"> 
 <?php  $result=$connect->query($sql);
@@ -199,80 +207,85 @@
                   <style>
                       #count{
                         display:none;
-
-                      }
-                      #dropdown-menu-notif{
-                          display:none;
-
                       }
                   </style>
               ';
             }
-             
-            
             ?> </span>
 </i>
-
-    <ul class="dropdown-menu" id = "dropdown-menu-notif" aria-labelledby="notification">
+<ul class="dropdown-menu" id = "dropdown" aria-labelledby="notification"  aria-expanded="false">
       <?php 
-          $result=$connect->query($sql);
-          if($result->num_rows > 0 ){
-            while($message = $result->fetch_assoc()){
+      $sql_all = "SELECT * FROM notifications  WHERE department_id = '$department_id' AND user_id = '$userId' ORDER BY id ASC";
+          $result_all=$connect->query($sql_all);
+          if($result_all->num_rows > 0 ){
+            while($message = $result_all->fetch_assoc()){
+              $messageId= $message['id'];
+              $messageStatus= $message['comment_status'];
               $modal = 'modal_'.$message['id'];
-
-echo '
+              ?>
               <li>
-              <a class="dropdown-item read" href="#" data-bs-toggle="modal" data-bs-target="#modal_'.$message['id'].'">
-                  <input type="text" value = " '.$message['id'].'" hidden >
-                	<strong> '.$message['comment_subject'].' </strong></br>
-                  <small> '.$message['comment_text'].'</small>
-              </a>
+              <span class="dropdown-item" data-bs-toggle="modal" data-bs-target="#<?=$modal?>">
+              <input type="text" value="<?=$message['id']?>" hidden>
+         
+
+              <strong class="pe-auto strong"><?=$message['comment_subject']?></strong><br>
+              <small class="pe-auto small"><?=substr($message['comment_text'], 0, 25)?>...</small>
+              </span>
+          <div class="dropdown-divider"></div>
 
                 <!-- Modal -->
-                <div class="modal fade overflow-visible" id="modal_'.$message['id'].'"  data-bs-backdrop="false" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
-                  <div class="modal-dialog modal-dialog-centered">
+                <div class="modal fade overflow-visible" id="<?=$modal?>"  data-bs-backdrop="false" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
+                  <div class="modal-dialog modal-dialog-centered ">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">  '.$message['comment_subject'].' </h5>
+                        <h5 class="modal-title" id="staticBackdropLabel"> <?=$message['comment_subject']?></h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body">
-                      '.$message['comment_text'].'
+                      <p><?=$message['timestamp']?> </p><br>
+                      <?=$message['comment_text']?>
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <a href="../Php/php-notification.php?message_id='.$message['id'].' "><button type="button" class="btn btn-primary">Mark as read</button></a>
+                        <?php if($message['comment_status']== 1 ) {?>
+                        <a href="../Php/php-notification.php?mark_as_read=<?= $message['id'] ?>" class="btn btn-info">Mark as read</a>
+                        <?php } else { ?>
+                          <span class="badge rounded-pill bg-success">Checked</span>
+                          <?php } ?>
                       </div>
                     </div>
                   </div>
                 </div>
-                </li> ';
-            
+                </li> 
+            <?php
             }
           }
       ?>
    
   </ul>
 </div>
-
 <script>
-      $(document).ready(function () {
-          $('.read').click(function () {
-              jQuery.ajax({
-				url:'../Php/php-notification.php',
-				success:function(){
-					$('#notifications').fadeToggle('fast', 'linear');
-					$('#count').fadeOut('slow');
-				}
-			  })
-              return false;
-          });
-          $(document).click(function () {
-              $('#notifications').hide(); 
-          });
-      });
-   </script>
+  document.querySelector('.dropdown-menu').addEventListener('click', function(event) {
+   event.stopPropagation();
+});
+document.addEventListener('DOMContentLoaded', function() {
+    const messageStatus = <?= json_encode($messageStatus) ?>;
+    console.log(messageStatus);
 
+    if (messageStatus === 1) {
+      const strongElements = document.querySelectorAll('.dropdown-menu strong');
+      const smallElements = document.querySelectorAll('.dropdown-menu small');
+      
+      strongElements.forEach(function(strong) {
+        strong.classList.add('notif-info');
+      });
+
+      smallElements.forEach(function(small) {
+        small.classList.add('notif-info');
+      });
+    }
+  });
+</script>
 <li class="nav-item lh-1 me-3">
   <a
     class="text-muted"

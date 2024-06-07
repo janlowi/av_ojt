@@ -47,41 +47,26 @@ if(isset($_POST['insertNotification'])){
 
 }
 ?>
+
 <?php
-if(isset($_GET['message_id'])) {
-    $message_id = $_GET['message_id'];
-    $user_id = $_SESSION['user_id'];
+if (isset($_GET['mark_as_read']) && !empty($_GET['mark_as_read'])) {
+    $notification_id = $_GET['mark_as_read'];
     
-    // Update notification status
-    $sql_update = "UPDATE notifications SET comment_status = 0 WHERE id = '$message_id' ";
-    $sql_updated = $connect->query($sql_update);
-    header('location: ../Users/UserDashboard.php');
+    $sql = "UPDATE notifications SET comment_status = 0 WHERE id = '$notification_id'";
+    $result = $connect->query($sql);
+
+    if ($result) {
+      header("Location: ../Users/UserDashboard.php");
+      exit();
+    } else {
+      $_SESSION['error'] = "Failed to mark notification as read";
+      header("Location: ../Users/UserDashboard.php");
+      exit();
+    }
+  } else {
+    $_SESSION['error'] = "Invalid request";
+    header("Location: ../Users/UserDashboard.php");
     exit();
-
-    // // Fetch latest notifications for the logged-in user's department
-    // $query = "SELECT * FROM notifications WHERE department_id = '$department_id' ORDER BY id DESC LIMIT 5";
-    // $result = $connect->query($query);
-    // $output = '';
-
-    // if($result->num_rows > 0) {
-    //     while($row = $result->fetch_assoc()) {
-    //         $output .= '<li><a href="#"><strong>'.$row["comment_subject"].'</strong><br /><small><em>'.$row["comment_text"].'</em></small></a></li><div class="dropdown-divider"></div>';
-    //     }
-    // } else {
-    //     $output .= '<li><a href="#" class="text-bold text-italic">No notifications found</a></li>';
-    // }
-
-    // // Count unseen notifications
-    // $status_query = "SELECT * FROM notifications WHERE deparment_id = '$department_id' AND comment_status = 1";
-    // $status_result = $connect->query($status_query);
-    // $status_count = $status_result->num_rows;
-
-    // // Prepare data to be sent back as JSON
-    // $data = array (  
-    //     'notification' => $output,
-    //     'count_notification' => $status_count
-    // );
-
-    // echo json_encode($data);
-}
+  }
 ?>
+   

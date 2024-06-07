@@ -5,58 +5,54 @@ checkLoggedIn();
 // checkUserType();
 $title="User Dashboard";
 include '../Layouts/main-user.php'; 
-
  include '../Php/db_connect.php';
-
-  ?>
-
-                              
-<div class="row order-0 d-flex justify-content-center ">
+?>
   <div class="card ">
         <div class="card-body ">
 
- <div class="row">
+<div class="row">
     <div class="col-sm-4">
-      <div class="card ">
-     
-        <div class="card-body ">
-          <?php
-
-            $user_id = $_SESSION['user_id'];
-            $sql = "SELECT SUM(ts.total_hours) AS total_hours,
-             ts.user_id,
-             tr.user_id,
-             tr.hours_to_render
-            FROM timesheet ts
-            INNER JOIN trainees tr ON ts.user_id = tr.user_id
-            WHERE ts.user_id = '$user_id'
-            AND event_type IN ('In', 'Out')";
+        <div class="card">
+            <div class="card-body">
+                <?php
+                $user_id = $_SESSION['user_id'];
+                $sql = "SELECT SUM(ts.total_hours) AS total_hours,
+                        ts.user_id,
+                        tr.user_id,
+                        tr.hours_to_render
+                    FROM timesheet ts
+                    INNER JOIN trainees tr ON ts.user_id = tr.user_id
+                    WHERE ts.user_id = '$user_id'
+                    AND event_type IN ('In', 'Out')";
                 
-              $query = mysqli_query($connect, $sql);
-              $totalHours = 0;
-                          
-              if ($query && mysqli_num_rows($query) > 0) {
-                  $row = mysqli_fetch_assoc($query);
-                  $totalHours = $row['total_hours'];
-                  $hoursToRender =$row['hours_to_render'];
-                  $total_json = json_encode($totalHours);
-                  $percent = $totalHours / $hoursToRender * 100;
+                $query = mysqli_query($connect, $sql);
+                $totalHours = 0;
+                
+                if ($query && mysqli_num_rows($query) > 0) {
+                    $row = mysqli_fetch_assoc($query);
+                    $totalHours = $row['total_hours'];
+                    $hoursToRender = $row['hours_to_render'];
+                    $total_json = json_encode($totalHours);
+                    
+                    if ($totalHours != 0 && $hoursToRender != 0) {
+                        $percent = ($totalHours / $hoursToRender) * 100;
+                    } else {
+                        $totalHours = 0;
+                        $percent = 0;
+                    }
+                }
+                ?>
 
-              }
-              ?>
-          <h4><span class="d-flex justify-content-center">Total Hours</span></h4>
-          <p class="card-text">Total hours rendered : </p>
-            <h4 id= "realTime"></h4>
-          <h5 class="card-title d-flex justify-content-center"><i class="fa-regular fa-clock" style="color: var(--bs-success); font-size: 60px;"> <?php echo $totalHours ?></i></h5>
-         
-       
-
-       </div>
+                <h4><span class="d-flex justify-content-center">Total Hours</span></h4>
+                <p class="card-text">Hours rendered:</p>
+                <h4 id="realTime"></h4>
+                <h5 class="card-title d-flex justify-content-center"><i class="fa-regular fa-clock" style="color: var(--bs-success); font-size: 60px;"><?php echo $totalHours ?></i></h5>
+            </div>
+        </div>
     </div>
-  </div>
 
   <?php
-    $user_id = $_SESSION['user_id'];
+  $user_id = $_SESSION['user_id'];
   date_default_timezone_set('Asia/Manila'); // local timezone
 
   $today=date('Y-m-d');
@@ -143,11 +139,10 @@ include '../Layouts/main-user.php';
             </div>
         </div>
     </div>
-
-              <?php include '../Timesheet/TimeSystem.php'; ?>
-              </div>
-            </div>
-          </div>
+        <?php include '../Timesheet/TimeSystem.php'; ?>
+    </div>
+  </div>
+</div>
 
         <div class="col-sm-4">
             <div class="card ">
@@ -173,7 +168,12 @@ include '../Layouts/main-user.php';
           <h4 class= ""> Current Progress </h4>
           <div class="progress" style="height: 35px;">
           <div class="progress-bar progress-bar-striped bg-info" role="progressbar"
-           style="width: <?php echo ($totalHours / $hoursToRender) * 100 ?>%" 
+           style="width: <?php if($totalHours != 0 && $hoursToRender != 0 ){
+            echo ($totalHours / $hoursToRender) * 100 ;
+          }else{
+            echo 0;
+          }
+            ?>%" 
            aria-valuenow="<?php echo $totalHours ?>" 
            aria-valuemin="0" 
            aria-valuemax="<?php echo $hoursToRender ?>">
