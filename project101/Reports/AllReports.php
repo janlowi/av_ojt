@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 <?php 
 session_start();
 include '../Php/authenticate.php';
@@ -189,3 +191,4 @@ if(isset($_SESSION['saved_success'])){
 ?>
 
 <?php include '../Layouts/footer.php'; ?>
+>>>>>>> 9c0377cc3fba3f0e80c8d4510f22d2cf3e16de02
