@@ -458,7 +458,7 @@ error_reporting (0);
                     <th scope="col">Id</th>
                     <th scope="col">Name</th>
                     <th scope="col">Sex</th>
-                    <th scope="col">Date started</th>
+                    <!-- <th scope="col">Date started</th> -->
                     <th scope="col">Department</th>
                     <th scope="col">Office</th>
                     <th scope="col">Email</th>
@@ -472,26 +472,21 @@ error_reporting (0);
             <?php 
     
     $sql = "SELECT us.*,
-                        tr.user_id,
-                        tr.dos,
                         dp.departments,
                         dp.id AS department_id
-
                         FROM users us
-                        INNER JOIN trainees tr ON tr.user_id = us.id 
-                        INNER JOIN departments dp ON dp.id= us. department_id
-                         WHERE  us.id=tr.user_id ";
+                        INNER JOIN departments dp ON dp.id= us. department_id ";
+
 
     $query =mysqli_query($connect, $sql);
    if( $count = mysqli_num_rows($query)>0) {
     while ($row=mysqli_fetch_assoc($query))  {
      ?>
                      <tr>
-
                         <td><?= $row ['id']; ?></td>
                         <td><?=  $row ['last_name'].","." ". $row['first_name']." ". $row['middle_name']; ?></td>;                     
                         <td><?= $row ['sex']; ?></td>
-                        <td><?= $row ['dos']; ?></td>
+                        <!-- <td><?= $row ['dos']; ?></td> -->
                         <td><?= $row ['departments']; ?></td>
                         <td><?= $row ['office_assigned']; ?></td>
                         <td><?= $row ['email']; ?></td>

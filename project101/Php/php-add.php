@@ -214,6 +214,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $status = $_POST["Status"];
         $department = $_POST["Department"];
         $dob = $_POST["Birthday"];
+        $default_profile = '../Assets/img/avatars/av.png';
     
 
          $stmt=$connect->prepare("SELECT * FROM users WHERE email=?");
@@ -242,8 +243,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           // Construct email body
           $mail_body = 'This is your OJT account body:<br><br>'
                       . 'Email: ' . $email . '<br>'
-                      . 'Password:' . $password_generated
-                      . 'Link:' . 'http://localhost:8080/av_ojt/project101/Login/index.php';
+                      . 'Password:' . $password_generated. '<br><br>'
+                      . '<a href="http://localhost:8080/av_ojt/project101/Login/index.php" style="background-color: #4CAF50; color: white; padding: 15px 25px; text-align: center; text-decoration: none; display: inline-block; border-radius: 10px;">Login</a>';
         if (
             !empty($firstname) &&   
             !empty($middlename) &&
@@ -267,7 +268,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 email,
                                 password,
                                 user_type,  
-                                department,
+                                department_id,
                                 office_assigned, 
                                 profile,
                                 status

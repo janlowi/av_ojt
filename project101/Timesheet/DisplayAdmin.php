@@ -4,7 +4,6 @@ include '../Php/authenticate.php';
 checkLoggedIn();
 // checkUserType();
 $title = "Attendance Record";
-
 include '../Php/db_connect.php';
 include '../Layouts/main-admin.php'; 
 
@@ -23,69 +22,69 @@ include '../Layouts/main-admin.php';
                 </tr>
             </thead>
          <tbody>
+         <?php 
+    $sql = "SELECT user_id, timestamp, department_id
+    FROM timesheet t1
+    WHERE event_type = 'In'
+      AND NOT EXISTS (
+          SELECT 1
+          FROM timesheet t2
+          WHERE t2.user_id = t1.user_id
+            AND event_type = 'Out'
+            AND DATE(t2.timestamp) = DATE(t1.timestamp) 
+      )
+      AND DATE(t1.timestamp) != CURDATE()
+            ";
+    $result = mysqli_query($connect, $sql);
+    
 
-             <?php 
-             $sql = "SELECT user_id, timestamp  
-             FROM timesheet WHERE DATE(timestamp) = DATE_SUB(CURDATE(), INTERVAL 1 DAY )
-             AND event_type = 'In' 
-             AND user_id NOT IN (SELECT user_id  FROM timesheet WHERE DATE(timestamp) = DATE_SUB(CURDATE(), INTERVAL 1 DAY)  AND event_type = 'Out')";
-             $result = mysqli_query($connect, $sql);
-             
-             if ($result) {
-                 // Ste 3: Process the Results
-                 if (mysqli_num_rows($result) > 0) {
-                     echo "Users who have failed to clock out yesterday:<br>";
+        // Step 3: Process the Results
+        if (mysqli_num_rows($result) > 0) {
+            echo "Users who have failed to clock out yesterday:<br>";
 
-                    
-                     while ($row = mysqli_fetch_assoc($result)) {
-                        $user_id = $row['user_id'];
-                        $_SESSION['failed_to_out'] = $row['user_id'];
-                         $yesterday_In_timestamp=$row['timestamp'];
-                         $_SESSION['last_timestamp']  =$yesterday_In_timestamp;
+            while ($row = mysqli_fetch_assoc($result)) {
 
-                         $sql_names="SELECT * FROM users WHERE id= '$user_id'";
-                         $result_names = mysqli_query($connect, $sql_names);
-                         if ($result_names && mysqli_num_rows($result_names)>0 ) {
-                            while ($row_names = mysqli_fetch_assoc($result_names)) {
-                                $_SESSION['name']=$row_names['last_name'].','.' '.$row_names['first_name'].' '.$row_names['middle_name'];
-            
-             
-                     }
-                     }
-                     }
-             ?>
-            <tr>
-            <td> <?= $_SESSION['failed_to_out']; ?> </td>  
-            <td><?=  $_SESSION['name'];?></td>     
-             <td><?= $_SESSION['last_timestamp'];?> </td>
+                $user_id = $row['user_id'];
+                $timestamp = $row['timestamp'];
+                $department_id = $row['department_id'];
 
-
-                <td>
-                    <form action="../Php/update-time.php" method="POST">
-                    <div class="d-grid gap-2 col-lg-6 mx-auto"> 
-                    <label for="logout">Update Log out time</label>    
-                    <input type="datetime-local" id="logout" name="dateNtime" required class="form-control">
-                    </div>
-                    <input type="text" value ="<?= $_SESSION['failed_to_out']; ?>" name ="failed_to_out" hidden>
-                    <input type="text" value ="<?= $_SESSION['last_timestamp']; ?>" name ="yesterday_In_timestamp" hidden>
-
-                <div class="d-grid gap-2 col-lg-6 mx-auto">
-                   <button class="btn btn-info" name="update_time">Update</button>
-                </div>
-                 </form>
-            </td>
-
-            </tr>
-            <?php
-           } else {
+                $sql_names = "SELECT * FROM users WHERE id= '$user_id'";
+                $result_names = mysqli_query($connect, $sql_names);
+                if ($result_names && mysqli_num_rows($result_names) > 0) {
+                    while ($row_names = mysqli_fetch_assoc($result_names)) {
+                        $full_name = $row_names['last_name'] . ',' . ' ' . $row_names['first_name'] . ' ' . $row_names['middle_name'];
+                            
+?>                      
+                <tr>
+                    <td><?= $user_id ?></td>  
+                    <td><?= $full_name ?></td>     
+                    <td><?= $timestamp ?></td>
+                    <td>
+                        <form action="../Php/update-time.php" method="POST">
+                            <div class="d-grid gap-2 col-lg-6 mx-auto"> 
+                                <label for="logout">Update Log out time</label>    
+                                <input type="datetime-local" id="logout" name="dateNtime" required class="form-control">
+                            </div>
+                            <input type="text" value="<?= $user_id ?>" name="failed_to_out" hidden>
+                            <input type="text" value="<?= $timestamp ?>" name="yesterday_In_timestamp" hidden>
+                            <input type="text" value="<?= $department_id ?>" name="department_id" hidden>
+                            <div class="d-grid gap-2 col-lg-6 mx-auto">
+                                <button class="btn btn-info" name="update_time">Update</button>
+                            </div>
+                        </form>
+                    </td>
+                </tr>
+<?php
+            }
+        } else {
             echo "No users have failed to clock out today.";
         } 
-    } else {
-        // Handle query execution error
-        echo "Error executing query: " . mysqli_error($connect);
     }
-    
-            ?>
+    }
+?>
+
+
+      
         </tbody>
     </table><br>
 
@@ -96,6 +95,23 @@ include '../Layouts/main-admin.php';
             <div class="col">
             <input type="text" name="end_date" id="end_date" placeholder="Date End" class="form-control" />
             </div>
+            <div class="col">
+            <select name="department" id="department" class="form-control">
+            <option value="">Select Department</option>
+                <?php $dp = "SELECT * FROM departments";
+                      $dp_result = $connect->query($dp);
+                    if($dp_result->num_rows > 0){
+                        while($departments =$dp_result->fetch_assoc()){
+                    ?>
+                         
+                            <option value="<?= $departments['id'] ?>"><?= $departments['departments'] ?></option>
+                    <?php
+                     }
+                    }
+                ?>
+                </select>
+            </div>  
+
             <div class="col">
             <input type="button" name="filter" id="filter" value="Filter" class="btn btn-info" />
             <input type="button" name="reset" id="reset" value="Reset" class="btn btn-warning" />
@@ -192,13 +208,14 @@ $(document).ready(function(){
     $('#filter').click(function(){
     var start_date = $('#start_date').val();
     var end_date = $('#end_date').val();
+    var department = $('#department').val();
 
     if(start_date )
     if(start_date != '' && end_date != '') {
         $.ajax({
             url: "../Php/php-filter.php",
             method: "POST",
-            data: { start_date: start_date, end_date: end_date },
+            data: { start_date: start_date, end_date: end_date, department: department },
             success: function(data) {
                 $('#attendanceRecord').html(data);
             },
@@ -252,6 +269,8 @@ $('#reset').click(function(){
                                        INNER JOIN trainees tr ON tr.user_id = us.id
                                        INNER JOIN departments dp ON us.department_id=dp.id
                                        WHERE us.user_type = 'Trainee'
+                                        AND status = 'Active'
+
                                        ";
                                        $result_trainees = mysqli_query($connect, $sql_trainees);
 

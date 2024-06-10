@@ -13,7 +13,7 @@ $title="Time Tracking System";
     
 <?php
 $user_id = $_SESSION['user_id'];
-
+$department_id = $_SESSION['department_id'];
 $sql = "SELECT event_type FROM timesheet WHERE DATE(timestamp) = CURDATE() AND user_id = '$user_id' ORDER BY id DESC LIMIT 1";
 $query = mysqli_query($connect, $sql);
 
@@ -56,6 +56,7 @@ if ($query && mysqli_num_rows($query) > 0) {
                                 <label class="form-label" for="Long" >Longitude </label>
                                 <input id="long" name = "long" type="text" value="" class="form-control"> 
                                 <input type="hidden" name="selfie_out" id="selfie_out">
+                                <input type="hidden" name="department_id" value = "' .$department_id. '">
                                 </div>
                             </form>
                         </div>
@@ -181,6 +182,7 @@ if ($query && mysqli_num_rows($query) > 0) {
                                 <input id="lat" name ="lat" type="text" value="" class="form-control"> 
                                 <label class="form-label" for="Long" >Longitude </label>
                                 <input id="long" name = "long" type="text" value="" class="form-control"> 
+                                <input type="hidden" name="department_id" value = "' .$department_id. '">
                                 <input type="hidden" name="selfie_in" id="selfie_in" class="form-control">
                                 </div>
                             </form>
@@ -309,7 +311,8 @@ if ($query && mysqli_num_rows($query) > 0) {
                             <input id="lat" name ="lat" type="text" value="" class="form-control">
                             <label class="form-label" for="long" >Longitude </label> 
                             <input  id="long" name = "long" type="text" value="" class="form-control"> 
-                            <input type="hidden" name="selfie_in" id="selfie_in" >
+                                <input type="hidden" name="department_id" value = "' .$department_id. '">
+                                <input type="hidden" name="selfie_in" id="selfie_in" >
 
                         </form> 
                     </div>

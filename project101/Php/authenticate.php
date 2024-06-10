@@ -14,12 +14,12 @@ function checkLoggedIn() {
             windows.location.href= '../Login/index.php';
         </script> -->
 
-<!-- // function checkUserType(){
-//     if(isset($_SESSION['usertype'])&& $_SESSION['usertype'] === 'Admin') {
-//         header('location: ../Admin/AdminDashboard.php');
+<!-- //  function checkUserType(){
+//      if(isset($_SESSION['usertype'])&& $_SESSION['usertype'] === 'Admin') {
+//        header('location: ../Admin/AdminDashboard.php');
 //         exit();
-//     }elseif(isset($_SESSION['usertype'])&& $_SESSION['usertype'] === 'Trainee') {
+//   }elseif(isset($_SESSION['usertype'])&& $_SESSION['usertype'] === 'Trainee') {
 //         header('location: ../Users/UserDashboard.php');
-//         exit();
+//          exit();
 //     }
-// } -->
+//  } -->
