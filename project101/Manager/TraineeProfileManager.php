@@ -61,28 +61,32 @@ if (isset($_GET['trainee_profile'])){
 ?>
   <div class="row" >
     <div class="card h-70 p-4">  
-
-   <a href="../Manager/TraineesManager.php" class="d-flex justify-content-end">
-       <button class="btn btn-dark">
-         Back
-       </button>
-   </a>
-    <img class="card-img-top d-flex align-items-start" style= "width: 300px; height: 350px;" src="../assets/img/avatars/<?=$profile;?>" alt="Card image cap" />
-  <div class="col  align-items-middle d-flex justify-content-center">
+<div class="row">
+  <div class="col-sm-6">
     <div class="card">
-      <div class="card-body d-flex justify-content-center  ">
-        <h1><i class="fa-solid fa-quote-left fa-2xl"></i></h1>
+      <div class="card-body d-flex justify-content-center">
+      <img class="card-img-top" style= "width: 350px; height: 430px;" src="../assets/img/avatars/<?= $profile?>" alt="Card image cap" />
+    <br>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6">
+    <div class="card " style = "margin-top: 130px;">
+      <div class="card-body d-flex justify-content-center ">
+      <h1 class="d-flex align-items-middle"><i class="fa-solid fa-quote-left fa-2xl"></i></h1>
            <figure class="p-3 mb-0">
-           <blockquote class="blockquote">
-             <h4><?=$qoute ?></h4>
+           <blockquote class="blockquote d-flex justify-content-center"><br><br>
+             <h4><?=  $qoute ?></h4>
            </blockquote>
            <figcaption class="blockquote-footer mb-0 text-muted">
-            <cite title="Source Title"><?= $author ?></cite>
+            <cite title="Source Title"><?=   $author ?></cite>
            </figcaption>
          </figure>
       </div>
     </div>
-  </div>                               
+  </div>
+</div>                           
  <div class="table-responsive ">
  <h5 class="card-header"><?= $firstname.' '. $middlename .' '. $lastname .' '. 'Information'?></h5>
  <table class="table table-bordered border-secondary">

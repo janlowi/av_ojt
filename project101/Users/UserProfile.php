@@ -86,14 +86,24 @@ if(isset(  $_SESSION['success'])){
                      
  <div class="row" >
     <div class="card h-70 p-4">  
-
-    <img class="card-img-top d-flex align-items-start" style= "width: 300px; height: 350px;" src="../assets/img/avatars/<?=$_SESSION['profile'];?>" alt="Card image cap" />
-    <br>
-    <i class='fa-solid fa-camera' style = "font-size: 30px;"  data-bs-toggle="modal" data-bs-target="#modalProfile" > </i>
-  <div class="col  align-items-middle d-flex justify-content-center">
+<div class="row">
+  <div class="col-sm-6">
     <div class="card">
-      <div class="card-body  ">
-        <h1><i class="fa-solid fa-quote-left fa-2xl"></i></h1>
+      <div class="card-body d-flex justify-content-center">
+      <img class="card-img-top" style= "width: 350px; height: 430px;" src="../assets/img/avatars/<?=$_SESSION['profile'];?>" alt="Card image cap" />
+    <br>
+    <div style = "position:absolute; bottom: 0px;">
+    <i class='fa-solid fa-camera' style = "font-size: 25px; color: black;"  data-bs-toggle="modal" data-bs-target="#modalProfile" > </i>
+    </div>
+   
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6">
+    <div class="card " style = "margin-top: 130px;">
+      <div class="card-body d-flex justify-content-center ">
+      <h1 class="d-flex align-items-middle"><i class="fa-solid fa-quote-left fa-2xl"></i></h1>
            <figure class="p-3 mb-0">
            <blockquote class="blockquote d-flex justify-content-center"><br><br>
              <h4><?= $_SESSION['qoute']; ?></h4>
@@ -103,9 +113,10 @@ if(isset(  $_SESSION['success'])){
            </figcaption>
          </figure>
       </div>
-
     </div>
-  </div>        
+  </div>
+</div>
+  
     <!-- qoute    -->
     <div class="table-responsive ">
       <table class="table table-bordered border-secondary">
