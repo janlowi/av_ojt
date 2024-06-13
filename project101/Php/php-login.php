@@ -61,6 +61,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         header('location: ../Users/UserDashboard.php');
                         unset($_SESSION['login_incorrect']);
                         exit();
+                    }elseif ($_SESSION['usertype'] === 'Manager') {
+                        $_SESSION['Manager']=true;
+                        $_SESSION['department_id'] = $row['department_id'];
+                        header('location: ../Manager/ManagerDashboard.php');
+                        unset($_SESSION['login_incorrect']);
+                        exit();
 
                         
                     } else {

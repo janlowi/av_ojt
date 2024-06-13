@@ -14,7 +14,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['selfie_in'])) {
         $lat = $_POST['lat'];
         $long = $_POST['long'];
-        $department_id = $_POST['department_id'];
         $selfie = $_POST['selfie_in'];
         $selfie = str_replace('data:image/png;base64,', '', $selfie);
         $selfie = str_replace(' ', '+', $selfie);
@@ -31,14 +30,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo "<script>alert('Error: Please capture an image.');</script>";
         } else {
              
-            $query = "INSERT INTO timesheet (user_id, department_id, event_type, total_hours, image, location) VALUES ( ?, ?, ?, ?, ?, ?)";
+            $query = "INSERT INTO timesheet (user_id, event_type, total_hours, image, location) VALUES ( ?, ?, ?, ?, ?)";
 
              
             $stmt = $connect->prepare($query);
 
             if ($stmt) {
                 
-                $stmt->bind_param("iissss", $user_id, $department_id, $event_type, $total_hours, $file, $coordinates);
+                $stmt->bind_param("issss", $user_id, $event_type, $total_hours, $file, $coordinates);
 
                  
                 $user_id = $user_id;  
@@ -71,7 +70,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }elseif(isset($_POST['selfie_out'])) {
 
         $lat = $_POST['lat'];
-        $department_id = $_POST['department_id'];
         $long = $_POST['long'];
         $selfie = $_POST['selfie_out'];
         $selfie = str_replace('data:image/png;base64,', '', $selfie);
@@ -121,14 +119,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     echo "<script>alert('Error: Please capture an image.');</script>";
                 } else {
                      
-                    $query = "INSERT INTO timesheet (user_id, department_id, event_type, total_hours, image, location) VALUES ( ?, ?, ?, ?, ?, ?)";
+                    $query = "INSERT INTO timesheet (user_id,  event_type, total_hours, image, location) VALUES ( ?, ?, ?, ?, ?)";
         
                      
                     $stmt = $connect->prepare($query);
         
                     if ($stmt) {
                         
-                        $stmt->bind_param("iissss", $user_id, $department_id, $event_type, $totalHours, $file, $coordinates);
+                        $stmt->bind_param("issss", $user_id, $event_type, $totalHours, $file, $coordinates);
         
                          
                         $user_id = $user_id;  

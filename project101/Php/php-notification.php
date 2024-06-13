@@ -1,6 +1,7 @@
 <?php
 session_start();
 include 'db_connect.php';
+$usertype= $_SESSION['usertype'];
 
 if(isset($_POST['insertNotification'])){
     $subject = $_POST['Subject'];
@@ -27,24 +28,23 @@ if(isset($_POST['insertNotification'])){
                 // Check for errors after execution
                 if($sql->affected_rows <= 0){
                     $_SESSION['error'] = 'Message failed for user ID ' . $userId;
-                    header('location: ../Notifications/Notification.php');
-                    exit();
+
                 }
         }
     }
 
         // If all notifications were inserted successfully
         $_SESSION['success'] = 'Message delivered successfully.';
-        header('location: ../Notifications/Notification.php');
-        exit();
+
     } else {
         $_SESSION['error'] = 'Empty fields or department IDs.';
-        header('location: ../Notifications/Notification.php');
-        exit();
+
     }
 
     $sql->close(); // Close the prepared statement
-
+    $redirect_url = ($usertype === 'Admin') ? '../Notifications/NotificationAdmin.php' : '../Notifications/NotificationManager.php';
+    header("location: $redirect_url");
+    exit();
 }
 ?>
 
@@ -56,17 +56,17 @@ if (isset($_GET['mark_as_read']) && !empty($_GET['mark_as_read'])) {
     $result = $connect->query($sql);
 
     if ($result) {
-      header("Location: ../Users/UserDashboard.php");
-      exit();
+      $_SESSION['success'] = 'Marked as read.';
     } else {
       $_SESSION['error'] = "Failed to mark notification as read";
-      header("Location: ../Users/UserDashboard.php");
-      exit();
+
     }
   } else {
     $_SESSION['error'] = "Invalid request";
-    header("Location: ../Users/UserDashboard.php");
-    exit();
+
   }
+  $redirect_url = ($usertype === 'Trainee') ? '../Functions/SettingsUser.php' : ($usertype === 'Admin' ? '../Functions/SettingsAdmin.php' : '../Functions/SettingsManager.php');
+  header("Location: $redirect_url");
+  exit();
 ?>
    

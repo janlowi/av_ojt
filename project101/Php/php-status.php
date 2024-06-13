@@ -2,7 +2,7 @@
 
 session_start();
 include 'db_connect.php';
-
+$usertype = $_SESSION['usertype'];
 ?>
 <?php
 if(isset($_GET['deactivate'])){
@@ -13,13 +13,14 @@ if(isset($_GET['deactivate'])){
         $query=mysqli_query($connect,$sql);
         if ($query==1) {
            $_SESSION['success']= "Status updated successfully";
-           header("location:../Admin/AdminDashboard.php");
         }else {
             $_SESSION['error']= "Error updating trainee status. ";
-           header("location:../Admin/AdminDashboard.php");
 
         }
 
+         $redirect_url = ($usertype === 'Admin') ? '../Admin/AdminDashboard.php' : '../Manager/ManagerDashboard.php' ;
+         header("location: $redirect_url");
+         exit();
 }
 
 if(isset($_GET['activate'])){
@@ -31,12 +32,14 @@ if(isset($_GET['activate'])){
     if ($query==1) {  
        $_SESSION['success']= "Status updated successfully";
        unset($_SESSION['login_incorrect']);
-       header("location:../Admin/AdminDashboard.php");
     }else {
         $_SESSION['error']= "Error updating trainee status. ";
-       header("location:../Admin/AdminDashboard.php");
 
     }
+    
+    $redirect_url = ($usertype === 'Admin') ? '../Admin/AdminDashboard.php' : '../Manager/ManagerDashboard.php' ;
+    header("location: $redirect_url");
+    exit();
 
 }
 ?>

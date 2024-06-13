@@ -69,9 +69,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     }
 
                     $_SESSION['success'] = "Password changed successfully.";
-                    $redirect_url = ($usertype === 'Trainee') ? '../Functions/SettingsUser.php' : '../Functions/SettingsAdmin.php';
+                    $redirect_url = ($usertype === 'Trainee') ? '../Functions/SettingsUser.php' : ($usertype === 'Admin' ? '../Functions/SettingsAdmin.php' : '../Functions/SettingsManager.php');
                     header("Location: $redirect_url");
                     exit();
+                    
                 } else {
                     $error_msg = "Failed to change password.";
                 }
@@ -85,5 +86,96 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $_SESSION['error'] = $error_msg;
     header('location: ../Functions/SettingsUser.php');
     exit();
+
+
 }
+
+
+ if(isset($_GET['reset_pass'])){
+
+    // Function to generate a random password
+function generateRandomPassword($length = 8) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $password = '';
+    for ($i = 0; $i < $length; $i++) {
+        $password .= $characters[rand(0, strlen($characters) - 1)];
+    }
+    return $password;
+}
+
+    $reset_id  = $_GET['reset_pass'];
+    $sql_user = "SELECT first_name, email FROM users WHERE id= ?";{
+    $stmt = $connect->prepare($sql_user);
+    $stmt->bind_param('i', $reset_id);
+    $stmt->execute();
+    $sql_user_result=$stmt->get_result();
+
+    
+    if( $sql_user_result->num_rows > 0 ){
+        while($user_row =$sql_user_result->fetch_assoc()){
+
+            $user_email = $user_row['email'];
+            $user_firstname = $user_row['first_name'];
+
+    $new_pass =generateRandomPassword();
+    $new_pass_hashed = password_hash($new_pass, PASSWORD_DEFAULT);
+
+
+    $reset_sql = "UPDATE users  SET password = ? WHERE id = ? ";
+    $stmt_reset = $connect->prepare($reset_sql);
+    $stmt_reset->bind_param('si',$new_pass_hashed, $reset_id);
+    $stmt_reset->execute();
+    
+    if($stmt_reset->execute()){
+
+        $mail_body = 'You password has been reset today :  ' . date('Y-m-d H:i:s') . ' <br><br>'
+                       . 'Here is your new password : '.$new_pass .' <br><br>'
+                       . '<a href="http://localhost:8080/av_ojt/project101/Login/index.php" style="background-color: #4CAF50; color: white; padding: 15px 25px; text-align: center; text-decoration: none; display: inline-block; border-radius: 10px;">Login</a>';
+
+     
+
+// Send email
+$mail = new PHPMailer(true);
+try {
+//Server settings
+$mail->isSMTP();
+$mail->Host       = 'smtp.gmail.com';
+$mail->SMTPAuth   = true;
+$mail->Username   = 'gastardo.johnlouie10@gmail.com';
+$mail->Password   = 'holb ctep kytm ualr';
+$mail->SMTPSecure = 'tls';
+$mail->Port       = 587;
+
+//Recipients
+$mail->setFrom('gastardo.johnlouie10@gmail.com', 'John Louie Gastardo');
+$mail->addAddress($user_email, $user_firstname);
+$mail->addReplyTo('info@example.com', 'Information');
+
+// Content
+$mail->isHTML(true);
+$mail->Subject = 'OJT Account';
+$mail->Body = $mail_body;
+
+$mail->send();
+$_SESSION['success'] = 'Email has been sent!';
+} catch (Exception $e) {
+$_SESSION['error'] = "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+}
+
+$_SESSION['success'] = "Password has been reset.";
+
+} else{
+    $_SESSION['error'] = "Faile to reset password.";
+
+    
+}
+
+}
+
+    }
+}
+header("Location: ../Admin/AdminDashboard.php");
+exit();
+}
+
 ?>

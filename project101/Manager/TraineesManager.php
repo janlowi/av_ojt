@@ -4,9 +4,9 @@ include '../Php/authenticate.php';
 checkLoggedIn();
 // checkUserType();
 $title="Trainees";
-include '../Layouts/main-admin.php'; 
+include '../Layouts/main-manager.php'; 
  include '../Php/db_connect.php';
-
+$department_id = $_SESSION['department_id'];
 
   ?>
 
@@ -15,7 +15,7 @@ include '../Layouts/main-admin.php';
          <h5 class="card-header">Trainees</h5>
          <div class="table-responsive text-nowrap">
          <table class="table table-bordered my-2" id="dataTrainee">
-             <thead class="bg-warning ">
+             <thead class="table-dark" style = "color: white;">
          <tr>
              <th >OJT ID</th>
              <th>Name</th>
@@ -38,7 +38,9 @@ include '../Layouts/main-admin.php';
      FROM users us
      INNER JOIN trainees tr ON tr.user_id = us.id
      INNER JOIN departments dp ON dp.id= us.department_id
-     WHERE us.user_type = 'Trainee'  "; 
+     WHERE us.user_type = 'Trainee'  
+     AND us.department_id = '$department_id'
+     "; 
 
      // Fetch data from the reports table
      $query = mysqli_query($connect, $sql);
@@ -83,10 +85,10 @@ include '../Layouts/main-admin.php';
      <td>
      <div class="row">
         <div class= "col" >
-        <a class="dropdown-item" href="../Admin/TraineeProfile.php?trainee_profile=<?=$row['id'] ?>"> <button class= "btn btn-warning " data-bs-toggle="tooltip" data-bs-placement="top" title="View profile records"><i class='fa fa-user-circle'></i> </button></a>
+        <a class="dropdown-item" href="../Manager/TraineeProfileManager.php?trainee_profile=<?=$row['id'] ?>"> <button class= "btn btn-warning " data-bs-toggle="tooltip" data-bs-placement="top" title="View profile records"><i class='fa fa-user-circle'></i> </button></a>
         </div>
         <div class= "col">
-        <a class="dropdown-item" href="../Timesheet/DisplayUserAttendance.php?trainee_attendance=<?=$row['id'] ?>"> <button class= "btn btn-info " data-bs-toggle="tooltip" data-bs-placement="top" title="View attendance records"><i class="fa-regular fa-clipboard-user"></i> </button></a>
+        <a class="dropdown-item" href="../Timesheet/DisplayUserAttendanceManager.php?trainee_attendance=<?=$row['id'] ?>"> <button class= "btn btn-info " data-bs-toggle="tooltip" data-bs-placement="top" title="View attendance records"><i class="fa-regular fa-clipboard-user"></i></button></a>
 
         </div>
      </div>

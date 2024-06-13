@@ -90,35 +90,35 @@
           <ul class="menu-inner py-1 ">
           <ul class="menu-item ">
             <li class="menu-item mb-3 mx-3"id ="hover">
-                  <a href="../Admin/AdminDashboard.php" class="menu-link mx-3">
+                  <a href="../Manager/ManagerDashboard.php" class="menu-link mx-3">
                     <div data-i18n="Connections">Dashboard</div>
                   </a>
                 </li>
                 <li class="menu-item mb-3 mx-3"id ="hover">
-                  <a href="../Timesheet/DisplayAdmin.php" class="menu-link mx-3">
+                  <a href="../Timesheet/DisplayManager.php" class="menu-link mx-3">
                     <div data-i18n="Analytics">Attendance Record</div>
                   </a>
                 </li>
 
                 <li class="menu-item mb-3 mx-3"id ="hover">
-                  <a href="../Reports/AllReports.php " class="menu-link mx-3">
+                  <a href="../Reports/AllReportsManager.php " class="menu-link mx-3">
                     <div data-i18n="Analytics">Weekly Reports</div>
                   </a>
                 </li>
             
                 <li class="menu-item mb-3 mx-3"id ="hover">
-                  <a href="../Admin/Trainees.php" class="menu-link mx-3">
+                  <a href="../Manager/TraineesManager.php" class="menu-link mx-3">
                     <div data-i18n="Analytics">Trainees</div>
                   </a>
-
+<!-- 
                   <li class="menu-item mb-3 mx-3"id ="hover">
-                  <a href="../Admin/Departments.php" class="menu-link mx-3">
+                  <a href="../Manager/Departments.php" class="menu-link mx-3">
                     <div data-i18n="Analytics">Departments</div>
-                  </a>
+                  </a> -->
 
                 </li>
                 <li class="menu-item mb-3 mx-3"id ="hover">
-                  <a href="../Notifications/NotificationAdmin.php" class="menu-link mx-3">
+                  <a href="../Notifications/NotificationManager.php" class="menu-link mx-3">
                     <div data-i18n="Notifications">Notifications</div>
                   </a>
                 </li> 

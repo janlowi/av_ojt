@@ -7,66 +7,43 @@ include 'db_connect.php';
  if ($_SERVER['REQUEST_METHOD']=='POST') {
 
     $id = $_POST["edit_id"];
-    $ojtid = $_POST["Ojtid"];
     $firstname = $_POST["Firstname"];
     $middlename = $_POST["Middlename"];
     $lastname = $_POST["Lastname"];
     $dob = $_POST["Birthday"];
     $sex = $_POST["Sex"];
-    $course = $_POST["Course"];
-    $university = $_POST["University"];
-    $hours = $_POST["Hours"];
-    $dos = $_POST["Dos"];
     $office = $_POST["Office"];
     $email = $_POST["Email"];
     $usertype = $_POST["Usertype"];
-    $contact = $_POST["Contact"];
-    $status = $_POST["Status"];
     $department = $_POST["Department"];
 
-    if( !empty( $ojtid)&&     
+    if(    
         !empty( $firstname)&&
         !empty( $middlename)&&
         !empty( $lastname)&&
         !empty( $dob)&&
         !empty( $sex)&&
-        !empty( $course)&&
-        !empty( $university)&&
-        !empty( $hours)&&
-        !empty( $dos)&&
         !empty( $office)&&
         !empty( $email)&&  
         !empty( $department)&& 
-        !empty( $status)&&
-        !empty( $usertype)&&
-        !empty( $contact)) {
+        !empty( $usertype)) {
 
 
   $sql = "UPDATE  
-                users us, 
-                trainees tr 
+                users
                 
                 SET 
-                    tr.ojt_id = '$ojtid', 
-                    us.first_name = '$firstname', 
-                    us.middle_name = '$middlename', 
-                    us.last_name = '$lastname', 
-                    us.dob = '$dob', 
-                    us.sex = '$sex', 
-                    tr.contact_num = '$contact', 
-                    tr.degree = '$course', 
-                    tr.university = '$university', 
-                    tr.hours_to_render = '$hours', 
-                    tr.dos = '$dos', 
-                    us.office_assigned = '$office', 
-                    tr.email = '$email',
-                    us.email = '$email',
-                    us.user_type = '$usertype', 
-                    us.status = '$status', 
-                    us.department_id = '$department'
+                    first_name = '$firstname', 
+                    middle_name = '$middlename', 
+                    last_name = '$lastname', 
+                    dob = '$dob', 
+                    sex = '$sex', 
+                    office_assigned = '$office', 
+                    email = '$email',
+                    user_type = '$usertype', 
+                    department_id = '$department'
                     
-          WHERE us.id=tr.user_id 
-          AND us.id = '$id'";
+          WHERE id = '$id'";
   $result = mysqli_query($connect, $sql);
 
   if($result==true){
@@ -103,8 +80,12 @@ if(isset($_POST['updateFirstname'])){
     header("Location: ../Admin/TraineeProfile.php?trainee_profile=  <?= $user_id ?>");
   }
 } 
+
   }
 
 
+
 ?>
+
+
 

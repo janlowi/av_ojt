@@ -3,13 +3,25 @@ document.getElementById('usertype').addEventListener('change', function() {
     if (userType === 'Admin') {
         document.getElementById('traineeForm').style.display = 'none';
         document.getElementById('adminForm').style.display = 'block';
+        document.getElementById('managerForm').style.display = 'block';
         disableFields('traineeForm'); 
+        disableFields('managerForm'); 
         enableFields('adminForm');   
         
-    } else if (userType === 'Trainee') {traineeForm
+    } else if (userType === 'Trainee') {
         document.getElementById('traineeForm').style.display = 'block';
+        document.getElementById('managerForm').style.display = 'block';
         document.getElementById('adminForm').style.display = 'none';
-        enableFields('traineeForm');   
+        enableFields('traineeForm');  
+        disableFields('managerForm'); 
+        disableFields('adminForm');   
+
+    } else if(userType === 'Manager'){
+        document.getElementById('traineeForm').style.display = 'none';
+        document.getElementById('managerForm').style.display = 'block';
+        document.getElementById('adminForm').style.display = 'none';
+        disableFields('traineeForm'); 
+        enableFields('managerForm'); 
         disableFields('adminForm');   
     }
 });

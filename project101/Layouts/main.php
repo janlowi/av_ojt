@@ -1,8 +1,3 @@
-<?php 
-ob_start();
-include '../Php/db_connect.php';
-?>
-
 
 <!DOCTYPE html>
 

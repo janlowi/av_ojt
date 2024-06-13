@@ -5,7 +5,7 @@ checkLoggedIn();
 // checkUserType();
 $title = "Attendance Record";
 include '../Php/db_connect.php';
-include '../Layouts/main-admin.php'; 
+include '../Layouts/main-manager.php'; 
 
 ?>
 

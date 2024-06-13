@@ -12,11 +12,9 @@ include '../Layouts/main-admin.php';
  if(isset($_GET['update'])) 
  
  $user_id= $_GET['update'];
-         $sql = "SELECT us.*,
-                        tr.*
-
+         $sql = "SELECT us.*
         FROM users us
-        INNER JOIN trainees tr ON tr.user_id = us.id
+        INNER JOIN departments dp ON dp.id = department_id
         WHERE us.id = '$user_id' 
         ";      
 
@@ -24,22 +22,14 @@ include '../Layouts/main-admin.php';
 
        if ($result->num_rows>0 ) {
         $row=$result->fetch_assoc();
-        $ojtid = $row["ojt_id"];
         $firstname = $row["first_name"];
         $middlename = $row["middle_name"];
         $lastname = $row["last_name"];
         $dob =  $row["dob"];
         $sex = $row["sex"];
-        $course = $row["degree"];
-        $university = $row["university"];
-        $hours = $row["hours_to_render"];
-        $dos = $row["dos"];
         $office = $row["office_assigned"];
         $email = $row["email"];
-        $password = $row["password"];
-        $confirm_pass = $row["password"];
         $usertype = $row["user_type"];
-        $contact= $row["contact_num"];
         $status = $row["status"];
         $department_id = $row["department_id"];
 
@@ -82,7 +72,7 @@ include '../Layouts/main-admin.php';
          ?>
                      
                  <div class="modal-header">
-                         <h2 class="modal-title" id="modalCenterTitle">Update account for trainee.</h2>
+                         <h2 class="modal-title" id="modalCenterTitle">Update User Information.</h2>
                              <a href="AdminDashboard.php">
                          <button
                              type="button"
@@ -111,15 +101,11 @@ include '../Layouts/main-admin.php';
                                 <label for="inputLastname" class="form-label">Lastname</label>
                                 <input type="text" class="form-control" id="inputLastname"name = "Lastname"  value = "<?php echo $lastname?>">
                         </div>
-                        <div class="col-md-6">
-                                <label for="inputLastname" class="form-label">OJT-ID</label>
-                                <input type="text" class="form-control" id="inputLastname"name = "Ojtid"  value = "<?php echo $ojtid?>" readonly>
-                        </div>
 
-                        <div class="col-md-6">
+                        <!-- <div class="col-md-6">
                                 <label for="inputZip" class="form-label">Contact no.</label>
                                 <input type="number" class="form-control" id="inputZip"name = "Contact"  value = "<?php echo $contact?>">
-                        </div>
+                        </div> -->
 
                         <div class="col-md-2">
                                 <label for="inputZip" class="form-label">Birthday</label>
@@ -143,6 +129,8 @@ include '../Layouts/main-admin.php';
                                          echo 'selected'; }?>>Admin</option>
                                         <option value="Trainee" <?php if ($usertype == 'Trainee' ) {
                                          echo 'selected'; }?>>Trainee</option>
+                                          <option value="Manager" <?php if ($usertype == 'Manager' ) {
+                                         echo 'selected'; }?>>Manager</option>
                                 </select>
                         </div>
                         <div class="col-md-6">    
@@ -163,37 +151,10 @@ include '../Layouts/main-admin.php';
                                          }
                                      }
                                  ?>   
-                                
-
-
                                 </select>
                         </div>
 
-
-                        <div class="col-md-6">    
-                                <select name="Status" id="status" class="form-select" hidden>
-                                        <option value="Active" selected >Active</option>
-                                        <option value="Deactivated">Deactivated</option>
-                                </select>
-                        </div>
-
-                        <div class="col-12">
-                                <label for="inputCourse" class="form-label">Course/Degree</label>
-                                <input type="text" class="form-control" id="inputCourse" name = "Course" value = "<?php echo $course?>">
-                        </div>
-                        <div class="col-12">
-                                <label for="inputAddress2" class="form-label">University</label>
-                                <input type="text" class="form-control" id="inputAddress2"name = "University" value = "<?php echo $university?>">
-                        </div>
-                        <div class="col-md-4">
-                                <label for="inputCity" class="form-label">Hours to render</label>
-                                <input type="number" class="form-control" id="inputCity"name = "Hours" value = "<?php echo $hours?>">
-                        </div>
-                        <div class="col-md-4">
-                                <label for="inputCity" class="form-label">Date started</label>
-                                <input type="date" class="form-control" id="inputCity"name = "Dos" value = "<?php echo $dos?>">
-                        </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                                 <label for="Office" class="form-label">Office Assigned</label>
                                 <select name="Office" id="office" class="form-select">
                                         <option value="Tayud" <?php if ($office == 'Tayud' ) {
@@ -204,14 +165,14 @@ include '../Layouts/main-admin.php';
                                          echo 'selected'; }?>>NRA</option>
                                 </select>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                                 <label for="inputZip" class="form-label">Email</label>
                                 <input type="email" class="form-control" id="inputZip"name = "Email" value = "<?php echo $email?>">
                         </div>
      
                         <div class="col-md-12">
-                                <label for="inputGroupFile04" class="form-label"> Profile</label>
-                                <input type="file" class="form-control" id="inputGroupFile04"  aria-label="Upload" name='Profile'>
+                            
+                                <a class="btn btn-danger" href="../Php/php-changepass.php?reset_pass=<?= $user_id ?>">Reset Password</a>
                         </div>
 
                                  

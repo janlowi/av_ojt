@@ -1,8 +1,8 @@
 <?php 
 session_start();
+$usertype = 'Trainee';
 include '../Php/authenticate.php';
 checkLoggedIn();
-// checkUserType();
 $title="User Dashboard";
 include '../Layouts/main-user.php'; 
  include '../Php/db_connect.php';

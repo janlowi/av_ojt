@@ -11,7 +11,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 // Function to generate a random password
-function generateRandomPassword($length = 6) {
+function generateRandomPassword($length = 8) {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $password = '';
     for ($i = 0; $i < $length; $i++) {
@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         // Generate a random password with initials
-        $password_generated = 'AV-' . $initials . generateRandomPassword();
+        $password_generated = $initials . generateRandomPassword();
 
         // Use $password_generated for sending in email or displaying to the user
         // echo "Generated Password: " . $password_generated;
@@ -235,13 +235,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           }
   
           // Generate a random password with initials
-          $password_generated = 'AV-' . $initials . generateRandomPassword();
+          $password_generated =  $initials . generateRandomPassword();
   
           // Use $password_generated for sending in email or displaying to the user
           // echo "Generated Password: " . $password_generated;
   
           // Construct email body
-          $mail_body = 'This is your OJT account body:<br><br>'
+          $mail_body = 'This is your Admin account body:<br><br>'
                       . 'Email: ' . $email . '<br>'
                       . 'Password:' . $password_generated. '<br><br>'
                       . '<a href="http://localhost:8080/av_ojt/project101/Login/index.php" style="background-color: #4CAF50; color: white; padding: 15px 25px; text-align: center; text-decoration: none; display: inline-block; border-radius: 10px;">Login</a>';
@@ -312,7 +312,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 
                 // Content
                 $mail->isHTML(true);
-                $mail->Subject = 'OJT Account';
+                $mail->Subject = 'Admin Account';
                 $mail->Body = $mail_body;
                 
                 $mail->send();
@@ -336,6 +336,139 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     //add department
+}elseif (isset($_POST['managerSubmit'])) {
+    $firstname = $_POST["Firstname"];
+    $middlename = $_POST["Middlename"];
+    $lastname = $_POST["Lastname"];
+    $sex = $_POST["Sex"];
+    $office = $_POST["Office"];
+    $email = $_POST["Email"];
+    $user_type = $_POST["Usertype"];
+    $status = $_POST["Status"];
+    $department = $_POST["Department"];
+    $dob = $_POST["Birthday"];
+    $default_profile = '../Assets/img/avatars/av.png';
+
+
+     $stmt=$connect->prepare("SELECT * FROM users WHERE email=?");
+            $stmt->execute([$email]);
+            $check_email=$stmt->fetch(); 
+           if($check_email) {
+            $error_msg="Email arlready in use.";
+            $_SESSION['error'] = $error_msg;
+            header("Location: ../Admin/AdminDashboard.php");
+            exit();
+           }else {
+      // Extract initials from the user's full name
+      $full_name = $firstname . ' ' . $lastname;
+      $name_parts = explode(' ', $full_name);
+      $initials = '';
+      foreach ($name_parts as $part) {
+          $initials .= strtoupper(substr($part, 0, 1)); // Get the first character of each part
+      }
+
+      // Generate a random password with initials
+      $password_generated =  $initials . generateRandomPassword();
+
+      // Use $password_generated for sending in email or displaying to the user
+      // echo "Generated Password: " . $password_generated;
+
+      // Construct email body
+      $mail_body = 'This is your manager account body:<br><br>'
+                  . 'Email: ' . $email . '<br>'
+                  . 'Password:' . $password_generated. '<br><br>'
+                  . '<a href="http://localhost:8080/av_ojt/project101/Login/index.php" style="background-color: #4CAF50; color: white; padding: 15px 25px; text-align: center; text-decoration: none; display: inline-block; border-radius: 10px;">Login</a>';
+    if (
+        !empty($firstname) &&   
+        !empty($middlename) &&
+        !empty($lastname) &&
+        !empty($dob) &&
+        !empty($sex) &&
+        !empty($office) &&
+        !empty($email) &&
+        !empty($department) &&
+        !empty($user_type)
+    ) {
+                $pass_hashed = password_hash($password_generated, PASSWORD_DEFAULT);
+
+                $sql = "INSERT INTO users (
+                           
+                            first_name,
+                            middle_name,
+                            last_name,
+                            dob,
+                            sex,
+                            email,
+                            password,
+                            user_type,  
+                            department_id,
+                            office_assigned, 
+                            profile,
+                            status
+                        )
+                        VALUES (       
+                            '$firstname',
+                            '$middlename',
+                            '$lastname',
+                            '$dob',
+                            '$sex',
+                            '$email',
+                            '$pass_hashed',
+                            '$user_type',
+                            '$department',
+                            '$office',
+                            '$default_profile',
+                            '$status'
+                        )";
+
+                $query = mysqli_query($connect, $sql);
+
+                if ($query == 1) {
+
+                  $pass_hashed= password_hash($password_generated, PASSWORD_DEFAULT);
+                    // Send email
+        $mail = new PHPMailer(true);
+        try {
+            //Server settings
+            $mail->isSMTP();
+            $mail->Host       = 'smtp.gmail.com';
+            $mail->SMTPAuth   = true;
+            $mail->Username   = 'gastardo.johnlouie10@gmail.com';
+            $mail->Password   = 'holb ctep kytm ualr';
+            $mail->SMTPSecure = 'tls';
+            $mail->Port       = 587;
+            
+            //Recipients
+            $mail->setFrom('gastardo.johnlouie10@gmail.com', 'John Louie Gastardo');
+            $mail->addAddress($email, $firstname);
+            $mail->addReplyTo('info@example.com', 'Information');
+            
+            // Content
+            $mail->isHTML(true);
+            $mail->Subject = 'Manager Account';
+            $mail->Body = $mail_body;
+            
+            $mail->send();
+            $success_msg ='Email has been sent!';
+        } catch (Exception $e) {
+            $error_msg= "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        }
+
+        $success_msg = "Admin added successfully.";
+        $_SESSION['success'] = $success_msg;
+        header("Location: ../Admin/AdminDashboard.php");
+        exit();
+} else {
+    $error_msg = "Invalid form submission.";
+}
+
+$_SESSION['error'] = $error_msg;
+header("Location: ../Admin/AdminDashboard.php");
+exit();
+}
+}
+
+//add department
 }elseif(isset($_POST['addDepartment'])){
     $department = $_POST['department'];
 echo $department;

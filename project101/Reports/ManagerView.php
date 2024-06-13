@@ -4,7 +4,7 @@ include '../Php/authenticate.php';
 checkLoggedIn();
 // checkUserType();
 $title="View";
-include '../Layouts/main-admin.php'; 
+include '../Layouts/main-manager.php'; 
  include '../Php/db_connect.php';
 
 ?>     
@@ -20,7 +20,7 @@ include '../Layouts/main-admin.php';
               <div class="row">
 
                                <!-- <h2 class="modal-title" id="modalCenterTitle">Responses</h2> -->
-                               <a href="../Reports/ViewReport.php?view_report=<?=$_SESSION['user_report_id']?>" class="d-flex justify-content-end">
+                               <a href="../Reports/ViewReportManager.php?view_report=<?=$_SESSION['user_report_id']?>" class="d-flex justify-content-end">
                                <button
                                  type="button"
                                 class="btn btn-dark d-flex"

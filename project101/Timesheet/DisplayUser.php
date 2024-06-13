@@ -10,7 +10,7 @@ include '../Layouts/main-user.php';
 ?>
     <div class="card table-responsive">
                 <table class="table table-stripes" id ="userAttendance">
-                    <thead class="bg-warning" >
+                    <thead class="bg-info" >
                         <tr>
                             <th>Department</th>
                             <th>Date</th>

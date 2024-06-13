@@ -9,17 +9,43 @@ function checkLoggedIn() {
         exit();
     }
 }
-?>
-        <!-- <script>
-            windows.location.href= '../Login/index.php';
-        </script> -->
 
-<!-- //  function checkUserType(){
+//  function checkUserType(){
 //      if(isset($_SESSION['usertype'])&& $_SESSION['usertype'] === 'Admin') {
-//        header('location: ../Admin/AdminDashboard.php');
+//        header('location: ../Error_101.php');
 //         exit();
 //   }elseif(isset($_SESSION['usertype'])&& $_SESSION['usertype'] === 'Trainee') {
-//         header('location: ../Users/UserDashboard.php');
+//         header('location: ../Error_101.php');
+//          exit();
+//     }elseif(isset($_SESSION['usertype'])&& $_SESSION['usertype'] === 'Manager') {
+//         header('location: ../Error_101.php');
 //          exit();
 //     }
-//  } -->
+//  }
+
+// Check if 'usertype' session variable is set
+if (!isset($_SESSION['usertype'])) {
+    header('location: /av_ojt/Project101/Error_101.php'); // Redirect to error page
+    die(); // Stop further execution
+}
+
+// Check if the user is not an admin
+if ($_SESSION['usertype'] !== $usertype) {
+    header('location: /av_ojt/Project101/Error_101.php'); // Redirect to error page
+    die(); // Stop further execution
+}
+
+// Check if the user is not a manager
+if ($_SESSION['usertype'] !== $usertype) {
+    header('location: /av_ojt/Project101/Error_101.php'); // Redirect to error page
+    die(); // Stop further execution
+}
+
+// Check if the user is not a trainee
+if ($_SESSION['usertype'] !== $usertype) {
+    header('location: /av_ojt/Project101/Error_101.php'); // Redirect to error page
+    die(); // Stop further execution
+}
+
+
+?>

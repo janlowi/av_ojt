@@ -1,6 +1,7 @@
 <?php
 session_start();
 include 'db_connect.php';
+$usertype = $_SESSION['usertype'];
 if(isset($_POST['updateBirthday'])) {
     $user_id=$_POST['user_id'];
     $dob=$_POST['updatedob']; 
@@ -210,5 +211,27 @@ if(isset($_POST['updateBirthday'])) {
       }
       header("Location: ../Admin/TraineeProfile.php?trainee_profile= $user_id ");
       exit();
+
+    }elseif(isset($_POST['editDepartment'])){
+      $department_id = $_POST['department_id'];
+       $department_name= $_POST['department'];
+    
+      $sql_dept = "UPDATE departments SET departments = ? WHERE id = ?";
+      $stmt_dept = $connect->prepare($sql_dept);
+      $stmt_dept->bind_param('si', $department_name, $department_id);
+      $stmt_dept->execute();
+    
+      if($stmt_dept->execute() === TRUE){
+    
+        $_SESSION['success'] = "Deparment updated successfully.";
+
+      }else {
+        $_SESSION['error'] = "Failed to update department.";
+      }
+      $redirect_url = ($usertype === 'Trainee') ? '../Functions/SettingsUser.php' : ($usertype === 'Admin' ? '../Functions/SettingsAdmin.php' : '../Functions/SettingsManager.php');
+      header("Location: $redirect_url");
+      header("Location: ../Admin/Departments.php");
+      exit();
     }
+    
 ?>

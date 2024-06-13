@@ -4,7 +4,7 @@ include '../Php/authenticate.php';
 checkLoggedIn();
 // checkUserType();
 $title="View";
-include '../Layouts/main-admin.php'; 
+include '../Layouts/main-manager.php'; 
  include '../Php/db_connect.php';
  $usertype = $_SESSION['usertype'];
 ?>     
@@ -17,7 +17,7 @@ include '../Layouts/main-admin.php';
         <div class="card-title  ">
           <h5 class="m-0 me-2 text-uppercase">Responses</h5>
         </div>
-        <a href=" <?php echo ($usertype === 'Admin') ? '../Reports/AllReports.php' :  '../Reports/AllReportsManager.php'; ?>" class="d-flex justify-content-end ">
+        <a href="../Reports/AllReportsManager.php" class="d-flex justify-content-end ">
                                <button
                                  type="button"
                                 class="btn btn-dark d-flex"
@@ -205,7 +205,7 @@ include '../Layouts/main-admin.php';
                                             <div class="d-flex flex-column justify-content-center align-items-center d-grid gap-2">
                                                     
                                             
-                                                    <a href="../Reports/AdminView.php?view=<?= $row['id'] ?>"  class="btn btn-success btn-md row-">
+                                                    <a href="../Reports/ManagerView.php?view=<?= $row['id'] ?>"  class="btn btn-success btn-md row-">
                                               View
                                                     </a>      
                                             </div>

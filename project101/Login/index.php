@@ -1,9 +1,9 @@
 <?php 
 session_start();
-// if(isset($_SESSION["logged_in"]) && $_SESSION["logged_in"] === true){
-//     header("location: ../Login/index.php");
-//     exit();
-// }
+if(isset($_SESSION["logged_in"]) && $_SESSION["logged_in"] === true){
+    header("location: ../Login/index.php");
+    exit();
+}
 $title= "Log in";
 include "../Layouts/main.php";
 ?>
@@ -158,8 +158,13 @@ include "../Layouts/main.php";
             margin: 20px auto;
 
         }
+        .copyright-container p {
+        color: white;
+    }
 
     </style>
+
+
 <div class="form-container ">
                                                                                                         <form action="../Php/php-login.php" method="POST">
                                                                                                         
@@ -168,18 +173,20 @@ include "../Layouts/main.php";
                                                                                                                 
                                                                                                             <div class="image"><img src="avega.png" alt="Logo" width="110" height="80"></div> 
                                                                                                                 <div class="welcome-container text-light">
-                                                                                                                    <p>avega</p>
+                                                                                                                    <p>ATTENDANCE MONITORING SYSTEM</p>
                                                                                                                 </div>
                                                                                                                 <div class=" text-light fw-medium mt-5">
-                                                                                                                    <p>We are a complete logistics provider company
-                                                                                                                        with full-range of services that can cater 
-                                                                                                                        all logistical needs of the flourishing 
-                                                                                                                        Philippine market through our ICHS system.</p>
+                                                                                                                    <p>Effortlessly track attendance, monitor progress, and foster communication. Boost productivity, save time, and ensure accountability like never before. Sign in today and redefine efficiency!</p>
                                                                                                                 </div>
                                                                                                                 <div class="abisc-container text-light fw-medium">    
-                                                                                                                    <p>ATTENDANCE MONITORING SYSTEM</p>
-                    
+                                                                                                                                                                                                
+                                                                                                                    </div>
+                                                                                                                    <p> <?php  ?> <div class="copyright-container">
+                                                                                                                    <p>&copy; <?php echo date("Y"); ?> Designed by AVega IT OJT</p>
+                                                                                                                </div> </p>
                                                                                                                 </div>
+                                                                                                                <div class="form-container ">
+                                                                                                                                            
                                                                                                             </div>
                                                                                                             <div class="sign"><h2>Sign in</h2></div>
 
