@@ -1,5 +1,6 @@
 <?php
 session_start();
+$usertype = 'Admin';
 include '../Php/authenticate.php';
 checkLoggedIn();
 // checkUserType();
@@ -22,6 +23,7 @@ include '../Layouts/main-admin.php';
                 </tr>
             </thead>
          <tbody>
+            <!-- FAILED TO LOG OUT QUERY AND UPDATE -->
          <?php 
     $sql = "SELECT user_id, timestamp, us.department_id 
     FROM timesheet t1
@@ -48,6 +50,18 @@ include '../Layouts/main-admin.php';
                 $user_id = $row['user_id'];
                 $timestamp = $row['timestamp'];
                 $department_id = $row['department_id'];
+
+// NOTIFY TO THOSE WHO FAILED TO LOG OUT
+                $comment_subject = "FAILED TO LOG OUT";
+                $comment_text = "You have failed to log out in this date : $timestamp ";
+
+                    $stmt_notif = $connect->prepare("INSERT INTO notifications (comment_subject, comment_text, comment_status, department_id, user_id) VALUES (?,?,?,?,?)");
+                    $status = 1;
+                    $stmt_notif ->bind_param('ssiii',$comment_subject, $comment_text, $status, $department_id, $user_id);
+                    $stmt_notif->execute();
+                    $stmt_notif->close();
+
+//UPDATE THOSE WHO DONT LOG OUT
 
                 $sql_names = "SELECT * FROM users WHERE id= '$user_id'";
                 $result_names = mysqli_query($connect, $sql_names);

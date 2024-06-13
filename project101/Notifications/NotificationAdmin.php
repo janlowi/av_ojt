@@ -1,5 +1,6 @@
 <?php 
 session_start();
+$usertype = 'Admin';
 $title="Notification Board";
 include '../Php/authenticate.php'; 
 checkLoggedIn();

@@ -42,7 +42,6 @@ include '../Layouts/main-user.php';
                     }
                 }
                 ?>
-
                 <h4><span class="d-flex justify-content-center">Total Hours</span></h4>
                 <p class="card-text">Hours rendered:</p>
                 <h4 id="realTime"></h4>
@@ -164,9 +163,9 @@ include '../Layouts/main-user.php';
           </div>
           </div>
 
-
           <h4 class= ""> Current Progress </h4>
           <div class="progress" style="height: 35px;">
+          <span class = "d-flex justify-content-end"><?php echo $hoursToRender ?></span>
           <div class="progress-bar progress-bar-striped bg-info" role="progressbar"
            style="width: <?php if($totalHours != 0 && $hoursToRender != 0 ){
             echo ($totalHours / $hoursToRender) * 100 ;
@@ -185,6 +184,7 @@ include '../Layouts/main-user.php';
       <!-- Progress Bar Label -->
       <div id="progressbar" class="text-center mt-2">
         Progress: <?php echo number_format($percent, 2, '.', '') ?>%
+        Hours to Render : <?php echo  $hoursToRender ?>
       </div>
 
       </div>

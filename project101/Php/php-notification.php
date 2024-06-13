@@ -65,7 +65,7 @@ if (isset($_GET['mark_as_read']) && !empty($_GET['mark_as_read'])) {
     $_SESSION['error'] = "Invalid request";
 
   }
-  $redirect_url = ($usertype === 'Trainee') ? '../Functions/SettingsUser.php' : ($usertype === 'Admin' ? '../Functions/SettingsAdmin.php' : '../Functions/SettingsManager.php');
+  $redirect_url = ($usertype === 'Trainee') ? '../Users/UserDashboard.php' : ($usertype === 'Admin' ? '..Admin/AdminDashboard.php' : '..Manager/ManagerDashboard.php');
   header("Location: $redirect_url");
   exit();
 ?>

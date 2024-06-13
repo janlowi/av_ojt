@@ -72,12 +72,8 @@
     background-color: var( --bs-link-hover-color);
     color: var(--bs-light);
 }
-.notif-info {
-    color: var(--bs-info);
-}
-
-.notif-secondary {
-    color: var(--bs-secondary);
+.read-notification {
+    color: var(--bs-danger);
 }
 
 </style>
@@ -214,23 +210,26 @@
             ?> </span>
 </i>
 <ul class="dropdown-menu" id = "dropdown" aria-labelledby="notification"  aria-expanded="false">
-      <?php 
-      $sql_all = "SELECT * FROM notifications  WHERE department_id = '$department_id' AND user_id = '$userId' ORDER BY id ASC";
-          $result_all=$connect->query($sql_all);
-          if($result_all->num_rows > 0 ){
-            while($message = $result_all->fetch_assoc()){
-              $messageId= $message['id'];
-              $messageStatus= $message['comment_status'];
-              $modal = 'modal_'.$message['id'];
-              ?>
-              <li>
-              <span class="dropdown-item" data-bs-toggle="modal" data-bs-target="#<?=$modal?>">
-              <input type="text" value="<?=$message['id']?>" hidden>
-         
+<?php 
+$sql_all = "SELECT * FROM notifications  WHERE department_id = '$department_id' AND user_id = '$userId' ORDER BY id DESC LIMIT 5";
+$result_all = $connect->query($sql_all);
+if ($result_all->num_rows > 0) {
+    while ($message = $result_all->fetch_assoc()) {
+        $messageId = $message['id'];
+        $messageStatus = $message['comment_status'];
+        $modal = 'modal_'.$message['id'];
 
-              <strong class="pe-auto strong"><?=$message['comment_subject']?></strong><br>
-              <small class="pe-auto small"><?=substr($message['comment_text'], 0, 25)?>...</small>
-              </span>
+        // Check if the status is 1 (read), then set the class accordingly
+        $spanClass = ($messageStatus == 1) ? 'read-notification' : '';
+
+        // Output the list item with the appropriate span class
+        ?>
+        <li>
+            <span class="dropdown-item <?=$spanClass?>" data-bs-toggle="modal" data-bs-target="#<?=$modal?>">
+                <input type="text" value="<?=$messageId?>" hidden>
+                <strong class="pe-auto strong"><?=$message['comment_subject']?></strong><br>
+                <small class="pe-auto small"><?=substr($message['comment_text'], 0, 25)?>...</small>
+            </span>
           <div class="dropdown-divider"></div>
 
                 <!-- Modal -->

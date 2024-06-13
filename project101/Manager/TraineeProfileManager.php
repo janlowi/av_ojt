@@ -1,5 +1,6 @@
 <?php 
 session_start();
+$usertype = 'Manager';
 include '../Php/authenticate.php';
 checkLoggedIn();
 // checkUserType();

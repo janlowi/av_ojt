@@ -44,7 +44,7 @@ $department_id = $_SESSION['department_id'];
 <div class="card ">
 <div class="card-body">
                        
-                <h5 class="card-header">Users</h5>
+                <h3 class="card-header text-success">USERS UNDER IT-DEPT</h3>
                 <div class=" table-responsive    text-nowrap">
                   <table class="table table-dark">
                     <thead>

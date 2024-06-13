@@ -1,6 +1,4 @@
 <?php  
-// include '../Php/authenticate.php';
-// checkLoggedIn();
 // checkUserType();
 $title="Time Tracking System";
  include '../Php/db_connect.php';

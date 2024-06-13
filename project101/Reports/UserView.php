@@ -1,5 +1,6 @@
 <?php 
 session_start();
+$usertype = 'Trainee';
 include '../Php/authenticate.php';
 checkLoggedIn();
 // checkUserType();

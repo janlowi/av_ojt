@@ -15,22 +15,50 @@ $usertype = $_SESSION['usertype'];
 <body>
 <div class="container position-relative">
 
-
+<br>
   <div class="position-absolute top-50 start-50 translate-middle-x ">
     <img src="Assets/img/illustrations/nope-despicable-me-4.gif" alt=" " >
     <div class="d-flex justify-content-center">
             <?php 
                 if($usertype === "Admin"){
                     echo '
-                    <a href="/av_ojt/Project101/Admin/AdminDashboard.php" class = "btn btn-warning btn-lg">GO BACK</a>
+                    <div class="alert alert-danger d-flex align-items-center" role="alert">
+                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                    <div>
+                      Ooops !!! , You\'re not allowed. to\'re non rawtui, bananana!!
+                    </div>
+                    </div>
+                    ';
+                    echo '<br><br>';
+
+                    echo '
+                    <a href="/av_ojt/Project101/Admin/AdminDashboard.php" class = "btn btn-danger btn-lg">GO BACK</a>
                     ';
                 }elseif($usertype === "Manager") {
                     echo '
-                    <a href="/av_ojt/Project101/Manager/ManagerDashboard.php" class = "btn btn-warning btn-lg">GO BACK</a>
+                    <div class="alert alert-danger d-flex align-items-center" role="alert">
+                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                    <div>
+                      Ooops !!! , You\'re not allowed. to\'re non rawtui, bananana
+                    </div>
+                    </div> 
+                    ';
+                    echo '<br><br>';
+                    echo '
+                    <a href="/av_ojt/Project101/Manager/ManagerDashboard.php" class = "btn btn-danger btn-lg">GO BACK</a>
                     ';
                 }elseif($usertype === "Trainee") {
                     echo '
-                    <a href="/av_ojt/Project101/Users/UserDashboard.php" class = "btn btn-warning btn-lg">GO BACK</a>
+                    <div class="alert alert-danger d-flex align-items-center" role="alert">
+                    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+                    <div>
+                      Ooops !!! , You\'re not allowed. to\'re non rawtui, bananana
+                    </div>
+                    </div>
+                    ';
+                    echo '<br><br>';
+                    echo '
+                    <a href="/av_ojt/Project101/Users/UserDashboard.php" class = "btn btn-danger btn-lg">GO BACK</a>
                     ';
                 }
             ?>
