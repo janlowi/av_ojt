@@ -27,14 +27,16 @@ include '../Layouts/main-user.php';
                 
                 $query = mysqli_query($connect, $sql);
                 $totalHours = 0;
+                $remainingHours = 0 ;
                 
                 if ($query && mysqli_num_rows($query) > 0) {
                     $row = mysqli_fetch_assoc($query);
                     $totalHours = $row['total_hours'];
                     $hoursToRender = $row['hours_to_render'];
+                    $remainingHours = $hoursToRender - $totalHours;
                     $total_json = json_encode($totalHours);
                     
-                    if ($totalHours != 0 && $hoursToRender != 0) {
+                    if ($totalHours != 0 && $hoursToRender != 0 ) {
                         $percent = ($totalHours / $hoursToRender) * 100;
                     } else {
                         $totalHours = 0;
@@ -43,9 +45,9 @@ include '../Layouts/main-user.php';
                 }
                 ?>
                 <h4><span class="d-flex justify-content-center">Total Hours</span></h4>
-                <p class="card-text">Hours rendered:</p>
+                <p class="card-text">REMANING HOURS :</p>
                 <h4 id="realTime"></h4>
-                <h5 class="card-title d-flex justify-content-center"><i class="fa-regular fa-clock" style="color: var(--bs-success); font-size: 60px;"><?php echo $totalHours ?></i></h5>
+                <h5 class="card-title d-flex justify-content-center"><i class="fa-regular fa-clock" style="color: var(--bs-success); font-size: 60px;"><?php echo $remainingHours ?></i></h5>
             </div>
         </div>
     </div>
@@ -165,7 +167,6 @@ include '../Layouts/main-user.php';
 
           <h4 class= ""> Current Progress </h4>
           <div class="progress" style="height: 35px;">
-          <span class = "d-flex justify-content-end"><?php echo $hoursToRender ?></span>
           <div class="progress-bar progress-bar-striped bg-info" role="progressbar"
            style="width: <?php if($totalHours != 0 && $hoursToRender != 0 ){
             echo ($totalHours / $hoursToRender) * 100 ;
@@ -177,10 +178,12 @@ include '../Layouts/main-user.php';
            aria-valuemin="0" 
            aria-valuemax="<?php echo $hoursToRender ?>">
 
-          <span> <?php echo number_format($percent, 2, '.', '' )?> %</span> 
+          <span data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo $totalHours," ", " Hours ","||"," ", number_format($percent, 2, '.', '' )?> %"> <?php echo $totalHours," ","Hours" ," - ","||"," ",number_format($percent, 2, '.', '' )?> %</span> 
+
 
            </div>
         </div>
+
       <!-- Progress Bar Label -->
       <div id="progressbar" class="text-center mt-2">
         Progress: <?php echo number_format($percent, 2, '.', '') ?>%
