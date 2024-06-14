@@ -575,7 +575,7 @@ if (isset($_GET['trainee_profile'])){
       </div>
     </div>
   </div>
-
+  <?php include '../Layouts/realfooter.php'; ?>
  <?php
 include '../Layouts/footer.php'; 
  ?>

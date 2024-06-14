@@ -325,6 +325,7 @@ include '../Layouts/main-user.php';
 
         <!-- /toast -->
 
+<?php include '../Layouts/realfooter.php';?>
     <?php
 
 include '../Layouts/footer.php'; 

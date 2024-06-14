@@ -350,4 +350,5 @@ if(isset($_SESSION['saved_success'])){
 }
 ?>
 
+<?php include '../Layouts/realfooter.php';?>
 <?php include '../Layouts/footer.php'; ?>

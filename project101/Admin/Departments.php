@@ -111,5 +111,5 @@ include '../Layouts/main-admin.php';
 </div>
 </div>
 
-
+<?php include '../Layouts/realfooter.php'; ?>
 <?php include '../Layouts/footer.php';?>

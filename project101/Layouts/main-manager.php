@@ -60,7 +60,15 @@
     #hover a:hover {
     background-color: var( --bs-link-hover-color);
     color: var(--bs-light);
+}.footer{
+  margin-top: 40px;
+  width: 100vh;
+  height: 50px;
+  z-index:1 ;
+  background: transparent;
+
 }
+
 
   </style>
   <body>
@@ -72,10 +80,10 @@
           <div class=" bg-dark mt-2" style= " height: 100%;">
           <div class="app-brand demoh-25 d-inline-block d-flex justify-content-center mt-2">
             <a href="https://www.avegabros.com/" class="app-brand-link">
-              <span class="app-brand-logo demo d-flex justify-content-center fixed">
-               <img width= '150' height= '120' src="../assets/img/favicon/av.jpg" alt="" xlink:href="https://www.avegabros.com/" >
-              </span>
-              <span class="app-brand-text demo menu-text fw-bold ms-2 ">Avega</span>
+            <span class="app-brand-logo demo d-flex justify-content-center fixed">
+         <img width= '130' height= '100' src="../assets/img/favicon/av.jpg" alt="" xlink:href="https://www.avegabros.com/" >
+        </span>
+        <span class="app-brand-text demo menu-text fw-bold ms-2 ">avams</span>
             </a>
 
             <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -129,13 +137,24 @@
             </li>
                 <li class="menu-item mb-3 mx-3"id ="hover">
           
-                  <a href="pages-account-settings-notifications.html" class="menu-link mx-3">
+                  <a href="../Functions/aboutus.php" class="menu-link mx-3">
                   <i class='fa-solid fa-gear' style='color:var(--bs-light)'></i>
                     <div data-i18n="Notifications">About Us</div>
                   </a>
                 </li> 
             </li>
             </li>
+            </li>
+
+            <li class="menu-item mb-3 mx-3">
+            <a href="#" class="menu-link mx-3">
+            © avams
+            <script>
+                    document.write(new Date().getFullYear());
+            </script><br>
+            All Rights Reserved.
+            </a>
+            </li> 
             </ul>
           </ul>
         </aside>

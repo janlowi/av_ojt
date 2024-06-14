@@ -113,5 +113,27 @@ include '../Layouts/main-user.php';
                     </div>
                   </div>
                 </div>
+                <script>
+        function validateDates() {
+            var startDate = document.getElementById("start_date").value;
+            var endDate = document.getElementById("end_date").value;
 
+            if (startDate && endDate) {
+                if (new Date(startDate) >= new Date(endDate)) {
+                    alert("The start date must be before the end date.");
+                    document.getElementById("end_date").value = "";
+                }
+            }
+
+            if (startDate) {
+                document.getElementById("end_date").setAttribute("min", startDate);
+            }
+        }
+
+        window.onload = function() {
+            document.getElementById("start_date").addEventListener("change", validateDates);
+            document.getElementById("end_date").addEventListener("change", validateDates);
+        };
+    </script>
+<?php include '../Layouts/realfooter.php';?>
   <?php include '../Layouts/footer.php'; ?>

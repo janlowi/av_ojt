@@ -36,7 +36,7 @@ include '../Layouts/main-admin.php';
    </a>
    <br>
  <table class="table table-stripes" id ="userAttendance">
-     <thead class="bg-warning" >
+     <thead class="bg-success" >
          <tr>
              <th>Department</th>
              <th>Date</th>
@@ -111,6 +111,7 @@ include '../Layouts/main-admin.php';
 
          </table>
  </div>
+<?php include '../Layouts/realfooter.php';?>
 <?php  include '../Layouts/footer.php';?> 
 <script>
 new DataTable('#userAttendance', {

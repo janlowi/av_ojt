@@ -106,4 +106,5 @@ if(isset($_SESSION['success'])){
     <!-- /toast -->
 <script>
 </script>
+    <?php include '../Layouts/realfooter.php';?>
 <?php include '../Layouts/footer.php';?>

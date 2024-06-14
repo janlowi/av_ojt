@@ -46,7 +46,7 @@ $department_id = $_SESSION['department_id'];
                        
                 <h3 class="card-header text-success">USERS UNDER IT-DEPT</h3>
                 <div class=" table-responsive    text-nowrap">
-                  <table class="table table-dark">
+                  <table class="table table-dark" id = "departmentUsers">
                     <thead>
                 <tr>
                     <th scope="col">Id</th>
@@ -112,9 +112,19 @@ $department_id = $_SESSION['department_id'];
               <!--/ Bootstrap Dark Table -->
               </div>                            
   </div>
+<script src="../Assets/js/jquery.js"></script>
+<script src="../Assets/js/datatables.js"></script>
+<script>
+$(document).ready( function () {
+    $('#departmentUsers').DataTable({
+        responsive: true,
+        order: [[0, 'desc']] 
+    });
+});
+</script> 
 
 
-
+    <?php include '../Layouts/realfooter.php';?>
     <?php
 
 include '../Layouts/footer.php'; 

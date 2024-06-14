@@ -134,4 +134,5 @@ if(isset($_SESSION['success'])){
     }
     ?>
     <!-- /toast -->
+    <?php include '../Layouts/realfooter.php';?>
     <?php include '../Layouts/footer.php';?>

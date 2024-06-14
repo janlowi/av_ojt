@@ -59,6 +59,10 @@ include '../Layouts/main-admin.php';
 
                     if ($result && mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_assoc($result)) {
+                      $timestamp = $row['timestamp'];
+                      $dos = $row['dos'];
+                      $doe = $row['doe'];
+                      $departments = $row['departments'];
                         $summary = $row['summary'];
                         $accomplishment = $row['accomplishment'];
                         $challenges = $row['challenges'];
@@ -85,4 +89,5 @@ include '../Layouts/main-admin.php';
     </div> <!-- End of card -->
 </div>
                
+<?php include '../Layouts/realfooter.php';?>
 <?php include '../Layouts/footer.php'; ?>

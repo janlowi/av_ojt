@@ -11,14 +11,11 @@ include '../Layouts/main-admin.php';
 ?>     
 
 </style>
-
-
    <!-- Contextual Classes -->
-  
    <div class="card position-relative   ">
                 <div class="table-responsive text-nowrap">
-                  <table class="datatables-ajax table table-bordered my-2" id="dataReport">
-                    <thead class="bg-secondary text-light">
+                  <table class="datatables-ajax table table-dark my-2" id="dataReport">
+                    <thead>
                       <tr>
                         <th>OJT ID</th>
                         <th>Name</th>

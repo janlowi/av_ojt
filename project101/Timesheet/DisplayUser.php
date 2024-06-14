@@ -87,6 +87,7 @@ include '../Layouts/main-user.php';
 
                         </table>
                 </div>
+<?php include '../Layouts/realfooter.php';?>
 <?php  include '../Layouts/footer.php';?> 
 <script>
 new DataTable('#userAttendance', {

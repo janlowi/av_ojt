@@ -204,7 +204,10 @@ include '../Layouts/main-admin.php';
     </table>               
 </div>
 
-<?php include '../Layouts/footer.php'; ?>
+<?php include '../Layouts/realfooter.php';?>
+<?php
+include '../Layouts/footer.php'; 
+?>
 <script>
 
 $(document).ready(function(){

@@ -238,4 +238,5 @@ $(document).ready( function () {
 
 } );
 </script> 
+<?php include '../Layouts/realfooter.php';?>
 <?php include '../Layouts/footer.php';?>

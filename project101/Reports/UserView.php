@@ -45,8 +45,11 @@ include '../Layouts/main-user.php';
 
                 $sql = "SELECT rp.*,
                                 us.id,
+                                dp.id,
+                                dp.departments,
                                 tr.ojt_id
                         FROM reports rp
+                        INNER JOIN departments dp ON dp.id = rp.department_id
                         INNER JOIN trainees tr ON tr.user_id=rp.user_id
                         INNER JOIN users us ON rp.user_id= us.id
                         WHERE  rp.id=? 
@@ -59,11 +62,20 @@ include '../Layouts/main-user.php';
 
                 if ($result && mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_assoc($result)) {
+                        
+                        $timestamp = $row['timestamp'];
+                        $dos = $row['dos'];
+                        $doe = $row['doe'];
+                        $departments = $row['departments'];
                         $summary = $row['summary'];
                         $accomplishment = $row['accomplishment'];
                         $challenges = $row['challenges'];
                         $learnings = $row['learnings'];
                             echo '<div class="container">';
+                            echo "<div class='section'><strong><label for='summary'>Summary:</label></strong><p>$timestamp</p></div>";
+                            echo "<div class='section'><strong><label for='summary'>Summary:</label></strong><p>$dos</p></div>";
+                            echo "<div class='section'><strong><label for='summary'>Summary:</label></strong><p>$doe</p></div>";
+                            echo "<div class='section'><strong><label for='summary'>Summary:</label></strong><p>$departments</p></div>";
                             echo "<div class='section'><strong><label for='summary'>Summary:</label></strong><p>$summary</p></div>";
                             echo "<div class='section'><strong><label for='accomplishments'>Accomplishments:</label></strong><p>$accomplishment</p></div>";
                             echo "<div class='section'><strong><label for='challenges'>Challenges:</label></strong><p>$challenges</p></div>";
@@ -81,4 +93,5 @@ include '../Layouts/main-user.php';
     </div> <!-- End of card -->
 </div>
 
+<?php include '../Layouts/realfooter.php';?>
 <?php include '../Layouts/footer.php'; ?>

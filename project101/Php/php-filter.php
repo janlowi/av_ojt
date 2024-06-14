@@ -45,7 +45,8 @@ if (isset($_POST['start_date'], $_POST['end_date'], $_POST['department'] )) {
              AND us.status = 'Active'";
 
 $result_trainees = mysqli_query($connect, $sql_trainees);
-
+    $total_user_hours = 0;
+     $total_rate = 0;
 if ($result_trainees && mysqli_num_rows($result_trainees) > 0) {
  while ($row_trainee = mysqli_fetch_assoc($result_trainees)) {
      echo "<tr>";
@@ -54,6 +55,7 @@ if ($result_trainees && mysqli_num_rows($result_trainees) > 0) {
      echo "<td class='bg-light text-dark'>" . $row_trainee['department_name'] . "</td>";
 
      $user_total_hours = 0 ;
+
      foreach ($dateColumns as $dateColumn) {
         $date = date("Y-m-d", strtotime($dateColumn));
         $traineeId = $row_trainee['user_id'];
@@ -70,6 +72,9 @@ if ($result_trainees && mysqli_num_rows($result_trainees) > 0) {
             $total_hours_row = mysqli_fetch_assoc($result_hours);
             $total_hours = $total_hours_row['total_hours'];
             $user_total_hours += $total_hours;
+
+
+          
             echo "<td class='bg-light text-dark'>" . $total_hours . "</td>";
         } else {
             echo "<td class='bg-light text-dark'>0</td>";
@@ -78,11 +83,24 @@ if ($result_trainees && mysqli_num_rows($result_trainees) > 0) {
 
   
     echo "<td class='bg-dark text-light'>" . $user_total_hours . "</td>";
-    $rate_per_hour = number_format($user_total_hours * $row_trainee['rph'], 2);
-    echo "<td class='bg-dark text-light'>" . $rate_per_hour . "</td>";  
-    
+    $rate_per_hour = $user_total_hours * $row_trainee['rph'];
+    echo "<td class='bg-dark text-light'>" . number_format($rate_per_hour, 2 ) . "</td>";  
     echo "</tr>";
+    $total_user_hours += $user_total_hours;
+    $total_rate += intval($rate_per_hour);
 }
+echo "<tr>";
+echo "<td></td><td></td><td></td>"; // Empty cells for ID, Name, and Department
+foreach ($dateColumns as $dateColumn) {
+    echo "<td></td>"; // Empty cells for date columns
+}
+echo "<td class='bg-dark text-light'>" . $total_user_hours . "</td>";
+echo "<td class='bg-dark text-light'>" . number_format($total_rate, 2) . "</td>";
+echo "</tr>";
+
+echo "<tr><td colspan='" . (count($dateColumns) + 6) . "'></td></tr>"; // Empty row for spacing
+
+
 } else {
 echo "No trainees found for the selected department.";
 }
@@ -92,8 +110,12 @@ echo "No data found for the selected date range.";
 } else {
 echo "Invalid request.";
 }
+
+
 ?>
 <script>
+$(document).ready(function(){
+    $.fn.dataTable.ext.errMode = 'none';
 new DataTable('#filteredData', {
     layout: {
         topStart: {
@@ -119,6 +141,9 @@ new DataTable('#filteredData', {
                 }
             ]
         }
-    }
+    },
+    responsive: true,
+    order: [[0, 'desc']] 
+});
 });
 </script>

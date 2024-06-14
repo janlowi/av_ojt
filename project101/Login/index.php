@@ -159,54 +159,57 @@ include "../Layouts/main.php";
 
         }
         .copyright-container p {
-        color: white;
+        margin-top: 80px;
+        color: #b4bdc6;
     }
 
     </style>
 
 
 <div class="form-container ">
-                                                                                                        <form action="../Php/php-login.php" method="POST">
-                                                                                                        
-                                                                                                        <div class="login-container">
-                                                                                                            <div class="img-cont  bg-dark">
-                                                                                                                
-                                                                                                            <div class="image"><img src="avega.png" alt="Logo" width="110" height="80"></div> 
-                                                                                                                <div class="welcome-container text-light">
-                                                                                                                    <p>ATTENDANCE MONITORING SYSTEM</p>
-                                                                                                                </div>
-                                                                                                                <div class=" text-light fw-medium mt-5">
-                                                                                                                    <p>Effortlessly track attendance, monitor progress, and foster communication. Boost productivity, save time, and ensure accountability like never before. Sign in today and redefine efficiency!</p>
-                                                                                                                </div>
-                                                                                                                <div class="abisc-container text-light fw-medium">    
-                                                                                                                                                                                                
-                                                                                                                    </div>
-                                                                                                                    <p> <?php  ?> <div class="copyright-container">
-                                                                                                                    <p>&copy; <?php echo date("Y"); ?> Designed by AVega IT OJT</p>
-                                                                                                                </div> </p>
-                                                                                                                </div>
-                                                                                                                <div class="form-container ">
-                                                                                                                                            
-                                                                                                            </div>
-                                                                                                            <div class="sign"><h2>Sign in</h2></div>
+     <form action="../Php/php-login.php" method="POST">
+     
+     <div class="login-container">
+         <div class="img-cont  bg-dark">
+             
+         <div class="image"><img src="avega.png" alt="Logo" width="110" height="80"></div> 
+             <div class="welcome-container text-light">
+                 <p>avams</p>
+             </div>
+             <div class=" text-light fw-medium mt-5">
+                 <p>This is an attendance and weekly reports monitoring system . Developed to provide a real-time tracking of Avega OJTs 
+                    attendance and reports.
+                 </p>
+             </div>
+             <div class="abisc-container text-light fw-medium">    
+                                                                                             
+                 </div>
+                 <p> <?php  ?> <div class="copyright-container">
+                 <p>&copy; <?php echo date("Y"); ?> Developed by AVega IT OJTs</p>
+             </div> </p>
+             </div>
+             <div class="form-container ">
+                                         
+         </div>
+         <div class="sign"><h2>Sign in</h2></div>
 
-                                                                                                        
-                                                                                                            <div class="login-form">
-                                                                                                                <div class="input-container">
-                                                                                                    <input type="email" id="email" name="email" placeholder="Email" >
-                                                                                                    <i class="fa fa-envelope icon"></i>
-                                                                                                    </div>
+     
+         <div class="login-form">
+             <div class="input-container">
+ <input type="email" id="email" name="email" placeholder="Email" >
+ <i class="fa fa-envelope icon"></i>
+ </div>
 
-                                                                                                    <div class="input-container">
-                                                                                                    <input type="password" id="password" name="password" placeholder="Password" >
-                                                                                                    <i class="fa fa-lock icon"></i>
-                                                                                                    </div>
+ <div class="input-container">
+ <input type="password" id="password" name="password" placeholder="Password" >
+ <i class="fa fa-lock icon"></i>
+ </div>
 
-                                                                                                    <div class=" d-flex justify-content-center col-10 mx-auto">
-                                                                                                                 <button type="submit" name =""class="btn btn-dark">Login</button>
-                                                                                                    </div>
+ <div class=" d-flex justify-content-center col-10 mx-auto">
+              <button type="submit" name =""class="btn btn-dark">Login</button>
+ </div>
                                                              
-                                                                                                </form>
+ </form>
  </div>
 
 

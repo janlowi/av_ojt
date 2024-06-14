@@ -6,6 +6,8 @@ checkLoggedIn();
 // checkUserType();
 $title="Trainees";
 include '../Layouts/main-admin.php'; 
+
+
  include '../Php/db_connect.php';
 
 
@@ -15,8 +17,8 @@ include '../Layouts/main-admin.php';
  <div class="card ">              
          <h5 class="card-header">Trainees</h5>
          <div class="table-responsive text-nowrap">
-         <table class="table table-bordered my-2" id="dataTrainee">
-             <thead class="bg-warning ">
+         <table class="table table-dark my-2" id="dataTrainee">
+             <thead >
          <tr>
              <th >OJT ID</th>
              <th>Name</th>
@@ -93,7 +95,9 @@ include '../Layouts/main-admin.php';
      </div>
     </td>
  </tr>
-<?php }} ?>
+<?php }
+} 
+?>
 
 <script src="../Assets/js/jquery.js"></script>
 <script src="../Assets/js/datatables.js"></script>

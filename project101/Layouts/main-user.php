@@ -74,7 +74,16 @@
 }
 .read-notification {
     color: var(--bs-danger);
+}.footer{
+  margin-top: 40px;
+  width: 100vh;
+  height: 50px;
+  z-index:1 ;
+  background: transparent;
+
 }
+
+
 
 </style>
   <body>
@@ -88,9 +97,9 @@
     <div class="app-brand demoh-25 d-inline-block d-flex justify-content-center mt-2">
       <a href="https://www.avegabros.com/" class="app-brand-link">
         <span class="app-brand-logo demo d-flex justify-content-center fixed">
-         <img width= '150' height= '120' src="../assets/img/favicon/av.jpg" alt="" xlink:href="https://www.avegabros.com/" >
+         <img width= '130' height= '100' src="../assets/img/favicon/av.jpg" alt="" xlink:href="https://www.avegabros.com/" >
         </span>
-        <span class="app-brand-text demo menu-text fw-bold ms-2 ">Avega</span>
+        <span class="app-brand-text demo menu-text fw-bold ms-2 ">avams</span>
       </a>
 
       <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -110,11 +119,11 @@
               <div data-i18n="Analytics">Dashboard</div>
             </a>
           </li>
-          <li class="menu-item  mb-3 mx-3" id="hover">
+          <!-- <li class="menu-item  mb-3 mx-3" id="hover">
             <a href="../Users/UserProfile.php" class="menu-link">
               <div data-i18n="Analytics">Profile</div>
             </a>
-          </li>
+          </li> -->
           <li class="menu-item mb-3 mx-3 " id="hover">
             <a href="../Reports/DisplayReports.php" class="menu-link">
               <div data-i18n="Analytics">Weekly Reports</div>
@@ -131,15 +140,26 @@
      <!-- Misc -->
      <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
       </li>
-          <li class="menu-item  mb-3 mx-3"id ="hover">
+          <li class="menu-item  mb-3 mx-3">
     
-            <a href="pages-account-settings-notifications.html" class="menu-link ">
+            <a href="../Functions/aboutus.php" class="menu-link ">
             <i class='fa-solid fa-gear' style='color: var(--bs-mute)'></i>
               <div data-i18n="Notifications">About Us</div>
             </a>
           </li> 
       </li>
       </li>
+      </li>
+
+      <li class="menu-item mb-3 mx-3"id ="hover">
+      <a href="#" class="menu-link mx-3">
+      © avams
+      <script>
+              document.write(new Date().getFullYear());
+      </script><br>
+      All Rights Reserved.
+      </a>
+      </li> 
       </ul>
     </ul>
     </div>
@@ -359,6 +379,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
    <div class="container-xxl flex-grow-1 container-p-y">
      <div class="row">
+
 <!-- content -->
 
 

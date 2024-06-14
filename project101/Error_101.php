@@ -34,7 +34,7 @@ $usertype = $_SESSION['usertype'];
     <div class="alert alert-danger d-flex align-items-center" role="alert">
                     <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
                     <div class="align-items-center">
-                    Oopos !!! , to're non rawtui !! bananana !!!<br>
+                    Ooops !!! , to're non rawtui !! bananana !!!<br>
                      <small>Ooops !!! , You're not allowed. bananana !!!</small>
                     </div>
                     </div>

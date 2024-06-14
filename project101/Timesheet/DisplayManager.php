@@ -191,6 +191,7 @@ include '../Layouts/main-manager.php';
     </table>               
 </div>
 
+<?php include '../Layouts/realfooter.php';?>
 <?php include '../Layouts/footer.php'; ?>
 <script>
 

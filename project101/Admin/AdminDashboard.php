@@ -521,7 +521,7 @@ function disableFields(formId) {
                                        
                 <h5 class="card-header">Users</h5>
                 <div class=" table-responsive    text-nowrap">
-                  <table class="table table-dark">
+                  <table class="table table-dark" id="allUsers">
                     <thead>
                 <tr>
                     <th scope="col">Id</th>
@@ -590,15 +590,23 @@ function disableFields(formId) {
 ?>
                       </tbody>
                   </table>
-
-              <!--/ Bootstrap Dark Table -->
-              </div>                            
+ 
+<script src="../Assets/js/jquery.js"></script>
+<script src="../Assets/js/datatables.js"></script>
+<script>
+$(document).ready( function () {
+    $('#allUsers').DataTable({
+        responsive: true,
+        order: [[0, 'desc']] 
+    });
+});
+</script> 
+              </div>      
+              
   </div>
-
-
-
+  <?php include '../Layouts/realfooter.php'; ?>
     <?php
-
 include '../Layouts/footer.php'; 
 
  ?>
+ 
