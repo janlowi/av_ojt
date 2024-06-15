@@ -89,16 +89,16 @@ include '../Layouts/main-user.php';
                                                           <br>
 
                                                           <label for="summary">Summary or Scope of Work:</label>
-                                                          <textarea id="summary" name="summary" rows="4" required class="form-control" ><?= $row['summary']?></textarea>
+                                                          <textarea minlength="30" id="summary" name="summary" rows="4" required class="form-control" ><?= $row['summary']?></textarea>
 
                                                           <label for="accomplishments">Accomplishments:</label><br>
-                                                          <textarea id="accomplishments" name="accomplishments" rows="4" class="form-control" ><?= $row['accomplishment']?></textarea>
+                                                          <textarea minlength="30" id="accomplishments" name="accomplishments" rows="4" class="form-control" ><?= $row['accomplishment']?></textarea>
 
                                                           <label for="challenges">Challenges:</label>
-                                                          <textarea id="challenges" name="challenges" rows="4" class="form-control"><?= $row['challenges']?></textarea>
+                                                          <textarea minlength="30" id="challenges" name="challenges" rows="4" class="form-control"><?= $row['challenges']?></textarea>
 
                                                           <label for="learning">Learning:</label>
-                                                          <textarea id="learning" name="learning" rows="4" class="form-control" ><?= $row['learnings']?></textarea>
+                                                          <textarea minlength="30" id="learning" name="learning" rows="4" class="form-control" ><?= $row['learnings']?></textarea>
                                                           <input type="text" name="report_id" value="<?= $row_id ;?>" hidden>
                                                           <input type="submit" name="update_report" value="Submit" class="btn btn-dark">
                                                       </form>
