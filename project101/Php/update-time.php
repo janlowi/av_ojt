@@ -32,7 +32,8 @@ mysqli_query($connect, $disable_auto_update_sql);
 
             if($query1==1){
                 $_SESSION['success']= "User ID: $user_id has been clocked out successfully";
-                header('location: ../Timesheet/DisplayAdmin.php');
+                $redirect_url = ($usertype === 'Admin') ? '../Notifications/NotificationAdmin.php' : '../Notifications/NotificationManager.php';
+                header("location: $redirect_url");
                 exit();
             }
         }

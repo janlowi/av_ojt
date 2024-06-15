@@ -1,4 +1,12 @@
-
+<?php 
+    include '../Php/db_connect.php';
+    $user_department = $_SESSION['department_id'];
+    $department_id=$_SESSION['department_id'];
+    $userId = $_SESSION['user_id'];
+    $sql = "SELECT * FROM notifications WHERE department_id = '$user_department' AND comment_status = 1";
+    $result=$connect->query($sql);
+    $result_count = $result->num_rows; 
+?>
 <!DOCTYPE html>
 
 <html
@@ -60,6 +68,8 @@
     #hover a:hover {
     background-color: var( --bs-link-hover-color);
     color: var(--bs-light);
+}.read-notification {
+    color: var(--bs-danger);
 }.footer{
   margin-top: 40px;
   width: 100vh;
@@ -190,7 +200,7 @@
                 <!-- Place this tag where you want the button to render. -->
 
                 <!-- time -->
-                <li class="nav-item lh-7 me-5">
+                <li class="nav-item lh-7 me-3">
                     
                                            
                                                       
@@ -202,10 +212,105 @@
                                                           <span  id ="currentTime">	</span>
                                                     
                                                           </div>
-
+                                                          </li>
                             <!-- Show current time -->
                         <script src="../Assets/js/dateTime.js"> </script>
                       <!-- Show current time -->
+
+<div class="dropdown read mx-3">
+<i class="fa-regular fa-bell" style="font-size: 22px;" id="notification" data-bs-toggle="dropdown" aria-expanded="false">
+<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger" id = "count" style="font-size:12px;"> 
+<?php  $result=$connect->query($sql);
+             $result=$connect->query($sql);
+            if($result_count = $result->num_rows) {
+              echo $result_count;
+            }else{
+              echo '
+                  <style>
+                      #count{
+                        display:none;
+                      }
+                  </style>
+              ';
+            }
+            ?> </span>
+</i>
+<ul class="dropdown-menu" id = "dropdown" aria-labelledby="notification"  aria-expanded="false">
+<?php 
+$sql_all = "SELECT * FROM notifications  WHERE department_id = '$user_department' ORDER BY comment_status DESC, id DESC LIMIT 5";
+$result_all = $connect->query($sql_all);
+if ($result_all->num_rows > 0) {
+    while ($message = $result_all->fetch_assoc()) {
+        $messageId = $message['id'];
+        $messageStatus = $message['comment_status'];
+        $modal = 'modal_'.$message['id'];
+
+        // Check if the status is 1 (read), then set the class accordingly
+        $spanClass = ($messageStatus == 1) ? 'read-notification' : '';
+
+        // Output the list item with the appropriate span class
+        ?>
+        <li>
+            <span class="dropdown-item <?=$spanClass?>" data-bs-toggle="modal" data-bs-target="#<?=$modal?>">
+                <input type="text" value="<?=$messageId?>" hidden>
+                <strong class="pe-auto strong"><?=$message['comment_subject']?></strong><br>
+                <small class="pe-auto small"><?=substr($message['comment_text'], 0, 25)?>...</small>
+            </span>
+          <div class="dropdown-divider"></div>
+
+                <!-- Modal -->
+                <div class="modal fade overflow-visible" id="<?=$modal?>"  data-bs-backdrop="false" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
+                  <div class="modal-dialog modal-dialog-centered ">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel"> <?=$message['comment_subject']?></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <div class="modal-body">
+                      <p><?=$message['timestamp']?> </p><br>
+                      <?=$message['comment_text']?>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <?php if($message['comment_status']== 1 ) {?>
+                        <a href="../Php/php-notification.php?mark_as_read=<?= $message['id'] ?>" class="btn btn-info">Mark as read</a>
+                        <?php } else { ?>
+                          <span class="badge rounded-pill bg-success">Checked</span>
+                          <?php } ?>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                </li> 
+            <?php
+            }
+          }
+      ?>
+   
+  </ul>
+</div>
+<script>
+  document.querySelector('.dropdown-menu').addEventListener('click', function(event) {
+   event.stopPropagation();
+});
+document.addEventListener('DOMContentLoaded', function() {
+    const messageStatus = <?= json_encode($messageStatus) ?>;
+    console.log(messageStatus);
+
+    if (messageStatus === 1) {
+      const strongElements = document.querySelectorAll('.dropdown-menu strong');
+      const smallElements = document.querySelectorAll('.dropdown-menu small');
+      
+      strongElements.forEach(function(strong) {
+        strong.classList.add('notif-info');
+      });
+
+      smallElements.forEach(function(small) {
+        small.classList.add('notif-info');
+      });
+    }
+  });
+</script>
                   </li>
                 <li class="nav-item lh-1 me-3">
                   <a

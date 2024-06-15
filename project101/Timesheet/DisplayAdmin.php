@@ -153,6 +153,8 @@ include '../Layouts/main-admin.php';
             
                 ?>
             <th class='bg-dark text-light'   >Total</th>
+            <th class='bg-dark text-light'   >Rate</th>
+            <th class='bg-dark text-light'   >Allowance</th>
             </tr>
         </thead>
         <tbody>
@@ -169,7 +171,7 @@ include '../Layouts/main-admin.php';
                 AND status = 'Active'
                 ";
                 $result_trainees = mysqli_query($connect, $sql_trainees);
-
+                $allowance = 0;
           if ($result_trainees && mysqli_num_rows($result_trainees) > 0) {
               while ($row_trainee = mysqli_fetch_array($result_trainees)) {
                   $user_total_hours = 0;
@@ -196,6 +198,11 @@ include '../Layouts/main-admin.php';
                     }
                 }
                 echo "<td  class='bg-dark text-light'>" .$user_total_hours. "</td>";
+                echo "<td  class='bg-dark text-light'>" .$row_trainee['rph']. "</td>";
+
+                $allowance = $user_total_hours*$row_trainee['rph'];
+            echo "<td  class='bg-dark text-light'>" .number_format($allowance, 2). "</td>";
+            echo "</tr>";
                 echo "</tr>";
             }
         }

@@ -7,6 +7,7 @@ checkLoggedIn();
 // checkUserType();
 include '../Layouts/main-manager.php'; 
  include '../Php/db_connect.php';
+ $user_department = $_SESSION['department_id'];
 ?>
 <div class="col-2 col-12" >
     <div class="card p-4">
@@ -26,7 +27,7 @@ include '../Layouts/main-manager.php';
         <div class="col mx-5">
             <h5>Select Recipients</h5>
             <?php 
-    $sql = "SELECT * FROM departments ";
+    $sql = "SELECT * FROM departments WHERE id = '$user_department'";
     $result = $connect->query($sql);
 
     if($result->num_rows > 0){

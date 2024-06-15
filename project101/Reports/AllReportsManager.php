@@ -24,6 +24,7 @@ $department_id = $_SESSION['department_id'];
                         <th>Name</th>
                         <th>Profile</th>
                         <th>Department</th>
+                        <th>Office</th>
                         <th>University</th>
                         <th>Actions</th>
                       </tr>
@@ -70,6 +71,7 @@ $department_id = $_SESSION['department_id'];
                   </div>
               </td>
               <td><span class="badge bg-label-primary me-1"> <?=$row['departments'] ?> </span></td>
+              <td> <?=$row['office_assigned'] ?> </td>
               <td><?=  $row['university'] ?></td>
               <td>
               <a class="dropdown-item" href="../Reports/ViewReportManager.php?view_report=<?=$row['id']?>"><button class= "btn btn-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="View reports"><i class='fa fa-files-o'></i></button></a>

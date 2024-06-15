@@ -83,7 +83,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Validate form fields
         if( !empty( $ojtid)&&     
             !empty( $firstname)&&
-            !empty( $middlename)&&
             !empty( $lastname)&&
             !empty( $dob)&&
             !empty( $sex)&&
@@ -247,7 +246,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                       . '<a href="http://localhost:8080/av_ojt/project101/Login/index.php" style="background-color: #4CAF50; color: white; padding: 15px 25px; text-align: center; text-decoration: none; display: inline-block; border-radius: 10px;">Login</a>';
         if (
             !empty($firstname) &&   
-            !empty($middlename) &&
             !empty($lastname) &&
             !empty($dob) &&
             !empty($sex) &&
@@ -380,7 +378,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                   . '<a href="http://localhost:8080/av_ojt/project101/Login/index.php" style="background-color: #4CAF50; color: white; padding: 15px 25px; text-align: center; text-decoration: none; display: inline-block; border-radius: 10px;">Login</a>';
     if (
         !empty($firstname) &&   
-        !empty($middlename) &&
         !empty($lastname) &&
         !empty($dob) &&
         !empty($sex) &&

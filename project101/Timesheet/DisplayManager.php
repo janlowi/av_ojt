@@ -7,7 +7,7 @@ checkLoggedIn();
 $title = "Attendance Record";
 include '../Php/db_connect.php';
 include '../Layouts/main-manager.php'; 
-
+$admin_department= $_SESSION['department_id'];
 ?>
 
   
@@ -36,6 +36,7 @@ include '../Layouts/main-manager.php';
             AND DATE(t2.timestamp) = DATE(t1.timestamp) 
       )
       AND DATE(t1.timestamp) != CURDATE()
+      AND us.department_id = '$admin_department'
             ";
     $result = mysqli_query($connect, $sql);
     
@@ -50,7 +51,7 @@ include '../Layouts/main-manager.php';
                 $timestamp = $row['timestamp'];
                 $department_id = $row['department_id'];
 
-                $sql_names = "SELECT * FROM users WHERE id= '$user_id'";
+                $sql_names = "SELECT * FROM users WHERE id= '$user_id' ";
                 $result_names = mysqli_query($connect, $sql_names);
                 if ($result_names && mysqli_num_rows($result_names) > 0) {
                     while ($row_names = mysqli_fetch_assoc($result_names)) {
@@ -139,7 +140,9 @@ include '../Layouts/main-manager.php';
                 }
             
                 ?>
-            <th class='bg-dark text-light'   >Total</th>
+            <th class='bg-dark text-light'   >Total Hours</th>
+            <th class='bg-dark text-light'   >Rate</th>
+            <th class='bg-dark text-light'   >Allowance</th>
             </tr>
         </thead>
         <tbody>
@@ -154,9 +157,10 @@ include '../Layouts/main-manager.php';
                 INNER JOIN departments dp ON us.department_id=dp.id
                 WHERE us.user_type = 'Trainee'
                 AND status = 'Active'
+                AND us.department_id = '$admin_department'
                 ";
                 $result_trainees = mysqli_query($connect, $sql_trainees);
-
+                $allowance = 0;
           if ($result_trainees && mysqli_num_rows($result_trainees) > 0) {
               while ($row_trainee = mysqli_fetch_array($result_trainees)) {
                   $user_total_hours = 0;
@@ -183,6 +187,10 @@ include '../Layouts/main-manager.php';
                     }
                 }
                 echo "<td  class='bg-dark text-light'>" .$user_total_hours. "</td>";
+                echo "<td  class='bg-dark text-light'>" .$row_trainee['rph']. "</td>";
+
+                    $allowance = $user_total_hours*$row_trainee['rph'];
+                echo "<td  class='bg-dark text-light'>" .number_format($allowance, 2). "</td>";
                 echo "</tr>";
             }
         }

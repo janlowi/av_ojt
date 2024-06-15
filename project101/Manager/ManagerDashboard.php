@@ -44,7 +44,7 @@ $department_id = $_SESSION['department_id'];
 <div class="card ">
 <div class="card-body">
                        
-                <h3 class="card-header text-success">USERS UNDER IT-DEPT</h3>
+                <h3 class="card-header text-success">USERS UNDER <?=    $department_name ?></h3>
                 <div class=" table-responsive    text-nowrap">
                   <table class="table table-dark" id = "departmentUsers">
                     <thead>
@@ -76,13 +76,13 @@ $department_id = $_SESSION['department_id'];
 
      ?>
                      <tr>
-                        <td><?= $row ['id']; ?></td>
-                        <td><?=  $row ['last_name'].","." ". $row['first_name']." ". $row['middle_name']; ?></td>;                     
-                        <td><?= $row ['sex']; ?></td>
-                        <td><?= $row ['departments']; ?></td>
-                        <td><?= $row ['office_assigned']; ?></td>
-                        <td><?= $row ['email']; ?></td>
-                        <td><?= $row ['user_type']; ?></td>
+                        <td><?= $row ['id'] ?></td>
+                        <td><?=  $row ['last_name'].","." ". $row['first_name']." ". $row['middle_name'] ?></td>;                     
+                        <td><?= $row ['sex'] ?></td>
+                        <td><?= $row ['departments'] ?></td>
+                        <td><?= $row ['office_assigned'] ?></td>
+                        <td><?= $row ['email'] ?></td>
+                        <td><?= $row ['user_type'] ?></td>
                        <td><?php  
                             $status = $row ['status'];
                             if($status==='Active') {

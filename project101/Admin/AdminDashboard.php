@@ -70,7 +70,7 @@ error_reporting (0);
                                                                </div>
                                                                <div class="col-md-6">
                                                                        <label for="inputMiddlename" class="form-label">Middlename</label>
-                                                                       <input type="text" class="form-control" id="inputMiddlename"name = "Middlename" required>
+                                                                       <input type="text" class="form-control" id="inputMiddlename"name = "Middlename" >
                                                                </div>
                                                                <div class="col-md-6">
                                                                        <label for="inputLastname" class="form-label">Lastname</label>
@@ -188,7 +188,7 @@ error_reporting (0);
                                                                         </div>
                                                                         <div class="col-md-6">
                                                                         <label for="inputMiddlename" class="form-label">Middlename</label>
-                                                                        <input type="text" class="form-control" id="inputMiddlename"name = "Middlename" required>
+                                                                        <input type="text" class="form-control" id="inputMiddlename"name = "Middlename" >
                                                                         </div>
                                                                         <div class="col-md-6">
                                                                         <label for="inputLastname" class="form-label">Lastname</label>
@@ -275,7 +275,7 @@ error_reporting (0);
                                                                         </div>
                                                                         <div class="col-md-6">
                                                                         <label for="inputMiddlename" class="form-label">Middlename</label>
-                                                                        <input type="text" class="form-control" id="inputMiddlename"name = "Middlename" required>
+                                                                        <input type="text" class="form-control" id="inputMiddlename"name = "Middlename" >
                                                                         </div>
                                                                         <div class="col-md-6">
                                                                         <label for="inputLastname" class="form-label">Lastname</label>
@@ -366,14 +366,14 @@ error_reporting (0);
     if (userType === 'Admin') {
         document.getElementById('traineeForm').style.display = 'none';
         document.getElementById('adminForm').style.display = 'block';
-        document.getElementById('managerForm').style.display = 'block';
+        document.getElementById('managerForm').style.display = 'none';
         disableFields('traineeForm'); 
         disableFields('managerForm'); 
         enableFields('adminForm');   
         
     } else if (userType === 'Trainee') {
         document.getElementById('traineeForm').style.display = 'block';
-        document.getElementById('managerForm').style.display = 'block';
+        document.getElementById('managerForm').style.display = 'none';
         document.getElementById('adminForm').style.display = 'none';
         enableFields('traineeForm');  
         disableFields('managerForm'); 
@@ -580,8 +580,11 @@ function disableFields(formId) {
                             ?>
                             </td>
                                 <td>
+                        <div class="col-md-12">
                             <a class="item" href="../Admin/Update.php? update=<?= $row ['id']; ?>"
                                 ><button class= "btn btn-info">Update</button></i></a>
+                            <a class="btn btn-danger" href="../Php/php-changepass.php?reset_pass=<?= $user_id ?>">Reset Password</a>
+                        </div>
                         </td>
                       </tr> 
 <?php
