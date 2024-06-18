@@ -78,7 +78,14 @@
   z-index:1 ;
   background: transparent;
 
-}
+} 
+ .valid{
+  color: var(--bs-success);
+
+ }
+ #message{
+  display: none;
+ }
 
   </style>
   <body>
@@ -201,21 +208,19 @@
 
         <!-- time -->
         <li class="nav-item lh-7 me-3">
-            
-                                   
-                                              
-                                                  <div class="display-date  ">
-                                                    <span id="day">day</span>,
-                                                    <span id="daynum" >00</span>
-                                                    <span id="month" >month</span>
-                                                    <span id="year" >0000</span>
-                                                  <span  id ="currentTime">	</span>
-                                            
-                                                  </div>
+                                                
+      <div class="display-date  ">
+        <span id="day">day</span>,
+        <span id="daynum" >00</span>
+        <span id="month" >month</span>
+        <span id="year" >0000</span>
+      <span  id ="currentTime">	</span>
+
+      </div>
 </li>
-                    <!-- Show current time -->
-                <script src="../Assets/js/dateTime.js"> </script>
-              <!-- Show current time -->
+      <!-- Show current time -->
+  <script src="../Assets/js/dateTime.js"> </script>
+ <!-- Show current time -->
 
 
 <div class="dropdown read mx-3">
@@ -291,26 +296,10 @@ if ($result_all->num_rows > 0) {
   </ul>
 </div>
 <script>
+
   document.querySelector('.dropdown-menu').addEventListener('click', function(event) {
    event.stopPropagation();
 });
-document.addEventListener('DOMContentLoaded', function() {
-    const messageStatus = <?= json_encode($messageStatus) ?>;
-    console.log(messageStatus);
-
-    if (messageStatus === 1) {
-      const strongElements = document.querySelectorAll('.dropdown-menu strong');
-      const smallElements = document.querySelectorAll('.dropdown-menu small');
-      
-      strongElements.forEach(function(strong) {
-        strong.classList.add('notif-info');
-      });
-
-      smallElements.forEach(function(small) {
-        small.classList.add('notif-info');
-      });
-    }
-  });
 </script>
           </li>
         <li class="nav-item lh-1 me-3">
@@ -345,15 +334,68 @@ document.addEventListener('DOMContentLoaded', function() {
               </a>
             </li>
             <li>
-                        <div class="dropdown-divider"></div>
-                      </li>
-                      <li>
-                        <a class="dropdown-item" href="../Functions/SettingsAdmin.php">
-                        <i class='fa-solid fa-gear'></i>
-                          <span class="align-middle">Change Password</span>
-                        </a>
-                      </li>
-                      <li>
+      <div class="dropdown-divider"></div>
+     </li>
+     <li>
+     <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#changePass" id = "changePasswordLink">
+       <i class='fa-solid fa-gear'></i>
+         <span class="align-middle">Change Password</span>
+      </a>
+    </li>
+     <li>
+<!-- changepass modal -->
+<!-- Modal -->
+<div class="modal fade overflow-visible" id="changePass"  data-bs-backdrop="false" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
+  <div class="modal-dialog modal-dialog-centered ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Change Password</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <form action="../Php/php-changepass.php" method="POST">
+          <div class="col-md-12">
+                  <label for="inputZip" class="form-label">Current Password</label>
+                  <input type="password" class="form-control" id="inputZip"name = "CurrentPassword" required>
+          </div>    
+
+          <div class="col-md-12">
+                  <label for="inputZip" class="form-label">New Password</label>
+                  <input type="password" class="form-control" id="password"name = "NewPassword" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+                 
+                  <div id="message">
+                    <h6>Password must contain the following:</h6>
+                    <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+                    <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+                    <p id="number" class="invalid">A <b>number</b></p>
+                    <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+                  </div>
+          </div>    
+
+          <div class="col-md-12">
+                  <label for="inputZip" class="form-label">Confirm New Password</label>
+                  <input type="password" class="form-control" id="inputZip"name = "ConfirmNewPassword" >
+          </div>    
+            <input type="text" value="<?= $userId ?>" name="user_id" hidden>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="../Assets/js/pass_verify.js"></script>
+<script>
+  const changePasswordLink = document.getElementById("changePasswordLink")
+  changePasswordLink.addEventListener('click', function(event) {
+   event.stopPropagation();
+   
+});
+
+</script>
+
             <li>
               <div class="dropdown-divider"></div>
             </li>

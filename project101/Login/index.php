@@ -161,6 +161,9 @@ include "../Layouts/main.php";
         .copyright-container p {
         margin-top: 80px;
         color: #b4bdc6;
+    }   
+    #showPassword:hover{
+        color: #b4bdc6;
     }
 
     </style>
@@ -203,6 +206,7 @@ include "../Layouts/main.php";
  <div class="input-container">
  <input type="password" id="password" name="password" placeholder="Password" >
  <i class="fa fa-lock icon"></i>
+ <i class="fa fa-eye" aria-hidden="true" id= "showPassword"></i>
  </div>
 
  <div class=" d-flex justify-content-center col-10 mx-auto">
@@ -212,5 +216,23 @@ include "../Layouts/main.php";
  </form>
  </div>
 
+<script>
+    const togglePassword = document.querySelector("#showPassword");
+const password = document.querySelector("#password");
+
+togglePassword.addEventListener("click", function () {
+    if(password.type === 'password'){
+        password.type = 'text';
+        togglePassword.classList.remove('fa-eye');
+        togglePassword.classList.add('fa-eye-slash');
+    }else{
+        password.type = 'password';
+        togglePassword.classList.remove('fa-eye-slash');
+        togglePassword.classList.add('fa-eye');
+    }
+
+});
+
+</script>
 
  

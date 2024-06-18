@@ -84,6 +84,7 @@
     <script src="../Assets/vendor/js/menu.js"></script>
     <script src="../Assets/js/jquery.js"></script>
     <script src="../Assets/js/datatables.js"></script>
+  
 
 
     <!-- endbuild -->
