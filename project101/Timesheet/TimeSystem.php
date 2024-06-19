@@ -12,25 +12,43 @@ $title="Time Tracking System";
 <?php
 $user_id = $_SESSION['user_id'];
 $department_id = $_SESSION['department_id'];
-$sql = "SELECT event_type FROM timesheet WHERE DATE(timestamp) = CURDATE() AND user_id = '$user_id' ORDER BY id DESC LIMIT 1";
+$sql = "SELECT event_type, timestamp FROM timesheet WHERE DATE(timestamp) = CURDATE() AND user_id = '$user_id' ORDER BY id DESC LIMIT 1";
 $query = mysqli_query($connect, $sql);
 
 if ($query && mysqli_num_rows($query) > 0) {
     $row = mysqli_fetch_assoc($query);
     $latest_event_type = $row['event_type'];
+    $current_time = time();
+    $timeIn = strtotime($row['timestamp']);
+    $timeOut = $current_time;
+
+    $timeDifferenceSeconds = $timeOut - $timeIn;
 
     if ($latest_event_type == 'In') {
         // If the latest event type is "In", display the "Out" button
+        if( $timeDifferenceSeconds < (2 * 3600) ){
         echo '
    
         <p class="card-text">Don\'t forget to time Out.</p>
         <div class="d-grid gap-2">
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#timeInDefault">
+            <button disabled type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#timeInDefault">
                Time Out
             </button>
         </div>
-    
+    ';
+    }else {
+
+        echo '
+   
+        <p class="card-text">Don\'t forget to time Out.</p>
+        <div class="d-grid gap-2">
+            <!-- Button trigger modal -->
+            <button  type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#timeInDefault">
+               Time Out
+            </button>
+        </div>
+
         <!-- Modal -->
         <div class="modal fade" id="timeInDefault" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
@@ -146,7 +164,8 @@ if ($query && mysqli_num_rows($query) > 0) {
             setInterval(updateTime, 1000);
         </script>
         ';
-    } else {
+    }
+ } else {
         // If the latest event type is "Out", display the "In" button
         echo '
    

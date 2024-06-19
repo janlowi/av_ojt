@@ -3,7 +3,7 @@
     include '../Php/db_connect.php';
     $department_id=$_SESSION['department_id'];
     $userId = $_SESSION['user_id'];
-    $sql = "SELECT * FROM notifications WHERE comment_status = 1";
+    $sql = "SELECT * FROM notifications WHERE user_id = '$userId' AND comment_status = 1";
     $result=$connect->query($sql);
     $result_count = $result->num_rows; 
 ?>
@@ -85,7 +85,30 @@
  }
  #message{
   display: none;
- }
+ }  .modal-backdrop {
+    opacity: 0.5; /* Adjust opacity as needed */
+    z-index: 0; /* Ensure z-index is higher than modal (1050 is default for modals) */
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust background color and transparency */
+  }
+
+  .currPass {
+    position: absolute;
+    right: 20px;
+    bottom: 170px;   
+  } 
+  .newPass{
+    position: absolute;
+    right: 20px;
+    bottom: 100px;    
+  } 
+  .confirmPass {
+    position: absolute;
+    right: 20px;
+    bottom: 30px;  
+  }
+  #message{
+    padding:30px;
+  }
 
   </style>
   <body>
@@ -243,7 +266,7 @@
 </i>
 <ul class="dropdown-menu" id = "dropdown" aria-labelledby="notification"  aria-expanded="false">
 <?php 
-$sql_all ="SELECT * FROM notifications ORDER BY comment_status DESC, id DESC LIMIT 5";
+$sql_all ="SELECT * FROM  notifications WHERE department_id = '$department_id' AND user_id = '$userId' ORDER BY comment_status ASC, id DESC LIMIT 5";
 $result_all = $connect->query($sql_all);
 if ($result_all->num_rows > 0) {
     while ($message = $result_all->fetch_assoc()) {
@@ -265,7 +288,7 @@ if ($result_all->num_rows > 0) {
           <div class="dropdown-divider"></div>
 
                 <!-- Modal -->
-                <div class="modal fade overflow-visible" id="<?=$modal?>"  data-bs-backdrop="false" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
+                <div class="modal fade overflow-visible" id="<?=$modal?>"  data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
                   <div class="modal-dialog modal-dialog-centered ">
                     <div class="modal-content">
                       <div class="modal-header">
@@ -290,7 +313,7 @@ if ($result_all->num_rows > 0) {
                 </li> 
             <?php
             }
-          }
+          } 
       ?>
    
   </ul>
@@ -345,7 +368,7 @@ if ($result_all->num_rows > 0) {
      <li>
 <!-- changepass modal -->
 <!-- Modal -->
-<div class="modal fade overflow-visible" id="changePass"  data-bs-backdrop="false" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
+<div class="modal fade overflow-visible" id="changePass"  data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
   <div class="modal-dialog modal-dialog-centered ">
     <div class="modal-content">
       <div class="modal-header">
@@ -354,47 +377,50 @@ if ($result_all->num_rows > 0) {
       </div>
       <div class="modal-body">
       <form action="../Php/php-changepass.php" method="POST">
-          <div class="col-md-12">
+          <div class="col-md-11">
                   <label for="inputZip" class="form-label">Current Password</label>
-                  <input type="password" class="form-control" id="inputZip"name = "CurrentPassword" required>
+                  <input type="password" class="form-control" id="currPass"name = "CurrentPassword" required>  
+                  <span class = "currPass">
+                  <i class="fa fa-eye" aria-hidden="true" id= "showCurrPassword"></i>
+                  </span>
           </div>    
 
-          <div class="col-md-12">
+          <div class="col-md-11">
                   <label for="inputZip" class="form-label">New Password</label>
                   <input type="password" class="form-control" id="password"name = "NewPassword" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
-                 
-                  <div id="message">
-                    <h6>Password must contain the following:</h6>
-                    <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
-                    <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
-                    <p id="number" class="invalid">A <b>number</b></p>
-                    <p id="length" class="invalid">Minimum <b>8 characters</b></p>
-                  </div>
+                  <span class = "newPass">
+                  <i class="fa fa-eye" aria-hidden="true" id= "showNewPassword"></i>
+                  </span>
           </div>    
 
-          <div class="col-md-12">
+          <div class="col-md-11">
                   <label for="inputZip" class="form-label">Confirm New Password</label>
-                  <input type="password" class="form-control" id="inputZip"name = "ConfirmNewPassword" >
+                  <input type="password" class="form-control" id="confirmPass" name = "ConfirmNewPassword">
+                  <span class = "confirmPass">
+                  <i class="fa fa-eye" aria-hidden="true" id= "showConfirmPassword"></i>
+                  </span>
           </div>    
             <input type="text" value="<?= $userId ?>" name="user_id" hidden>
 
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="submit" name ="submit" class="btn btn-dark ">Change</button>
       </div>
+      <div id="message">
+                    <h6>Password must contain the following:</h6>
+                    <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+                    <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+                    <p id="number" class="invalid">A <b>number</b></p>
+                    <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+                    </div>
+      </form>
     </div>
   </div>
 </div>
 <script src="../Assets/js/pass_verify.js"></script>
-<script>
-  const changePasswordLink = document.getElementById("changePasswordLink")
-  changePasswordLink.addEventListener('click', function(event) {
-   event.stopPropagation();
-   
-});
+<script src="../Assets/js/form.js"></script>
 
-</script>
 
             <li>
               <div class="dropdown-divider"></div>

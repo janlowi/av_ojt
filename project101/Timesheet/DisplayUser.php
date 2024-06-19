@@ -13,7 +13,6 @@ include '../Layouts/main-user.php';
                 <table class="table table-stripes" id ="userAttendance">
                     <thead class="bg-info" >
                         <tr>
-                            <th>Department</th>
                             <th>Date</th>
                             <th>Day</th>
                             <th>Time In</th>
@@ -48,7 +47,7 @@ include '../Layouts/main-user.php';
                                 $date = date('Y-m-d', strtotime($row['timestamp']));
                                 $event_type = $row['event_type'];
                                 $today = date("D", strtotime($row['timestamp']));
-                                $time = date('H:i:s', strtotime($row['timestamp']));
+                                $time = date('h:i:s a', strtotime($row['timestamp']));
 
                                 // Add the total hours for each record to the total
                                 $totalHours += $row['total_hours'];
@@ -57,15 +56,14 @@ include '../Layouts/main-user.php';
                                 if ($prev_row && $prev_row['event_type'] !== $event_type && $date === date('Y-m-d', strtotime($prev_row['timestamp']))) {
                                     ?>
                                     <tr>
-                                        <td><?php echo $prev_row['departments']; ?></td>
                                         <td><?php echo $date; ?></td>
                                         <td><?php echo $today; ?></td>
                                         <?php if ($prev_row['event_type'] === 'In') { ?>
-                                            <td><?php echo date('H:i:s', strtotime($prev_row['timestamp'])); ?></td>
+                                            <td><?php echo date('h:i:s a', strtotime($prev_row['timestamp'])); ?></td>
                                             <td><?php echo $time; ?></td>
                                         <?php } else { ?>
                                             <td><?php echo $time; ?></td>
-                                            <td><?php echo date('H:i:s', strtotime($prev_row['timestamp'])); ?></td>
+                                            <td><?php echo date('h:i:s a', strtotime($prev_row['timestamp'])); ?></td>
                                         <?php } ?>
 
                                         <td><?php echo $row['total_hours']; ?></td>
@@ -80,8 +78,8 @@ include '../Layouts/main-user.php';
                         </tbody>
                         <!-- Display total hours row outside the loop -->
                         <tr style="text-align: right;">
-                            <td colspan="5"><strong>Total Hours:</strong></td>
-                            <td colspan="5"  ><?php echo $totalHours; ?></td>
+                            <td colspan="4"><strong>Total Hours:</strong></td>
+                            <td colspan="4"  ><?php echo $totalHours; ?></td>
                         </tr>
 
 

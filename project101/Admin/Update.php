@@ -169,16 +169,8 @@ include '../Layouts/main-admin.php';
                         <div class="col-md-6">
                                 <label for="inputZip" class="form-label">Email</label>
                                 <input type="email" class="form-control" id="inputZip"name = "Email" value = "<?php echo $email?>">
-                        </div>
-     
-                        <div class="col-md-12">
-                            
-                                <a class="btn btn-danger" href="../Php/php-changepass.php?reset_pass=<?= $user_id ?>">Reset Password</a>
-                        </div>
-
-                                 
+                        </div>   
                          <!-- id to edit -->
-
                          <input type="text" name = "edit_id" value = "<?php echo $user_id?>" hidden>
 
                  <div class="row mt-3">

@@ -156,7 +156,7 @@ include '../Layouts/main-manager.php';
                                                         <td>
 
                                                             <div class="d-flex flex-column justify-content-center align-items-center">
-                                                                <p class="mb-1 "> <?= $row['timestamp']; ?></p>
+                                                                <p class="mb-1 "> <?=  date('Y-m-d h:i:s a', strtotime($row['timestamp'])); ?></p>
                                                             </div>
                                                            
                                                         

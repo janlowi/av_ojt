@@ -51,8 +51,14 @@ if(isset($_POST['insertNotification'])){
 <?php
 if (isset($_GET['mark_as_read']) && !empty($_GET['mark_as_read'])) {
     $notification_id = $_GET['mark_as_read'];
-    
-    $sql = "UPDATE notifications SET comment_status = 0 WHERE id = '$notification_id'";
+    $status = [
+      "Admin" => 4,
+      "Manager" => 5,
+      "Trainee" => 6
+
+    ];
+    $comment_status = $status[$usertype];
+    $sql = "UPDATE notifications SET comment_status = '$comment_status' WHERE id = '$notification_id'";
     $result = $connect->query($sql);
 
     if ($result) {

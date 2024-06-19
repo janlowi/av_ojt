@@ -63,7 +63,7 @@ include '../Layouts/main-user.php';
                 if ($result && mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_assoc($result)) {
                         
-                        $timestamp = $row['timestamp'];
+                        $timestamp =  date('Y-m-d h:i:s a', strtotime($row['timestamp']));;
                         $dos = $row['dos'];
                         $doe = $row['doe'];
                         $departments = $row['departments'];

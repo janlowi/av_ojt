@@ -48,7 +48,7 @@ $admin_department= $_SESSION['department_id'];
             while ($row = mysqli_fetch_assoc($result)) {
 
                 $user_id = $row['user_id'];
-                $timestamp = $row['timestamp'];
+                $timestamp =  date('Y-m-d h:i:s a', strtotime($row['timestamp']));
                 $department_id = $row['department_id'];
 
                 $sql_names = "SELECT * FROM users WHERE id= '$user_id' ";
@@ -58,25 +58,25 @@ $admin_department= $_SESSION['department_id'];
                         $full_name = $row_names['last_name'] . ',' . ' ' . $row_names['first_name'] . ' ' . $row_names['middle_name'];
                             
 ?>                      
-                <tr>
-                    <td><?= $user_id ?></td>  
-                    <td><?= $full_name ?></td>     
-                    <td><?= $timestamp ?></td>
-                    <td>
-                        <form action="../Php/update-time.php" method="POST">
-                            <div class="d-grid gap-2 col-lg-6 mx-auto"> 
-                                <label for="logout">Update Log out time</label>    
-                                <input type="datetime-local" id="logout" name="dateNtime" required class="form-control">
-                            </div>
-                            <input type="text" value="<?= $user_id ?>" name="failed_to_out" hidden>
-                            <input type="text" value="<?= $timestamp ?>" name="yesterday_In_timestamp" hidden>
-                            <input type="text" value="<?= $department_id ?>" name="department_id" hidden>
-                            <div class="d-grid gap-2 col-lg-6 mx-auto">
-                                <button class="btn btn-info" name="update_time">Update</button>
-                            </div>
-                        </form>
-                    </td>
-                </tr>
+    <tr>
+        <td><?= $user_id ?></td>  
+        <td><?= $full_name ?></td>     
+        <td><?= $timestamp ?></td>
+        <td>
+            <form action="../Php/update-time.php" method="POST">
+                <div class="d-grid gap-2 col-lg-6 mx-auto"> 
+                    <label for="logout">Update Log out time</label>    
+                    <input type="datetime-local" id="logout" name="dateNtime" required class="form-control">
+                </div>
+                <input type="text" value="<?= $user_id ?>" name="failed_to_out" hidden>
+                <input type="text" value="<?= $timestamp ?>" name="yesterday_In_timestamp" hidden>
+                <input type="text" value="<?= $department_id ?>" name="department_id" hidden>
+                <div class="d-grid gap-2 col-lg-6 mx-auto">
+                    <button class="btn btn-info" name="update_time">Update</button>
+                </div>
+            </form>
+        </td>
+    </tr>
 <?php
             }
         } else {
@@ -87,10 +87,8 @@ $admin_department= $_SESSION['department_id'];
 ?>
 
 
-      
-        </tbody>
+</tbody>
     </table><br>
-
         <div class="row align-items-start">
             <div class="col">
                   <input type="text" name="start_date" id="start_date" placeholder="Date Start" class="form-control" />
@@ -114,6 +112,14 @@ $admin_department= $_SESSION['department_id'];
                 ?>
                 </select>
             </div>  
+            <div class="col">
+            <select name="office" id="office" class="form-control">
+            <option value="">Select Office</option>
+            <option value="Tayud">Tayud Office </option>
+            <option value="NRA">NRA </option>
+            <option value="Makati">Makati Office</option>
+                </select>
+            </div> 
 
             <div class="col">
             <input type="button" name="filter" id="filter" value="Filter" class="btn btn-info" />
@@ -220,13 +226,14 @@ $(document).ready(function(){
     var start_date = $('#start_date').val();
     var end_date = $('#end_date').val();
     var department = $('#department').val();
+    var office = $('#office').val();
 
     if(start_date )
-    if(start_date != '' && end_date != '') {
+    if(start_date != '' && end_date != '' && department != '' && office != '') {
         $.ajax({
             url: "../Php/php-filter.php",
             method: "POST",
-            data: { start_date: start_date, end_date: end_date, department: department },
+            data: { start_date: start_date, end_date: end_date, department: department, office: office },
             success: function(data) {
                 $('#attendanceRecord').html(data);
             },
@@ -235,10 +242,9 @@ $(document).ready(function(){
             }
         });
     } else {
-        alert("Please select both start and end dates.");
+        alert("All fields are required. ");
     }
 });
-
 
 $('#reset').click(function(){
         // Reset start and end date inputs
@@ -247,78 +253,83 @@ $('#reset').click(function(){
 
         // Reload default table content
         var defaultContent = `
-                        <div class="table-responsive">
-                             <table class="table table-borderless display-nowrap" id="attendanceRecord">
-                                <thead   >
-                                    <tr >
-                                        <th class='bg-dark text-light' width="10%">ID</th>
-                                        <th class='bg-dark text-light'>Name</th>
-                                        <th class='bg-dark text-light'>Department</th>
-                                        <?php 
-                                         // Fetch all unique dates from the timestamp column
-                                        $sql_dates = "SELECT DISTINCT DATE(timestamp) AS date FROM timesheet";
-                                        $result_dates = mysqli_query($connect, $sql_dates);
-                                        if ($result_dates && mysqli_num_rows($result_dates) > 0) {
-                                            while ($row_date = mysqli_fetch_assoc($result_dates)) {
-                                                echo "<th class='bg-dark text-light'>" . date("D M j", strtotime($row_date['date'])) . "</th>";
-                                            
-                                            }
-                                        }
-                                    
-                                        ?>
-                                    <th class='bg-dark text-light'   >Total</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                <?php
-                                 $sql_trainees = "SELECT us.*, 
-                                 tr.ojt_id,
-                                 tr.user_id,
-                                 dp.departments,
-                                 dp.id AS department_id
-                                       FROM users us
-                                       INNER JOIN trainees tr ON tr.user_id = us.id
-                                       INNER JOIN departments dp ON us.department_id=dp.id
-                                       WHERE us.user_type = 'Trainee'
-                                        AND status = 'Active'
+        <div class="table-responsive text-nowrap" >
+        <table class="table table-borderless" id="attendanceRecord">
+            <thead   >
+            <tr >
+                <th class='bg-dark text-light'>ID</th>
+                <th class='bg-dark text-light'>Name</th>
+                <th class='bg-dark text-light'>Department</th>
+                <?php 
+                 // Fetch all unique dates from the timestamp column
+                $sql_dates = "SELECT DISTINCT DATE(timestamp) AS date FROM timesheet";
+                $result_dates = mysqli_query($connect, $sql_dates);
+                if ($result_dates && mysqli_num_rows($result_dates) > 0) {
+                    while ($row_date = mysqli_fetch_assoc($result_dates)) {
+                        echo "<th class='bg-dark text-light'>" . date("D M j", strtotime($row_date['date'])) . "</th>";
+                    
+                    }
+                }
+            
+                ?>
+            <th class='bg-dark text-light'   >Total Hours</th>
+            <th class='bg-dark text-light'   >Rate</th>
+            <th class='bg-dark text-light'   >Allowance</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php
+          $sql_trainees = "SELECT us.*, 
+          tr.ojt_id,
+          tr.user_id,
+          dp.departments,
+          dp.id AS department_id
+                FROM users us
+                INNER JOIN trainees tr ON tr.user_id = us.id
+                INNER JOIN departments dp ON us.department_id=dp.id
+                WHERE us.user_type = 'Trainee'
+                AND status = 'Active'
+                AND us.department_id = '$admin_department'
+                ";
+                $result_trainees = mysqli_query($connect, $sql_trainees);
+                $allowance = 0;
+          if ($result_trainees && mysqli_num_rows($result_trainees) > 0) {
+              while ($row_trainee = mysqli_fetch_array($result_trainees)) {
+                  $user_total_hours = 0;
+                  echo "<tr >";
+                  echo "<td  class='bg-light text-dark '>" . $row_trainee['ojt_id'] . "</td>";
+                  echo "<td  class='bg-light text-dark '>" . $row_trainee['last_name'] . ", " . $row_trainee['first_name'] . " " . $row_trainee['middle_name'] . "</td>";
+                  echo "<td  class='bg-light text-dark '>" . $row_trainee['departments'] . "</td>";
+                // Fetch total hours worked by trainee for each date
+                $userId = $row_trainee['id'];
+                // echo $userId;
+                $result_dates = mysqli_query($connect, $sql_dates);
+                if ($result_dates && mysqli_num_rows($result_dates) > 0) {
+                    while ($row_date = mysqli_fetch_assoc($result_dates)) {
+                        $date = $row_date['date'];
+                        $sql_total_hours = "SELECT SUM(total_hours) AS total_hours
+                                            FROM timesheet
+                                            WHERE user_id = $userId
+                                            AND DATE(timestamp) = '$date'";
+                        $result_total_hours = mysqli_query($connect, $sql_total_hours);
+                        $total_hours_row = mysqli_fetch_assoc($result_total_hours);
+                        $user_total_hours += $total_hours_row['total_hours'];
+                        echo "<td  class='bg-light text-dark '>" . $total_hours_row['total_hours'] . "</td>";
+            
+                    }
+                }
+                echo "<td  class='bg-dark text-light'>" .$user_total_hours. "</td>";
+                echo "<td  class='bg-dark text-light'>" .$row_trainee['rph']. "</td>";
 
-                                       ";
-                                       $result_trainees = mysqli_query($connect, $sql_trainees);
-
-                                 if ($result_trainees && mysqli_num_rows($result_trainees) > 0) {
-                                     while ($row_trainee = mysqli_fetch_array($result_trainees)) {
-                                         $user_total_hours = 0;
-                                         echo "<tr >";
-                                         echo "<td  class='bg-light text-dark '>" . $row_trainee['ojt_id'] . "</td>";
-                                         echo "<td  class='bg-light text-dark '>" . $row_trainee['last_name'] . ", " . $row_trainee['first_name'] . " " . $row_trainee['middle_name'] . "</td>";
-                                         echo "<td  class='bg-light text-dark '>" . $row_trainee['departments'] . "</td>";
-                                        // Fetch total hours worked by trainee for each date
-                                        $userId = $row_trainee['id'];
-                                        // echo $userId;
-                                        $result_dates = mysqli_query($connect, $sql_dates);
-                                        if ($result_dates && mysqli_num_rows($result_dates) > 0) {
-                                            while ($row_date = mysqli_fetch_assoc($result_dates)) {
-                                                $date = $row_date['date'];
-                                                $sql_total_hours = "SELECT SUM(total_hours) AS total_hours
-                                                                    FROM timesheet
-                                                                    WHERE user_id = $userId
-                                                                    AND DATE(timestamp) = '$date'";
-                                                $result_total_hours = mysqli_query($connect, $sql_total_hours);
-                                                $total_hours_row = mysqli_fetch_assoc($result_total_hours);
-                                                $user_total_hours += $total_hours_row['total_hours'];
-                                                echo "<td  class='bg-light text-dark '>" . $total_hours_row['total_hours'] . "</td>";
-                                    
-                                            }
-                                        }
-                                        echo "<td  class='bg-dark text-light'>" .$user_total_hours. "</td>";
-                                        echo "</tr>";
-                                }
-                            }
-                            ?>
-                                </tbody>
-                            </table>
-                                        
-                        </div>
+                    $allowance = $user_total_hours*$row_trainee['rph'];
+                echo "<td  class='bg-dark text-light'>" .number_format($allowance, 2). "</td>";
+                echo "</tr>";
+            }
+        }
+        ?>
+        </tbody>
+    </table>               
+</div>
         `;
         $('#attendanceRecord').html(defaultContent);
     });

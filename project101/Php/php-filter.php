@@ -5,6 +5,7 @@ if (isset($_POST['start_date'], $_POST['end_date'], $_POST['department'] )) {
     $startDate = mysqli_real_escape_string($connect, $_POST['start_date']);
     $endDate = mysqli_real_escape_string($connect, $_POST['end_date']);
     $department = mysqli_real_escape_string($connect, $_POST['department']);
+    $office = mysqli_real_escape_string($connect, $_POST['office']);
     $sql_dates = "SELECT DISTINCT DATE(ts.timestamp) AS date
                   FROM timesheet ts
                   WHERE DATE(timestamp) BETWEEN '$startDate' AND '$endDate'
@@ -25,8 +26,9 @@ if (isset($_POST['start_date'], $_POST['end_date'], $_POST['department'] )) {
                     <?php foreach ($dateColumns as $dateColumn) {
                         echo '<th class="bg-dark text-light">' . $dateColumn . '</th>';
                     } ?>
-                    <th class="bg-dark text-light">Total</th>
+                    <th class="bg-success text-dark">Total</th>
                     <th class="bg-success text-dark">Rate</th>
+                    <th class="bg-success text-dark">Allowance</th>
                 </tr>
             </thead>
             <tbody>
@@ -41,6 +43,7 @@ if (isset($_POST['start_date'], $_POST['end_date'], $_POST['department'] )) {
              INNER JOIN trainees tr ON tr.user_id = us.id
              INNER JOIN departments dp ON us.department_id = dp.id
              WHERE us.department_id = '$department'
+             AND us.office_assigned = '$office'
              AND us.user_type = 'Trainee'
              AND us.status = 'Active'";
 
@@ -83,11 +86,13 @@ if ($result_trainees && mysqli_num_rows($result_trainees) > 0) {
 
   
     echo "<td class='bg-dark text-light'>" . $user_total_hours . "</td>";
+    echo "<td class='bg-dark text-light'>" . $row_trainee['rph'] . "</td>";
     $rate_per_hour = $user_total_hours * $row_trainee['rph'];
     echo "<td class='bg-dark text-light'>" . number_format($rate_per_hour, 2 ) . "</td>";  
     echo "</tr>";
     $total_user_hours += $user_total_hours;
     $total_rate += intval($rate_per_hour);
+    $rph = $row_trainee['rph'] ;
 }
 echo "<tr>";
 echo "<td></td><td></td><td></td>"; // Empty cells for ID, Name, and Department
@@ -95,6 +100,7 @@ foreach ($dateColumns as $dateColumn) {
     echo "<td></td>"; // Empty cells for date columns
 }
 echo "<td class='bg-dark text-light'>" . $total_user_hours . "</td>";
+echo "<td class='bg-dark text-light'>" . $rph . "</td>";
 echo "<td class='bg-dark text-light'>" . number_format($total_rate, 2) . "</td>";
 echo "</tr>";
 

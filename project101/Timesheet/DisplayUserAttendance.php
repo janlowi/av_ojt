@@ -72,7 +72,7 @@ include '../Layouts/main-admin.php';
                  $date = date('Y-m-d', strtotime($row['timestamp']));
                  $event_type = $row['event_type'];
                  $today = date("D", strtotime($row['timestamp']));
-                 $time = date('H:i:s', strtotime($row['timestamp']));
+                 $time = date('h:i:s a', strtotime($row['timestamp']));
 
                  // Add the total hours for each record to the total
                  $totalHours += $row['total_hours'];
@@ -85,11 +85,11 @@ include '../Layouts/main-admin.php';
                          <td><?php echo $date; ?></td>
                          <td><?php echo $today; ?></td>
                          <?php if ($prev_row['event_type'] === 'In') { ?>
-                             <td><?php echo date('H:i:s', strtotime($prev_row['timestamp'])); ?></td>
+                             <td><?php echo date('h:i:s a', strtotime($prev_row['timestamp'])); ?></td>
                              <td><?php echo $time; ?></td>
                          <?php } else { ?>
                              <td><?php echo $time; ?></td>
-                             <td><?php echo date('H:i:s', strtotime($prev_row['timestamp'])); ?></td>
+                             <td><?php echo date('h:i:s a', strtotime($prev_row['timestamp'])); ?></td>
                          <?php } ?>
 
                          <td><?php echo $row['total_hours']; ?></td>

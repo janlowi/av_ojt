@@ -62,6 +62,18 @@ if (isset($_GET['trainee_profile'])){
   <div class="row" >
     <div class="card h-70 p-4">  
 <div class="row">
+
+                            <a href="../Admin/Trainees.php" class="d-flex justify-content-end">
+                               <button
+                                 type="button"
+                                class="btn btn-dark d-flex"
+                                 data-bs-dismiss="modal"
+                                 aria-label="Close">
+                                    Back
+                               </button>
+                               </a>
+
+
   <div class="col-sm-6">
     <div class="card">
       <div class="card-body d-flex justify-content-center">

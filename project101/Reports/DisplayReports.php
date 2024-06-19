@@ -49,6 +49,14 @@ include '../Layouts/main-user.php';
                                                     </div>
                                      
 
+                                                </th> <th scope="col">
+
+                   
+                                                    <div class="d-flex flex-column justify-content-center align-items-center">
+                                                        <p class="mb-1 ">OFFICE</p>
+                                                    </div>
+                                     
+
                                                 </th>
 
                                                 <th scope="col">
@@ -100,6 +108,7 @@ include '../Layouts/main-user.php';
                                             us.first_name,
                                             us.last_name,
                                             us.middle_name,
+                                            us.office_assigned,
                                             dp.departments,
                                             dp.id as department_id
                                      FROM  reports rp
@@ -129,7 +138,7 @@ include '../Layouts/main-user.php';
                                                         <td>
 
                                                             <div class="d-flex flex-column justify-content-center align-items-center">
-                                                                <p class="mb-1 "> <?= $row['timestamp']; ?></p>
+                                                                <p class="mb-1 "> <?= date('Y-m-d h:i:s a', strtotime($row['timestamp'])); ?></p>
                                                             </div>
                                                            
                                                         
@@ -139,6 +148,16 @@ include '../Layouts/main-user.php';
                                            
                                                             <div class="d-flex flex-column justify-content-center align-items-center">
                                                                 <p class="mb-1 "> <?= $row['departments']; ?></p>
+                                                            </div>
+                                                      
+
+
+                                                        </td>
+                                                         <td>
+
+                                           
+                                                            <div class="d-flex flex-column justify-content-center align-items-center">
+                                                                <p class="mb-1 "> <?= $row['office_assigned']; ?></p>
                                                             </div>
                                                       
 

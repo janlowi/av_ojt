@@ -3,7 +3,7 @@
     $user_department = $_SESSION['department_id'];
     $department_id=$_SESSION['department_id'];
     $userId = $_SESSION['user_id'];
-    $sql = "SELECT * FROM notifications WHERE department_id = '$user_department' AND comment_status = 1";
+    $sql = "SELECT * FROM notifications WHERE department_id = '$department_id' AND user_id = '$userId' AND comment_status = 1";
     $result=$connect->query($sql);
     $result_count = $result->num_rows; 
 ?>
@@ -77,7 +77,37 @@
   z-index:1 ;
   background: transparent;
 
-}
+} .valid{
+  color: var(--bs-success);
+
+ }
+ #message{
+  display: none;
+ }  .modal-backdrop {
+    opacity: 0.5; /* Adjust opacity as needed */
+    z-index: 0; /* Ensure z-index is higher than modal (1050 is default for modals) */
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust background color and transparency */
+  }
+
+  .currPass {
+    position: absolute;
+    right: 20px;
+    bottom: 170px;   
+  } 
+  .newPass{
+    position: absolute;
+    right: 20px;
+    bottom: 100px;    
+  } 
+  .confirmPass {
+    position: absolute;
+    right: 20px;
+    bottom: 30px;  
+  }
+  #message{
+    padding:30px;
+  }
+
 
 
   </style>
@@ -200,22 +230,19 @@
                 <!-- Place this tag where you want the button to render. -->
 
                 <!-- time -->
-                <li class="nav-item lh-7 me-3">
-                    
-                                           
-                                                      
-                                                          <div class="display-date  ">
-                                                            <span id="day">day</span>,
-                                                            <span id="daynum" >00</span>
-                                                            <span id="month" >month</span>
-                                                            <span id="year" >0000</span>
-                                                          <span  id ="currentTime">	</span>
-                                                    
-                                                          </div>
-                                                          </li>
-                            <!-- Show current time -->
-                        <script src="../Assets/js/dateTime.js"> </script>
-                      <!-- Show current time -->
+                <li class="nav-item lh-7 me-3">                                          
+       <div class="display-date  ">
+         <span id="day">day</span>,
+         <span id="daynum" >00</span>
+         <span id="month" >month</span>
+         <span id="year" >0000</span>
+       <span  id ="currentTime">	</span>
+
+       </div>
+       </li>
+        <!-- Show current time -->
+     <script src="../Assets/js/dateTime.js"> </script>
+  <!-- Show current time -->
 
 <div class="dropdown read mx-3">
 <i class="fa-regular fa-bell" style="font-size: 22px;" id="notification" data-bs-toggle="dropdown" aria-expanded="false">
@@ -237,7 +264,7 @@
 </i>
 <ul class="dropdown-menu" id = "dropdown" aria-labelledby="notification"  aria-expanded="false">
 <?php 
-$sql_all = "SELECT * FROM notifications  WHERE department_id = '$user_department' ORDER BY comment_status DESC, id DESC LIMIT 5";
+$sql_all = "SELECT * FROM notifications  WHERE department_id = '$user_department' AND  user_id = '$userId'  ORDER BY comment_status ASC, id DESC LIMIT 5";
 $result_all = $connect->query($sql_all);
 if ($result_all->num_rows > 0) {
     while ($message = $result_all->fetch_assoc()) {
@@ -344,14 +371,67 @@ document.addEventListener('DOMContentLoaded', function() {
                       </a>
                     </li>
                     <li>
-                                <div class="dropdown-divider"></div>
-                              </li>
-                              <li>
-                                <a class="dropdown-item" href="../Functions/SettingsAdmin.php">
-                                <i class='fa-solid fa-gear'></i>
-                                  <span class="align-middle">Change Password</span>
-                                </a>
-                              </li>
+     <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#changePass" id = "changePasswordLink">
+       <i class='fa-solid fa-gear'></i>
+         <span class="align-middle">Change Password</span>
+      </a>
+    </li>
+     <li>
+<!-- changepass modal -->
+<!-- Modal -->
+<div class="modal fade overflow-visible" id="changePass"  data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
+  <div class="modal-dialog modal-dialog-centered ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Change Password</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <form action="../Php/php-changepass.php" method="POST">
+          <div class="col-md-11">
+                  <label for="inputZip" class="form-label">Current Password</label>
+                  <input type="password" class="form-control" id="currPass"name = "CurrentPassword" required>  
+                  <span class = "currPass">
+                  <i class="fa fa-eye" aria-hidden="true" id= "showCurrPassword"></i>
+                  </span>
+          </div>    
+
+          <div class="col-md-11">
+                  <label for="inputZip" class="form-label">New Password</label>
+                  <input type="password" class="form-control" id="password"name = "NewPassword" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+                  <span class = "newPass">
+                  <i class="fa fa-eye" aria-hidden="true" id= "showNewPassword"></i>
+                  </span>
+          </div>    
+
+          <div class="col-md-11">
+                  <label for="inputZip" class="form-label">Confirm New Password</label>
+                  <input type="password" class="form-control" id="confirmPass" name = "ConfirmNewPassword">
+                  <span class = "confirmPass">
+                  <i class="fa fa-eye" aria-hidden="true" id= "showConfirmPassword"></i>
+                  </span>
+          </div>    
+            <input type="text" value="<?= $userId ?>" name="user_id" hidden>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" name ="submit" class="btn btn-dark ">Change</button>
+      </div>
+      <div id="message">
+                    <h6>Password must contain the following:</h6>
+                    <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+                    <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+                    <p id="number" class="invalid">A <b>number</b></p>
+                    <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+                    </div>
+      </form>
+    </div>
+  </div>
+</div>
+<script src="../Assets/js/pass_verify.js"></script>
+<script src="../Assets/js/form.js"></script>
+
                               <li>
                     <li>
                       <div class="dropdown-divider"></div>

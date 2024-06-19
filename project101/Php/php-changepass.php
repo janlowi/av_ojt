@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     }
 
                     $_SESSION['success'] = "Password changed successfully.";
-                    $redirect_url = ($usertype === 'Trainee') ? '../Functions/SettingsUser.php' : ($usertype === 'Admin' ? '../Functions/SettingsAdmin.php' : '../Functions/SettingsManager.php');
+                    $redirect_url = ($usertype === 'Trainee') ? '../Users/UserDashboard.php' : ($usertype === 'Admin' ? '../Admin/AdminDashboard.php' : '../Manager/ManagerDashboard.php');
                     header("Location: $redirect_url");
                     exit();
                     
@@ -86,7 +86,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $_SESSION['error'] = $error_msg;
     header('location: ../Functions/SettingsUser.php');
     exit();
-
 
 }
 

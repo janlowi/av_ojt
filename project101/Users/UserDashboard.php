@@ -44,8 +44,8 @@ include '../Layouts/main-user.php';
                     }
                 }
                 ?>
-                <h4><span class="d-flex justify-content-center">Total Hours</span></h4>
-                <p class="card-text">REMANING HOURS :</p>
+                <h4><span class="d-flex justify-content-center">Remaining Hours to Render</span></h4>
+                <p class="card-text"> </p>
                 <h4 id="realTime"></h4>
                 <h5 class="card-title d-flex justify-content-center"><i class="fa-regular fa-clock" style="color: var(--bs-success); font-size: 60px;"><?php echo $remainingHours ?></i></h5>
             </div>
@@ -165,6 +165,17 @@ include '../Layouts/main-user.php';
           </div>
           </div>
 
+          <div class="col-sm-4">
+            <div class="card ">
+            <div class="card-body text-center">
+                <h4 class="card-title">Hours to Render</h4>
+
+                <h5 class="card-title d-flex justify-content-center"><i class="fa-regular fa-clock" style="color: var(--bs-success); font-size: 60px;"><?php echo $hoursToRender ?></i></h5>
+
+            </div>
+          </div>
+          </div>
+
           <h4 class= ""> Current Progress </h4>
           <div class="progress" style="height: 35px;">
           <div class="progress-bar progress-bar-striped bg-info" role="progressbar"
@@ -187,7 +198,7 @@ include '../Layouts/main-user.php';
       <!-- Progress Bar Label -->
       <div id="progressbar" class="text-center mt-2">
         Progress: <?php echo number_format($percent, 2, '.', '') ?>%
-        Hours to Render : <?php echo  $hoursToRender ?>
+        Hours Rendered : <?php echo  $totalHours ." Hours " ?>
       </div>
 
       </div>
