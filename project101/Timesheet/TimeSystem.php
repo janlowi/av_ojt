@@ -33,7 +33,7 @@ if ($query && mysqli_num_rows($query) > 0) {
         <div class="d-grid gap-2">
             <!-- Button trigger modal -->
             <button disabled type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#timeInDefault">
-               Time Out
+               Need a minimum of 2 hours to time out.
             </button>
         </div>
     ';

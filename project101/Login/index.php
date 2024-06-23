@@ -14,8 +14,14 @@ include "../Layouts/main.php";
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #f0f0f0; /* Added a background color */
             color: #000; /* Set text color to black */
+        }
+        .bg-image{
+            height:100%;
+            width:100%;
+            position: fixed;
+            background-image: url(../Assets/img/illustrations/bck.jpg);
+            background-image: cover;
         }
 
         .form-container{
@@ -72,7 +78,8 @@ include "../Layouts/main.php";
             text-align: center;
         }
 
-        .sign {
+        .sign h2 {
+            color: white;
             position: absolute;
             right: 150px;
             top: 20px;
@@ -159,7 +166,7 @@ include "../Layouts/main.php";
 
         }
         .copyright-container p {
-        margin-top: 80px;
+        margin-top: 50px;
         color: #b4bdc6;
     }   
     #showPassword:hover{
@@ -167,8 +174,7 @@ include "../Layouts/main.php";
     }
 
     </style>
-
-
+    <div class="bg-image"></div>
 <div class="form-container ">
      <form action="../Php/php-login.php" method="POST">
      
@@ -176,9 +182,11 @@ include "../Layouts/main.php";
          <div class="img-cont  bg-dark">
              
          <div class="image"><img src="avega.png" alt="Logo" width="110" height="80"></div> 
-             <div class="welcome-container text-light">
-                 <p>avams</p>
+             <div class="welcome-container text-light fs-2 fw-bold">
+                 <p>TAMS</p>
+               
              </div>
+             <p class = " text-light fs-5">Trainees Attendance Monitoring System</p>
              <div class=" text-light fw-medium mt-5">
                  <p>This is an attendance and weekly reports monitoring system . Developed to provide a real-time tracking of Avega OJTs 
                     attendance and reports.

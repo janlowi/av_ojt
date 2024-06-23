@@ -6,7 +6,9 @@ checkLoggedIn();
 $title="User Dashboard";
 include '../Layouts/main-user.php'; 
  include '../Php/db_connect.php';
+ $department_id = $_SESSION['department_id'];
 ?>
+
   <div class="card ">
         <div class="card-body ">
 
@@ -150,7 +152,7 @@ include '../Layouts/main-user.php';
             <div class="card-body text-center">
                 <h4 class="card-title">Weekly Report</h4>
                   <p class="card-text mt-4">
-                    PLease submit a response weekly of your weekly duties or reports.
+                    PLease submit a response of your weekly duties or reports.
                   </p>
                   <button
                     type="button"
@@ -236,9 +238,10 @@ include '../Layouts/main-user.php';
 
                                          if($department_query && mysqli_num_rows($department_query)> 0){
                                                  while($department_row = mysqli_fetch_assoc($department_query)){
-
+                                                  $selected = ($department_row['id'] == $department_id) ? 'selected' : '';
                                                          echo '
-                                                                 <option value="'.$department_row['id'].'">'.$department_row['departments'].'</option>
+                                                                 <option value="'.$department_row['id'].'" '.$selected.'>
+                                                                 '.$department_row['departments'].'</option>
                                                          ';
                                                  }
                                          }

@@ -96,22 +96,7 @@ $admin_department= $_SESSION['department_id'];
             <div class="col">
             <input type="text" name="end_date" id="end_date" placeholder="Date End" class="form-control" />
             </div>
-            <div class="col">
-            <select name="department" id="department" class="form-control">
-            <option value="">Select Department</option>
-                <?php $dp = "SELECT * FROM departments";
-                      $dp_result = $connect->query($dp);
-                    if($dp_result->num_rows > 0){
-                        while($departments =$dp_result->fetch_assoc()){
-                    ?>
-                         
-                            <option value="<?= $departments['id'] ?>"><?= $departments['departments'] ?></option>
-                    <?php
-                     }
-                    }
-                ?>
-                </select>
-            </div>  
+
             <div class="col">
             <select name="office" id="office" class="form-control">
             <option value="">Select Office</option>
@@ -125,6 +110,24 @@ $admin_department= $_SESSION['department_id'];
             <input type="button" name="filter" id="filter" value="Filter" class="btn btn-info" />
             <input type="button" name="reset" id="reset" value="Reset" class="btn btn-warning" />
             </div>
+            <div class="col">
+            <select name="department" id="department" class="form-control" hidden>
+            <option value="">Select Department</option>
+                <?php $dp = "SELECT * FROM departments";
+                      $dp_result = $connect->query($dp);
+                    if($dp_result->num_rows > 0){
+                        while($departments =$dp_result->fetch_assoc()){
+                    ?>
+                         
+                            <option value="<?= $departments['id'] ?>" 
+                            <?php if ($admin_department == $departments['id']){ echo "selected";} ?>
+                            ><?= $departments['departments'] ?></option>
+                    <?php
+                     }
+                    }
+                ?>
+                </select>
+            </div>  
         </div>   <br><br>  
 
     <div class="table-responsive text-nowrap" >
@@ -140,7 +143,7 @@ $admin_department= $_SESSION['department_id'];
                 $result_dates = mysqli_query($connect, $sql_dates);
                 if ($result_dates && mysqli_num_rows($result_dates) > 0) {
                     while ($row_date = mysqli_fetch_assoc($result_dates)) {
-                        echo "<th class='bg-dark text-light'>" . date("D M j", strtotime($row_date['date'])) . "</th>";
+                        echo "<th class='bg-dark text-light'>" . date("D M j Y", strtotime($row_date['date'])) . "</th>";
                     
                     }
                 }
@@ -266,7 +269,7 @@ $('#reset').click(function(){
                 $result_dates = mysqli_query($connect, $sql_dates);
                 if ($result_dates && mysqli_num_rows($result_dates) > 0) {
                     while ($row_date = mysqli_fetch_assoc($result_dates)) {
-                        echo "<th class='bg-dark text-light'>" . date("D M j", strtotime($row_date['date'])) . "</th>";
+                        echo "<th class='bg-dark text-light'>" . date("D M j Y", strtotime($row_date['date'])) . "</th>";
                     
                     }
                 }

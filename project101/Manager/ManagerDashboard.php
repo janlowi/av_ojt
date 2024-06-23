@@ -77,7 +77,7 @@ $department_id = $_SESSION['department_id'];
      ?>
                      <tr>
                         <td><?= $row ['id'] ?></td>
-                        <td><?=  $row ['last_name'].","." ". $row['first_name']." ". $row['middle_name'] ?></td>;                     
+                        <td><?=  $row ['last_name'].","." ". $row['first_name']." ". $row['middle_name'] ?></td>                   
                         <td><?= $row ['sex'] ?></td>
                         <td><?= $row ['departments'] ?></td>
                         <td><?= $row ['office_assigned'] ?></td>

@@ -553,7 +553,7 @@ function disableFields(formId) {
      ?>
                      <tr>
                         <td><?= $row ['id']; ?></td>
-                        <td><?=  $row ['last_name'].","." ". $row['first_name']." ". $row['middle_name']; ?></td>;                     
+                        <td><?=  $row ['last_name'].","." ". $row['first_name']." ". $row['middle_name']; ?></td>                 
                         <td><?= $row ['sex']; ?></td>
                         <!-- <td><?= $row ['dos']; ?></td> -->
                         <td><?= $row ['departments']; ?></td>
@@ -583,7 +583,7 @@ function disableFields(formId) {
                         <div class="col-md-12">
                             <a class="item" href="../Admin/Update.php? update=<?= $row ['id']; ?>"
                                 ><button class= "btn btn-info">Update</button></i></a>
-                            <a class="btn btn-danger" href="../Php/php-changepass.php?reset_pass=<?= $user_id ?>">Reset Password</a>
+                            <a class="btn btn-danger" href="../Php/php-changepass.php?reset_pass=<?= $row ['id']; ?>">Reset Password</a>
                         </div>
                         </td>
                       </tr> 

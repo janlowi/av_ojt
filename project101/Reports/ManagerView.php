@@ -44,6 +44,7 @@ include '../Layouts/main-manager.php';
 
                                             $sql = "SELECT rp.*,
                                                             us.id,
+                                                            us.office_assigned,
                                                             dp.id,
                                                             dp.departments
                                                     FROM reports rp
@@ -60,6 +61,7 @@ include '../Layouts/main-manager.php';
                     if ($result && mysqli_num_rows($result) > 0) {
                     while ($row = mysqli_fetch_assoc($result)) {
                       $timestamp =  date('Y-m-d h:i:s a', strtotime($row['timestamp']));
+                      $office = $row['office_assigned'];
                       $dos = $row['dos'];
                       $doe = $row['doe'];
                       $departments = $row['departments'];
@@ -69,6 +71,7 @@ include '../Layouts/main-manager.php';
                         $learnings = $row['learnings'];
                             // Outputting the form data within the HTML structure
                             echo '<div class="container">';
+                            echo "<div class='section'><strong><label for='Office'>Office:</label></strong><p>$office</p></div>";
                             echo "<div class='section'><strong><label for='timestamp'>Timestamp:</label></strong><p>$timestamp</p></div>";
                             echo "<div class='section'><strong><label for='department'>Department:</label></strong><p>$departments</p></div>";
                             echo "<div class='section'><strong><label for='dos'>Start:</label></strong><p>$dos</p></div>";

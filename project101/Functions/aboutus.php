@@ -25,85 +25,307 @@ $usertype = $_SESSION['usertype'];
             padding: 0;
         }
         .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
+            position: relative;
+            max-width: 1000px;
+            margin: auto;
+            padding: 0 30px 0 30px;
+            background-color: white;
+            height: 1200px;
         }
-        .trainee {
-            display: inline-block;
-            margin: 20px;
-            text-align: center;
-        }
-        .trainee img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 10px;
-        }
-        .trainee h3 {
-            margin: 0;
-            font-size: 18px;
-        }
-      
-          
+
+
+        .logo-container {
+    position:absolute;
+    left:0px;
+    margin-bottom: 20px; 
+    width: 100%;
+    height: 150px;
+    /* background-color:white; */
+}
+
+.logo-ctu {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    margin: 0 0 10px 20px;
+
+}
+.logo-av {
+    position: absolute;
+    right: 0px;
+    transform:scale(.8);
+    width: 180px;
+    height: 140px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+.logo-container .content-container {
+    width: 300px;
+
+}
+.logo-container .content{
+    padding-top: 20px;
+    align-items: middle;
+    position: absolute;
+    top:0;
+    right: 50%;
+    transform: translateX(50%);
+}
+
+        .text-center {
+    text-align: center;
+}
+.about{
+    position: relative;
+    top: 250px;
+}
+.images{
+    position: relative;
+    top: 250px;
+}
+.Trainee{
+    margin: 20px 15px 0 0;
+    width: 220px;
+    height: 220px;
+}
+
+   
     </style>
 </head>
 <body>
 
 <div class="container">
-<?php
-  $redirect_url = ($usertype === 'Trainee') ? '../Users/UserDashboard.php' : ($usertype === 'Admin' ? '../Admin/AdminDashboard.php' : '../Manager/ManagerDashboard.php');;
-?>
+    <?php
+    $redirect_url = ($usertype === 'Trainee') ? '../Users/UserDashboard.php' : ($usertype === 'Admin' ? '../Admin/AdminDashboard.php' : '../Manager/ManagerDashboard.php');;
+    ?>
     <a href="<?php echo $redirect_url ?>"> 
         <button class ="btn- btn-dark">
         Back
     </button></a>
    
 
-
-
-    <h2>About Us</h2>
-    <p>Welcome to our team! 
-We're the backbone of technology solutions.
-Join us to innovate and drive excellence.
-    </p>
-
-    <!-- Trainee 1 -->
-     
-    <div class="trainee">
-        <img src="../Assets/img/us/stuart.jpg" alt="Trainee 3">
-        <h3>John Louie T. Gastardo</h3>
+    <div class="logo-container">
+        <img src="../Assets/img/us/ctu.jpg" alt="CTU Logo" class="logo-ctu">
+       <img src="../Assets/img/us/avega.png" alt="CTU Logo" class="logo-av">
+       <div class = "content-container">
+        <p class="text-center content">
+                <strong>
+                Cebu Techonological University
+                </strong> <br>
+                <small>
+                    Daanbantayan-Campus
+                </small><br>  <small>
+                   Bachelor of Industrial Technology major in Computer Technology
+                </small><br>
+                <strong>
+                Avega Bros. Integrated Shipping Corp.
+                </strong> <br>
+                <small>
+                  On-the-Job Trainees
+                </small><br>
+                <small>
+                  Batch 2023-2024
+                </small>
+                
+            </p>
+        </div>
     </div>
-    
-
-    <!-- Trainee 2 -->
-   
-    <!-- Trainee 3 -->
-    <div class="trainee">
-        <img src="../Assets/img/us/bebe.jpg" alt="Trainee 3">
-        <h3>Bebelyn P. Rodrigo</h3>
-
-    </div> <div class="trainee">
-        <img src="../Assets/img/us/cha.jpg" alt="Trainee 3">
-        <h3>Charity N. Salgarino</h3>
+    <div class = "about">
+        <h5>About Us : </h5>
+        <h5>
+        We are the world
+        We are the children
+        We are the ones who make a brighter day, so let's start giving.
+        </h5>
     </div>
-    <div class="trainee">
-        <img src="../Assets/img/us/chu.jpg" alt="Trainee 2">
-        <h3>Marichu P. Arriesgado</h3>
+    <div class=" images">
+    <div class="row align-items-start">
+        <div class="col">
+        <figure class="figure">
+        <img src="../Assets/img/us/gru.png" alt="Trainee 3" class ="Trainee" >
+        <figcaption class="figure-caption">
+
+        <div class="accordion accordion-flush" id="accordionPanelsStayOpenExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#Trainee-1" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+            John Louie T.Gastardo 
+            </button>
+            </h2>
+            <div id="Trainee-1" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
+            <div class="accordion-body">
+                <strong>Project Manager</strong> <br>
+                <strong>Developer</strong> <br>
+               
+                <strong>Personal Project x Profile : </strong> <br>
+                : <a href="">Profile</a> <br> <br>
+
+                <p>
+                    "Minioons!<br>
+                    Together, We will steal the mooooon !. "
+                </p> 
+
+            </div>
+            </div>
+        </div>
+        </div>
+        
+        </figcaption>
+        </figure>
+        </div>
+
+
+        <div class="col">
+        <figure class="figure">
+        <img src="../Assets/img/us/yang.jpg" alt="Trainee 3" class ="Trainee" >
+        <figcaption class="figure-caption">
+        <div class="accordion accordion-flush" id="accordionPanelsStayOpenExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#Trainee-2" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+            Rhealyn Arnoco
+            </button>
+            </h2>
+            <div id="Trainee-2" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
+            <div class="accordion-body">
+                <strong>Project Manager</strong> <br>
+                <strong>Minion 1 </strong> <br><br>
+                <p>
+                    Waaaaaaaah !!
+                </p>
+
+
+            </div>
+            </div>
+        </div>
+        </div>
+        
+        </figcaption>
+        </figure>
+        </div>
+
+
+        <div class="col">
+        <figure class="figure">
+        <img src="../Assets/img/us/bebe.jpg" alt="Trainee 3" class ="Trainee" >
+        <figcaption class="figure-caption">
+            <div class="accordion accordion-flush" id="accordionPanelsStayOpenExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#Trainee-3" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                Bebelyn Rodrigo
+                </button>
+                </h2>
+                <div id="Trainee-3" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
+                <div class="accordion-body">
+                    <strong>Project Manager</strong> <br>
+                <strong>Minion 2 </strong> <br><br>
+                <p>
+                    Bananaaaaaaa !!
+                </p>
+
+
+                </div>
+                </div>
+            </div>
+            </div>
+        
+        </figcaption>
+        </figure>
+        </div>  
+
+
+        <div class="col">
+        <figure class="figure">
+        <img src="../Assets/img/us/zyrah.jpg" alt="Trainee 3" class ="Trainee" >
+        <figcaption class="figure-caption">
+            <div class="accordion accordion-flush" id="accordionPanelsStayOpenExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#Trainee-4" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                Zyrah Pepito
+                </button>
+                </h2>
+                <div id="Trainee-4" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
+                <div class="accordion-body">
+                    <strong>Project Manager</strong> <br>
+                <strong>Minion 3 </strong> <br><br>
+                <p>
+                    coopee go !!
+                </p>
+
+
+                </div>
+                </div>
+            </div>
+            </div>
+
+        </figcaption>
+        </figure>
+        </div>  
+
+
+        <div class="col">
+        <figure class="figure">
+        <img src="../Assets/img/us/cha.jpg" alt="Trainee 3" class ="Trainee" >
+        <figcaption class="figure-caption">
+            <div class="accordion accordion-flush" id="accordionPanelsStayOpenExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#Trainee-5" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                Charity Salgarino
+                </button>
+                </h2>
+                <div id="Trainee-5" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
+                <div class="accordion-body">
+                    <strong>Project Manager</strong> <br>
+                <strong>Minion 4 </strong> <br><br>
+                <p>
+                    Bananaaaaaaa !!
+                </p>
+
+
+                </div>
+                </div>
+            </div>
+            </div>
+        
+        </figcaption>
+        </figure>
+        </div>  
+
+
+        <div class="col">
+        <figure class="figure">
+        <img src="../Assets/img/us/chu.jpg" alt="Trainee 3" class ="Trainee" >
+        <figcaption class="figure-caption">
+            <div class="accordion accordion-flush" id="accordionPanelsStayOpenExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#Trainee-6" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                Marichu Arriesgado
+                </button>
+                </h2>
+                <div id="Trainee-6" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
+                <div class="accordion-body">
+                    <strong>Project Manager</strong> <br>
+                <strong>Minion 5 </strong> <br><br>
+                <p>
+                coopee go!!
+                </p>
+
+
+                </div>
+                </div>
+            </div>
+            </div>
+        
+        </figcaption>
+        </figure>
+        </div>
+    </div>
     </div>
 
-    <div class="trainee">
-        <img src="../Assets/img/us/zyrah.jpg" alt="Trainee 1">
-        <h3>Zyrah M. Pepito</h3>
-    </div>
-    <div class="trainee">
-        <img src="../Assets/img/us/yang.jpg" alt="Trainee 3">
-        <h3>Rhealyn O. Arnoco</h3>
-    </div>
-
-
-    <!-- Add more trainees as needed -->
 
 </div>
 

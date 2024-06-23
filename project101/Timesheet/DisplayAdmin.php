@@ -35,6 +35,7 @@ include '../Layouts/main-admin.php';
             AND DATE(t2.timestamp) = DATE(t1.timestamp) 
       )
       AND DATE(t1.timestamp) != CURDATE()
+
             ";
     $result = mysqli_query($connect, $sql);
     
@@ -48,8 +49,6 @@ include '../Layouts/main-admin.php';
                 $user_id = $row['user_id'];
                 $timestamp =  date('Y-m-d h:i:s a', strtotime($row['timestamp']));
                 $department_id = $row['department_id'];
-
-
 //UPDATE THOSE WHO DONT LOG OUT
 
                 $sql_names = "SELECT * FROM users WHERE id= '$user_id'";
@@ -135,11 +134,11 @@ include '../Layouts/main-admin.php';
                 <th class='bg-dark text-light'>Department</th>
                 <?php 
                  // Fetch all unique dates from the timestamp column
-                $sql_dates = "SELECT DISTINCT DATE(timestamp) AS date FROM timesheet";
+                $sql_dates = "SELECT DISTINCT DATE(timestamp) AS date FROM timesheet ORDER BY timestamp ASC";
                 $result_dates = mysqli_query($connect, $sql_dates);
                 if ($result_dates && mysqli_num_rows($result_dates) > 0) {
                     while ($row_date = mysqli_fetch_assoc($result_dates)) {
-                        echo "<th class='bg-dark text-light'>" . date("D M j", strtotime($row_date['date'])) . "</th>";
+                        echo "<th class='bg-dark text-light'>" . date("D M j Y", strtotime($row_date['date'])) . "</th>";
                     
                     }
                 }
@@ -269,7 +268,7 @@ $('#reset').click(function(){
                 $result_dates = mysqli_query($connect, $sql_dates);
                 if ($result_dates && mysqli_num_rows($result_dates) > 0) {
                     while ($row_date = mysqli_fetch_assoc($result_dates)) {
-                        echo "<th class='bg-dark text-light'>" . date("D M j", strtotime($row_date['date'])) . "</th>";
+                        echo "<th class='bg-dark text-light'>" . date("D M j Y", strtotime($row_date['date'])) . "</th>";
                     
                     }
                 }

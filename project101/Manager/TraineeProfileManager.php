@@ -24,8 +24,8 @@ if (isset($_GET['trainee_profile'])){
                                   tr.hours_to_render
                                 FROM users us, trainees tr
                                 WHERE us.id=tr.user_id
-                                AND us.id='$trainee_profile_id';
-                              ");
+                                AND us.id='$trainee_profile_id'");
+                
 
    if($row=mysqli_fetch_assoc($res)) {
       $ojtid=$row['ojt_id'];
@@ -78,6 +78,7 @@ if (isset($_GET['trainee_profile'])){
       <div class="card-body d-flex justify-content-center">
       <img class="card-img-top" style= "width: 350px; height: 430px;" src="../assets/img/avatars/<?= $profile?>" alt="Card image cap" />
     <br>
+    <br> 
       </div>
     </div>
   </div>

@@ -24,13 +24,16 @@ if(isset($_POST['insertNotification'])){
                 $sql = $connect->prepare("INSERT INTO notifications (comment_subject, comment_text, department_id, user_id, comment_status) VALUES (?, ?, ?, ?, ? )");
                 $sql->bind_param('ssiii', $subject, $body, $userDepartmentId, $userId,  $status);
                 $sql->execute();
-                
+
                 // Check for errors after execution
                 if($sql->affected_rows <= 0){
                     $_SESSION['error'] = 'Message failed for user ID ' . $userId;
+                    $sql->close();
 
                 }
+              
         }
+
     }
 
         // If all notifications were inserted successfully
@@ -40,16 +43,9 @@ if(isset($_POST['insertNotification'])){
         $_SESSION['error'] = 'Empty fields or department IDs.';
 
     }
+    // Close the prepared statement
 
-    $sql->close(); // Close the prepared statement
-    $redirect_url = ($usertype === 'Admin') ? '../Notifications/NotificationAdmin.php' : '../Notifications/NotificationManager.php';
-    header("location: $redirect_url");
-    exit();
-}
-?>
-
-<?php
-if (isset($_GET['mark_as_read']) && !empty($_GET['mark_as_read'])) {
+}elseif (isset($_GET['mark_as_read']) && !empty($_GET['mark_as_read'])) {
     $notification_id = $_GET['mark_as_read'];
     $status = [
       "Admin" => 4,

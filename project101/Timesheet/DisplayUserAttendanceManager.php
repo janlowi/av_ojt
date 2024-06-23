@@ -38,7 +38,7 @@ include '../Layouts/main-manager.php';
  <table class="table table-stripes" id ="userAttendance">
      <thead class="bg-success" >
          <tr>
-             <th>Department</th>
+             <!-- <th>Department</th> -->
              <th>Date</th>
              <th>Day</th>
              <th>Time In</th>
@@ -81,7 +81,7 @@ include '../Layouts/main-manager.php';
                  if ($prev_row && $prev_row['event_type'] !== $event_type && $date === date('Y-m-d', strtotime($prev_row['timestamp']))) {
                      ?>
                      <tr>
-                         <td><?php echo $prev_row['departments']; ?></td>
+                         <!-- <td><?php echo $prev_row['departments']; ?></td> -->
                          <td><?php echo $date; ?></td>
                          <td><?php echo $today; ?></td>
                          <?php if ($prev_row['event_type'] === 'In') { ?>
@@ -104,8 +104,8 @@ include '../Layouts/main-manager.php';
          </tbody>
          <!-- Display total hours row outside the loop -->
          <tr style="text-align: right;">
-             <td colspan="5"><strong>Total Hours:</strong></td>
-             <td colspan="5"  ><?php echo $totalHours; ?></td>
+             <td colspan="4"><strong>Total Hours:</strong></td>
+             <td colspan="4"  ><?php echo $totalHours; ?></td>
          </tr>
 
 

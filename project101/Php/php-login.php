@@ -48,7 +48,44 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     } else {
                         $_SESSION['profile'] = $row['profile'];
                     }
-                    $_SESSION['logged_in']=true;
+
+                    if( $_SESSION['logged_in']=true) {
+                        $sql = "SELECT user_id, timestamp, us.department_id 
+                        FROM timesheet t1
+                        INNER JOIN users us ON us.id = t1.user_id
+                        WHERE event_type = 'In'
+                          AND NOT EXISTS (
+                              SELECT 1
+                              FROM timesheet t2
+                              WHERE t2.user_id = t1.user_id
+                                AND event_type = 'Out'
+                                AND DATE(t2.timestamp) = DATE(t1.timestamp) 
+                          )
+                          AND DATE(t1.timestamp) != CURDATE()
+                                ";
+                        $result = mysqli_query($connect, $sql);
+                        
+                    
+                            // Step 3: Process the Results
+                            if (mysqli_num_rows($result) > 0) {
+                    
+                                while ($row_out = mysqli_fetch_assoc($result)) {
+                    
+                                    $user_id = $row_out['user_id'];
+                                    $timestamp =  date('Y-m-d h:i:s a', strtotime($row['timestamp']));
+                                    $departmentId = $row_out['department_id'];
+                    
+                                    $subject = "User $user_id  failed to clock out.  ";
+                                    $body = "User $user_id  has failed to clock out yesterday. Please reach to your admin or manager. ";
+                                    $status_notif = 0;
+                    
+                                    $sql_notif = $connect->prepare("INSERT INTO notifications (comment_subject, comment_text, department_id, user_id, comment_status) VALUES (?, ?, ?, ?, ? )");
+                                    $sql_notif->bind_param('ssiii', $subject, $body, $departmentId, $user_id,  $status_notif);
+                                    $sql_notif->execute();
+                                    $sql_notif-> close();
+                                }
+                               }
+               
                     if ($_SESSION['usertype'] === 'Admin') {
                         $_SESSION['Admin']=true;
                         $_SESSION['department_id'] = $row['department_id'];
@@ -71,6 +108,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         
                     } else {
                         $_SESSION['error'] ="Unknown user type: " . $_SESSION['usertype'];
+                    }
+                   
+
                     }
                 } 
             } else {

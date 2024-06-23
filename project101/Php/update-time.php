@@ -13,10 +13,11 @@ mysqli_query($connect, $disable_auto_update_sql);
 
 
         if (isset($_POST ['update_time'])){
+            date_default_timezone_set('Asia/Manila'); // local timezone
             $user_id=$_POST['failed_to_out'];
             $date=$_POST['dateNtime'];
+            $department_id=$_POST['department_id'];
             $yesterday_In_timestamp=$_POST['yesterday_In_timestamp'];
-
             $yesterday_date = date('Y-m-d', strtotime($yesterday_In_timestamp));
             $timestamp = $yesterday_date.' '.$date;
 
@@ -43,6 +44,19 @@ mysqli_query($connect, $disable_auto_update_sql);
                     $query1=mysqli_query($connect,$sql1);
         
                     if($query1==1){
+                        $status = [
+                            "Admin" => 4,
+                            "Manager" => 5,
+                      
+                          ];
+                          $comment_status = $status[$usertype];
+                          $sql = "UPDATE notifications SET comment_status = ? WHERE user_id = ? AND department_id = ? AND comment_status = 0";
+                          $stmt = mysqli_prepare($connect, $sql);
+                          mysqli_stmt_bind_param($stmt, "iii", $comment_status, $user_id, $department_id);
+                          $result = mysqli_stmt_execute($stmt);
+                          mysqli_stmt_close($stmt);
+
+
                         $_SESSION['success']= "User ID: $user_id has been clocked out successfully";
                         $redirect_url = ($usertype === 'Admin') ? '../Timesheet/DisplayAdmin.php' : '../Timesheet/DisplayManager.php';
                         header("location: $redirect_url");

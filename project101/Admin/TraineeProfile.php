@@ -79,9 +79,9 @@ if (isset($_GET['trainee_profile'])){
       <div class="card-body d-flex justify-content-center">
       <img class="card-img-top" style= "width: 350px; height: 430px;" src="../assets/img/avatars/<?= $profile?>" alt="Card image cap" />
     <br>
-    <!-- <div style = "position:absolute; bottom: 0px;">
+    <div style = "position:absolute; bottom: 0px;">
     <i class='fa-solid fa-camera' style = "font-size: 25px; color: black;"  data-bs-toggle="modal" data-bs-target="#modalProfile" > </i>
-    </div> -->
+    </div>
    
       </div>
     </div>
@@ -587,6 +587,43 @@ if (isset($_GET['trainee_profile'])){
       </div>
     </div>
   </div>
+
+  <!-- Modal Profile-->
+<div class="modal fade" id="modalProfile" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title" id="modalCenterTitle">Upload Profile Picture</h2>
+
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close">
+          </button>
+        </div>
+          <div class="row">
+                    <div class="col-xl">
+                    <div class="card mb-4">
+                    <div class="card-body">
+              <form method="POST" enctype="multipart/form-data" action="../Php/php-upload.php ">
+                <input type="file" name="image" class="form-control"/>
+                <label for="qoute">Phrase</label>
+             
+                <input type="text" name="qoute" class="form-control" id= "qoute"/>
+                <label for="author">Author</label>
+                <input type="text" name="author" class="form-control" id="author"/>
+                <input type="text" value = "<?=$trainee_profile_id?>" name = "user_id" hidden/>
+                <br><br>
+              <div class="d-grid gap-2 col-6 mx-auto">
+                <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+                </div>
+              </form>
+        </div>
+      </div>
+    </div>
+   </div>
+ </div>
   <?php include '../Layouts/realfooter.php'; ?>
  <?php
 include '../Layouts/footer.php'; 

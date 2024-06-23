@@ -3,7 +3,7 @@
     $user_department = $_SESSION['department_id'];
     $department_id=$_SESSION['department_id'];
     $userId = $_SESSION['user_id'];
-    $sql = "SELECT * FROM notifications WHERE department_id = '$department_id' AND user_id = '$userId' AND comment_status = 1";
+    $sql = "SELECT * FROM notifications WHERE department_id = '$department_id' AND comment_status IN (1,0)";
     $result=$connect->query($sql);
     $result_count = $result->num_rows; 
 ?>
@@ -121,9 +121,9 @@
           <div class="app-brand demoh-25 d-inline-block d-flex justify-content-center mt-2">
             <a href="https://www.avegabros.com/" class="app-brand-link">
             <span class="app-brand-logo demo d-flex justify-content-center fixed">
-         <img width= '130' height= '100' src="../assets/img/favicon/av.jpg" alt="" xlink:href="https://www.avegabros.com/" >
+         <img class="mt-3" width= '90' height= '60' src="../assets/img/favicon/av.jpg" alt="" xlink:href="https://www.avegabros.com/" >
         </span>
-        <span class="app-brand-text demo menu-text fw-bold ms-2 ">avams</span>
+        <span class="app-brand-text demo menu-text fw-bold ms-2 text-uppercase mt-3 fs-2 ">TAMS</span>
             </a>
 
             <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -264,7 +264,7 @@
 </i>
 <ul class="dropdown-menu" id = "dropdown" aria-labelledby="notification"  aria-expanded="false">
 <?php 
-$sql_all = "SELECT * FROM notifications  WHERE department_id = '$user_department' AND  user_id = '$userId'  ORDER BY comment_status ASC, id DESC LIMIT 5";
+$sql_all = "SELECT * FROM notifications  WHERE department_id = '$user_department'  ORDER BY comment_status ASC, id DESC LIMIT 5";
 $result_all = $connect->query($sql_all);
 if ($result_all->num_rows > 0) {
     while ($message = $result_all->fetch_assoc()) {
@@ -273,7 +273,7 @@ if ($result_all->num_rows > 0) {
         $modal = 'modal_'.$message['id'];
 
         // Check if the status is 1 (read), then set the class accordingly
-        $spanClass = ($messageStatus == 1) ? 'read-notification' : '';
+        $spanClass = ($messageStatus == 1 || $messageStatus == 0) ? 'read-notification' : '';
 
         // Output the list item with the appropriate span class
         ?>
@@ -281,7 +281,7 @@ if ($result_all->num_rows > 0) {
             <span class="dropdown-item <?=$spanClass?>" data-bs-toggle="modal" data-bs-target="#<?=$modal?>">
                 <input type="text" value="<?=$messageId?>" hidden>
                 <strong class="pe-auto strong"><?=$message['comment_subject']?></strong><br>
-                <small class="pe-auto small"><?=substr($message['comment_text'], 0, 25)?>...</small>
+                <small class="pe-auto small"> User : <?=$message['user_id']?></small>
             </span>
           <div class="dropdown-divider"></div>
 
@@ -299,7 +299,7 @@ if ($result_all->num_rows > 0) {
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <?php if($message['comment_status']== 1 ) {?>
+                        <?php if($message['comment_status']== 1 || $message['comment_status']== 0) {?>
                         <a href="../Php/php-notification.php?mark_as_read=<?= $message['id'] ?>" class="btn btn-info">Mark as read</a>
                         <?php } else { ?>
                           <span class="badge rounded-pill bg-success">Checked</span>

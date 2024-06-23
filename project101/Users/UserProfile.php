@@ -90,7 +90,7 @@ if(isset(  $_SESSION['success'])){
   <div class="col-sm-6">
     <div class="card">
       <div class="card-body d-flex justify-content-center">
-      <img class="card-img-top" style= "width: 350px; height: 430px;" src="../assets/img/avatars/<?=$_SESSION['profile'];?>" alt="Card image cap" />
+      <img class="card-img-top" style= "width: 350px; height: 430px;" src="../assets/img/avatars/<?=$row['profile'];?>" alt="Card image cap" />
     <br>
     <div style = "position:absolute; bottom: 0px;">
     <i class='fa-solid fa-camera' style = "font-size: 25px; color: black;"  data-bs-toggle="modal" data-bs-target="#modalProfile" > </i>
@@ -106,10 +106,10 @@ if(isset(  $_SESSION['success'])){
       <h1 class="d-flex align-items-middle"><i class="fa-solid fa-quote-left fa-2xl"></i></h1>
            <figure class="p-3 mb-0">
            <blockquote class="blockquote d-flex justify-content-center"><br><br>
-             <h4><?= $_SESSION['qoute']; ?></h4>
+             <h4><?= $row['qoute']; ?></h4>
            </blockquote>
            <figcaption class="blockquote-footer mb-0 text-muted">
-            <cite title="Source Title"><?=  $_SESSION['author']; ?></cite>
+            <cite title="Source Title"><?=  $row['author']; ?></cite>
            </figcaption>
          </figure>
       </div>
@@ -399,6 +399,7 @@ if(isset(  $_SESSION['success'])){
                 <input type="text" name="qoute" class="form-control" id= "qoute"/>
                 <label for="author">Author</label>
                 <input type="text" name="author" class="form-control" id="author"/>
+                <input type="text" value="<?= $user_id ?>" name="user_id"  hidden/>
                 <br><br>
               <div class="d-grid gap-2 col-6 mx-auto">
                 <button type="submit" name="submit" class="btn btn-primary">Submit</button>

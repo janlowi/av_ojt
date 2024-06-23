@@ -3,6 +3,7 @@ session_start();
 $usertype = 'Trainee';
 include '../Php/authenticate.php';
 checkLoggedIn();
+$title =  $_SESSION ['reportname'].'\'s'.' '. 'Response';
 // checkUserType();
 include '../Php/db_connect.php';
 include '../Layouts/main-user.php';
@@ -21,7 +22,7 @@ include '../Layouts/main-user.php';
               <div class="row">
 
                                <!-- <h2 class="modal-title" id="modalCenterTitle">Responses</h2> -->
-                               <a href="../Reports/DisplayReports.php?view_report=<?=$_SESSION['user_report_id']?>" class="d-flex justify-content-end">
+                               <a href="../Reports/DisplayReports.php" class="d-flex justify-content-end">
                                <button
                                  type="button"
                                 class="btn btn-dark d-flex"
@@ -45,6 +46,7 @@ include '../Layouts/main-user.php';
 
                 $sql = "SELECT rp.*,
                                 us.id,
+                                us.office_assigned,
                                 dp.id,
                                 dp.departments,
                                 tr.ojt_id
@@ -64,6 +66,7 @@ include '../Layouts/main-user.php';
                     while ($row = mysqli_fetch_assoc($result)) {
                         
                         $timestamp =  date('Y-m-d h:i:s a', strtotime($row['timestamp']));;
+                        $office = $row['office_assigned'];
                         $dos = $row['dos'];
                         $doe = $row['doe'];
                         $departments = $row['departments'];
@@ -72,10 +75,11 @@ include '../Layouts/main-user.php';
                         $challenges = $row['challenges'];
                         $learnings = $row['learnings'];
                             echo '<div class="container">';
-                            echo "<div class='section'><strong><label for='summary'>Summary:</label></strong><p>$timestamp</p></div>";
-                            echo "<div class='section'><strong><label for='summary'>Summary:</label></strong><p>$dos</p></div>";
-                            echo "<div class='section'><strong><label for='summary'>Summary:</label></strong><p>$doe</p></div>";
-                            echo "<div class='section'><strong><label for='summary'>Summary:</label></strong><p>$departments</p></div>";
+                            echo "<div class='section'><strong><label for='Office'>Office:</label></strong><p>$office</p></div>";
+                            echo "<div class='section'><strong><label for='timestamp'>Timestamp:</label></strong><p>$timestamp</p></div>";
+                            echo "<div class='section'><strong><label for='Start'>Start:</label></strong><p>$dos</p></div>";
+                            echo "<div class='section'><strong><label for='End'>End:</label></strong><p>$doe</p></div>";
+                            echo "<div class='section'><strong><label for='Departments'>Departments:</label></strong><p>$departments</p></div>";
                             echo "<div class='section'><strong><label for='summary'>Summary:</label></strong><p>$summary</p></div>";
                             echo "<div class='section'><strong><label for='accomplishments'>Accomplishments:</label></strong><p>$accomplishment</p></div>";
                             echo "<div class='section'><strong><label for='challenges'>Challenges:</label></strong><p>$challenges</p></div>";
@@ -92,6 +96,7 @@ include '../Layouts/main-user.php';
         </div> <!-- End of card-body -->
     </div> <!-- End of card -->
 </div>
+
 
 <?php include '../Layouts/realfooter.php';?>
 <?php include '../Layouts/footer.php'; ?>

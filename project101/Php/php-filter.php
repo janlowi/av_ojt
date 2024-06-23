@@ -1,7 +1,7 @@
 <?php 
 include 'db_connect.php';
 
-if (isset($_POST['start_date'], $_POST['end_date'], $_POST['department'] )) {
+if (isset($_POST['start_date'], $_POST['end_date'], $_POST['department'], $_POST['office'] )) {
     $startDate = mysqli_real_escape_string($connect, $_POST['start_date']);
     $endDate = mysqli_real_escape_string($connect, $_POST['end_date']);
     $department = mysqli_real_escape_string($connect, $_POST['department']);
@@ -95,10 +95,11 @@ if ($result_trainees && mysqli_num_rows($result_trainees) > 0) {
     $rph = $row_trainee['rph'] ;
 }
 echo "<tr>";
-echo "<td></td><td></td><td></td>"; // Empty cells for ID, Name, and Department
+echo "<td></td><td></td>"; // Empty cells for ID, Name, and Department
 foreach ($dateColumns as $dateColumn) {
     echo "<td></td>"; // Empty cells for date columns
 }
+echo "<td class='text-dark'>Total : </td>";
 echo "<td class='bg-dark text-light'>" . $total_user_hours . "</td>";
 echo "<td class='bg-dark text-light'>" . $rph . "</td>";
 echo "<td class='bg-dark text-light'>" . number_format($total_rate, 2) . "</td>";

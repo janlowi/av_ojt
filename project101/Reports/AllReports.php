@@ -13,6 +13,7 @@ include '../Layouts/main-admin.php';
 </style>
    <!-- Contextual Classes -->
    <div class="card position-relative   ">
+    
                 <div class="table-responsive text-nowrap">
                   <table class="datatables-ajax table table-dark my-2" id="dataReport">
                     <thead>

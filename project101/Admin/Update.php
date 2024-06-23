@@ -15,7 +15,7 @@ include '../Layouts/main-admin.php';
  $user_id= $_GET['update'];
          $sql = "SELECT us.*
         FROM users us
-        INNER JOIN departments dp ON dp.id = department_id
+        INNER JOIN departments dp ON dp.id = us.department_id
         WHERE us.id = '$user_id' 
         ";      
 
@@ -117,20 +117,20 @@ include '../Layouts/main-admin.php';
                         <div class="col-md-4">    
                                 <label for="sex" class="form-label">Sex</label>
                                 <select name="Sex" id="sex" class="form-select">
-                                        <option value="Male" <?php if ($sex == 'Male' ) {
-                                         echo 'selected'; }?> >Male</option  >
-                                        <option value="Female" <?php if ($sex == 'Female  ' ) {
+                                        <option value="Male" <?php if ($sex === 'Male' ) {
+                                         echo 'selected'; }?>>Male</option  >
+                                        <option value="Female" <?php if ($sex === 'Female' ) {
                                          echo 'selected'; }?>>Female</option>
                                 </select>
                         </div>
                         <div class="col-md-6">    
                                 <label for="usertype" class="form-label">Usertype</label>
                                 <select name="Usertype" id="usertype" class="form-select">
-                                        <option value="Admin" <?php if ($usertype == 'Admin' ) {
+                                        <option value="Admin" <?php if ($usertype === 'Admin' ) {
                                          echo 'selected'; }?>>Admin</option>
-                                        <option value="Trainee" <?php if ($usertype == 'Trainee' ) {
+                                        <option value="Trainee" <?php if ($usertype === 'Trainee' ) {
                                          echo 'selected'; }?>>Trainee</option>
-                                          <option value="Manager" <?php if ($usertype == 'Manager' ) {
+                                          <option value="Manager" <?php if ($usertype === 'Manager' ) {
                                          echo 'selected'; }?>>Manager</option>
                                 </select>
                         </div>
