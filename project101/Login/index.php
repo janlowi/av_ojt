@@ -108,7 +108,12 @@ include "../Layouts/main.php";
             justify-content: center;
             text-align: center;
         }
-
+        .manual a{
+            position: relative;
+            top: 50px;
+            color: white;
+            text-decoration: underline;
+        }
 
         input[type="text"],input[type="email"],
         input[type="password"] {
@@ -222,13 +227,13 @@ include "../Layouts/main.php";
  </div>
                                                              
  </form>
- <div class=" d-flex justify-content-center col-10 mx-auto">
-              <a href=""><button class="btn btn-dark">Download Manual</button></a>
+ <div class="manual d-flex justify-content-center col-10 mx-auto">
+              <a href="https://www.mediafire.com/file/dyckyw9hxgh5589/OJT_MANUAL_1_1_1_%25281%2529.pptx/file">Download Manual</a>
  </div>
  </div>
 
 <script>
-    const togglePassword = document.querySelector("#showPassword");
+    const togglePassword = document.querySelector("#showPassword"); 
 const password = document.querySelector("#password");
 
 togglePassword.addEventListener("click", function () {
