@@ -222,6 +222,9 @@ include "../Layouts/main.php";
  </div>
                                                              
  </form>
+ <div class=" d-flex justify-content-center col-10 mx-auto">
+              <a href=""><button class="btn btn-dark">Download Manual</button></a>
+ </div>
  </div>
 
 <script>
