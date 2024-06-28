@@ -17,6 +17,7 @@ include '../Layouts/main-user.php';
                             <th>Day</th>
                             <th>Time In</th>
                             <th>Time Out</th>
+                            <th>Date and Location</th>
                             <th>Hours Worked</th>
                         </tr>
                     </thead>
@@ -65,6 +66,19 @@ include '../Layouts/main-user.php';
                                             <td><?php echo $time; ?></td>
                                             <td><?php echo date('h:i:s a', strtotime($prev_row['timestamp'])); ?></td>
                                         <?php } ?>
+                                        <td>
+                            <form action="ViewDateLocationTrainee.php" method="POST">
+                                <input type="hidden" name="date" value="<?php echo $date; ?>" />
+                                <input type="hidden" name="trainee_id" value="<?php echo $trainee_id; ?>" />
+                            <button class= "btn btn-success" name="view_location">
+
+                            <i class="fa-solid fa-eye"> </i>
+                            </button>
+                            
+                                </a> 
+                                </form>
+                            
+                            </td>
 
                                         <td><?php echo $row['total_hours']; ?></td>
                                     </tr>

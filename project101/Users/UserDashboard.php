@@ -12,8 +12,10 @@ include '../Layouts/main-user.php';
   <div class="card ">
         <div class="card-body ">
 
-<div class="row">
-    <div class="col-sm-4">
+<div class="row row-cols-3 ">
+
+
+    <div class="col">
         <div class="card">
             <div class="card-body">
                 <?php
@@ -70,15 +72,14 @@ include '../Layouts/main-user.php';
     $currentTImeIn_query=  mysqli_query($connect, $currentTImeIn);
     if($currentTImeIn_query && mysqli_num_rows($currentTImeIn_query)>0){
       $row=mysqli_fetch_assoc($currentTImeIn_query);
-      $currentTimeInRecord= date('Y-m-d H:i:s', strtotime($row['timestamp']));
+      $currentTimeInRecord= date('Y-m-d h:i:s A', strtotime($row['timestamp']));
       $currentEventType = $row['event_type'];
-
      $currentEventType_json = json_encode($currentEventType);
       $timeInValue = json_encode($currentTimeInRecord);
  
     }
     ?>
-<div class="col-sm-4">
+<div class="col">
   <div class="card ">
     <div class="card-body  text-center">
     <h4 class="card-title">Attendance</h4>
@@ -103,51 +104,11 @@ include '../Layouts/main-user.php';
           '; 
         }
   }else{echo "No Record";} ?></i></h5>
- <!-- Modal -->
-  <!-- //leaflet -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
-    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
-
-    <div class="modal fade" id="timeInView" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content overflow-auto">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Daily Timesheet Record</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-
-                <?php
-                 $currentTImeIn_query=  mysqli_query($connect, $currentTImeIn);
-                if($currentTImeIn_query && mysqli_num_rows($currentTImeIn_query)>0){
-                   $row=mysqli_fetch_assoc($currentTImeIn_query);
-                   $image=$row['image'];
-                   $location=$row['location'];
-                   $location_array=explode(",", $location);
-                   $lat=$location_array[0];
-                   $long=$location_array[1];
-                   $lat_json = json_encode($lat);
-                   $long_json = json_encode($long);
-
-                  }?>
-                  <div class="modal-body">
-                  <div class="card" >
-                  <img src="../Php/<?=$image?>" class="rounded mx-auto d-block"  alt="...">
-                  </div>
-                  <div id="map" style="width: 600px; height: 540px;"></div>
-                  <div id="location"> </div>
-                  </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
         <?php include '../Timesheet/TimeSystem.php'; ?>
     </div>
   </div>
 </div>
-
-        <div class="col-sm-4">
+        <div class="col">
             <div class="card ">
             <div class="card-body text-center">
                 <h4 class="card-title">Weekly Report</h4>
@@ -165,48 +126,51 @@ include '../Layouts/main-user.php';
                 </div>
             </div>
           </div>
-          </div>
 
-          <div class="col-sm-4">
-            <div class="card ">
-            <div class="card-body text-center">
-                <h4 class="card-title">Hours to Render</h4>
-
-                <h5 class="card-title d-flex justify-content-center"><i class="fa-regular fa-clock" style="color: var(--bs-success); font-size: 60px;"><?php echo $hoursToRender ?></i></h5>
-
-            </div>
-          </div>
-          </div>
-
-          <h4 class= ""> Current Progress </h4>
-          <div class="progress" style="height: 35px;">
-          <div class="progress-bar progress-bar-striped bg-info" role="progressbar"
-           style="width: <?php if($totalHours != 0 && $hoursToRender != 0 ){
-            echo ($totalHours / $hoursToRender) * 100 ;
-          }else{
-            echo 0;
-          }
-            ?>%" 
-           aria-valuenow="<?php echo $totalHours ?>" 
-           aria-valuemin="0" 
-           aria-valuemax="<?php echo $hoursToRender ?>">
-
-          <span data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo $totalHours," ", " Hours ","||"," ", number_format($percent, 2, '.', '' )?> %"> <?php echo $totalHours," ","Hours" ," - ","||"," ",number_format($percent, 2, '.', '' )?> %</span> 
+  <div class="col">
+    <div class="card ">
+    <div class="card-body text-center">
+    <h4 class="card-title">Hours to Render</h4>
+    <h5 class="card-title d-flex justify-content-center"><i class="fa-regular fa-clock" style="color: var(--bs-success); font-size: 60px;"><?php echo $hoursToRender ?></i></h5>
+    </div>
+  </div>
+  </div>
 
 
-           </div>
-        </div>
+
+
+      </div>
+    </div>
+    <div class= "">
+<h4> Current Progress </h4>
+  <div class="progress" style="height: 35px;">
+  <div class="progress-bar progress-bar-striped bg-info" role="progressbar"
+   style="width: <?php if($totalHours != 0 && $hoursToRender != 0 ){
+    echo ($totalHours / $hoursToRender) * 100 ;
+  }else{
+    echo 0;
+  }
+    ?>%" 
+   aria-valuenow="<?php echo $totalHours ?>" 
+   aria-valuemin="0" 
+   aria-valuemax="<?php echo $hoursToRender ?>">
+
+  <span data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo $totalHours," ", " Hours ","||"," ", number_format($percent, 2, '.', '' )?> %"> <?php echo $totalHours," ","Hours" ," - ","||"," ",number_format($percent, 2, '.', '' )?> %</span> 
+
+<!-- content end  -->
+    </div>
+</div>
 
       <!-- Progress Bar Label -->
       <div id="progressbar" class="text-center mt-2">
         Progress: <?php echo number_format($percent, 2, '.', '') ?>%
         Hours Rendered : <?php echo  $totalHours ." Hours " ?>
       </div>
-
-      </div>
-    </div>
+</div>
  </div>
-                 
+           
+ 
+
     <!-- Modal  for report-->
     <div class="modal fade" id="modalReport" tabindex="-1" aria-hidden="true">
  <div class="modal-dialog modal-lg" role="document">
@@ -276,12 +240,104 @@ include '../Layouts/main-user.php';
                </div>
             </div>
        </div>               
-        <div class="modal-footer">
-      </div>
     </div>
   </div>
 </div>
 
+ <!-- Modal -->
+  <!-- //leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+
+    <div class="modal fade" id="timeInView" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content overflow-auto">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Daily Timesheet Record</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <?php
+                if($currentEventType === "In" || $currentEventType === 'Out'){
+                  $currentIn="SELECT *
+                  FROM timesheet
+                  WHERE DATE(timestamp)='$today'
+                  AND user_id='$user_id'
+                  AND event_type = 'In'
+                  ORDER BY id DESC LIMIT 1
+                      ";
+                  $currentIn_query=  mysqli_query($connect, $currentIn);
+                  if($currentIn_query && mysqli_num_rows($currentIn_query)>0){
+                     $row=mysqli_fetch_assoc($currentIn_query);
+                     $image=$row['image'];
+                     $location=$row['location'];
+                     $location_array=explode(",", $location);
+                     $lat=$location_array[0];
+                     $long=$location_array[1];
+                     $lat_json = json_encode($lat);
+                     $long_json = json_encode($long);
+                     $currentInRecord= date('Y-m-d h:i:s A', strtotime($row['timestamp']));
+                
+                    ?>
+                  <div class="modal-body">
+                  <div class="card">
+                  <div class="card-body"> 
+                
+                  <h5 class="card-title">Time In</h5>
+
+                  <div class = "d-flex align-items-start gap-3">
+                  <img src="../Php/<?=$image?>" class="rounded mx-auto d-block mt-5"  alt="..."  style="width: 400px; height: 400px; margin-right: 50px;  " >
+                  <div>
+                    <h5 class="card-title"><?= $currentInRecord ?> </h5>
+                  <div id="location">Latitude : <?=$lat?> Longitude : <?= $long ?> </div>
+                  <div id="map" style="width: 500px; height: 390px;  margin-right: 50px;"></div>
+                  </div>
+                  </div>
+                  </div>
+                </div>
+                <?php               
+                  }  }
+                ?>
+<?php if($currentEventType === "Out"){
+  $currentTimeOut="SELECT *
+  FROM timesheet
+  WHERE DATE(timestamp)='$today'
+  AND user_id='$user_id'
+  AND event_type = 'Out'
+  ORDER BY id DESC LIMIT 1
+      ";
+    $currentTimeOut_query = mysqli_query($connect, $currentTimeOut);
+    if ($currentTimeOut_query && mysqli_num_rows($currentTimeOut_query) > 0) {
+        $rowTimeOut = mysqli_fetch_assoc($currentTimeOut_query);
+        $imageTimeOut = $rowTimeOut['image'];
+        $locationTimeOut = $rowTimeOut['location'];
+        $location_arrayTimeOut = explode(",", $locationTimeOut);
+        $latTimeOut = $location_arrayTimeOut[0];
+        $longTimeOut = $location_arrayTimeOut[1];
+  ?>
+                <div class="card ">
+                  <div class="card-body">
+                    <h5 class="card-title">Time Out</h5>
+                    <div class = "d-flex align-items-start gap-3">
+                  <img src="../Php/<?=$imageTimeOut?>" class="rounded mx-auto d-block mt-5"  alt="..."  style="width: 400px; height: 400px; margin-right: 50px;  " >
+                  <div>
+                    <h5 class="card-title"><?= $currentTimeInRecord ?> </h5>
+                  <div id="location"> Latitude : <?=$latTimeOut?> Longitude : <?= $longTimeOut ?> </div>
+                  <div id="mapOut" style="width: 500px; height: 390px;  margin-right: 50px;"></div>
+                  </div>
+                </div>
+                </div>
+                </div>
+                <?php } else { ?>
+                  <p>No record of time out.</p>
+                  <?php }}?>
+              </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
   <!-- toast -->
    
@@ -338,8 +394,6 @@ include '../Layouts/main-user.php';
 
 
         <!-- /toast -->
-
-<?php include '../Layouts/realfooter.php';?>
     <?php
 
 include '../Layouts/footer.php'; 
@@ -446,7 +500,48 @@ function onMapClick(e) {
 }
 map.on('click', onMapClick);
 
-    document.getElementById('location').innerHTML = "Latitude: " + latValue + ", Longitude: " + longValue;
+    // document.getElementById('location').innerHTML = "Latitude: " + latValue + ", Longitude: " + longValue;
+
+const mapOut = L.map('mapOut'); 
+
+const latValueOut= <?php echo $lat_json; ?>;
+
+const longValueOut= <?php echo $long_json ?>;
+
+
+mapOut.setView([latValueOut, longValueOut], 13); 
+// Sets initial coordinates and zoom level
+
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+maxZoom: 19,
+attribution: '© OpenStreetMap'
+}).addTo(mapOut); 
+// Sets map data source and associates with map
+
+let markerOut, circleOut, zoomedOut;
+let popupOut = L.popup();
+
+if (markerOut) {
+    mapOut.removeLayer(markerOut);
+    mapOut.removeLayer(circleOut);
+}
+// Removes any existing marker and circule (new ones about to be set)
+
+markerOut = L.marker([latValueOut, longValueOut]).addTo(mapOut);
+circleOut = L.circle([latValueOut, longValueOut]).addTo(mapOut);
+// Adds marker to the map and a circle for accuracy
+
+if (!zoomedOut) {
+    zoomedOut = mapOut.fitBounds(circleOut.getBounds()); 
+}
+function onMapClick(e) {
+popup
+    .setLatlong(e.latValuelongValue)
+    .setContent("You clicked the map at " + e.latValuelongValue.toString())
+    .openOn(mapOut);
+}
+mapOut.on('click', onMapClick);
+
 
 });
 

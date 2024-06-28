@@ -25,7 +25,7 @@ include '../Layouts/main-manager.php';
         </div> 
 
         <div class="col mx-5">
-            <h5>Select Recipients</h5>
+            <h5>Recipient</h5>
             <?php 
     $sql = "SELECT * FROM departments WHERE id = '$user_department'";
     $result = $connect->query($sql);
@@ -33,12 +33,12 @@ include '../Layouts/main-manager.php';
     if($result->num_rows > 0){
         while($department = $result->fetch_assoc()){  
 ?>
-    <div class="form-check">
-        <input class="form-check-input" name="department_ids[]" type="checkbox" id="department_<?= $department['id'] ?>" value="<?= $department['id'] ?>">
-        <label class="form-check-label" for="department_<?= $department['id'] ?>">
+   
+        <input name="department_ids[]" type="checkbox" id="department_<?= $department['id'] ?>" value="<?= $department['id'] ?>" hidden >
+        <label for="department_<?= $department['id'] ?>">
             <?= $department['departments'] ?>
         </label>     
-    </div>       
+       
 <?php 
         }
     }

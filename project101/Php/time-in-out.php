@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (file_put_contents($file, $imageData)) {
 
 
-        if (empty($selfie)) {
+        if (empty($selfie) && empty($lat) && empty($long)) {
             echo "<script>alert('Error: Please capture an image.');</script>";
         } else {
              

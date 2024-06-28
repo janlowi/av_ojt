@@ -142,7 +142,7 @@ $usertype = $_SESSION['usertype'];
     <div class="row align-items-start">
         <div class="col">
         <figure class="figure">
-        <img src="../Assets/img/us/gru.png" alt="Trainee 3" class ="Trainee" >
+        <img src="../Assets/img/us/lowi.jpg" alt="Trainee 3" class ="Trainee" >
         <figcaption class="figure-caption">
 
         <div class="accordion accordion-flush" id="accordionPanelsStayOpenExample">

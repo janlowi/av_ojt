@@ -3,7 +3,7 @@
     include '../Php/db_connect.php';
     $department_id=$_SESSION['department_id'];
     $userId = $_SESSION['user_id'];
-    $sql = "SELECT * FROM notifications WHERE comment_status IN (1,0)";
+    $sql = "SELECT * FROM notifications WHERE comment_status IN (1,0) ";
     $result=$connect->query($sql);
     $result_count = $result->num_rows; 
 ?>
@@ -187,7 +187,7 @@
 
             <li class="menu-item mb-3 mx-3">
             <a href="#" class="menu-link mx-3">
-            © avams
+            © TAMS
             <script>
                     document.write(new Date().getFullYear());
             </script><br>
@@ -215,14 +215,14 @@
     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
       <!-- Search -->
       <div class="navbar-nav align-items-center">
-        <div class="nav-item d-flex align-items-center">
+        <!-- <div class="nav-item d-flex align-items-center">
           <i class="bx bx-search fs-4 lh-0"></i>
           <input
             type="text"
             class="form-control border-0 shadow-none ps-1 ps-sm-2"
             placeholder="Search..."
             aria-label="Search..." />
-        </div>
+        </div> -->
       </div>
       <!-- /Search -->
 
@@ -266,7 +266,7 @@
 </i>
 <ul class="dropdown-menu" id = "dropdown" aria-labelledby="notification"  aria-expanded="false">
 <?php 
-$sql_all ="SELECT * FROM  notifications WHERE department_id = '$department_id' ORDER BY comment_status ASC, id DESC LIMIT 5";
+$sql_all ="SELECT * FROM  notifications  ORDER BY comment_status ASC, id DESC LIMIT 5";
 $result_all = $connect->query($sql_all);
 if ($result_all->num_rows > 0) {
     while ($message = $result_all->fetch_assoc()) {

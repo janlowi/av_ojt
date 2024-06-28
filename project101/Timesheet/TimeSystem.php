@@ -57,14 +57,17 @@ if ($query && mysqli_num_rows($query) > 0) {
                         <h5 class="modal-title" id="staticBackdropLabel">Daily Timesheet Record</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body d-flex justify-content-center">
                         <div>
                             <p>Current Date-Time: <span bg-success id="datetime"></span></p>
                             <p style="color: orange;">Please turn on the GPS on your device.</p>
                             <form id="selfie-form" method="post" action="../Php/time-in-out.php" enctype="multipart/form-data">
                                 <div class = "align-items-center">
                                     <video id="video" width="320" height="240" autoplay></video></br></br>
-                                    <button type="button" id="capture-button" class="btn btn-warning">Capture</button></br></br>
+                                    <div class="d-flex justify-content-center">
+                                <button type="button" id="capture-button" class="btn btn-primary">Capture</button>
+                                </div>
+                                </br></br>
                                     <canvas id="canvas" width="320" height="240" hidden></canvas>
 
                               <label class="form-label" for="lat" >Latitude </label>
@@ -185,14 +188,17 @@ if ($query && mysqli_num_rows($query) > 0) {
                         <h5 class="modal-title" id="staticBackdropLabel">Daily Timesheet Record</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
+                    <div class="modal-body d-flex justify-content-center">
                         <div>
                             <p>Current Date-Time: <span bg-success id="datetime"></span></p>
                             <p style="color: orange;">Please turn on the GPS on your device.</p>
                             <form id="selfie-form" method="post" action="../Php/time-in-out.php" enctype="multipart/form-data">
                                 <div class = "align-items-center">
                                     <video id="video" width="320" height="240" autoplay></video></br></br>
-                                    <button type="button" id="capture-button" class="btn btn-primary">Capture</button></br></br>
+                                    <div class="d-flex justify-content-center">
+                                <button type="button" id="capture-button" class="btn btn-primary">Capture</button>
+                                </div>
+                                </br></br>
                                     <canvas id="canvas" width="320" height="240" hidden></canvas>
 
                                     <label class="form-label" for="lat" >Latitude </label>
@@ -314,14 +320,17 @@ if ($query && mysqli_num_rows($query) > 0) {
                     <h5 class="modal-title" id="staticBackdropLabel">Daily Timesheet Record</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                <div class = "align-items-center">
+                <div class="modal-body d-flex justify-content-center">
+                <div>
                         <p>Current Date-Time: <span bg-success id="datetime"></span></p>
                         <p style="color: orange;">Please turn on the GPS on your device.</p>
                         <form id="selfie-form" method="post" action="../Php/time-in-out.php" enctype="multipart/form-data">
 
                                 <video id="video" width="320" height="240" autoplay></video></br></br>
-                                <button type="button" id="capture-button" class="btn btn-primary">Capture</button></br></br>
+                                <div class="d-flex justify-content-center">
+                                <button type="button" id="capture-button" class="btn btn-primary">Capture</button>
+                                </div>
+                                </br></br>
                                 <canvas id="canvas" width="320" height="240" hidden></canvas>
                           
                             <label class="form-label" for="lat" >Latitude </label>

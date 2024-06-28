@@ -233,5 +233,4 @@ if(isset($_POST['updateBirthday'])) {
       header("Location: ../Admin/Departments.php");
       exit();
     }
-    
 ?>

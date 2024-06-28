@@ -119,7 +119,7 @@ include "../Layouts/main.php";
             border: none;
             border-bottom: 1px solid rgba(0,0,0,0.30); /* Changed to underline style */
             background-color: transparent; /* Transparent background */
-            color: #000; /* Set text color to black */
+            color: white; /* Set text color to black */
             outline: none; /* Remove default outline */
             position: relative; /* Ensure position is relative */
         }

@@ -23,7 +23,7 @@ include '../Layouts/main-admin.php';
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Department Name</th>
-                <th scope="col">Action</th>
+                <th class="col-2">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -41,6 +41,7 @@ include '../Layouts/main-admin.php';
             <td><?= $row['departments'] ?></td>
             <td>
                 <button class = "btn btn-info"  data-bs-toggle="modal" data-bs-target="#departmentModal_<?= $row['id'] ?>"><i class="fa-regular fa-pen-to-square" ></i>Edit</button>
+
             </td>
           </tr>
 
@@ -98,8 +99,9 @@ include '../Layouts/main-admin.php';
                <input type="text" class="form-control" id="inputZip"name = "department" required>
                </div><br>
                <div>
-                <div class=" d-grid gap-2 col-6 mx-auto ">
+                        <div class=" d-grid gap-2 col-6 mx-auto ">
                         <button id="register-btn" type="submit" name ="addDepartment" class="btn btn-dark ">Add</button>
+
                         </div>  
                 </div>
         </form>

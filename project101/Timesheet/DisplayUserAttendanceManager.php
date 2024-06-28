@@ -34,6 +34,55 @@ include '../Layouts/main-manager.php';
          Back
        </button>
    </a>
+   <?php
+                $sql = "SELECT SUM(ts.total_hours) AS total_hours,
+                        ts.user_id,
+                        tr.user_id,
+                        tr.hours_to_render
+                    FROM timesheet ts
+                    INNER JOIN trainees tr ON ts.user_id = tr.user_id
+                    WHERE ts.user_id = '$trainee_id'
+                    AND event_type IN ('In', 'Out')";
+                
+                $query = mysqli_query($connect, $sql);
+                $totalHours = 0;
+                $remainingHours = 0 ;
+                
+                if ($query && mysqli_num_rows($query) > 0) {
+                    $row = mysqli_fetch_assoc($query);
+                    $totalHours = $row['total_hours'];
+                    $hoursToRender = $row['hours_to_render'];
+                    $remainingHours = $hoursToRender - $totalHours;
+                    
+                    if ($totalHours != 0 && $hoursToRender != 0 ) {
+                        $percent = ($totalHours / $hoursToRender) * 100;
+                    } else {
+                        $totalHours = 0;
+                        $percent = 0;
+                    }
+                }
+                ?>
+<h4 class= ""> Current Progress </h4>
+          <div class="progress" style="height: 35px;">
+          <div class="progress-bar progress-bar-striped bg-info" role="progressbar"
+           style="width: <?php if($totalHours != 0 && $hoursToRender != 0 ){
+            echo ($totalHours / $hoursToRender) * 100 ;
+          }else{
+            echo 0;
+          }
+            ?>%" 
+           aria-valuenow="<?php echo $totalHours ?>" 
+           aria-valuemin="0" 
+           aria-valuemax="<?php echo $hoursToRender ?>">
+
+          
+ <span data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo $totalHours," ", " Hours ","||"," ", number_format($percent, 2, '.', '' )?> %"> <?php echo $totalHours," ","Hours" ," - ","||"," ",number_format($percent, 2, '.', '' )?> %</span> <br>
+        </div>
+        </div>
+        <div id="progressbar" class="text-center mt-2">
+        Progress: <?php echo number_format($percent, 2, '.', '') ?>%
+        Hours Rendered : <?php echo  $totalHours ." Hours " ?>
+      </div>
    <br>
  <table class="table table-stripes" id ="userAttendance">
      <thead class="bg-success" >
@@ -43,6 +92,7 @@ include '../Layouts/main-manager.php';
              <th>Day</th>
              <th>Time In</th>
              <th>Time Out</th>
+             <th>Date and Location</th>
              <th>Hours Worked</th>
          </tr>
      </thead>
@@ -91,6 +141,19 @@ include '../Layouts/main-manager.php';
                              <td><?php echo $time; ?></td>
                              <td><?php echo date('h:i:s a', strtotime($prev_row['timestamp'])); ?></td>
                          <?php } ?>
+                         <td>
+                            <form action="ViewDateLocationManager.php" method="POST">
+                                <input type="hidden" name="date" value="<?php echo $date; ?>" />
+                                <input type="hidden" name="trainee_id" value="<?php echo $trainee_id; ?>" />
+                        <button class= "btn btn-success" name="view_location">
+
+                        <i class="fa-solid fa-eye"> </i>
+                        </button>
+                           
+                            </a> 
+                            </form>
+                           
+                         </td>
 
                          <td><?php echo $row['total_hours']; ?></td>
                      </tr>
