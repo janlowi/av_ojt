@@ -1,6 +1,6 @@
 <?php
 session_start();
-$usertype = $_SESSION['usertype'];
+$usertype = $_SESSION['usertype'] ?? '';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,19 +42,19 @@ $usertype = $_SESSION['usertype'];
                 if($usertype === "Admin"){
                     echo '
                     <div class=" d-flex justify-content-center">
-                    <a href="/av_ojt/Project101/Admin/AdminDashboard.php" class = "btn btn-danger">GO BACK</a>
+                    <a href="/project101/Admin/AdminDashboard.php" class = "btn btn-danger">GO BACK</a>
                     </div>
                     ';
                 }elseif($usertype === "Manager") {
                     echo '
                     <div  class=" d-flex justify-content-center">
-                    <a href="/av_ojt/Project101/Manager/ManagerDashboard.php" class = "btn btn-danger">GO BACK</a>
+                    <a href="/project101/Manager/ManagerDashboard.php" class = "btn btn-danger">GO BACK</a>
                     </div>
                     ';
                 }elseif($usertype === "Trainee") {
                     echo '
                     <div  class=" d-flex justify-content-center">
-                    <a href="/av_ojt/Project101/Users/UserDashboard.php" class = "btn btn-danger">GO BACK</a>
+                    <a href="/project101/Users/UserDashboard.php" class = "btn btn-danger">GO BACK</a>
                     </div>
                     ';
                 }

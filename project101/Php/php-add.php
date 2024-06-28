@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $mail_body = 'This is your OJT account:<br><br>'
         . 'Email: ' . $email . '<br>'
         . 'Password: ' . $password_generated . '<br><br>'
-        . '<a href="http://tams.avegabros.local/Login/index.php" style="background-color: #4CAF50; color: white; padding: 15px 25px; text-align: center; text-decoration: none; display: inline-block; border-radius: 10px;">Login</a>';
+        . '<a href="http://tams.avegabros.local" style="background-color: #4CAF50; color: white; padding: 15px 25px; text-align: center; text-decoration: none; display: inline-block; border-radius: 10px;">Login</a>';
 
 
 
@@ -105,10 +105,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             try {
                 //Server settings
                 $mail->isSMTP();
-                $mail->Host       = 'smtp.avegabros.com';
+                $mail->Host       = 'avegabros.com';
                 $mail->SMTPAuth   = true;
                 $mail->Username   = 'noreply@avegabros.com';
-                $mail->Password   = '';
+                $mail->Password   = '}1rQ-T8]%-Xf';
                 $mail->SMTPSecure = 'tls';
                 $mail->Port       = 587;
                 
@@ -210,6 +210,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $email = $_POST["Email"];
         $user_type = $_POST["Usertype"];
         $status = $_POST["Status"];
+        $rph = 0;
         $department = $_POST["Department"];
         $dob = $_POST["Birthday"];
         $default_profile = '../Assets/img/avatars/av.png';
@@ -242,7 +243,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           $mail_body = 'This is your Admin account body:<br><br>'
                       . 'Email: ' . $email . '<br>'
                       . 'Password:' . $password_generated. '<br><br>'
-                      . '<a href="http://tams.avegabros.local/Login/index.php" style="background-color: #4CAF50; color: white; padding: 15px 25px; text-align: center; text-decoration: none; display: inline-block; border-radius: 10px;">Login</a>';
+                      . '<a href="http://tams.avegabros.local" style="background-color: #4CAF50; color: white; padding: 15px 25px; text-align: center; text-decoration: none; display: inline-block; border-radius: 10px;">Login</a>';
         if (
             !empty($firstname) &&   
             !empty($lastname) &&
@@ -266,6 +267,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 password,
                                 user_type,  
                                 department_id,
+                                rph,
                                 office_assigned, 
                                 profile,
                                 status
@@ -280,6 +282,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 '$pass_hashed',
                                 '$user_type',
                                 '$department',
+                                '$rph',
                                 '$office',
                                 '$default_profile',
                                 '$status'
@@ -295,10 +298,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             try {
                 //Server settings
                 $mail->isSMTP();
-                $mail->Host       = 'smtp.avegabros.com';
+                $mail->Host       = 'avegabros.com';
                 $mail->SMTPAuth   = true;
                 $mail->Username   = 'noreply@avegabros.com';
-                $mail->Password   = '';
+                $mail->Password   = '}1rQ-T8]%-Xf';
                 $mail->SMTPSecure = 'tls';
                 $mail->Port       = 587;
                 
@@ -343,6 +346,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $user_type = $_POST["Usertype"];
     $status = $_POST["Status"];
     $department = $_POST["Department"];
+    $rph = 0;
     $dob = $_POST["Birthday"];
     $default_profile = '../Assets/img/avatars/av.png';
 
@@ -374,7 +378,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $mail_body = 'This is your manager account body:<br><br>'
                   . 'Email: ' . $email . '<br>'
                   . 'Password:' . $password_generated. '<br><br>'
-                  . '<a href="http://tams.avegabros.local/Login/index.php" style="background-color: #4CAF50; color: white; padding: 15px 25px; text-align: center; text-decoration: none; display: inline-block; border-radius: 10px;">Login</a>';
+                  . '<a href="http://tams.avegabros.local" style="background-color: #4CAF50; color: white; padding: 15px 25px; text-align: center; text-decoration: none; display: inline-block; border-radius: 10px;">Login</a>';
     if (
         !empty($firstname) &&   
         !empty($lastname) &&
@@ -398,6 +402,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             password,
                             user_type,  
                             department_id,
+                            rph,
                             office_assigned, 
                             profile,
                             status
@@ -412,6 +417,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             '$pass_hashed',
                             '$user_type',
                             '$department',
+                            '$rph',
                             '$office',
                             '$default_profile',
                             '$status'
@@ -427,10 +433,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         try {
             //Server settings
             $mail->isSMTP();
-            $mail->Host       = 'smtp.avegabros.com';
+            $mail->Host       = 'avegabros.com';
             $mail->SMTPAuth   = true;
             $mail->Username   = 'noreply@avegabros.com';
-            $mail->Password   = '';
+            $mail->Password   = '}1rQ-T8]%-Xf';
             $mail->SMTPSecure = 'tls';
             $mail->Port       = 587;
             
