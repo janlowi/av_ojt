@@ -107,7 +107,14 @@ include "../Layouts/main.php";
             position: relative;
             justify-content: center;
             text-align: center;
+        }        
+        .manual a{
+            position: relative;
+            top: 50px;
+            color: white;
+            text-decoration: underline;
         }
+
 
 
         input[type="text"],input[type="email"],
