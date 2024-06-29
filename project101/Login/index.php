@@ -228,7 +228,7 @@ include "../Layouts/main.php";
                                                              
  </form>
  <div class="manual d-flex justify-content-center col-10 mx-auto">
-              <a href="https://www.mediafire.com/file/dyckyw9hxgh5589/OJT_MANUAL_1_1_1_%25281%2529.pptx/file">Download Manual</a>
+              <a href="../Assets/manual/user-manual.ppsx">Download Manual</a>
  </div>
  </div>
 
