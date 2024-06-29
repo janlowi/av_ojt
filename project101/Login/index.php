@@ -229,6 +229,9 @@ include "../Layouts/main.php";
  </div>
                                                              
  </form>
+ <div class="manual d-flex justify-content-center col-10 mx-auto">
+              <a href="../Assets/manual/user-manual.ppsx">Download Manual</a>
+ </div>
  </div>
 
 <script>
