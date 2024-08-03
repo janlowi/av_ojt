@@ -14,7 +14,7 @@
   class="light-style layout-menu-fixed layout-compact"
   dir="ltr"
   data-theme="theme-default"
-  data-assets-path="../assets/"
+  data-Assets-path="../Assets/"
   data-template="vertical-menu-template-free">
   <head>
     <meta charset="utf-8" />
@@ -27,7 +27,7 @@
 
     <meta name="description" content="" />
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="../assets/img/favicon/avlogo.png" />
+    <link rel="icon" type="image/x-icon" href="../Assets/img/favicon/avlogo.png" />
 
    <!-- Font awersome -->
    <script src="https://kit.fontawesome.com/19fed37d60.js" crossorigin="anonymous"></script>
@@ -38,7 +38,7 @@
       href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
       rel="stylesheet" />
 
-    <link rel="stylesheet" href="../assets/vendor/fonts/boxicons.css" />
+    <link rel="stylesheet" href="../Assets/vendor/fonts/boxicons.css" />
 
     <!-- Core CSS -->
     <link rel="stylesheet" href="../Assets/vendor/css/core.css" class="template-customizer-core-css" />
@@ -46,8 +46,8 @@
     <link rel="stylesheet" href="../Assets/css/demo.css" />
 
     <!-- Vendors CSS -->
-    <link rel="stylesheet" href="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-    <link rel="stylesheet" href="../assets/vendor/libs/apex-charts/apex-charts.css" />
+    <link rel="stylesheet" href="../Assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="../Assets/vendor/libs/apex-charts/apex-charts.css" />
 
     <!-- leaflit -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
@@ -60,9 +60,9 @@
  <link rel="stylesheet" href="https://cdn.datatables.net/2.0.7/css/dataTables.bootstrap5.css">
 
     <!-- Helpers -->
-    <script src="../assets/vendor/js/helpers.js"></script>
+    <script src="../Assets/vendor/js/helpers.js"></script>
     
-    <script src="../assets/js/config.js"></script>
+    <script src="../Assets/js/config.js"></script>
   </head>
   <style>
     #hover a:hover {
@@ -121,7 +121,7 @@
           <div class="app-brand demoh-25 d-inline-block d-flex justify-content-center mt-2">
             <a href="https://www.avegabros.com/" class="app-brand-link">
             <span class="app-brand-logo demo d-flex justify-content-center fixed">
-         <img  class="mt-3" width= '90' height= '60'  src="../assets/img/favicon/av.jpg" alt="" xlink:href="https://www.avegabros.com/" >
+         <img  class="mt-3" width= '90' height= '60'  src="../Assets/img/favicon/av.jpg" alt="" xlink:href="https://www.avegabros.com/" >
         </span>
         <span class="app-brand-text demo menu-text fw-bold ms-2  text-uppercase mt-3 fs-2">tams</span>
             </a>
@@ -328,7 +328,7 @@ if ($result_all->num_rows > 0) {
         <li class="nav-item lh-1 me-3">
           <a
             class="text-muted"
-            href="#"> <?= $_SESSION['usertype']. " " .$_SESSION['firstname'] ?> </a>
+            href="#"> <?= $_SESSION['firstname'] ?> </a>
 
         </li>
 
@@ -337,7 +337,7 @@ if ($result_all->num_rows > 0) {
         <li class="nav-item navbar-dropdown dropdown-user dropdown">
           <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
             <div class="avatar avatar-online">
-              <img src="../assets/img/avatars/av.png" alt class="w-px-40 h-px-40 rounded-circle" />
+              <img src="../Assets/img/avatars/av.png" alt class="w-px-40 h-px-40 rounded-circle" />
             </div>
           </a>
           <ul class="dropdown-menu dropdown-menu-end">
@@ -346,7 +346,7 @@ if ($result_all->num_rows > 0) {
                 <div class="d-flex">
                   <div class="flex-shrink-0 me-3">
                     <div class="avatar avatar-online">
-                      <img src="../assets/img/avatars/av.png" alt class="w-px-40 h-px-40 rounded-circle" />
+                      <img src="../Assets/img/avatars/av.png" alt class="w-px-40 h-px-40 rounded-circle" />
                     </div>
                   </div>
                   <div class="flex-grow-1">

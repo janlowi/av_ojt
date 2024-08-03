@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $mail_body = 'This is your OJT account:<br><br>'
         . 'Email: ' . $email . '<br>'
         . 'Password: ' . $password_generated . '<br><br>'
-        . '<a href="http://localhost:8080/av_ojt/project101/Login/index.php" style="background-color: #4CAF50; color: white; padding: 15px 25px; text-align: center; text-decoration: none; display: inline-block; border-radius: 10px;">Login</a>';
+        . '<a href="http://tams.avegabros.local" style="background-color: #4CAF50; color: white; padding: 15px 25px; text-align: center; text-decoration: none; display: inline-block; border-radius: 10px;">Login</a>';
 
 
 
@@ -105,17 +105,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             try {
                 //Server settings
                 $mail->isSMTP();
-                $mail->Host       = 'smtp.gmail.com';
+                $mail->Host       = 'avegabros.com';
                 $mail->SMTPAuth   = true;
-                $mail->Username   = 'gastardo.johnlouie10@gmail.com';
-                $mail->Password   = 'holb ctep kytm ualr';
+                $mail->Username   = 'noreply@avegabros.com';
+                $mail->Password   = '}1rQ-T8]%-Xf';
                 $mail->SMTPSecure = 'tls';
                 $mail->Port       = 587;
                 
                 //Recipients
-                $mail->setFrom('gastardo.johnlouie10@gmail.com', 'John Louie Gastardo');
+                $mail->setFrom('noreply@avegabros.com', 'AvegaIT');
                 $mail->addAddress($email, $firstname);
-                $mail->addReplyTo('info@example.com', 'Information');
                 
                 // Content
                 $mail->isHTML(true);
@@ -171,7 +170,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             university,
                             hours_to_render, 
                             email, 
-                            dos
+                            dos,
+                            qoute,
+                            author
                         ) VALUES (
                             '$ojtid',
                             '$user_id', 
@@ -180,7 +181,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             '$university',
                             '$hours_to_render',
                             '$email',
-                            '$dos'
+                            '$dos',
+                            '--',
+                            '--'
                         )";
   
                 $query = mysqli_query($connect, $insert);
@@ -211,6 +214,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $email = $_POST["Email"];
         $user_type = $_POST["Usertype"];
         $status = $_POST["Status"];
+        $rph = 0;
         $department = $_POST["Department"];
         $dob = $_POST["Birthday"];
         $default_profile = '../Assets/img/avatars/av.png';
@@ -243,7 +247,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           $mail_body = 'This is your Admin account body:<br><br>'
                       . 'Email: ' . $email . '<br>'
                       . 'Password:' . $password_generated. '<br><br>'
-                      . '<a href="http://localhost:8080/av_ojt/project101/Login/index.php" style="background-color: #4CAF50; color: white; padding: 15px 25px; text-align: center; text-decoration: none; display: inline-block; border-radius: 10px;">Login</a>';
+                      . '<a href="http://tams.avegabros.local" style="background-color: #4CAF50; color: white; padding: 15px 25px; text-align: center; text-decoration: none; display: inline-block; border-radius: 10px;">Login</a>';
         if (
             !empty($firstname) &&   
             !empty($lastname) &&
@@ -267,6 +271,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 password,
                                 user_type,  
                                 department_id,
+                                rph,
                                 office_assigned, 
                                 profile,
                                 status
@@ -281,6 +286,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 '$pass_hashed',
                                 '$user_type',
                                 '$department',
+                                '$rph',
                                 '$office',
                                 '$default_profile',
                                 '$status'
@@ -296,17 +302,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             try {
                 //Server settings
                 $mail->isSMTP();
-                $mail->Host       = 'smtp.gmail.com';
+                $mail->Host       = 'avegabros.com';
                 $mail->SMTPAuth   = true;
-                $mail->Username   = 'gastardo.johnlouie10@gmail.com';
-                $mail->Password   = 'holb ctep kytm ualr';
+                $mail->Username   = 'noreply@avegabros.com';
+                $mail->Password   = '}1rQ-T8]%-Xf';
                 $mail->SMTPSecure = 'tls';
                 $mail->Port       = 587;
                 
                 //Recipients
-                $mail->setFrom('gastardo.johnlouie10@gmail.com', 'John Louie Gastardo');
+                $mail->setFrom('noreply@avegabros.com', 'AvegaIT');
                 $mail->addAddress($email, $firstname);
-                $mail->addReplyTo('info@example.com', 'Information');
+ 
                 
                 // Content
                 $mail->isHTML(true);
@@ -344,6 +350,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $user_type = $_POST["Usertype"];
     $status = $_POST["Status"];
     $department = $_POST["Department"];
+    $rph = 0;
     $dob = $_POST["Birthday"];
     $default_profile = '../Assets/img/avatars/av.png';
 
@@ -375,7 +382,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $mail_body = 'This is your manager account body:<br><br>'
                   . 'Email: ' . $email . '<br>'
                   . 'Password:' . $password_generated. '<br><br>'
-                  . '<a href="http://localhost:8080/av_ojt/project101/Login/index.php" style="background-color: #4CAF50; color: white; padding: 15px 25px; text-align: center; text-decoration: none; display: inline-block; border-radius: 10px;">Login</a>';
+                  . '<a href="http://tams.avegabros.local" style="background-color: #4CAF50; color: white; padding: 15px 25px; text-align: center; text-decoration: none; display: inline-block; border-radius: 10px;">Login</a>';
     if (
         !empty($firstname) &&   
         !empty($lastname) &&
@@ -399,6 +406,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             password,
                             user_type,  
                             department_id,
+                            rph,
                             office_assigned, 
                             profile,
                             status
@@ -413,6 +421,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             '$pass_hashed',
                             '$user_type',
                             '$department',
+                            '$rph',
                             '$office',
                             '$default_profile',
                             '$status'
@@ -428,15 +437,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         try {
             //Server settings
             $mail->isSMTP();
-            $mail->Host       = 'smtp.gmail.com';
+            $mail->Host       = 'avegabros.com';
             $mail->SMTPAuth   = true;
-            $mail->Username   = 'gastardo.johnlouie10@gmail.com';
-            $mail->Password   = 'holb ctep kytm ualr';
+            $mail->Username   = 'noreply@avegabros.com';
+            $mail->Password   = '}1rQ-T8]%-Xf';
             $mail->SMTPSecure = 'tls';
             $mail->Port       = 587;
             
             //Recipients
-            $mail->setFrom('gastardo.johnlouie10@gmail.com', 'John Louie Gastardo');
+            $mail->setFrom('noreply@avegabros.com', 'AvegaIT');
             $mail->addAddress($email, $firstname);
             $mail->addReplyTo('info@example.com', 'Information');
             

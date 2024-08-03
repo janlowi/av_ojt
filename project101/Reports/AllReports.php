@@ -46,7 +46,7 @@ include '../Layouts/main-admin.php';
   if($query && mysqli_num_rows($query) > 0) {
       while ($row= mysqli_fetch_assoc($query)) {     
           $defaultProfileImage = '../Assets/img/avatars/av.png';
-          $profileImage = !empty($row['profile']) ? '../Assets/img/avatars/'.$row['profile'] : $defaultProfileImage;
+          $profileImage = !empty($row['profile']) ? $row['profile'] : $defaultProfileImage;
          $name= $row['first_name'].' '.$row['middle_name'].' '.$row['last_name']; 
           ?>
           <tr class="table-">

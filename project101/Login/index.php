@@ -115,6 +115,7 @@ include "../Layouts/main.php";
             text-decoration: underline;
         }
 
+
         input[type="text"],input[type="email"],
         input[type="password"] {
             font-size: 12px;
@@ -233,7 +234,7 @@ include "../Layouts/main.php";
  </div>
 
 <script>
-    const togglePassword = document.querySelector("#showPassword"); 
+    const togglePassword = document.querySelector("#showPassword");
 const password = document.querySelector("#password");
 
 togglePassword.addEventListener("click", function () {

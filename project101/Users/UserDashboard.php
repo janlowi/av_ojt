@@ -7,6 +7,7 @@ $title="User Dashboard";
 include '../Layouts/main-user.php'; 
  include '../Php/db_connect.php';
  $department_id = $_SESSION['department_id'];
+ $lat_json = $long_json = 0;
 ?>
 
   <div class="card ">
@@ -70,6 +71,7 @@ include '../Layouts/main-user.php';
     ORDER BY id DESC LIMIT 1
         ";
     $currentTImeIn_query=  mysqli_query($connect, $currentTImeIn);
+    $timeInValue = $currentEventType_json = 0;
     if($currentTImeIn_query && mysqli_num_rows($currentTImeIn_query)>0){
       $row=mysqli_fetch_assoc($currentTImeIn_query);
       $currentTimeInRecord= date('Y-m-d h:i:s A', strtotime($row['timestamp']));
@@ -428,6 +430,7 @@ include '../Layouts/footer.php';
 
 
   const currentTime = new Date();
+  let intervalId = 0;
   const currentTimeStamp =  new Date(<?php echo  $timeInValue; ?>);
   currentTime.toLocaleString('en-US', { timeZone: 'Asia/Manila' })
   currentTimeStamp.toLocaleString('en-US', { timeZone: 'Asia/Manila' })
@@ -446,7 +449,10 @@ include '../Layouts/footer.php';
     intervalId = setInterval(realTimeDisplay, 1000);
   }
 function stopRealTimeDisplay(){
-  clearInterval(intervalId);
+  if (intervalId !== 0) {
+    clearInterval(intervalId);
+    intervalId = 0; // reset intervalId
+  }
 }
 const currentEventType = <?php echo $currentEventType_json ?>;
 if(currentEventType === "Out"){

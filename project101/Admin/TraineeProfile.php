@@ -77,7 +77,7 @@ if (isset($_GET['trainee_profile'])){
   <div class="col-sm-6">
     <div class="card">
       <div class="card-body d-flex justify-content-center">
-      <img class="card-img-top" style= "width: 350px; height: 430px;" src="../assets/img/avatars/<?= $profile?>" alt="Card image cap" />
+      <img class="card-img-top" style= "width: 220px; height: 220px;" src="<?= $profile?>" alt="Card image cap" />
     <br>
     <div style = "position:absolute; bottom: 0px;">
     <i class='fa-solid fa-camera' style = "font-size: 25px; color: black;"  data-bs-toggle="modal" data-bs-target="#modalProfile" > </i>
@@ -357,8 +357,8 @@ if (isset($_GET['trainee_profile'])){
         <div class="modal-body">
             <form action="../Php/php-profile-update.php" method = "POST">
 
-          <label for="fname "></label>
-          <input type="text" name="Middlename" class="form-control" id="fname" value="<?=  $middlename; ?>" required />
+          <label for="mname "></label>
+          <input type="text" name="Middlename" class="form-control" id="mname" value="<?=  $middlename; ?>" required />
           <input type="text" value="<?= $trainee_profile_id;  ?>" name="user_id"  hidden />
         </div>
           <div class="modal-footer">
@@ -381,8 +381,8 @@ if (isset($_GET['trainee_profile'])){
         <div class="modal-body">
             <form action="../Php/php-profile-update.php"  method = "POST">
 
-          <label for="fname "></label>
-          <input type="text" name="Lastname" class="form-control" id="fname" value="<?=  $lastname; ?>" required />
+          <label for="lname "></label>
+          <input type="text" name="Lastname" class="form-control" id="lname" value="<?=  $lastname; ?>" required />
           <input type="text" value="<?= $trainee_profile_id;  ?>" name="user_id"  hidden />
         </div>
           <div class="modal-footer">
@@ -405,7 +405,7 @@ if (isset($_GET['trainee_profile'])){
         <div class="modal-body">
             <form action="../Php/php-profile-update.php" method = "POST">
 
-          <label for="fname "></label>
+          <label for="dob "></label>
           <input type="date" name="updatedob" class="form-control" id="dob" value="<?php echo date('Y-m-d',strtotime($dob) )?>" required />
           <input type="text" value="<?= $trainee_profile_id;  ?>" name="user_id"  hidden />
           <input type="text" value="<?= $_SESSION['usertype'];  ?>" name="user_type"  hidden />
@@ -457,8 +457,8 @@ if (isset($_GET['trainee_profile'])){
         <div class="modal-body">
             <form action="../Php/php-profile-update.php" method = "POST">
 
-          <label for="fname "></label>
-          <input type="number" name="Contact" class="form-control" id="fname" value="<?=  $contact_num; ?>" required />
+          <label for="contact "></label>
+          <input type="number" name="Contact" class="form-control" id="contact" value="<?=  $contact_num; ?>" required />
           <input type="text" value="<?= $trainee_profile_id;  ?>" name="user_id"  hidden />
         </div>
           <div class="modal-footer">
@@ -480,8 +480,8 @@ if (isset($_GET['trainee_profile'])){
         </div>
         <div class="modal-body">
             <form action="../Php/php-profile-update.php" method = "POST">
-          <label for="fname "></label>
-          <input type="text" name="Degree" class="form-control" id="fname" value="<?=  $degree; ?>" required />
+          <label for="degree "></label>
+          <input type="text" name="Degree" class="form-control" id="degree" value="<?=  $degree; ?>" required />
           <input type="text" value="<?= $trainee_profile_id;  ?>" name="user_id"  hidden />
         </div>
           <div class="modal-footer">
@@ -504,8 +504,8 @@ if (isset($_GET['trainee_profile'])){
         <div class="modal-body">
             <form action="../Php/php-profile-update.php" method = "POST">
 
-          <label for="fname "></label>
-          <input type="text" name="University" class="form-control" id="fname" value="<?=  $university; ?>" required />
+          <label for="university "></label>
+          <input type="text" name="University" class="form-control" id="university" value="<?=  $university; ?>" required />
           <input type="text" value="<?= $trainee_profile_id;  ?>" name="user_id"  hidden />
         </div>
           <div class="modal-footer">
@@ -528,8 +528,8 @@ if (isset($_GET['trainee_profile'])){
         <div class="modal-body">
             <form action="../Php/php-profile-update.php" method = "POST">
 
-          <label for="fname "></label>
-          <input type="text" name="Hours" class="form-control" id="fname" value="<?=  $hours_to_render; ?>" required />
+          <label for="hours "></label>
+          <input type="text" name="Hours" class="form-control" id="hours" value="<?=  $hours_to_render; ?>" required />
           <input type="text" value="<?= $trainee_profile_id;  ?>" name="user_id"  hidden />
         </div>
           <div class="modal-footer">
@@ -552,8 +552,8 @@ if (isset($_GET['trainee_profile'])){
         <div class="modal-body">
             <form action="../Php/php-profile-update.php" method = "POST">
 
-          <label for="fname "></label>
-          <input type="email" name="Email" class="form-control" id="fname" value="<?=  $email; ?>" required />
+          <label for="email "></label>
+          <input type="email" name="Email" class="form-control" id="email" value="<?=  $email; ?>" required />
           <input type="text" value="<?= $trainee_profile_id;  ?>" name="user_id"  hidden />
         </div>
           <div class="modal-footer">
@@ -575,8 +575,8 @@ if (isset($_GET['trainee_profile'])){
         </div>
         <div class="modal-body">
           <form action="../Php/php-profile-update.php" method = "POST">
-          <label for="fname "></label>
-          <input type="date" name="dateStart" class="form-control" id="fname" value="<?= date('Y-m-d',strtotime($dos) ) ?>" required />
+          <label for="datestart "></label>
+          <input type="date" name="dateStart" class="form-control" id="datestart" value="<?= date('Y-m-d',strtotime($dos) ) ?>" required />
           <input type="text" value="<?= $trainee_profile_id;  ?>" name="user_id"  hidden />
         </div>
           <div class="modal-footer">

@@ -98,6 +98,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $timeDifferenceSeconds = $timeOut - $timeIn;
                 $totalHours = $timeDifferenceSeconds/3600;
                 $totalHours = round($totalHours, 2);
+                if($totalHours > 4 && $totalHours > 8 ){
+                    $totalHours = $totalHours - 1; //deduct  1hour lunch break
+                    $_SESSION['success'] = "A 1 hour lunch break was deducted to your time.";
+                }
             
                 // echo "Time Difference (Seconds): " . $timeDifferenceSeconds . "<br>";
                 if ($timeDifferenceSeconds < (2 * 3600)) {

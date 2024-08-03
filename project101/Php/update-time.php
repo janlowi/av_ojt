@@ -33,6 +33,11 @@ mysqli_query($connect, $disable_auto_update_sql);
                 $timeDifferenceSeconds = $timeOut - $timeIn;
                 $totalHours = $timeDifferenceSeconds/3600;
                 $totalHours = round($totalHours, 2);
+
+                if($totalHours > 4 && $totalHours > 8 ){
+                    $totalHours = $totalHours - 1; //deduct  1hour lunch break
+                }
+
                 if ($timeDifferenceSeconds < (2 * 3600)) {
                     $_SESSION['error'] = "You cannot time out within 2 hours of your last time in.";
                     $redirect_url = ($usertype === 'Admin') ? '../Timesheet/DisplayAdmin.php' : '../Timesheet/DisplayManager.php';
@@ -40,7 +45,7 @@ mysqli_query($connect, $disable_auto_update_sql);
                     exit();
                 }else{
 
-                    $sql1= "INSERT INTO timesheet (user_id, timestamp, event_type, total_hours ) VALUES ('$user_id',  FROM_UNIXTIME($timeOut), 'Out', '$totalHours' )";
+                    $sql1= "INSERT INTO timesheet (user_id, timestamp, event_type, total_hours,image,location ) VALUES ('$user_id',  FROM_UNIXTIME($timeOut), 'Out', '$totalHours','','' )";
                     $query1=mysqli_query($connect,$sql1);
         
                     if($query1==1){

@@ -48,7 +48,7 @@ include '../Layouts/main-admin.php';
      if(mysqli_num_rows($query) > 0) {
      while ($row = mysqli_fetch_assoc($query)) {     
      $defaultProfileImage = '../Assets/img/avatars/av.png';
-     $profileImage = !empty($row['profile']) ? '../Assets/img/avatars/'.$row['profile'] : $defaultProfileImage;
+     $profileImage = !empty($row['profile']) ? $row['profile'] : $defaultProfileImage;
      $name= $row['first_name'].' '.$row['middle_name'].' '.$row['last_name']; 
      $_SESSION['user_name'] = $row['first_name'];
      date_default_timezone_set('Asia/Manila');// local timezone
@@ -89,7 +89,7 @@ include '../Layouts/main-admin.php';
         <a class="dropdown-item" href="../Admin/TraineeProfile.php?trainee_profile=<?=$row['id'] ?>"> <button class= "btn btn-warning " data-bs-toggle="tooltip" data-bs-placement="top" title="View profile records"><i class='fa fa-user-circle'></i> </button></a>
         </div>
         <div class= "col">
-        <a class="dropdown-item" href="../Timesheet/DisplayUserAttendance.php?trainee_attendance=<?=$row['id'] ?>"> <button class= "btn btn-info " data-bs-toggle="tooltip" data-bs-placement="top" title="View attendance records"><i class="fa-regular fa-clipboard-user"></i> </button></a>
+        <a class="dropdown-item" href="../Timesheet/DisplayUserAttendance.php?trainee_attendance=<?=$row['id'] ?>"> <button class= "btn btn-info " data-bs-toggle="tooltip" data-bs-placement="top" title="View attendance records"><i class="fa-regular fa-clipboard"></i> </button></a>
 
         </div>
      </div>

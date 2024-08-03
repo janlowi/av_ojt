@@ -1,8 +1,8 @@
-const displayTime = document.getElementById("currentTime");
+var displayTime = document.getElementById("currentTime");
 // Time
 function showTime() {
   let time = new Date();
-  displayTime.innerText = time.toLocaleTimeString("en-US", { hour12: true });
+  displayTime.innerText = time.toLocaleTimeString("en-US", { timeZone: "Asia/Manila", hour12: true });
   setTimeout(showTime, 1000);
 }
 
