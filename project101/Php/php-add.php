@@ -107,13 +107,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $mail->isSMTP();
                 $mail->Host       = 'avegabros.com';
                 $mail->SMTPAuth   = true;
-                $mail->Username   = 'noreply@avegabros.com';
-                $mail->Password   = '}1rQ-T8]%-Xf';
+                $mail->Username   = 'enter_email_add';
+                $mail->Password   = 'enter_email_pass';
                 $mail->SMTPSecure = 'tls';
                 $mail->Port       = 587;
                 
                 //Recipients
-                $mail->setFrom('noreply@avegabros.com', 'AvegaIT');
+                $mail->setFrom('enter_email_add', 'AvegaIT');
                 $mail->addAddress($email, $firstname);
                 
                 // Content
@@ -304,13 +304,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $mail->isSMTP();
                 $mail->Host       = 'avegabros.com';
                 $mail->SMTPAuth   = true;
-                $mail->Username   = 'noreply@avegabros.com';
-                $mail->Password   = '}1rQ-T8]%-Xf';
+                $mail->Username   = 'enter_email_add';
+                $mail->Password   = 'enter_email_pass';
                 $mail->SMTPSecure = 'tls';
                 $mail->Port       = 587;
                 
                 //Recipients
-                $mail->setFrom('noreply@avegabros.com', 'AvegaIT');
+                $mail->setFrom('enter_email_add', 'AvegaIT');
                 $mail->addAddress($email, $firstname);
  
                 
@@ -439,13 +439,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $mail->isSMTP();
             $mail->Host       = 'avegabros.com';
             $mail->SMTPAuth   = true;
-            $mail->Username   = 'noreply@avegabros.com';
-            $mail->Password   = '}1rQ-T8]%-Xf';
+            $mail->Username   = 'enter_email_add';
+            $mail->Password   = 'enter_email_pass';
             $mail->SMTPSecure = 'tls';
             $mail->Port       = 587;
             
             //Recipients
-            $mail->setFrom('noreply@avegabros.com', 'AvegaIT');
+            $mail->setFrom('enter_email_add', 'AvegaIT');
             $mail->addAddress($email, $firstname);
             $mail->addReplyTo('info@example.com', 'Information');
             

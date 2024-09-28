@@ -47,13 +47,13 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                         $mail->isSMTP();
                         $mail->Host       = 'avegabros.com';
                         $mail->SMTPAuth   = true;
-                        $mail->Username   = 'noreply@avegabros.com';
-                        $mail->Password   = '}1rQ-T8]%-Xf';
+                        $mail->Username   = 'enter_email_add';
+                        $mail->Password   = 'enter_email_pass';
                         $mail->SMTPSecure = 'tls';
                         $mail->Port       = 587;
                         
                         //Recipients
-                        $mail->setFrom('noreply@avegabros.com', 'AvegaIT');
+                        $mail->setFrom('enter_email_add', 'AvegaIT');
                         $mail->addAddress($email, $firstname);
                         
                         // Content
@@ -139,13 +139,13 @@ try {
 $mail->isSMTP();
 $mail->Host       = 'avegabros.com';
 $mail->SMTPAuth   = true;
-$mail->Username   = 'noreply@avegabros.com';
-$mail->Password   = '}1rQ-T8]%-Xf';
+$mail->Username   = 'enter_email_add';
+$mail->Password   = 'enter_email_pass';
 $mail->SMTPSecure = 'tls';
 $mail->Port       = 587;
 
 //Recipients
-$mail->setFrom('noreply@avegabros.com', 'AvegaIT');
+$mail->setFrom('enter_email_add', 'AvegaIT');
 $mail->addAddress($user_email, $user_firstname);
 
 // Content
